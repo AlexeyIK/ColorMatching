@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD2978EB2697C4B100F19AEF /* skateparkData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* skateparkData.json */; };
 		BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */; };
-		BD3CF12E2692F07700FF0D68 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12D2692F07700FF0D68 /* ContentView.swift */; };
+		BD3CF12E2692F07700FF0D68 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12D2692F07700FF0D68 /* DetailView.swift */; };
 		BD3CF1302692F07900FF0D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3CF12F2692F07900FF0D68 /* Assets.xcassets */; };
 		BD3CF1332692F07900FF0D68 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3CF1322692F07900FF0D68 /* Preview Assets.xcassets */; };
 		BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF1342692F07900FF0D68 /* Persistence.swift */; };
@@ -37,9 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BD2978EA2697C4B100F19AEF /* skateparkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skateparkData.json; sourceTree = "<group>"; };
 		BD3CF1282692F07700FF0D68 /* Color Matching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Matching.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_MatchingApp.swift; sourceTree = "<group>"; };
-		BD3CF12D2692F07700FF0D68 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BD3CF12D2692F07700FF0D68 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		BD3CF12F2692F07900FF0D68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD3CF1322692F07900FF0D68 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BD3CF1342692F07900FF0D68 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -80,6 +82,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD2978E02697C45600F19AEF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BD2978E72697C46400F19AEF /* ListView */,
+				BD72A30C269742D800F1498C /* DetailView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BD2978E72697C46400F19AEF /* ListView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ListView;
+			sourceTree = "<group>";
+		};
+		BD2978E82697C47000F19AEF /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				BD2978EA2697C4B100F19AEF /* skateparkData.json */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		BD2978E92697C47600F19AEF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BD3CF11F2692F07600FF0D68 = {
 			isa = PBXGroup;
 			children = (
@@ -103,15 +136,15 @@
 		BD3CF12A2692F07700FF0D68 /* Color Matching */ = {
 			isa = PBXGroup;
 			children = (
+				BD2978E82697C47000F19AEF /* Data */,
+				BD2978E92697C47600F19AEF /* Models */,
+				BD2978E02697C45600F19AEF /* Views */,
 				BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */,
-				BD3CF12D2692F07700FF0D68 /* ContentView.swift */,
-				BDC1984426973DF300B54DA2 /* MapView.swift */,
 				BD3CF12F2692F07900FF0D68 /* Assets.xcassets */,
 				BD3CF1342692F07900FF0D68 /* Persistence.swift */,
 				BD3CF1392692F07900FF0D68 /* Info.plist */,
 				BD3CF1362692F07900FF0D68 /* Color_Matching.xcdatamodeld */,
 				BD3CF1312692F07900FF0D68 /* Preview Content */,
-				BDC1983F2697295F00B54DA2 /* CircleImage.swift */,
 			);
 			path = "Color Matching";
 			sourceTree = "<group>";
@@ -140,6 +173,16 @@
 				BD3CF14F2692F07A00FF0D68 /* Info.plist */,
 			);
 			path = "Color MatchingUITests";
+			sourceTree = "<group>";
+		};
+		BD72A30C269742D800F1498C /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				BD3CF12D2692F07700FF0D68 /* DetailView.swift */,
+				BDC1984426973DF300B54DA2 /* MapView.swift */,
+				BDC1983F2697295F00B54DA2 /* CircleImage.swift */,
+			);
+			path = DetailView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,6 +288,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD2978EB2697C4B100F19AEF /* skateparkData.json in Resources */,
 				BD3CF1332692F07900FF0D68 /* Preview Assets.xcassets in Resources */,
 				BD3CF1302692F07900FF0D68 /* Assets.xcassets in Resources */,
 			);
@@ -274,7 +318,7 @@
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
 				BDC1984526973DF300B54DA2 /* MapView.swift in Sources */,
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
-				BD3CF12E2692F07700FF0D68 /* ContentView.swift in Sources */,
+				BD3CF12E2692F07700FF0D68 /* DetailView.swift in Sources */,
 				BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */,
 				BDC198402697295F00B54DA2 /* CircleImage.swift in Sources */,
 			);
