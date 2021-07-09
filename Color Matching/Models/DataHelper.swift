@@ -60,7 +60,7 @@ final class ImageStore {
     fileprivate func _guaranteeImage(name: String) -> _ImageDictionary.Index {
         if let index = images.index(forKey: name) { return index }
         
-        image[name] = ImageStore.loadImage(name: name)
+        images[name] = ImageStore.loadImage(name: name)
         return images.index(forKey: name)!
     }
 }

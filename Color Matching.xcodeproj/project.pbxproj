@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BD2978EB2697C4B100F19AEF /* skateparkData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* skateparkData.json */; };
-		BD2978F02697C54600F19AEF /* images in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EF2697C54600F19AEF /* images */; };
 		BD2978F52697C56D00F19AEF /* Skatepark.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2978F42697C56D00F19AEF /* Skatepark.swift */; };
 		BD2978FA2697C6B600F19AEF /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2978F92697C6B600F19AEF /* DataHelper.swift */; };
 		BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */; };
@@ -19,6 +18,17 @@
 		BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF1362692F07900FF0D68 /* Color_Matching.xcdatamodeld */; };
 		BD3CF1432692F07A00FF0D68 /* Color_MatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF1422692F07A00FF0D68 /* Color_MatchingTests.swift */; };
 		BD3CF14E2692F07A00FF0D68 /* Color_MatchingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF14D2692F07A00FF0D68 /* Color_MatchingUITests.swift */; };
+		BD3E5A902698A1EB0030C769 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3E5A8F2698A1EB0030C769 /* RowView.swift */; };
+		BD3E5A9F2698A3580030C769 /* folkestine_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A952698A3570030C769 /* folkestine_skpark.jpg */; };
+		BD3E5AA02698A3580030C769 /* beckenham_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A962698A3570030C769 /* beckenham_skpark.jpg */; };
+		BD3E5AA12698A3580030C769 /* bloblands_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A972698A3570030C769 /* bloblands_skpark.jpg */; };
+		BD3E5AA22698A3580030C769 /* white_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A982698A3570030C769 /* white_skpark.jpg */; };
+		BD3E5AA32698A3580030C769 /* bay66_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A992698A3570030C769 /* bay66_skpark.jpg */; };
+		BD3E5AA42698A3580030C769 /* king_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A9A2698A3580030C769 /* king_skpark.jpg */; };
+		BD3E5AA52698A3580030C769 /* acton_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A9B2698A3580030C769 /* acton_skpark.jpg */; };
+		BD3E5AA62698A3580030C769 /* woo_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A9C2698A3580030C769 /* woo_skpark.jpg */; };
+		BD3E5AA72698A3580030C769 /* crystal_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A9D2698A3580030C769 /* crystal_skpark.jpg */; };
+		BD3E5AA82698A3580030C769 /* apalace_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A9E2698A3580030C769 /* apalace_skpark.jpg */; };
 		BDC198402697295F00B54DA2 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC1983F2697295F00B54DA2 /* CircleImage.swift */; };
 		BDC1984526973DF300B54DA2 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC1984426973DF300B54DA2 /* MapView.swift */; };
 /* End PBXBuildFile section */
@@ -42,7 +52,6 @@
 
 /* Begin PBXFileReference section */
 		BD2978EA2697C4B100F19AEF /* skateparkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skateparkData.json; sourceTree = "<group>"; };
-		BD2978EF2697C54600F19AEF /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		BD2978F42697C56D00F19AEF /* Skatepark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skatepark.swift; sourceTree = "<group>"; };
 		BD2978F92697C6B600F19AEF /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		BD3CF1282692F07700FF0D68 /* Color Matching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Matching.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +68,17 @@
 		BD3CF1492692F07A00FF0D68 /* Color MatchingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Color MatchingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3CF14D2692F07A00FF0D68 /* Color_MatchingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_MatchingUITests.swift; sourceTree = "<group>"; };
 		BD3CF14F2692F07A00FF0D68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD3E5A8F2698A1EB0030C769 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
+		BD3E5A952698A3570030C769 /* folkestine_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = folkestine_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A962698A3570030C769 /* beckenham_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = beckenham_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A972698A3570030C769 /* bloblands_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bloblands_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A982698A3570030C769 /* white_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = white_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A992698A3570030C769 /* bay66_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bay66_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A9A2698A3580030C769 /* king_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = king_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A9B2698A3580030C769 /* acton_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = acton_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A9C2698A3580030C769 /* woo_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = woo_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A9D2698A3580030C769 /* crystal_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crystal_skpark.jpg; sourceTree = "<group>"; };
+		BD3E5A9E2698A3580030C769 /* apalace_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = apalace_skpark.jpg; sourceTree = "<group>"; };
 		BDC1983F2697295F00B54DA2 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		BDC1984426973DF300B54DA2 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +120,7 @@
 		BD2978E72697C46400F19AEF /* ListView */ = {
 			isa = PBXGroup;
 			children = (
+				BD3E5A8F2698A1EB0030C769 /* RowView.swift */,
 			);
 			path = ListView;
 			sourceTree = "<group>";
@@ -107,7 +128,7 @@
 		BD2978E82697C47000F19AEF /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				BD2978EF2697C54600F19AEF /* images */,
+				BD3E5A942698A3470030C769 /* Images */,
 				BD2978EA2697C4B100F19AEF /* skateparkData.json */,
 			);
 			path = Data;
@@ -182,6 +203,23 @@
 				BD3CF14F2692F07A00FF0D68 /* Info.plist */,
 			);
 			path = "Color MatchingUITests";
+			sourceTree = "<group>";
+		};
+		BD3E5A942698A3470030C769 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				BD3E5A9B2698A3580030C769 /* acton_skpark.jpg */,
+				BD3E5A9E2698A3580030C769 /* apalace_skpark.jpg */,
+				BD3E5A992698A3570030C769 /* bay66_skpark.jpg */,
+				BD3E5A962698A3570030C769 /* beckenham_skpark.jpg */,
+				BD3E5A972698A3570030C769 /* bloblands_skpark.jpg */,
+				BD3E5A9D2698A3580030C769 /* crystal_skpark.jpg */,
+				BD3E5A952698A3570030C769 /* folkestine_skpark.jpg */,
+				BD3E5A9A2698A3580030C769 /* king_skpark.jpg */,
+				BD3E5A982698A3570030C769 /* white_skpark.jpg */,
+				BD3E5A9C2698A3580030C769 /* woo_skpark.jpg */,
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 		BD72A30C269742D800F1498C /* DetailView */ = {
@@ -297,9 +335,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BD2978F02697C54600F19AEF /* images in Resources */,
+				BD3E5AA32698A3580030C769 /* bay66_skpark.jpg in Resources */,
+				BD3E5AA52698A3580030C769 /* acton_skpark.jpg in Resources */,
+				BD3E5AA02698A3580030C769 /* beckenham_skpark.jpg in Resources */,
+				BD3E5A9F2698A3580030C769 /* folkestine_skpark.jpg in Resources */,
+				BD3E5AA42698A3580030C769 /* king_skpark.jpg in Resources */,
+				BD3E5AA22698A3580030C769 /* white_skpark.jpg in Resources */,
 				BD2978EB2697C4B100F19AEF /* skateparkData.json in Resources */,
 				BD3CF1332692F07900FF0D68 /* Preview Assets.xcassets in Resources */,
+				BD3E5AA72698A3580030C769 /* crystal_skpark.jpg in Resources */,
+				BD3E5AA62698A3580030C769 /* woo_skpark.jpg in Resources */,
+				BD3E5AA82698A3580030C769 /* apalace_skpark.jpg in Resources */,
+				BD3E5AA12698A3580030C769 /* bloblands_skpark.jpg in Resources */,
 				BD3CF1302692F07900FF0D68 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -329,6 +376,7 @@
 				BDC1984526973DF300B54DA2 /* MapView.swift in Sources */,
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
 				BD3CF12E2692F07700FF0D68 /* DetailView.swift in Sources */,
+				BD3E5A902698A1EB0030C769 /* RowView.swift in Sources */,
 				BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */,
 				BD2978FA2697C6B600F19AEF /* DataHelper.swift in Sources */,
 				BDC198402697295F00B54DA2 /* CircleImage.swift in Sources */,
