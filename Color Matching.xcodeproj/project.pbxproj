@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		BD2978EB2697C4B100F19AEF /* skateparkData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* skateparkData.json */; };
+		BD2978F02697C54600F19AEF /* images in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EF2697C54600F19AEF /* images */; };
+		BD2978F52697C56D00F19AEF /* Skatepark.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2978F42697C56D00F19AEF /* Skatepark.swift */; };
+		BD2978FA2697C6B600F19AEF /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2978F92697C6B600F19AEF /* DataHelper.swift */; };
 		BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */; };
 		BD3CF12E2692F07700FF0D68 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12D2692F07700FF0D68 /* DetailView.swift */; };
 		BD3CF1302692F07900FF0D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3CF12F2692F07900FF0D68 /* Assets.xcassets */; };
@@ -39,6 +42,9 @@
 
 /* Begin PBXFileReference section */
 		BD2978EA2697C4B100F19AEF /* skateparkData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = skateparkData.json; sourceTree = "<group>"; };
+		BD2978EF2697C54600F19AEF /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		BD2978F42697C56D00F19AEF /* Skatepark.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skatepark.swift; sourceTree = "<group>"; };
+		BD2978F92697C6B600F19AEF /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		BD3CF1282692F07700FF0D68 /* Color Matching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Matching.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_MatchingApp.swift; sourceTree = "<group>"; };
 		BD3CF12D2692F07700FF0D68 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -101,6 +107,7 @@
 		BD2978E82697C47000F19AEF /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				BD2978EF2697C54600F19AEF /* images */,
 				BD2978EA2697C4B100F19AEF /* skateparkData.json */,
 			);
 			path = Data;
@@ -109,6 +116,8 @@
 		BD2978E92697C47600F19AEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BD2978F42697C56D00F19AEF /* Skatepark.swift */,
+				BD2978F92697C6B600F19AEF /* DataHelper.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,6 +297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD2978F02697C54600F19AEF /* images in Resources */,
 				BD2978EB2697C4B100F19AEF /* skateparkData.json in Resources */,
 				BD3CF1332692F07900FF0D68 /* Preview Assets.xcassets in Resources */,
 				BD3CF1302692F07900FF0D68 /* Assets.xcassets in Resources */,
@@ -320,7 +330,9 @@
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
 				BD3CF12E2692F07700FF0D68 /* DetailView.swift in Sources */,
 				BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */,
+				BD2978FA2697C6B600F19AEF /* DataHelper.swift in Sources */,
 				BDC198402697295F00B54DA2 /* CircleImage.swift in Sources */,
+				BD2978F52697C56D00F19AEF /* Skatepark.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
