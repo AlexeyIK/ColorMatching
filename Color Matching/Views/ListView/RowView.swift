@@ -18,6 +18,10 @@ struct RowView: View {
                 .frame(width: 50, height: 50)
             Text(skatepark.name)
             Spacer()
+            if skatepark.isFavorite {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
         }
     }
 }

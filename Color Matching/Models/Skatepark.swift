@@ -17,6 +17,7 @@ struct Skatepark: Hashable, Codable, Identifiable {
     var area: String
     var city: String
     var category: Category
+    var isFavorite: Bool
     
     var locationCoodinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: coordinates.latitude, longitude: coordinates.longitude)

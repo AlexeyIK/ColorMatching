@@ -8,13 +8,24 @@
 import SwiftUI
 
 struct ListView: View {
+    
+    @State var showFavoriteSkateparks: Bool = false
+    
     var body: some View {
         NavigationView {
-            List(skateparkData) { skatepark in
-                NavigationLink(
-                    destination: DetailView(skatepark: skatepark)) {
-                    RowView(skatepark: skatepark)
+            List {
+                
+                Toggle(isOn: $showFavoriteSkateparks) {
+                    Text("Show favorites")
                 }
+                
+                ForEach(skateparkData) { skatepark in
+                    if (!self.showFavoriteSkateparks || skatepark.isFavorite) {
+                        NavigationLink(
+                            destination: DetailView(skatepark: skatepark)) {
+                            RowView(skatepark: skatepark)
+                        }
+                    }
             }
             .navigationBarTitle(Text("Skateparks"))
         }
