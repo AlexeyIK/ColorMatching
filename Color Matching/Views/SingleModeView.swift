@@ -52,13 +52,6 @@ struct SingleModeView: View {
 
 struct SingleModeView_Previews: PreviewProvider {
     static var previews: some View {
-//        ForEach(["iPhone X", "iPhone 8"], id: \.self) { deviceName in
-//            SingleModeView()
-//                .previewDevice(PreviewDevice(rawValue: deviceName))
-//                .previewDisplayName(deviceName)
-//        }
-        
         SingleModeView()
-            .previewDevice(PreviewDevice("iPhone SE"))
     }
 }
