@@ -19,12 +19,15 @@ struct RowView: View {
             Text(skatepark.name)
             Spacer()
         }
-        .padding()
     }
 }
 
 struct RowView_Previews: PreviewProvider {
     static var previews: some View {
-        RowView(skatepark: skateparkData[0])
+        Group {
+            RowView(skatepark: skateparkData[0])
+            RowView(skatepark: skateparkData[1])
+        }
+        .previewLayout(.fixed(width: 300, height: 70))
     }
 }

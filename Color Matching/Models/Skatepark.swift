@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct Skatepark: Hashable, Codable {
+struct Skatepark: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
     fileprivate var imageName: String

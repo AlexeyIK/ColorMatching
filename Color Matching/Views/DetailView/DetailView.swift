@@ -7,37 +7,40 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct DetailView: View {
+    var skatepark: Skatepark
+    
     var body: some View {
         VStack {
             
-            MapView()
+            MapView(coordinates: skatepark.locationCoodinate)
                 .edgesIgnoringSafeArea(.top)
                 .frame(height: 200)
             
-            CircleImage()
-                .offset(y: -60)
-                .padding(.bottom, -60)
+            CircleImage(image: skatepark.image)
+                .offset(y: -70)
+                .padding(.bottom, -70)
         
             VStack(alignment: .leading, spacing: nil) {
-                Text("Color matcher")
+                Text(skatepark.name)
                     .foregroundColor(.blue)
                     .font(.title)
                 
                 HStack {
-                    Text("Area").font(.subheadline)
+                    Text(skatepark.area).font(.subheadline)
                     Spacer()
-                    Text("West London").font(.subheadline)
+                    Text(skatepark.city).font(.subheadline)
                 }
             }.padding()
             
             Spacer()
         }
+        .navigationBarTitle(Text(skatepark.name), displayMode: .inline)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        DetailView(skatepark: skateparkData[0])
     }
 }

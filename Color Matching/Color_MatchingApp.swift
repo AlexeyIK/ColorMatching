@@ -13,7 +13,7 @@ struct Color_MatchingApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
