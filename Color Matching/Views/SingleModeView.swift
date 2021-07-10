@@ -7,17 +7,7 @@
 
 import SwiftUI
 
-struct BackgroundView: View {
-    var body: some View {
-        Rectangle().scaledToFill().foregroundColor(.gray)
-            .edgesIgnoringSafeArea(.all)
-    }
-}
-
 struct SingleModeView: View {
-    
-    var backgroundView = BackgroundView()
-    
     var body: some View {
         TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
             HStack {
@@ -42,12 +32,21 @@ struct SingleModeView: View {
                 Spacer()
             }.tabItem {
                 Text("Mode 1")
-            }.tag(1)
+            }.tag(1).background(Color.gray.scaledToFill().ignoresSafeArea())
             
-            Text("Tab Content 2").tabItem { /*@START_MENU_TOKEN@*/Text("Tab Label 2")/*@END_MENU_TOKEN@*/
-            }.tag(2)
+            Text("Mode 2").tabItem {
+                Text("Mode 2")
+            }.tag(2).background(Color.gray.scaledToFill().ignoresSafeArea())
             
-        }.background(backgroundView)
+            Text("Mode 3").tabItem {
+                Text("Mode 2")
+            }.tag(3).background(Color.gray.scaledToFill().ignoresSafeArea())
+            
+            Text("Mode 4").tabItem {
+                Text("Mode 4")
+            }.tag(4).background(Color.gray.scaledToFill().ignoresSafeArea())
+            
+        }
     }
 }
 
