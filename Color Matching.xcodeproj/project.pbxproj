@@ -31,6 +31,7 @@
 		BD3E5AA82698A3580030C769 /* apalace_skpark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = BD3E5A9E2698A3580030C769 /* apalace_skpark.jpg */; };
 		BDC198402697295F00B54DA2 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC1983F2697295F00B54DA2 /* CircleImage.swift */; };
 		BDC1984526973DF300B54DA2 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC1984426973DF300B54DA2 /* MapView.swift */; };
+		F1469CAE2698D8A1006A14BC /* SingleModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1469CAD2698D8A1006A14BC /* SingleModeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		BD3E5A9E2698A3580030C769 /* apalace_skpark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = apalace_skpark.jpg; sourceTree = "<group>"; };
 		BDC1983F2697295F00B54DA2 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		BDC1984426973DF300B54DA2 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		F1469CAD2698D8A1006A14BC /* SingleModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleModeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			children = (
 				BD2978E72697C46400F19AEF /* ListView */,
 				BD72A30C269742D800F1498C /* DetailView */,
+				F1469CAD2698D8A1006A14BC /* SingleModeView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
 				BDC1984526973DF300B54DA2 /* MapView.swift in Sources */,
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
+				F1469CAE2698D8A1006A14BC /* SingleModeView.swift in Sources */,
 				BD3CF12E2692F07700FF0D68 /* DetailView.swift in Sources */,
 				BD3E5A902698A1EB0030C769 /* RowView.swift in Sources */,
 				BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */,
