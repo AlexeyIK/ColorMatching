@@ -31,7 +31,7 @@ struct FirstModeView: View {
                     .scaleEffect(0.9)
                 Spacer()
             }.tabItem {
-                Image(systemName: "capsule").resizable().foregroundColor(.gray)
+                Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
 //                Text("Mode 1")
             }.tag(1)
 //                .background(Color.gray)
