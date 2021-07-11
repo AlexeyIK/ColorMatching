@@ -12,6 +12,4 @@ struct ColorModel: Codable, Hashable, Identifiable {
     var name: String
     var engName: String
     var hexCode: String
-    
-    
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-let skateparkData: [ColorModel] = load("colorsData.json")
+let colorsData: [ColorModel] = load("colorsData.json")
 
 func load<T: Decodable>(_ filename: String) -> T {
     let data: Data
