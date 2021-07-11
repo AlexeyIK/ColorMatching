@@ -9,8 +9,8 @@ import SwiftUI
 
 struct FirstModeView: View {
     var body: some View {
-        TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
-            HStack {
+        TabView(selection: .constant(0)) {
+            HStack() {
                 Rectangle()
                     .frame(width: 200, height: 300, alignment: .center)
                     .cornerRadius(20)
@@ -31,21 +31,25 @@ struct FirstModeView: View {
                     .scaleEffect(0.9)
                 Spacer()
             }.tabItem {
-                Text("Mode 1")
-            }.tag(1).background(Color.gray.scaledToFill().ignoresSafeArea())
+                Image(systemName: "capsule").resizable().foregroundColor(.gray)
+//                Text("Mode 1")
+            }.tag(1)
+//                .background(Color.gray)
             
             Text("Mode 2").tabItem {
-                Text("Mode 2")
-            }.tag(2).background(Color.gray.scaledToFill().ignoresSafeArea())
+                Image(systemName: "circle.fill").resizable().foregroundColor(.gray)
+//                Text("Mode 2")
+            }.tag(2)
             
             Text("Mode 3").tabItem {
-                Text("Mode 2")
-            }.tag(3).background(Color.gray.scaledToFill().ignoresSafeArea())
+                Image(systemName: "textformat.superscript").resizable().foregroundColor(.gray)
+//                Text("Mode 2")
+            }.tag(3)
             
             Text("Mode 4").tabItem {
-                Text("Mode 4")
-            }.tag(4).background(Color.gray.scaledToFill().ignoresSafeArea())
-            
+                Image(systemName: "text.justify").resizable().foregroundColor(.gray)
+//                Text("Mode 4")
+            }.tag(4)
         }
     }
 }
