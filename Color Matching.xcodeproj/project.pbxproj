@@ -17,6 +17,7 @@
 		BD3CF14E2692F07A00FF0D68 /* Color_MatchingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF14D2692F07A00FF0D68 /* Color_MatchingUITests.swift */; };
 		F1469CAE2698D8A1006A14BC /* FirstModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1469CAD2698D8A1006A14BC /* FirstModeView.swift */; };
 		F14A3C34269B27B800B9A710 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14A3C33269B27B800B9A710 /* ColorModel.swift */; };
+		F14A3C4B269B28FB00B9A710 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14A3C4A269B28FB00B9A710 /* DataHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		BD3CF14F2692F07A00FF0D68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1469CAD2698D8A1006A14BC /* FirstModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstModeView.swift; sourceTree = "<group>"; };
 		F14A3C33269B27B800B9A710 /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		F14A3C4A269B28FB00B9A710 /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,16 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				BD2978EA2697C4B100F19AEF /* colorsData.json */,
-				F14A3C33269B27B800B9A710 /* ColorModel.swift */,
 			);
 			path = Data;
-			sourceTree = "<group>";
-		};
-		BD2978E92697C47600F19AEF /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		BD3CF11F2692F07600FF0D68 = {
@@ -127,8 +121,8 @@
 		BD3CF12A2692F07700FF0D68 /* Color Matching */ = {
 			isa = PBXGroup;
 			children = (
+				F14A3C52269B292A00B9A710 /* Model */,
 				BD2978E82697C47000F19AEF /* Data */,
-				BD2978E92697C47600F19AEF /* Models */,
 				BD2978E02697C45600F19AEF /* Views */,
 				BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */,
 				BD3CF12F2692F07900FF0D68 /* Assets.xcassets */,
@@ -164,6 +158,15 @@
 				BD3CF14F2692F07A00FF0D68 /* Info.plist */,
 			);
 			path = "Color MatchingUITests";
+			sourceTree = "<group>";
+		};
+		F14A3C52269B292A00B9A710 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F14A3C33269B27B800B9A710 /* ColorModel.swift */,
+				F14A3C4A269B28FB00B9A710 /* DataHelper.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F14A3C4B269B28FB00B9A710 /* DataHelper.swift in Sources */,
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
 				F1469CAE2698D8A1006A14BC /* FirstModeView.swift in Sources */,
