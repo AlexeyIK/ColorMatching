@@ -13,9 +13,8 @@ struct Color_MatchingApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ListView()
-                .environmentObject(UserData())
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            FirstModeView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 
         }
     }

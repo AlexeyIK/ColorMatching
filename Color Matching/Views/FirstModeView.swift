@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SingleModeView: View {
+struct FirstModeView: View {
     var body: some View {
         TabView(selection: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Selection@*/.constant(1)/*@END_MENU_TOKEN@*/) {
             HStack {
@@ -52,6 +52,7 @@ struct SingleModeView: View {
 
 struct SingleModeView_Previews: PreviewProvider {
     static var previews: some View {
-        SingleModeView()
+        FirstModeView()
+            .previewDevice(PreviewDevice(stringLiteral: "iPhone X"))
     }
 }
