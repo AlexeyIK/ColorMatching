@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct DetailView: View {
+    
+    @EnvironmentObject var userData: UserData
+    
     var skatepark: Skatepark
+    
+    var skateparkId: Int {
+        self.userData.skateparks.firstIndex(where: {$0.id == skatepark.id})!
+    }
     
     var body: some View {
         VStack {
@@ -22,9 +29,23 @@ struct DetailView: View {
                 .padding(.bottom, -70)
         
             VStack(alignment: .leading, spacing: nil) {
-                Text(skatepark.name)
-                    .foregroundColor(.blue)
-                    .font(.title)
+                HStack {
+                    Text(skatepark.name)
+                        .foregroundColor(.blue)
+                        .font(.title)
+                    
+                    Button(action: {
+                        self.userData.skateparks[self.skateparkId].isFavorite.toggle()
+                    }, label: {
+                        if (self.userData.skateparks[self.skateparkId].isFavorite) {
+                            Image(systemName: "star.fill")
+                                .foregroundColor(.yellow)
+                        } else {
+                            Image(systemName: "star")
+                                .foregroundColor(.gray)
+                        }
+                    })
+                }
                 
                 HStack {
                     Text(skatepark.area).font(.subheadline)
@@ -41,6 +62,7 @@ struct DetailView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(skatepark: skateparkData[0])
+        DetailView(skatepark: skateparkData[1])
+            .environmentObject(UserData())
     }
 }

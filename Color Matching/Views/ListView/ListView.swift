@@ -9,23 +9,23 @@ import SwiftUI
 
 struct ListView: View {
     
-    @State var showFavoriteSkateparks: Bool = false
+    @EnvironmentObject var userData: UserData
     
     var body: some View {
         NavigationView {
             List {
-                
-                Toggle(isOn: $showFavoriteSkateparks) {
+                Toggle(isOn: $userData.isShowingFavorites) {
                     Text("Show favorites")
                 }
                 
-                ForEach(skateparkData) { skatepark in
-                    if (!self.showFavoriteSkateparks || skatepark.isFavorite) {
+                ForEach(userData.skateparks) { skatepark in
+                    if (!self.userData.isShowingFavorites || skatepark.isFavorite) {
                         NavigationLink(
                             destination: DetailView(skatepark: skatepark)) {
                             RowView(skatepark: skatepark)
                         }
                     }
+                }
             }
             .navigationBarTitle(Text("Skateparks"))
         }
@@ -42,5 +42,6 @@ struct ListView_Previews: PreviewProvider {
         
         ListView()
             .previewDevice(PreviewDevice(rawValue: "iPhone SE"))
+            .environmentObject(UserData())
     }
 }

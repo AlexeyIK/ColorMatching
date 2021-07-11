@@ -33,6 +33,7 @@
 		BDC1984526973DF300B54DA2 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC1984426973DF300B54DA2 /* MapView.swift */; };
 		F1469CAE2698D8A1006A14BC /* SingleModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1469CAD2698D8A1006A14BC /* SingleModeView.swift */; };
 		F1469CB9269A339E006A14BC /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1469CB8269A339E006A14BC /* ListView.swift */; };
+		F1469CBE269AF6EE006A14BC /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1469CBD269AF6EE006A14BC /* UserData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		BDC1984426973DF300B54DA2 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		F1469CAD2698D8A1006A14BC /* SingleModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleModeView.swift; sourceTree = "<group>"; };
 		F1469CB8269A339E006A14BC /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		F1469CBD269AF6EE006A14BC /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			children = (
 				BD2978F42697C56D00F19AEF /* Skatepark.swift */,
 				BD2978F92697C6B600F19AEF /* DataHelper.swift */,
+				F1469CBD269AF6EE006A14BC /* UserData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				F1469CAE2698D8A1006A14BC /* SingleModeView.swift in Sources */,
 				BD3CF12E2692F07700FF0D68 /* DetailView.swift in Sources */,
 				BD3E5A902698A1EB0030C769 /* RowView.swift in Sources */,
+				F1469CBE269AF6EE006A14BC /* UserData.swift in Sources */,
 				BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */,
 				BD2978FA2697C6B600F19AEF /* DataHelper.swift in Sources */,
 				F1469CB9269A339E006A14BC /* ListView.swift in Sources */,
