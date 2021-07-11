@@ -3,6 +3,33 @@
         "id": 0,
         "name": "Зеленый",
         "englishName": "Green",
-        "hexCode": "#00ff00"
+        "hexCode": "#00ff00",
+        "colorRGB": [
+            0,
+            255,
+            0
+        ]
+    },
+    {
+        "id": 1,
+        "name": "Красный",
+        "englishName": "Red",
+        "hexCode": "#ff0000",
+        "colorRGB": [
+            255,
+            0,
+            0
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Синий",
+        "englishName": "Blue",
+        "hexCode": "#0000ff",
+        "colorRGB": [
+            0,
+            0,
+            255
+        ]
     }
 ]

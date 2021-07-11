@@ -7,32 +7,21 @@
 
 import SwiftUI
 
-struct FirstModeView: View {
+struct AllModesView: View {
+    
+    @GestureState var dragState: DragState = .inactive
+    
     var body: some View {
+        
+//        let dragGesture = DragGesture()
+//            .updating($dragState) { (value, state, transc) in
+//                state = .dragging(translation: value.translation)
+//            }
+        
         TabView(selection: .constant(0)) {
-            HStack() {
-                Rectangle()
-                    .frame(width: 200, height: 300, alignment: .center)
-                    .cornerRadius(20)
-                    .foregroundColor(.green)
-                    .offset(x: -45)
-                    .scaleEffect(0.9)
-                Spacer()
-                Rectangle()
-                    .frame(width: 200, height: 300, alignment: .center)
-                    .cornerRadius(20)
-                    .foregroundColor(.yellow)
-                Spacer()
-                Rectangle()
-                    .frame(width: 200, height: 300, alignment: .center)
-                    .cornerRadius(20)
-                    .foregroundColor(.red)
-                    .offset(x: 45)
-                    .scaleEffect(0.9)
-                Spacer()
-            }.tabItem {
+            SwipeView()
+                .tabItem {
                 Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
-//                Text("Mode 1")
             }.tag(1)
 //                .background(Color.gray)
             
@@ -56,7 +45,21 @@ struct FirstModeView: View {
 
 struct SingleModeView_Previews: PreviewProvider {
     static var previews: some View {
-        FirstModeView()
+        AllModesView()
             .previewDevice(PreviewDevice(stringLiteral: "iPhone X"))
+    }
+}
+
+enum DragState {
+    case inactive
+    case dragging(translation: CGSize)
+    
+    var translation: CGSize {
+        switch self {
+        case .inactive:
+            return .zero
+        case .dragging(let translation):
+            return translation
+        }
     }
 }
