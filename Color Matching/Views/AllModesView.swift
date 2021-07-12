@@ -42,17 +42,3 @@ struct SingleModeView_Previews: PreviewProvider {
             .previewDevice(PreviewDevice(stringLiteral: "iPhone X"))
     }
 }
-
-enum DragState {
-    case inactive
-    case dragging(translation: CGSize)
-    
-    var translation: CGSize {
-        switch self {
-        case .inactive:
-            return .zero
-        case .dragging(let translation):
-            return translation
-        }
-    }
-}

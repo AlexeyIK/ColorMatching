@@ -12,26 +12,29 @@ struct ColorCardView: View {
     var colorModel: ColorModel
     
     var body: some View {
+        
+        let currentColor: Color = Color.init(red: Double(colorModel.colorRGB[0])/255, green: Double(colorModel.colorRGB[1])/255, blue: Double(colorModel.colorRGB[2])/255)
+        
         VStack {
-            Rectangle()
-                .foregroundColor(Color.init(red: Double(colorModel.colorRGB[0])/255, green: Double(colorModel.colorRGB[1])/255, blue: Double(colorModel.colorRGB[2])/255))
+            RoundedRectangle(cornerRadius: 30)
+                .foregroundColor(currentColor)
                 .frame(width: 300, height: 450, alignment: .center)
-                .cornerRadius(20)
-                .padding(.top, 50.0)
-            
-            Spacer()
+                .padding(.top, 20.0)
             
             ZStack {
-                Rectangle()
-                    .foregroundColor(.gray).opacity(0.5)
-                    .cornerRadius(50)
-                    .frame(width: 300, height: 80, alignment: .center)
+                RoundedRectangle(cornerRadius: 30)
+                    .foregroundColor(.gray).opacity(0.3)
+                    .frame(minWidth: 100, idealWidth: 200, maxWidth: 300,
+                           minHeight: 40, idealHeight: 40, maxHeight: 80,
+                           alignment: .center)
                 
                 VStack {
-                    Text(colorModel.name).font(.largeTitle)
-                    Text("HEX: \(colorModel.hexCode)").font(.title3)
+                    Text(colorModel.name).font(.title)
+                    Text("HEX: \(colorModel.hexCode)").font(.body)
                 }
             }
+            .padding(.top, 20)
+            
         }.padding()
     }
 }
@@ -39,6 +42,5 @@ struct ColorCardView: View {
 struct ColorCardView_Previews: PreviewProvider {
     static var previews: some View {
         ColorCardView(colorModel: colorsData[0])
-            .previewDevice(PreviewDevice(rawValue: "iPhone 8"))
     }
 }
