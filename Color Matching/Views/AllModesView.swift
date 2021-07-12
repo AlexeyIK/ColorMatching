@@ -9,14 +9,7 @@ import SwiftUI
 
 struct AllModesView: View {
     
-    @GestureState var dragState: DragState = .inactive
-    
     var body: some View {
-        
-//        let dragGesture = DragGesture()
-//            .updating($dragState) { (value, state, transc) in
-//                state = .dragging(translation: value.translation)
-//            }
         
         TabView(selection: .constant(0)) {
             SwipeView()
