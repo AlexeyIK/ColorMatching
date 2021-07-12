@@ -12,7 +12,7 @@ struct AllModesView: View {
     var body: some View {
         
         TabView(selection: .constant(0)) {
-            SwipeView()
+            SwipeView().padding()
                 .tabItem {
                 Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
             }.tag(1)
@@ -38,7 +38,10 @@ struct AllModesView: View {
 
 struct SingleModeView_Previews: PreviewProvider {
     static var previews: some View {
-        AllModesView()
-            .previewDevice(PreviewDevice(stringLiteral: "iPhone X"))
+        ForEach(["iPhone 8", "iPhone X"], id: \.self) { device in
+            AllModesView()
+                .previewDevice(PreviewDevice(stringLiteral: device))
+                .previewDisplayName(device)
+        }
     }
 }

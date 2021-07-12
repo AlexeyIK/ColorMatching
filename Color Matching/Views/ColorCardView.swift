@@ -19,7 +19,6 @@ struct ColorCardView: View {
             RoundedRectangle(cornerRadius: 30)
                 .foregroundColor(currentColor)
                 .frame(width: 300, height: 450, alignment: .center)
-                .padding(.top, 20.0)
             
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
@@ -35,7 +34,7 @@ struct ColorCardView: View {
             }
             .padding(.top, 20)
             
-        }.padding()
+        }
     }
 }
 
