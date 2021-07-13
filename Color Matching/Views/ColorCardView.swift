@@ -17,22 +17,27 @@ struct ColorCardView: View {
         
         VStack {
             RoundedRectangle(cornerRadius: 30)
-                .foregroundColor(currentColor)
-                .frame(width: 300, height: 450, alignment: .center)
+                .fill(currentColor)
+                .frame(width: 300, height: 400, alignment: .center)
+                .shadow(color: .init(red: 0.75, green: 0.75, blue: 0.75), radius: 5, x: 3, y: 5)
+                .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.001))
             
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
-                    .foregroundColor(.gray).opacity(0.3)
-                    .frame(minWidth: 100, idealWidth: 200, maxWidth: 300,
-                           minHeight: 40, idealHeight: 40, maxHeight: 80,
-                           alignment: .center)
+                    .fill(Color.gray).opacity(0.2)
+                    .frame(width: 300, height: 88, alignment: .bottom)
+                    .shadow(color: .init(red: 0.75, green: 0.75, blue: 0.75), radius: 5, x: 3, y: 5)
                 
                 VStack {
                     Text(colorModel.name).font(.title)
-                    Text("HEX: \(colorModel.hexCode)").font(.body)
+                    VStack(alignment: .leading) {
+                        Text("HEX: \(colorModel.hexCode)").font(.body)
+                        Text("RGB: \(colorModel.colorRGB[0]), \(colorModel.colorRGB[1]), \(colorModel.colorRGB[2])").font(.body)
+                    }
                 }
             }
-            .padding(.top, 20)
+            .padding(.top, 25)
+            .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.001))
             
         }
     }
@@ -40,6 +45,10 @@ struct ColorCardView: View {
 
 struct ColorCardView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorCardView(colorModel: colorsData[0])
+        ForEach(["iPhone 8", "iPhone X"], id: \.self) { device in
+            ColorCardView(colorModel: colorsData[0])
+                .previewDevice(PreviewDevice(stringLiteral: device))
+                .previewDisplayName(device)
+        }
     }
 }

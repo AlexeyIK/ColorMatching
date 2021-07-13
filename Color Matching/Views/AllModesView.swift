@@ -10,9 +10,8 @@ import SwiftUI
 struct AllModesView: View {
     
     var body: some View {
-        
         TabView(selection: .constant(0)) {
-            SwipeView().padding()
+            SwipeView()
                 .tabItem {
                 Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
             }.tag(1)
