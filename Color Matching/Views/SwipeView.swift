@@ -25,6 +25,7 @@ struct SwipeView: View {
                 }
             }
             .content.offset(x: self.offset)
+            .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.001))
             .frame(width: geometry.size.width, alignment: .leading)
             .gesture(
                 DragGesture()
@@ -38,7 +39,7 @@ struct SwipeView: View {
                            if value.predictedEndTranslation.width > geometry.size.width / 2, self.index > 0 {
                                self.index -= 1
                            }
-                           withAnimation { self.offset = -(geometry.size.width + self.spacing) * CGFloat(self.index) }
+                        withAnimation { self.offset = -(geometry.size.width + self.spacing) * CGFloat(self.index) }
                     })
             )
         })
