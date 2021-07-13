@@ -25,8 +25,7 @@ struct SwipeView: View {
                 }
             }
             .content.offset(x: self.offset)
-            .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.001))
-            .frame(width: geometry.size.width, alignment: .leading)
+            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .leading)
             .gesture(
                 DragGesture()
                     .onChanged({ value in
