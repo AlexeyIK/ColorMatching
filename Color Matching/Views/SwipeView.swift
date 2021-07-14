@@ -12,15 +12,16 @@ struct SwipeView: View {
     @State private var index = 0
     
     let cards = colorsData
-    let spacing: CGFloat = 10.0
+    let spacing: CGFloat = 0 // изменить, если захочется видеть карточки по бокам
     
     var body: some View {
         GeometryReader(content: { geometry in
-            return ScrollView(.horizontal, showsIndicators: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/) {
+            return ScrollView(.horizontal, showsIndicators: true) {
                 HStack(spacing: self.spacing) {
-                    ForEach(self.cards) { card in
-                        ColorCardView(colorModel: card)
-                            .frame(width: geometry.size.width)
+                    ForEach(self.cards.indices) { i in
+                        ColorCardView(colorModel: self.cards[i])
+                            .frame(width: geometry.size.width - spacing)
+//                            .scaleEffect(index == i ? 1.0 : 0.95)
                     }
                 }
             }
@@ -42,6 +43,7 @@ struct SwipeView: View {
                     })
             )
         })
+        .padding(.leading, spacing)
     }
 }
 

@@ -18,15 +18,15 @@ struct ColorCardView: View {
         VStack {
             RoundedRectangle(cornerRadius: 30)
                 .fill(currentColor)
-                .frame(width: 300, height: 400, alignment: .center)
-                .shadow(color: .init(red: 0.75, green: 0.75, blue: 0.75), radius: 5, x: 3, y: 5)
+                .frame(width: 290, height: 400, alignment: .center)
+                .shadow(color: .init(red: 0.8, green: 0.8, blue: 0.8), radius: 6, x: 3, y: 5)
                 .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.001))
             
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
                     .fill(Color.gray).opacity(0.2)
-                    .frame(width: 300, height: 88, alignment: .bottom)
-                    .shadow(color: .init(red: 0.75, green: 0.75, blue: 0.75), radius: 5, x: 3, y: 5)
+                    .frame(width: 250, height: 88, alignment: .bottom)
+                    .shadow(color: .init(red: 0.7, green: 0.7, blue: 0.7), radius: 6, x: 3, y: 5)
                 
                 VStack {
                     Text(colorModel.name).font(.title)
