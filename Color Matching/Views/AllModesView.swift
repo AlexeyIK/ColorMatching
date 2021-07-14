@@ -9,27 +9,28 @@ import SwiftUI
 
 struct AllModesView: View {
     
+    init() {
+        UITabBar.appearance().barTintColor = .systemBackground
+    }
+    
     var body: some View {
         TabView(selection: .constant(0)) {
             SwipeView()
                 .tabItem {
-                Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
+                Image(systemName: "square.stack.3d.down.right.fill").resizable()
+                    .foregroundColor(.gray)
             }.tag(1)
-//                .background(Color.gray)
             
             Text("Mode 2").tabItem {
                 Image(systemName: "circle.fill").resizable().foregroundColor(.gray)
-//                Text("Mode 2")
             }.tag(2)
             
             Text("Mode 3").tabItem {
                 Image(systemName: "textformat.superscript").resizable().foregroundColor(.gray)
-//                Text("Mode 2")
             }.tag(3)
             
             Text("Mode 4").tabItem {
                 Image(systemName: "text.justify").resizable().foregroundColor(.gray)
-//                Text("Mode 4")
             }.tag(4)
         }
     }
