@@ -19,12 +19,13 @@ struct ColorCardView: View {
             red: Double(colorModel.colorRGB[0] ?? 0)/255,
             green: Double(colorModel.colorRGB[1] ?? 0)/255,
             blue: Double(colorModel.colorRGB[2] ?? 0)/255)
+        let shadowColor: Color = currentColor.opacity(0.7)
         
         VStack {
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
                     .fill(currentColor)
-                    .shadow(color: .init(red: 0.8, green: 0.8, blue: 0.8), radius: 6, x: 3, y: 5)
+                    .shadow(color: shadowColor, radius: 10, x: 0, y: 0)
                 
                 if showAdditionalInfo {
                     Text(String(colorModel.id))
@@ -38,7 +39,7 @@ struct ColorCardView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 30)
                     .fill(Color.gray).opacity(0.2)
-                    .shadow(color: .init(red: 0.7, green: 0.7, blue: 0.7), radius: 6, x: 3, y: 5)
+                    .shadow(color: .init(red: 0.4, green: 0.4, blue: 0.4), radius: 8, x: 0, y: 0)
                 
                 VStack {
                     Text(colorModel.name)
