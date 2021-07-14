@@ -1060,11 +1060,11 @@ var i = 0;
 for (var line in arr ) {
   colors[i] = {};
   colors[i]['id'] = i;
-  colors[i]['RuName'] = arr[line].split(',')[1];
-  colors[i]['EngName'] = 'engNameTemplate';
-  colors[i]['HEX'] = arr[line].split(',')[2];
-  colors[i]['RGB'] = [arr[line].split(',')[3], arr[line].split(',')[4], arr[line].split(',')[5]];
-  colors[i]['HSV'] = rgbToHsv(...colors[i]['RGB']);
+  colors[i]['name'] = arr[line].split(',')[1];
+  colors[i]['englishName'] = 'engNameTemplate';
+  colors[i]['hexCode'] = arr[line].split(',')[2];
+  colors[i]['colorRGB'] = [arr[line].split(',')[3], arr[line].split(',')[4], arr[line].split(',')[5]];
+  colors[i]['colorHSV'] = rgbToHsv(...colors[i]['colorRGB']);
 
   i++;
 }
