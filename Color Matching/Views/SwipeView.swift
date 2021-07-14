@@ -12,7 +12,7 @@ struct SwipeView: View {
     @State private var index = 0
     
     let cards = colorsData
-    let numberOfCards = 10
+    let numberOfCards = 12
     
     let spacing: CGFloat = 0 // изменить, если захочется видеть карточки по бокам
     
