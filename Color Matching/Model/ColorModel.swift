@@ -17,8 +17,26 @@ struct ColorModel: Codable, Hashable, Identifiable {
     var difficulty: Difficulty
     
     enum Difficulty: CustomStringConvertible, Codable, Hashable {
+        case base
+        case popular
+        case hard
+        case unreal
+        case unknown(value: String)
         
-        typealias RawValue = Difficulty
+        var description: String {
+            switch self {
+                case .base:
+                    return "базовый"
+                case .popular:
+                    return "популярный"
+                case .hard:
+                    return "сложный"
+                case .unreal:
+                    return "немыслимый"
+                default:
+                    return "не определена"
+            }
+        }
         
         init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
@@ -40,27 +58,6 @@ struct ColorModel: Codable, Hashable, Identifiable {
                 case .hard: try container.encode("3")
                 case .unreal: try container.encode("4")
                 default: try container.encode("")
-            }
-        }
-        
-        case base
-        case popular
-        case hard
-        case unreal
-        case unknown(value: String)
-        
-        var description: String {
-            switch self {
-            case .base:
-                return "базовый"
-            case .popular:
-                return "популярный"
-            case .hard:
-                return "сложный"
-            case .unreal:
-                return "немыслимый"
-            default:
-                return "не определена"
             }
         }
     }
