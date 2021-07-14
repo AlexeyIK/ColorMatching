@@ -10,6 +10,7 @@ import Foundation
 struct ColorModel: Codable, Hashable, Identifiable {
     var id: Int
     var name: String
-    var engName: String
+    var englishName: String
     var hexCode: String
+    var colorRGB: [Int]
 }
