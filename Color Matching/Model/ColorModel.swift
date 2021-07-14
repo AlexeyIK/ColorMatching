@@ -12,5 +12,6 @@ struct ColorModel: Codable, Hashable, Identifiable {
     var name: String
     var englishName: String
     var hexCode: String
-    var colorRGB: [Int]
+    var colorRGB: [Int?]
+    var colorHSV: [Int?]
 }
