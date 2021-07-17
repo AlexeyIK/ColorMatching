@@ -17,7 +17,7 @@ struct AllModesView: View {
             }.tag(1)
 //                .background(Color.gray)
             
-            Text("Mode 2").tabItem {
+            DeckView().tabItem {
                 Image(systemName: "circle.fill").resizable().foregroundColor(.gray)
 //                Text("Mode 2")
             }.tag(2)
