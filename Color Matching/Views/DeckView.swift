@@ -14,6 +14,7 @@ struct DeckView: View {
     @State private var index: Int = 0
     @State var slicedCardsList = Array(colorsData[1...10])
     @State var needToDropCard: Bool = false
+    @State var viewAppear = false
     
 //        let rndStart = Int.random(in: 0..<colorsData.count - numberOfCards)
 //        let slicedCardsList = colorsData[rndStart...rndStart + numberOfCards]
@@ -44,15 +45,19 @@ struct DeckView: View {
                             ColorCardMinimalView(colorModel: slicedCardsList[indx])
                                 .offset(
                                     x: self.dragState.translation.width,
-                                    y: 0
+                                    y: CGFloat(indx) * -2).zIndex(-Double(indx)
                                 )
                                 .rotationEffect(Angle(degrees: Double(dragState.translation.width / 30)))
                                 .gesture(dragGesture)
-                                .animation(.spring(response: 0.3, dampingFraction: 0.65, blendDuration: 0.01))
+                                .animation(self.viewAppear ? .spring(response: 0.3, dampingFraction: 0.65, blendDuration: 0.01) : nil)
                                 .transition(.move(edge: .leading))
+                                .onAppear() {
+                                    self.viewAppear = true
+                                }
                                 .onDisappear() {
                                     if needToDropCard {
                                         self.needToDropCard = false
+                                        self.viewAppear = false
                                     }
                                 }
                         }
