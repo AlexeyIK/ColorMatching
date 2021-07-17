@@ -12,13 +12,19 @@ struct SwipeView: View {
     @State private var index = 0
     
     let cards = colorsData
+    let numberOfCards = 12
+    
     let spacing: CGFloat = 0 // изменить, если захочется видеть карточки по бокам
     
     var body: some View {
+        
+        let rndStart = Int.random(in: 0..<colorsData.count - numberOfCards)
+        let slicedCardsList = colorsData[rndStart...rndStart + numberOfCards]
+        
         GeometryReader(content: { geometry in
             return ScrollView(.horizontal, showsIndicators: true) {
                 HStack(spacing: self.spacing) {
-                    ForEach(self.cards.indices) { i in
+                    ForEach(slicedCardsList.indices) { i in
                         ColorCardView(colorModel: self.cards[i])
                             .frame(width: geometry.size.width - spacing)
 //                            .scaleEffect(index == i ? 1.0 : 0.95)
@@ -33,7 +39,7 @@ struct SwipeView: View {
                         self.offset = value.translation.width - geometry.size.width * CGFloat(self.index)
                     })
                     .onEnded({ value in
-                        if -value.predictedEndTranslation.width > geometry.size.width / 2, self.index < self.cards.count - 1 {
+                        if -value.predictedEndTranslation.width > geometry.size.width / 2, self.index < slicedCardsList.count - 1 {
                                self.index += 1
                            }
                            if value.predictedEndTranslation.width > geometry.size.width / 2, self.index > 0 {
