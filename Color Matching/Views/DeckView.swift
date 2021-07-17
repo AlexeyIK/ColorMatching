@@ -12,7 +12,7 @@ struct DeckView: View {
     @GestureState var dragState: DragState = .inactive
     @State private var offset: CGFloat = 0
     @State private var index: Int = 0
-    @State var slicedCardsList = Array(colorsData[1...10])
+    @State var slicedCardsList = Array(colorsData[10...20])
     @State var needToDropCard: Bool = false
     @State var viewAppear = false
     
@@ -21,7 +21,7 @@ struct DeckView: View {
     
     let cards = colorsData
     let numberOfCards = 12
-    let swipeTreshold: CGFloat = 20
+    let swipeTreshold: CGFloat = 200
     
     var body: some View {
         
@@ -35,6 +35,9 @@ struct DeckView: View {
                     self.index += 1
                     self.needToDropCard = true
                 }
+                else {
+                    self.needToDropCard = false
+                }
             })
         
         VStack {
@@ -42,7 +45,7 @@ struct DeckView: View {
                 ForEach(slicedCardsList.indices) { indx in
                     if (indx >= index) {
                         if (indx == index && !self.needToDropCard) {
-                            ColorCardMinimalView(colorModel: slicedCardsList[indx])
+                            ColorCardMinimalView(colorModel: slicedCardsList[indx], drawBorder: true)
                                 .offset(
                                     x: self.dragState.translation.width,
                                     y: CGFloat(indx) * -2).zIndex(-Double(indx)
@@ -50,7 +53,7 @@ struct DeckView: View {
                                 .rotationEffect(Angle(degrees: Double(dragState.translation.width / 30)))
                                 .gesture(dragGesture)
                                 .animation(self.viewAppear ? .spring(response: 0.3, dampingFraction: 0.65, blendDuration: 0.01) : nil)
-                                .transition(.move(edge: .leading))
+                                .transition(self.dragState.translation.width > 0 ? .move(edge: .trailing) : .move(edge: .leading))
                                 .onAppear() {
                                     self.viewAppear = true
                                 }
@@ -62,12 +65,11 @@ struct DeckView: View {
                                 }
                         }
                         else {
-                            ColorCardMinimalView(colorModel: slicedCardsList[indx])
+                            ColorCardMinimalView(colorModel: slicedCardsList[indx], drawBorder: true)
                                 .offset(y: CGFloat(indx) * -2).zIndex(-Double(indx))
                         }
                     }
                 }
-                
                 
 //                ColorCardMinimalView(colorModel: slicedCardsList[index])
 //                    .offset(
