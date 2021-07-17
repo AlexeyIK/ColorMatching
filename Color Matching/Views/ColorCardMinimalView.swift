@@ -10,6 +10,7 @@ import SwiftUI
 struct ColorCardMinimalView: View {
     
     var colorModel: ColorModel
+    var drawBorder: Bool
     
     var body: some View {
         
@@ -25,6 +26,11 @@ struct ColorCardMinimalView: View {
                 RoundedRectangle(cornerRadius: 30)
                     .fill(currentColor)
                     .shadow(color: shadowColor, radius: 10, x: 0, y: 0)
+                    .overlay(drawBorder ?
+                        RoundedRectangle(cornerRadius: 30)
+                                .stroke(LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), startPoint: .topLeading, endPoint: .bottomTrailing), lineWidth: 3)
+                        : nil
+                    )
                 
                 
                 Text(String(colorModel.id))
@@ -40,6 +46,6 @@ struct ColorCardMinimalView: View {
 
 struct ColorCardMinimalView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorCardMinimalView(colorModel: colorsData[2])
+        ColorCardMinimalView(colorModel: colorsData[2], drawBorder: true)
     }
 }
