@@ -21,7 +21,7 @@ struct DeckView: View {
     
     let cards = colorsData
     let numberOfCards = 12
-    let swipeTreshold: CGFloat = 200
+    let swipeTreshold: CGFloat = 160
     
     var body: some View {
         
