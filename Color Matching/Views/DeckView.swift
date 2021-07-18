@@ -42,7 +42,7 @@ struct DeckView: View {
                 ForEach(slicedCardsList.indices) { indx in
                     if (indx >= index) {
                         if (indx == index && !self.needToDropCard) {
-                            ColorCardMinimalView(colorModel: slicedCardsList[indx], drawBorder: true)
+                            ColorCardMinimalView(colorModel: slicedCardsList[indx], drawBorder: true, showName: true)
                                 .offset(
                                     x: self.dragState.translation.width,
                                     y: CGFloat(indx) * -2).zIndex(-Double(indx)
@@ -62,7 +62,7 @@ struct DeckView: View {
                                 }
                         }
                         else {
-                            ColorCardMinimalView(colorModel: slicedCardsList[indx], drawBorder: true)
+                            ColorCardMinimalView(colorModel: slicedCardsList[indx], drawBorder: true, showName: false)
                                 .offset(y: CGFloat(indx) * -2).zIndex(-Double(indx))
                         }
                     }
@@ -80,7 +80,7 @@ struct DeckView: View {
                 
             }
             
-            Text("Cards remain: \(slicedCardsList.count - index)")
+            Text("Осталось карточек: \(slicedCardsList.count - index)")
                 .padding(.top, 20)
                 .font(.title2)
         }

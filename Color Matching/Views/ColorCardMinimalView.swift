@@ -11,6 +11,7 @@ struct ColorCardMinimalView: View {
     
     var colorModel: ColorModel
     var drawBorder: Bool
+    var showName: Bool
     
     var body: some View {
         
@@ -28,7 +29,7 @@ struct ColorCardMinimalView: View {
                     .shadow(color: shadowColor, radius: 10, x: 0, y: 0)
                     .overlay(drawBorder ?
                         RoundedRectangle(cornerRadius: 30)
-                                .stroke(AngularGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), center: .topTrailing, startAngle: .degrees(45), endAngle: .degrees(315)) /*LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), startPoint: .topLeading, endPoint: .bottomTrailing)*/, lineWidth: 4)
+                                .stroke(AngularGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), center: .topTrailing, startAngle: .degrees(45), endAngle: .degrees(315)), lineWidth: 4)
                         : nil
                     )
                 
@@ -40,12 +41,37 @@ struct ColorCardMinimalView: View {
             .frame(width: 290, height: 400, alignment: .center)
 //            .offset(y: -60)
 //            .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.001))
+            
+            
+            if showName {
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(Color.gray).opacity(0.2)
+                        .shadow(color: .init(red: 0.4, green: 0.4, blue: 0.4), radius: 5, x: 0, y: 0)
+                    
+                    VStack {
+                        Text(colorModel.name != "" ? colorModel.name : colorModel.englishName)
+                            .lineLimit(2)
+                            .font(.title2)
+                            .frame(width: 250, height: 68, alignment: .center)
+                            .multilineTextAlignment(.center)
+                    }
+                }
+                .frame(width: 280, height: 50, alignment: .center)
+                .padding(.top, 25)
+                .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.001))
+            }
+            else {
+                ZStack {}
+                    .frame(width: 280, height: 50, alignment: .center)
+                    .padding(.top, 25)
+            }
         }
     }
 }
 
 struct ColorCardMinimalView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorCardMinimalView(colorModel: colorsData[2], drawBorder: true)
+        ColorCardMinimalView(colorModel: colorsData[20], drawBorder: true, showName: true)
     }
 }
