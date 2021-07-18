@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SwipeView: View {
+    
     @State private var offset: CGFloat = 0
     @State private var index = 0
     
