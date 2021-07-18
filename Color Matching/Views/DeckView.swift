@@ -49,7 +49,7 @@ struct DeckView: View {
                                 )
                                 .rotationEffect(Angle(degrees: Double(dragState.translation.width / 30)))
                                 .gesture(dragGesture)
-                                .animation(self.viewAppear ? .spring(response: 0.3, dampingFraction: 0.65, blendDuration: 0.01) : nil)
+                                .animation(self.viewAppear ? .spring(response: 0.25, dampingFraction: 0.6, blendDuration: 0.01) : nil)
                                 .transition(self.dragState.translation.width > 0 ? .move(edge: .trailing) : .move(edge: .leading))
                                 .onAppear() {
                                     self.viewAppear = true
