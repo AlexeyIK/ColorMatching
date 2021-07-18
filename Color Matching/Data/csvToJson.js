@@ -7,8 +7,8 @@
 3. запускаем этот скрипт — готовый результат в файле 'Refactored.json' 
 */
 
-//сюда конечно лучше скармливать файл, но пока тут содержание csv
 const fs = require('fs');
+//локальный путь до файла
 const csvfilepath = 'D:/YandexDisk/!!!!!!!!!!WORK/_Apps/colors/Color Matching/Data/'
 
 const tempData = fs.readFileSync(`${csvfilepath}TheColors.csv`, 'utf8' , (err, data) => {
@@ -77,7 +77,7 @@ for (var line in arr ) {
     || arr[line].split(',')[nameColumn].includes('Крайола')
     ){ continue; };
 
-  if ( i != 0 ){
+  /* if ( i != 0 ){
     if ( arr[line].split(',')[hexCodeColumn] == colors[i-1]['hexCode'] && colors[i-1]['hexCode'] != undefined ) {
       console.log('twin finded');
       if ( arr[line].split(',')[newEngNameColumn] != undefined
@@ -91,7 +91,7 @@ for (var line in arr ) {
       twins++;
       continue;    
     };
-  };
+  }; */
 
   colors[i] = {};
   colors[i]['id'] = i;
@@ -145,7 +145,7 @@ fs.writeFileSync(`${csvfilepath}Refactored.csv`, csvForGoogle, err => {
 })
 
 //делаем HTML со всеми цветами
-let htmlForGoogleStart = `
+/* let htmlForGoogleStart = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -161,7 +161,7 @@ let htmlForGoogleEnd = `</table>
 </body>
 </html>`
 
-/* let htmlForGoogleInnertext = '' 
+let htmlForGoogleInnertext = '' 
 for (let hex in colors){
   htmlForGoogleInnertext += `<tr><td bgcolor="${colors[hex]['hexCode']}"></td><td>${(colors[hex]['name'] || 'noname')}</td></tr>`;  
   htmlForGoogleInnertext += '\n'
@@ -175,7 +175,7 @@ fs.writeFileSync(`${csvfilepath}colors.html`, htmlForGoogleStart + htmlForGoogle
 }) */
 
 console.log('--- start ---');
-console.log(`we are find ${twins} twins`);
+/* console.log(`we are find ${twins} twins`); */
 console.log(`we got json with ${colors.length} objects`);
 console.log('---  end  ---');
 
