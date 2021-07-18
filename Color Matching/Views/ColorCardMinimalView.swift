@@ -28,7 +28,7 @@ struct ColorCardMinimalView: View {
                     .shadow(color: shadowColor, radius: 10, x: 0, y: 0)
                     .overlay(drawBorder ?
                         RoundedRectangle(cornerRadius: 30)
-                                .stroke(AngularGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), center: .topTrailing, startAngle: .degrees(45), endAngle: .degrees(315)) /*LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), startPoint: .topLeading, endPoint: .bottomTrailing)*/, lineWidth: 3)
+                                .stroke(AngularGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), center: .topTrailing, startAngle: .degrees(45), endAngle: .degrees(315)) /*LinearGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), startPoint: .topLeading, endPoint: .bottomTrailing)*/, lineWidth: 4)
                         : nil
                     )
                 

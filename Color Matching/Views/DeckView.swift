@@ -12,12 +12,9 @@ struct DeckView: View {
     @GestureState var dragState: DragState = .inactive
     @State private var offset: CGFloat = 0
     @State private var index: Int = 0
-    @State var slicedCardsList = Array(colorsData[10...20])
+    @State var slicedCardsList = GetSequentalNumOfCards(cardsArray: colorsData)
     @State var needToDropCard: Bool = false
     @State var viewAppear = false
-    
-//        let rndStart = Int.random(in: 0..<colorsData.count - numberOfCards)
-//        let slicedCardsList = colorsData[rndStart...rndStart + numberOfCards]
     
     let cards = colorsData
     let numberOfCards = 12
@@ -83,7 +80,7 @@ struct DeckView: View {
                 
             }
             
-            Text("Cards remains: \(slicedCardsList.count - index)")
+            Text("Cards remain: \(slicedCardsList.count - index)")
                 .padding(.top, 20)
                 .font(.title2)
         }
