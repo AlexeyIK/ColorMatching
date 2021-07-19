@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BackgroundView: View {
     var body: some View {
-        ConvertColor(colorType: .rgba, value: (68, 68, 68, 1)).ignoresSafeArea()
+        _globalBackgroundColor.ignoresSafeArea()
     }
 }
 

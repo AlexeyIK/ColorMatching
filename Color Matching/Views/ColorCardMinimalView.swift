@@ -41,7 +41,8 @@ struct ColorCardMinimalView: View {
                     
                     Text(String(colorModel.id))
                         .font(.largeTitle)
-                        .foregroundColor(.white)
+                        .foregroundColor(currentColor)
+                        .colorInvert()
                 }
                 .frame(width: 280, height: 390, alignment: .center)
     //            .offset(y: -60)

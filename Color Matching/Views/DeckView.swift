@@ -18,7 +18,7 @@ struct DeckView: View {
     @State var showColorNames: Bool = true
     
     let cards = colorsData
-    let swipeTreshold: CGFloat = 160
+    let swipeTreshold: CGFloat = 180
     
     var body: some View {
         
@@ -50,7 +50,9 @@ struct DeckView: View {
                     ForEach(slicedCardsList.indices) { indx in
                         if (indx >= index) {
                             if (indx == index && !self.needToDropCard) {
-                                ColorCardMinimalView(colorModel: slicedCardsList[indx], drawBorder: true, drawShadow: index == slicedCardsList.count - 1)
+                                ColorCardMinimalView(colorModel: slicedCardsList[indx],
+                                                     drawBorder: true,
+                                                     drawShadow: index == slicedCardsList.count - 1)
                                     .offset(
                                         x: self.dragState.translation.width,
                                         y: CGFloat(indx) * -1).zIndex(-Double(indx)
@@ -93,7 +95,7 @@ struct DeckView: View {
                     ZStack {
                         Text(slicedCardsList[index].name != "" ? slicedCardsList[index].name : slicedCardsList[index].englishName)
                             .lineLimit(2)
-                            .foregroundColor(ConvertColor(colorType: .rgba, value: (127, 255, 212, 1)))
+                            .foregroundColor(_globalMainTextColor)
                             .font(.title2)
                             .frame(width: 280, height: 58, alignment: .top)
                             .multilineTextAlignment(.center)
@@ -106,11 +108,11 @@ struct DeckView: View {
                     Spacer()
                     
                     Text("Осталось карточек: \(slicedCardsList.count - index)")
-                        .foregroundColor(ConvertColor(colorType: .rgba, value: (127, 255, 212, 1)))
+                        .foregroundColor(_globalMainTextColor)
                         .font(.title3)
                 } else {
                     Text("На этом пока все!")
-                        .foregroundColor(ConvertColor(colorType: .rgba, value: (127, 255, 212, 1)))
+                        .foregroundColor(_globalMainTextColor)
                         .font(.title)
                 }
             }
