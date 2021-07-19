@@ -11,7 +11,7 @@ struct ColorCardMinimalView: View {
     
     var colorModel: ColorModel
     var drawBorder: Bool
-    var showName: Bool
+    var drawShadow: Bool
     
     var body: some View {
         
@@ -20,51 +20,32 @@ struct ColorCardMinimalView: View {
             green: Double(colorModel.colorRGB[1] ?? 0)/255,
             blue: Double(colorModel.colorRGB[2] ?? 0)/255)
         
-        let shadowColor: Color = currentColor.opacity(0.2)
+//        let shadowColor: Color = currentColor.opacity(0.3)
+        let shadowColor: Color = Color.black.opacity(0.6)
         
-        VStack {
-            ZStack {
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(currentColor)
-                    .shadow(color: shadowColor, radius: 10, x: 0, y: 0)
-                    .overlay(drawBorder ?
-                        RoundedRectangle(cornerRadius: 30)
-                                .stroke(AngularGradient(gradient: Gradient(colors: [Color.white.opacity(0.5), Color.clear]), center: .topTrailing, startAngle: .degrees(45), endAngle: .degrees(315)), lineWidth: 4)
-                        : nil
-                    )
-                
-                
-                Text(String(colorModel.id))
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-            }
-            .frame(width: 290, height: 400, alignment: .center)
-//            .offset(y: -60)
-//            .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.001))
-            
-            
-            if showName {
+        ZStack {
+            // для дебага внешности, можно включить фоновый цвет
+//            BackgroundView()
+        
+            VStack {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 30)
-                        .fill(Color.gray).opacity(0.2)
-                        .shadow(color: .init(red: 0.4, green: 0.4, blue: 0.4), radius: 5, x: 0, y: 0)
+                    RoundedRectangle(cornerRadius: 24)
+                        .fill(currentColor)
+                        .shadow(color: drawShadow ? shadowColor : Color.clear, radius: 20, x: -1, y: -3)
+                        .overlay(drawBorder ?
+                            RoundedRectangle(cornerRadius: 24)
+                                    .stroke(AngularGradient(gradient: Gradient(colors: [currentColor, Color.clear]), center: .topTrailing, startAngle: .degrees(-30), endAngle: .degrees(225)), lineWidth: 4)
+                                    .brightness(0.35)
+                            : nil
+                        )
                     
-                    VStack {
-                        Text(colorModel.name != "" ? colorModel.name : colorModel.englishName)
-                            .lineLimit(2)
-                            .font(.title2)
-                            .frame(width: 250, height: 68, alignment: .center)
-                            .multilineTextAlignment(.center)
-                    }
+                    Text(String(colorModel.id))
+                        .font(.largeTitle)
+                        .foregroundColor(.white)
                 }
-                .frame(width: 280, height: 50, alignment: .center)
-                .padding(.top, 25)
-                .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.001))
-            }
-            else {
-                ZStack {}
-                    .frame(width: 280, height: 50, alignment: .center)
-                    .padding(.top, 25)
+                .frame(width: 280, height: 390, alignment: .center)
+    //            .offset(y: -60)
+    //            .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.001))
             }
         }
     }
@@ -72,6 +53,6 @@ struct ColorCardMinimalView: View {
 
 struct ColorCardMinimalView_Previews: PreviewProvider {
     static var previews: some View {
-        ColorCardMinimalView(colorModel: colorsData[20], drawBorder: true, showName: true)
+        ColorCardMinimalView(colorModel: colorsData[1610], drawBorder: true, drawShadow: true)
     }
 }
