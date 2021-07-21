@@ -13,7 +13,10 @@ struct Color_MatchingApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AllModesView()
+//            AllModesView()
+            DeckView()
+//            AnimationsTest()
+//            ColorCardMinimalView(colorModel: colorsData[1201], drawBorder: true, drawShadow: true)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 
         }

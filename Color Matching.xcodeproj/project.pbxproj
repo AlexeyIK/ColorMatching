@@ -23,11 +23,13 @@
 		F14A3C4B269B28FB00B9A710 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14A3C4A269B28FB00B9A710 /* DataHelper.swift */; };
 		F1758E6926A0DEB20035E6B5 /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1758E6826A0DEB20035E6B5 /* DeckView.swift */; };
 		F1758E6E26A0DFA60035E6B5 /* ColorCardMinimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */; };
+		F197014926A6DF4800494B2F /* AnimationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197014826A6DF4800494B2F /* AnimationsTest.swift */; };
 		F1A8428826A623DE0068A897 /* DefinedColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1A8428726A623DE0068A897 /* DefinedColors.swift */; };
 		F1B568D326A608B20008494D /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B568D226A608B20008494D /* BackgroundView.swift */; };
 		F1C519DA269DE18C0096B9B4 /* ReadSizeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C519D9269DE18C0096B9B4 /* ReadSizeExtension.swift */; };
 		F1D22CA8269B89AE009D4BD2 /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */; };
 		F1D22CAD269BA14A009D4BD2 /* ColorCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */; };
+		F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1F3757726A75D4700FBA06A /* GameHelpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,11 +72,13 @@
 		F14A3C4A269B28FB00B9A710 /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		F1758E6826A0DEB20035E6B5 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
 		F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardMinimalView.swift; sourceTree = "<group>"; };
+		F197014826A6DF4800494B2F /* AnimationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsTest.swift; sourceTree = "<group>"; };
 		F1A8428726A623DE0068A897 /* DefinedColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefinedColors.swift; sourceTree = "<group>"; };
 		F1B568D226A608B20008494D /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		F1C519D9269DE18C0096B9B4 /* ReadSizeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadSizeExtension.swift; sourceTree = "<group>"; };
 		F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardView.swift; sourceTree = "<group>"; };
+		F1F3757726A75D4700FBA06A /* GameHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHelpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +116,6 @@
 				F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */,
 				F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */,
 				F125010E26A5819700B521F1 /* ColorConverter.swift */,
-				F145D10626A44D500044476F /* CardAnimations.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,10 +152,12 @@
 		BD3CF12A2692F07700FF0D68 /* Color Matching */ = {
 			isa = PBXGroup;
 			children = (
+				F197014826A6DF4800494B2F /* AnimationsTest.swift */,
 				F145D0FC26A446A30044476F /* Logic */,
 				F1C519D8269DE1730096B9B4 /* Helpers */,
 				F14A3C52269B292A00B9A710 /* Model */,
 				BD2978E82697C47000F19AEF /* Data */,
+				F1461DB426A82F880082C886 /* Animations */,
 				BD2978E02697C45600F19AEF /* Views */,
 				BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */,
 				BD3CF12F2692F07900FF0D68 /* Assets.xcassets */,
@@ -198,6 +203,14 @@
 			path = Logic;
 			sourceTree = "<group>";
 		};
+		F1461DB426A82F880082C886 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				F145D10626A44D500044476F /* CardAnimations.swift */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		F14A3C52269B292A00B9A710 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -211,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				F1C519D9269DE18C0096B9B4 /* ReadSizeExtension.swift */,
+				F1F3757726A75D4700FBA06A /* GameHelpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -350,11 +364,13 @@
 				F1758E6E26A0DFA60035E6B5 /* ColorCardMinimalView.swift in Sources */,
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
 				F1D22CAD269BA14A009D4BD2 /* ColorCardView.swift in Sources */,
+				F197014926A6DF4800494B2F /* AnimationsTest.swift in Sources */,
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
 				F1D22CA8269B89AE009D4BD2 /* SwipeView.swift in Sources */,
 				F1758E6926A0DEB20035E6B5 /* DeckView.swift in Sources */,
 				F1469CAE2698D8A1006A14BC /* AllModesView.swift in Sources */,
 				F1C519DA269DE18C0096B9B4 /* ReadSizeExtension.swift in Sources */,
+				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
 				F145D0F826A4468E0044476F /* SingleModeLogic.swift in Sources */,
 				F125010F26A5819700B521F1 /* ColorConverter.swift in Sources */,
 				F145D10726A44D500044476F /* CardAnimations.swift in Sources */,

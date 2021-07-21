@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ColorCardMinimalView: View {
+        
+    @State var isActive = false
     
     var colorModel: ColorModel
     var drawBorder: Bool
@@ -27,27 +29,36 @@ struct ColorCardMinimalView: View {
             // для дебага внешности, можно включить фоновый цвет
 //            BackgroundView()
         
-            VStack {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 24)
-                        .fill(currentColor)
-                        .shadow(color: drawShadow ? shadowColor : Color.clear, radius: 20, x: -1, y: -3)
-                        .overlay(drawBorder ?
+//            VStack {
+//                if isActive {
+//                    withAnimation {
+                        ZStack {
                             RoundedRectangle(cornerRadius: 24)
-                                    .stroke(AngularGradient(gradient: Gradient(colors: [currentColor, Color.clear]), center: .topTrailing, startAngle: .degrees(-30), endAngle: .degrees(225)), lineWidth: 4)
-                                    .brightness(0.35)
-                            : nil
-                        )
-                    
-                    Text(String(colorModel.id))
-                        .font(.largeTitle)
-                        .foregroundColor(currentColor)
-                        .colorInvert()
-                }
-                .frame(width: 280, height: 390, alignment: .center)
-    //            .offset(y: -60)
-    //            .animation(.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0.001))
-            }
+                                .fill(currentColor)
+                                .shadow(color: drawShadow ? shadowColor : Color.clear, radius: 20, x: -1, y: -3)
+                                .overlay(drawBorder ?
+                                    RoundedRectangle(cornerRadius: 24)
+                                            .stroke(AngularGradient(gradient: Gradient(colors: [currentColor, Color.clear]), center: .topTrailing, startAngle: .degrees(-30), endAngle: .degrees(225)), lineWidth: 4)
+                                            .brightness(0.3)
+                                    : nil
+                                )
+                            
+                            Text(String(colorModel.id))
+                                .font(.largeTitle)
+                                .foregroundColor(currentColor)
+                                .colorInvert()
+                        }
+                        .frame(width: 280, height: 390, alignment: .center)
+//                        .transition(.swipe)
+//                    }
+//                }
+//
+//                Button("Tap here", action: {
+//                    withAnimation {
+//                        self.isActive.toggle()
+//                    }
+//                }).padding(.top, 20)
+//            }
         }
     }
 }
