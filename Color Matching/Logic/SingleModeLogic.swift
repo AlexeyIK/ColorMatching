@@ -7,13 +7,18 @@
 
 import Foundation
 
-func GetSequentalNumOfCards(cardsArray: [ColorModel], numberOfCards: Int = 10) -> [ColorModel] {
-    let rndStart = Int.random(in: 0..<cardsArray.count - numberOfCards)
-    let newCardList = Array(cardsArray[rndStart..<rndStart + numberOfCards])
+public class LearnColorsGameManager {
     
-    return newCardList
+    static let shared = LearnColorsGameManager()
+    
+    private init() { }
+    
+    var savedCardsArray: [ColorModel] = []
+    
+    func StartGame(cardsInDeck numOfCards: Int) -> [ColorModel] {
+        savedCardsArray = GetSequentalNumOfCards(cardsArray: colorsData, numberOfCards: numOfCards)
+        
+        return savedCardsArray
+    }
 }
 
-func ShuffleCards(cardsArray: [ColorModel]) -> [ColorModel] {
-    return cardsArray.shuffled()
-}
