@@ -14,7 +14,7 @@ struct CardState {
 
 struct DeckView: View {
     
-    @State var cardsList = LearnColorsGameManager.shared.StartGame(cardsInDeck: 10)
+    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .easy, shuffle: true)
     @State var needToDropCard: Bool = false
     @State var showColorNames: Bool = true
     @State var swipeDirection: SwipeDirection = .toLeft
@@ -24,6 +24,8 @@ struct DeckView: View {
     let swipeTreshold: CGFloat = 120
     
     var body: some View {
+        
+//        let simCard = SimilarColorPicker.shared.getSimilarColors(colorRef: cardsList[0])
         
         ZStack {
             BackgroundView()
@@ -37,7 +39,7 @@ struct DeckView: View {
                     ForEach(cardsList.indices, id: \.self) { i in
                         // ToDo: подумать над тем, как сделать это через анимацию удаления
                         if (i >= currentIndex) {
-                            ColorCardMinimalView(colorModel: cardsList[i],
+                            TransparentCardView(colorModel: cardsList[i],
                                                  drawBorder: true,
                                                  drawShadow: i == cardsList.count - 1)
                                 .offset(
@@ -83,7 +85,7 @@ struct DeckView: View {
 //                if showColorNames && cardsList.count > 0 {
                 if showColorNames && currentIndex < cardsList.count {
                     ZStack {
-                        let colorName = cardsList.first?.name != "" ? cardsList.first!.name : cardsList.first!.englishName
+                        let colorName = cardsList[currentIndex].name != "" ? cardsList[currentIndex].name : cardsList[currentIndex].englishName
                         
                         Text(colorName)
                             .lineLimit(2)
@@ -92,7 +94,6 @@ struct DeckView: View {
                             .frame(width: 280, height: 58, alignment: .top)
                             .multilineTextAlignment(.center)
                     }
-                    .frame(width: 230, height: 48, alignment: .center)
                     .padding(.top, 25)
                 }
                 
@@ -105,6 +106,7 @@ struct DeckView: View {
                         .font(.title3)
                         .padding(.bottom, 10)
                 } else {
+                    
                     Text("Теперь постарайся вспомнить названия цветов!")
                         .foregroundColor(_globalMainTextColor)
                         .font(.title2)

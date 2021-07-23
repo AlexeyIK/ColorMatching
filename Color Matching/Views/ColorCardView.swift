@@ -72,8 +72,8 @@ struct ColorCardView: View {
 
 struct ColorCardView_Previews: PreviewProvider {
     static var previews: some View {
-//        ForEach(["iPhone X"], id: \.self) { device in
-        ForEach(["iPhone 8", "iPhone X"], id: \.self) { device in
+        ForEach(["iPhone X"], id: \.self) { device in
+//        ForEach(["iPhone 8", "iPhone X"], id: \.self) { device in
             ColorCardView(colorModel: colorsData[16])
                 .previewDevice(PreviewDevice(stringLiteral: device))
                 .previewDisplayName(device)

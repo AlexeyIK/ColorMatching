@@ -16,11 +16,13 @@ struct AllModesView: View {
                 Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
                 }.tag(1)
             
-            SwipeView().tabItem {
+            SimilarColorsView()
+                .tabItem {
                 Image(systemName: "circle.fill").resizable().foregroundColor(.gray)
             }.tag(2)
             
-            Text("Mode 3").tabItem {
+            AnimationsTest()
+                .tabItem {
                 Image(systemName: "textformat.superscript").resizable().foregroundColor(.gray)
             }.tag(3)
             
@@ -28,7 +30,10 @@ struct AllModesView: View {
                 Image(systemName: "text.justify").resizable().foregroundColor(.gray)
             }.tag(4)
         }
+        .accentColor(_globalTabBarBackground)
     }
+    
+    
 }
 
 struct SingleModeView_Previews: PreviewProvider {
