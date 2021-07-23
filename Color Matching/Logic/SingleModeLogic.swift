@@ -20,9 +20,13 @@ public class LearnColorsGameManager {
     var countdown: Timer = Timer()
     var quizPosition: Int = 0
     
-    func StartGameSession(cardsInDeck numOfCards: Int, with hardness: Hardness) -> [ColorModel] {
+    func StartGameSession(cardsInDeck numOfCards: Int, with hardness: Hardness, shuffle: Bool = false) -> [ColorModel] {
         currentHardness = hardness
-        let cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness)
+        var cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness)
+        if (shuffle) {
+            cardsByHardness = ShuffleCards(cardsArray: cardsByHardness)
+        }
+        
         savedCardsArray = GetSequentalNumOfCards(cardsArray: cardsByHardness, numberOfCards: numOfCards)
         gameSessionActive = true;
         

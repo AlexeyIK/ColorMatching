@@ -14,7 +14,7 @@ struct CardState {
 
 struct DeckView: View {
     
-    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .easy)
+    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .easy, shuffle: true)
     @State var needToDropCard: Bool = false
     @State var showColorNames: Bool = true
     @State var swipeDirection: SwipeDirection = .toLeft
@@ -39,7 +39,7 @@ struct DeckView: View {
                     ForEach(cardsList.indices, id: \.self) { i in
                         // ToDo: подумать над тем, как сделать это через анимацию удаления
                         if (i >= currentIndex) {
-                            ColorCardMinimalView(colorModel: cardsList[i],
+                            TransparentCardView(colorModel: cardsList[i],
                                                  drawBorder: true,
                                                  drawShadow: i == cardsList.count - 1)
                                 .offset(

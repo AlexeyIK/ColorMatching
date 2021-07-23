@@ -107,11 +107,12 @@ public class SimilarColorPicker {
         var similarColor: ColorModel?
         var newHue = refHue
         var iterations = 0
+        let shuffledColorData = ShuffleCards(cardsArray: colorsData)
         
         repeat {
             iterations += 1
 
-            colorsData.forEach({ color in
+            shuffledColorData.forEach({ color in
                 if angleDistance(a: color.colorHSV[0]!, b: newHue) <= hueOffset &&
                     // saturation offsets
                     color.colorHSV[1]! >= (satRef - satOffset).clamped(to: satClamp) &&

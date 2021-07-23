@@ -43,14 +43,13 @@ struct ColorCardMinimalView: View {
                                     : nil
                                 )
                             
-                            VStack {
-                                Text(String(colorModel.id))
-                                    .font(.largeTitle)
-                                    .foregroundColor(currentColor)
-                                    .colorInvert()
-                                
-                                Spacer()
-                            }.padding()
+//                            VStack {
+//                                Text(String(colorModel.id))
+//                                    .font(.largeTitle)
+//                                    .foregroundColor(currentColor)
+//                                    .colorInvert()
+//                                Spacer()
+//                            }.padding()
                         }
                         .frame(width: 280, height: 390, alignment: .center)
 //                        .transition(.swipe)
