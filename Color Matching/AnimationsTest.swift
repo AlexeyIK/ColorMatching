@@ -68,6 +68,9 @@ struct AnimationsTest: View {
                     self.cardsArray.append(ColorItem(cardTypes[Int.random(in: 0..<cardTypes.count)]))
                 }
             }
+            .padding([.top, .bottom], 10)
+            .padding([.leading, .trailing], 20)
+            .border(Color.blue, width: 2)
         }
         .edgesIgnoringSafeArea(.top)
         .padding(.top, 10)
