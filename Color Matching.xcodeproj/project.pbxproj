@@ -32,6 +32,7 @@
 		F1D22CA8269B89AE009D4BD2 /* SwipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */; };
 		F1D22CAD269BA14A009D4BD2 /* ColorCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */; };
 		F1D656E726AB552B007BCDAE /* TransparentCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D656E626AB552B007BCDAE /* TransparentCardView.swift */; };
+		F1D656EF26AB758A007BCDAE /* QuizGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D656EE26AB758A007BCDAE /* QuizGameView.swift */; };
 		F1E28E0626AB0D1200B62054 /* SimilarColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E28E0526AB0D1200B62054 /* SimilarColorPicker.swift */; };
 		F1E28E0B26AB0D6000B62054 /* ColorsPickerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E28E0A26AB0D6000B62054 /* ColorsPickerHelper.swift */; };
 		F1E28E1326AB128400B62054 /* Hardness.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E28E1226AB128400B62054 /* Hardness.swift */; };
@@ -87,6 +88,7 @@
 		F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeView.swift; sourceTree = "<group>"; };
 		F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardView.swift; sourceTree = "<group>"; };
 		F1D656E626AB552B007BCDAE /* TransparentCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransparentCardView.swift; sourceTree = "<group>"; };
+		F1D656EE26AB758A007BCDAE /* QuizGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizGameView.swift; sourceTree = "<group>"; };
 		F1E28E0526AB0D1200B62054 /* SimilarColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarColorPicker.swift; sourceTree = "<group>"; };
 		F1E28E0A26AB0D6000B62054 /* ColorsPickerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsPickerHelper.swift; sourceTree = "<group>"; };
 		F1E28E1226AB128400B62054 /* Hardness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hardness.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				F1469CAD2698D8A1006A14BC /* AllModesView.swift */,
+				F1D656EE26AB758A007BCDAE /* QuizGameView.swift */,
 				F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */,
 				F1758E6826A0DEB20035E6B5 /* DeckView.swift */,
 				F1B568D226A608B20008494D /* BackgroundView.swift */,
@@ -392,6 +395,7 @@
 				F1E28E0B26AB0D6000B62054 /* ColorsPickerHelper.swift in Sources */,
 				F1469CAE2698D8A1006A14BC /* AllModesView.swift in Sources */,
 				F1C519DA269DE18C0096B9B4 /* ReadSizeExtension.swift in Sources */,
+				F1D656EF26AB758A007BCDAE /* QuizGameView.swift in Sources */,
 				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
 				F145D0F826A4468E0044476F /* SingleModeLogic.swift in Sources */,
 				F1E28E1326AB128400B62054 /* Hardness.swift in Sources */,

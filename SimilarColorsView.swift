@@ -31,8 +31,8 @@ struct SimilarColorsView: View {
                         .zIndex(-1)
                     }
                     
-                    if (simCard.count > 0 && simCard[0] != nil) {
-                        TransparentCardView(colorModel: simCard[0]!, drawBorder: true, drawShadow: true)
+                    if (simCard.count > 0) {
+                        TransparentCardView(colorModel: simCard[0], drawBorder: true, drawShadow: true)
                             .offset(x: self.cardsState.posX / 3)
                             .rotationEffect(Angle(degrees: self.cardsState.angle), anchor: .bottom)
                             .animation(.spring())
@@ -46,8 +46,8 @@ struct SimilarColorsView: View {
                             .zIndex(1)
                     }
                     
-                    if (simCard.count > 1 && simCard[1] != nil) {
-                        TransparentCardView(colorModel: simCard[1]!, drawBorder: true, drawShadow: true)
+                    if (simCard.count > 1) {
+                        TransparentCardView(colorModel: simCard[1], drawBorder: true, drawShadow: true)
                             .offset(x: self.cardsState.posX)
                             .rotationEffect(Angle(degrees: (15 + self.cardsState.angle)), anchor: .bottom)
                             .animation(.spring())

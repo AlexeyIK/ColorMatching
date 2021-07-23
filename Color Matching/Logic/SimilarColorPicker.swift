@@ -14,8 +14,9 @@ public class SimilarColorPicker {
     
     private init() { }
     
-    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness) -> [ColorModel?] {
+    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, withRef packRef: Bool = false) -> [ColorModel] {
         
+        var result: [ColorModel] = []
         var similarColor1: ColorModel?
         var similarColor2: ColorModel?
         
@@ -98,7 +99,17 @@ public class SimilarColorPicker {
         
         print("new hues: \(similarColor1?.colorHSV[0]), \(similarColor2?.colorHSV[0]); new saturations: \(similarColor1?.colorHSV[1]), \(similarColor2?.colorHSV[1]), new values: \(similarColor1?.colorHSV[2]), \(similarColor2?.colorHSV[2])")
         
-        return [similarColor1, similarColor2]
+        if (similarColor1 != nil) {
+            result.append(similarColor1!)
+        }
+        if (similarColor2 != nil) {
+            result.append(similarColor2!)
+        }
+        if packRef {
+            result.append(colorRef)
+        }
+        
+        return result
     }
     
     private func findSimilarColorByOffset(hue refHue: Int, saturation satRef: Int, value valueRef: Int,
