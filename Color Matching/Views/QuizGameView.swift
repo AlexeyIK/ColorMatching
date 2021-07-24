@@ -14,6 +14,7 @@ struct QuizGameView: View {
     @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .easy, shuffle: true)
     @State var currentQuizStep: Int = 0
     @State var correctAnswers: Int = 0
+    @State var showCorrectAnswer: Bool = false
     
     var body: some View {
         
@@ -24,7 +25,7 @@ struct QuizGameView: View {
                 if (cardsList.count > 0) {
                     Spacer()
                 }
-//
+
                 ZStack {
                     ForEach(Array(cardsList.enumerated()), id: \.element) { (index, card) in
                         
@@ -35,13 +36,16 @@ struct QuizGameView: View {
                             .scaleEffect(1.0 - CGFloat(index) / 100)
                             .zIndex(Double(index))
                             .transition(.swipeToLeft)
+                            .onDisappear() {
+                                showCorrectAnswer = false
+                            }
                     }
                 }
                 
                 if cardsList.count > 0 {
                     VStack {
                         let correctColor = cardsList.first!
-                        var answers = SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardnessLvl, withRef: true).shuffled()
+                        let answers = SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardnessLvl, withRef: true).shuffled()
                         
                         ForEach(answers) { answer in
                             let colorName = answer.name != "" ? answer.name : answer.englishName
@@ -49,6 +53,7 @@ struct QuizGameView: View {
                             Button(colorName) {
                                 if answer == correctColor {
                                     correctAnswers += 1
+                                    showCorrectAnswer = true
                                 }
                                 
                                 withAnimation {
@@ -57,7 +62,8 @@ struct QuizGameView: View {
                                 }
                             }
                             .buttonStyle(QuizButton())
-                            .brightness(answer == correctColor ? 0.1 : 0)
+                            .brightness(answer == correctColor ? 0.05 : 0)
+                            .transition(.opacity)
                         }
                     }
                     .padding(.top, 25)
@@ -71,11 +77,11 @@ struct QuizGameView: View {
                         .font(.title3)
                         .padding(.bottom, 10)
                 } else {
-                    Text("Игра окончена!\nТы угадал \(correctAnswers) карт")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title2)
-                        .padding()
-                        .multilineTextAlignment(.center)
+                    Text("Игра окончена!\nТы угадал \(correctAnswers) \(correctAnswers > 0 && correctAnswers < 5 ? "карты" : "карт")")
+                    .foregroundColor(_globalMainTextColor)
+                    .font(.title2)
+                    .padding()
+                    .multilineTextAlignment(.center)
                 }
             }
         }
@@ -95,6 +101,16 @@ struct QuizButton: ButtonStyle {
             .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
             .foregroundColor(_globalMainTextColor)
             .background(configuration.isPressed ? Color.init(hue: 0, saturation: 0, brightness: 0.5, opacity: 1) : Color.init(hue: 0, saturation: 0, brightness: 0.33, opacity: 1))
+            .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
+}
+
+struct QuizButtonCorrect: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+            .foregroundColor(_globalMainTextColor)
+            .background(configuration.isPressed ? Color.init(red: 0.2, green: 1, blue: 0.2) : Color.init(hue: 0, saturation: 0, brightness: 0.33, opacity: 1))
             .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 }

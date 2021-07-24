@@ -11,22 +11,19 @@ struct AllModesView: View {
     
     var body: some View {
         TabView(selection: .constant(0)) {
-            DeckView()
-                .tabItem {
+            DeckView().tabItem {
                 Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
-                }.tag(1)
+            }.tag(1)
             
-            SimilarColorsView()
-                .tabItem {
+            QuizGameView(hardnessLvl: .normal).tabItem {
                 Image(systemName: "circle.fill").resizable().foregroundColor(.gray)
             }.tag(2)
             
-            AnimationsTest()
-                .tabItem {
+            SimilarColorsView().tabItem {
                 Image(systemName: "textformat.superscript").resizable().foregroundColor(.gray)
             }.tag(3)
             
-            Text("Mode 4").tabItem {
+            AnimationsTest().tabItem {
                 Image(systemName: "text.justify").resizable().foregroundColor(.gray)
             }.tag(4)
         }
