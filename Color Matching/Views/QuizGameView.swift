@@ -10,11 +10,15 @@ import SwiftUI
 struct QuizGameView: View {
     
     var hardnessLvl: Hardness
+    var showColorName: Bool
     
-    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .normal, shuffle: true)
+    @EnvironmentObject var gameState: LearnAndQuizState
+    
+//    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .normal, shuffle: true)
+    @State var cardsList: [ColorModel] = []
     @State var currentQuizStep: Int = 0
     @State var correctAnswers: Int = 0
-    @State var showCorrectAnswer: Bool = false
+    @State var highlightCorrectAnswer: Bool = false
     
     var body: some View {
         
@@ -31,13 +35,14 @@ struct QuizGameView: View {
                         
                         TransparentCardView(colorModel: card,
                                              drawBorder: true,
-                                             drawShadow: index == cardsList.count - 1)
+                                             drawShadow: index == cardsList.count - 1,
+                                             showName: showColorName)
                             .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
                             .scaleEffect(1.0 - CGFloat(index) / 100)
                             .zIndex(Double(index))
                             .transition(.swipeToLeft)
                             .onDisappear() {
-                                showCorrectAnswer = false
+                                highlightCorrectAnswer = false
                             }
                     }
                 }
@@ -45,7 +50,7 @@ struct QuizGameView: View {
                 if cardsList.count > 0 {
                     VStack {
                         let correctColor = cardsList.first!
-                        let answers = SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardnessLvl, withRef: true).shuffled()
+                        let answers = SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: gameState.hardness, withRef: true).shuffled()
                         
                         ForEach(answers) { answer in
                             let colorName = answer.name != "" ? answer.name : answer.englishName
@@ -53,7 +58,7 @@ struct QuizGameView: View {
                             Button(colorName) {
                                 if answer == correctColor {
                                     correctAnswers += 1
-                                    showCorrectAnswer = true
+                                    highlightCorrectAnswer = true
                                 }
                                 
                                 withAnimation {
@@ -78,11 +83,20 @@ struct QuizGameView: View {
                         .font(.title3)
                         .padding(.bottom, 10)
                 } else {
-                    Text("Игра окончена!\nУгадано \(correctAnswers) \(correctAnswers > 0 && correctAnswers < 5 ? "карты" : "карт")")
-                    .foregroundColor(_globalMainTextColor)
-                    .font(.title2)
-                    .padding()
-                    .multilineTextAlignment(.center)
+                    
+                    if (correctAnswers == currentQuizStep) {
+                        Text("Игра окончена!\nВы угадали все карты!")
+                        .foregroundColor(_globalMainTextColor)
+                        .font(.title2)
+                        .padding()
+                        .multilineTextAlignment(.center)
+                    } else {
+                        Text("Игра окончена!\nУгадано \(correctAnswers) \(correctAnswers > 0 && correctAnswers < 5 ? "карты" : "карт")")
+                        .foregroundColor(_globalMainTextColor)
+                        .font(.title2)
+                        .padding()
+                        .multilineTextAlignment(.center)
+                    }
                 }
             }
         }
@@ -92,7 +106,11 @@ struct QuizGameView: View {
 
 struct QuizGameView_Previews: PreviewProvider {
     static var previews: some View {
-        QuizGameView(hardnessLvl: .normal)
+        ForEach(["iPhone 8", "iPhone Xs"], id: \.self) { device in
+            QuizGameView(hardnessLvl: .normal, showColorName: true)
+                .previewDevice(PreviewDevice(stringLiteral: device))
+                .previewDisplayName(device)
+        }
     }
 }
 

@@ -14,11 +14,14 @@ struct CardState {
 
 struct DeckView: View {
     
-    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .easy, shuffle: true)
+    @EnvironmentObject var gameState: LearnAndQuizState
+    
+//    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .easy, shuffle: true)
+    @State var cardsList: [ColorModel] = [colorsData[1000], colorsData[0]]
     @State var needToDropCard: Bool = false
     @State var showColorNames: Bool = true
     @State var swipeDirection: SwipeDirection = .toLeft
-    @State var cardsState: [CardState] = Array(repeating: CardState(), count: LearnColorsGameManager.shared.savedCardsArray.count)
+    @State var cardsState: [CardState] = []
     @State var currentIndex: Int = 0
     
     let swipeTreshold: CGFloat = 120
@@ -41,7 +44,8 @@ struct DeckView: View {
                         if (i >= currentIndex) {
                             TransparentCardView(colorModel: cardsList[i],
                                                  drawBorder: true,
-                                                 drawShadow: i == cardsList.count - 1)
+                                                 drawShadow: i == cardsList.count - 1,
+                                                 showName: i == currentIndex)
                                 .offset(
                                     x: self.cardsState[i].posX,
                                     y: CGFloat(i) * -2).zIndex(-Double(i)
@@ -106,12 +110,17 @@ struct DeckView: View {
                         .font(.title3)
                         .padding(.bottom, 10)
                 } else {
-                    
                     Text("Теперь постарайся вспомнить названия цветов!")
                         .foregroundColor(_globalMainTextColor)
                         .font(.title2)
                         .padding()
                         .multilineTextAlignment(.center)
+                    
+                    Button("Поехали!") {
+                        cardsList = ShuffleCards(cardsArray: cardsList)
+                        gameState.quizModeOn = true
+                    }
+                    .buttonStyle(MenuButton())
                 }
             }
         }

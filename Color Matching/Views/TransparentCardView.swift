@@ -14,6 +14,8 @@ struct TransparentCardView: View {
     var colorModel: ColorModel
     var drawBorder: Bool
     var drawShadow: Bool
+    var showName: Bool
+    var glowOffset: (CGSize, CGSize) = (CGSize(width: 0.5, height: 0), CGSize(width: 1, height: 1))
     
     var body: some View {
         
@@ -38,17 +40,18 @@ struct TransparentCardView: View {
                                 .brightness(0.45)
                         : nil
                     )
+                    // glow-эффект
+                    .overlay(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.white.opacity(0.6)]), startPoint: UnitPoint(x: glowOffset.0.width, y: glowOffset.0.height), endPoint: UnitPoint(x: glowOffset.1.width, y: glowOffset.1.height)).clipShape(RoundedRectangle(cornerRadius: 24)), alignment: .bottomTrailing)
                     .opacity(0.9)
                 
-                VStack {
+                if showName {
                     Text(String(colorModel.name != "" ? colorModel.name : colorModel.englishName))
                         .lineLimit(2)
                         .multilineTextAlignment(.center)
                         .font(.title3)
                         .foregroundColor(currentColor)
                         .colorInvert()
-                        .opacity(0.7)
-                }.padding()
+                }
             }
             .frame(width: 280, height: 390, alignment: .center)
         }
@@ -57,6 +60,10 @@ struct TransparentCardView: View {
 
 struct TransparentCardView_Previews: PreviewProvider {
     static var previews: some View {
-        TransparentCardView(colorModel: colorsData[1610], drawBorder: true, drawShadow: true)
+        ForEach(["iPhone 8", "iPhone Xs"], id: \.self) { device in
+            TransparentCardView(colorModel: colorsData[1610], drawBorder: true, drawShadow: true, showName: true)
+                .previewDevice(PreviewDevice(stringLiteral: device))
+                .previewDisplayName(device)
+        }
     }
 }

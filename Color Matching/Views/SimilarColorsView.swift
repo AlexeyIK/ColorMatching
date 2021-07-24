@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SimilarColorsView: View {
     
-    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 1, with: .easy)
+    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 1, with: .hard)
     @State var simCard = SimilarColorPicker.shared.getSimilarColors(colorRef: LearnColorsGameManager.shared.savedCardsArray[0], for: LearnColorsGameManager.shared.currentHardness)
     @State var cardsState = CardState(posX: 0, angle: 0)
     
@@ -24,7 +24,10 @@ struct SimilarColorsView: View {
                 
                 ZStack {
                     if cardsList.count > 0 {
-                    TransparentCardView(colorModel: cardsList[0], drawBorder: true, drawShadow: true)
+                    TransparentCardView(colorModel: cardsList[0],
+                                        drawBorder: true,
+                                        drawShadow: true,
+                                        showName: true)
                         .rotationEffect(Angle(degrees: -15 + self.cardsState.angle), anchor: .bottom)
                         .animation(.spring())
                         .transition(.swipeToLeft)
@@ -32,7 +35,11 @@ struct SimilarColorsView: View {
                     }
                     
                     if (simCard.count > 0) {
-                        TransparentCardView(colorModel: simCard[0], drawBorder: true, drawShadow: true)
+                        TransparentCardView(colorModel: simCard[0],
+                                            drawBorder: true,
+                                            drawShadow: true,
+                                            showName: true,
+                                            glowOffset: (CGSize(width: 0, height: 0 + self.cardsState.angle / 20), CGSize(width: 2, height: 2.5 + self.cardsState.angle / 20)))
                             .offset(x: self.cardsState.posX / 3)
                             .rotationEffect(Angle(degrees: self.cardsState.angle), anchor: .bottom)
                             .animation(.spring())
@@ -47,7 +54,11 @@ struct SimilarColorsView: View {
                     }
                     
                     if (simCard.count > 1) {
-                        TransparentCardView(colorModel: simCard[1], drawBorder: true, drawShadow: true)
+                        TransparentCardView(colorModel: simCard[1],
+                                            drawBorder: true,
+                                            drawShadow: true,
+                                            showName: true,
+                                            glowOffset: (CGSize(width: 0, height: 0 + self.cardsState.angle / 20), CGSize(width: 1.5 + self.cardsState.angle / 20, height: 1)))
                             .offset(x: self.cardsState.posX)
                             .rotationEffect(Angle(degrees: (15 + self.cardsState.angle)), anchor: .bottom)
                             .animation(.spring())
@@ -68,15 +79,17 @@ struct SimilarColorsView: View {
                 
                 Spacer()
             
-                Button("Еще раз") {
+                Button("Сгенерировать набор цветов") {
                     withAnimation {
                         self.cardsList = []
                         self.simCard = []
                     }
                 }
                 .padding()
-                .foregroundColor(.blue)
-                .border(Color.blue, width: 2)
+                .foregroundColor(_globalMainTextColor)
+                .background(_globalButtonBackgroundColor)
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+                .offset(y: -10)
             }
         }
     }
