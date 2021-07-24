@@ -11,7 +11,7 @@ struct QuizGameView: View {
     
     var hardnessLvl: Hardness
     
-    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .easy, shuffle: true)
+    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 7, with: .normal, shuffle: true)
     @State var currentQuizStep: Int = 0
     @State var correctAnswers: Int = 0
     @State var showCorrectAnswer: Bool = false
@@ -67,17 +67,18 @@ struct QuizGameView: View {
                         }
                     }
                     .padding(.top, 25)
+                    .padding(.bottom, 25)
                 }
                 
                 if cardsList.count > 0 {
-                    Spacer()
+//                    Spacer()
 
                     Text("Осталось карточек: \(cardsList.count)")
                         .foregroundColor(_globalMainTextColor)
                         .font(.title3)
                         .padding(.bottom, 10)
                 } else {
-                    Text("Игра окончена!\nТы угадал \(correctAnswers) \(correctAnswers > 0 && correctAnswers < 5 ? "карты" : "карт")")
+                    Text("Игра окончена!\nУгадано \(correctAnswers) \(correctAnswers > 0 && correctAnswers < 5 ? "карты" : "карт")")
                     .foregroundColor(_globalMainTextColor)
                     .font(.title2)
                     .padding()
@@ -91,7 +92,7 @@ struct QuizGameView: View {
 
 struct QuizGameView_Previews: PreviewProvider {
     static var previews: some View {
-        QuizGameView(hardnessLvl: .easy)
+        QuizGameView(hardnessLvl: .normal)
     }
 }
 

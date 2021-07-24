@@ -169,7 +169,6 @@
 		BD3CF12A2692F07700FF0D68 /* Color Matching */ = {
 			isa = PBXGroup;
 			children = (
-				F197014826A6DF4800494B2F /* AnimationsTest.swift */,
 				F145D0FC26A446A30044476F /* Logic */,
 				F1C519D8269DE1730096B9B4 /* Helpers */,
 				F14A3C52269B292A00B9A710 /* Model */,
@@ -226,6 +225,7 @@
 		F1461DB426A82F880082C886 /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				F197014826A6DF4800494B2F /* AnimationsTest.swift */,
 				F145D10626A44D500044476F /* CardAnimations.swift */,
 			);
 			path = Animations;

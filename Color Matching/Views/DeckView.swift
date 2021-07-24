@@ -44,12 +44,12 @@ struct DeckView: View {
                                                  drawShadow: i == cardsList.count - 1)
                                 .offset(
                                     x: self.cardsState[i].posX,
-                                    y: CGFloat(i) * -4).zIndex(-Double(i)
+                                    y: CGFloat(i) * -2).zIndex(-Double(i)
                                 )
-                                .scaleEffect(1.0 - CGFloat(i) / 100)
+                                .scaleEffect(1.0 - CGFloat(i) / 250)
                                 .rotationEffect(Angle(degrees: self.cardsState[i].angle))
                                 .zIndex(Double(i))
-                                .animation(.spring(response: 0.25, dampingFraction: 0.6, blendDuration: 0.01))
+                                .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0.01))
                                 .transition(self.cardsState[i].posX > 0 ? .swipeToRight : .swipeToLeft)
 //                                .transition(AnyTransition.asymmetric(insertion: .identity, removal: self.swipeDirection == .toRight ? .swipeToRight : .swipeToLeft))
                                 .gesture(DragGesture()
