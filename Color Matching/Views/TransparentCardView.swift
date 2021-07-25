@@ -15,7 +15,7 @@ struct TransparentCardView: View {
     var drawBorder: Bool
     var drawShadow: Bool
     var showName: Bool
-    var glowOffset: (CGSize, CGSize) = (CGSize(width: 0.5, height: 0), CGSize(width: 1, height: 1))
+    var glowOffset: (CGSize, CGSize) = (CGSize(width: 0.75, height: 0.75), CGSize(width: 1.25, height: 1.5))
     
     var body: some View {
         
@@ -41,7 +41,7 @@ struct TransparentCardView: View {
                         : nil
                     )
                     // glow-эффект
-                    .overlay(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.white.opacity(0.6)]), startPoint: UnitPoint(x: glowOffset.0.width, y: glowOffset.0.height), endPoint: UnitPoint(x: glowOffset.1.width, y: glowOffset.1.height)).clipShape(RoundedRectangle(cornerRadius: 24)), alignment: .bottomTrailing)
+                    .overlay(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.init(red: 120, green: 120, blue: 120), Color.clear]), startPoint: UnitPoint(x: glowOffset.0.width, y: glowOffset.0.height), endPoint: UnitPoint(x: glowOffset.1.width, y: glowOffset.1.height)).blur(radius: 40).clipShape(RoundedRectangle(cornerRadius: 24)), alignment: .center)
                     .opacity(0.9)
                 
                 if showName {

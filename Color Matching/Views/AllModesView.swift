@@ -15,7 +15,7 @@ struct AllModesView: View {
                 Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
             }.tag(1)
             
-            DeckView().tabItem {
+            SimilarColorsView().tabItem {
                 Image(systemName: "square.stack.3d.up.badge.a.fill").resizable().foregroundColor(.gray)
             }.tag(2)
             

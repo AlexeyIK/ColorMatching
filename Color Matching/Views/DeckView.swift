@@ -35,6 +35,11 @@ struct DeckView: View {
             
             VStack {
                 if (currentIndex < cardsList.count) {
+                    Text("Осталось карточек: \(cardsList.count - currentIndex)")
+                        .foregroundColor(_globalMainTextColor)
+                        .font(.title3)
+                        .padding(.bottom, 10)
+                    
                     Spacer()
                 }
                 
@@ -45,7 +50,9 @@ struct DeckView: View {
                             TransparentCardView(colorModel: cardsList[i],
                                                  drawBorder: true,
                                                  drawShadow: i == cardsList.count - 1,
-                                                 showName: i == currentIndex)
+                                                 showName: false,
+//                                                 showName: i == currentIndex,
+                                                 glowOffset: (CGSize(width: 0.75, height: 0.75 + self.cardsState[i].angle / 5), CGSize(width: 1.5, height: 1.25 + self.cardsState[i].angle / 10)))
                                 .offset(
                                     x: self.cardsState[i].posX,
                                     y: CGFloat(i) * -2).zIndex(-Double(i)
@@ -63,14 +70,14 @@ struct DeckView: View {
                                             })
                                             .onEnded({ value in
                                                 if value.translation.width > swipeTreshold {
-                                                    withAnimation(.linear) {
+                                                    withAnimation() {
 //                                                        self.cardsState[i].posX = 400
 //                                                        self.cardsState[i].angle = 15
                                                         currentIndex += 1
                                                     }
                                                 }
                                                 else if value.translation.width < -swipeTreshold {
-                                                    withAnimation(.linear) {
+                                                    withAnimation() {
 //                                                        self.cardsState[i].posX = -400
 //                                                        self.cardsState[i].angle = -15
                                                         currentIndex += 1
@@ -88,27 +95,21 @@ struct DeckView: View {
                 
 //                if showColorNames && cardsList.count > 0 {
                 if showColorNames && currentIndex < cardsList.count {
-                    ZStack {
-                        let colorName = cardsList[currentIndex].name != "" ? cardsList[currentIndex].name : cardsList[currentIndex].englishName
-                        
-                        Text(colorName)
-                            .lineLimit(2)
-                            .foregroundColor(_globalMainTextColor)
-                            .font(.title2)
-                            .frame(width: 280, height: 58, alignment: .top)
-                            .multilineTextAlignment(.center)
-                    }
-                    .padding(.top, 25)
+                    let colorName = cardsList[currentIndex].name != "" ? cardsList[currentIndex].name : cardsList[currentIndex].englishName
+                    
+                    Text(colorName)
+                        .transition(.identity)
+                        .lineLimit(2)
+                        .foregroundColor(_globalMainTextColor)
+                        .font(.title2)
+                        .frame(width: 280, height: 58, alignment: .top)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 25)
                 }
                 
 //                if cardsList.count > 0 {
                 if currentIndex < cardsList.count {
                     Spacer()
-                    
-                    Text("Осталось карточек: \(cardsList.count - currentIndex)")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title3)
-                        .padding(.bottom, 10)
                 } else {
                     Text("Теперь постарайся вспомнить названия цветов!")
                         .foregroundColor(_globalMainTextColor)

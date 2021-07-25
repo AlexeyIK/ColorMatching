@@ -27,7 +27,8 @@ struct SimilarColorsView: View {
                     TransparentCardView(colorModel: cardsList[0],
                                         drawBorder: true,
                                         drawShadow: true,
-                                        showName: true)
+                                        showName: true,
+                                        glowOffset: (CGSize(width: 0.75, height: 0.75 + self.cardsState.angle / 10), CGSize(width: 1.25, height: 1.5 + self.cardsState.angle / 20)))
                         .rotationEffect(Angle(degrees: -15 + self.cardsState.angle), anchor: .bottom)
                         .animation(.spring())
                         .transition(.swipeToLeft)
@@ -39,7 +40,7 @@ struct SimilarColorsView: View {
                                             drawBorder: true,
                                             drawShadow: true,
                                             showName: true,
-                                            glowOffset: (CGSize(width: 0, height: 0 + self.cardsState.angle / 20), CGSize(width: 2, height: 2.5 + self.cardsState.angle / 20)))
+                                            glowOffset: (CGSize(width: 0.75, height: 0.75 + self.cardsState.angle / 10), CGSize(width: 1.25, height: 1.5 + self.cardsState.angle / 20)))
                             .offset(x: self.cardsState.posX / 3)
                             .rotationEffect(Angle(degrees: self.cardsState.angle), anchor: .bottom)
                             .animation(.spring())
@@ -58,7 +59,7 @@ struct SimilarColorsView: View {
                                             drawBorder: true,
                                             drawShadow: true,
                                             showName: true,
-                                            glowOffset: (CGSize(width: 0, height: 0 + self.cardsState.angle / 20), CGSize(width: 1.5 + self.cardsState.angle / 20, height: 1)))
+                                            glowOffset: (CGSize(width: 0.75, height: 0.75 + self.cardsState.angle / 10), CGSize(width: 1.25, height: 1.5 + self.cardsState.angle / 20)))
                             .offset(x: self.cardsState.posX)
                             .rotationEffect(Angle(degrees: (15 + self.cardsState.angle)), anchor: .bottom)
                             .animation(.spring())

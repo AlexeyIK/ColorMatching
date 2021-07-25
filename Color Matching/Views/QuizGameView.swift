@@ -27,6 +27,11 @@ struct QuizGameView: View {
 
             VStack {
                 if (cardsList.count > 0) {
+                    Text("Осталось карточек: \(cardsList.count)")
+                        .foregroundColor(_globalMainTextColor)
+                        .font(.title3)
+                        .padding(.top, 10)
+                    
                     Spacer()
                 }
 
@@ -76,14 +81,8 @@ struct QuizGameView: View {
                 }
                 
                 if cardsList.count > 0 {
-//                    Spacer()
-
-                    Text("Осталось карточек: \(cardsList.count)")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title3)
-                        .padding(.bottom, 10)
+                    Spacer()
                 } else {
-                    
                     if (correctAnswers == currentQuizStep) {
                         Text("Игра окончена!\nВы угадали все карты!")
                         .foregroundColor(_globalMainTextColor)
@@ -100,7 +99,6 @@ struct QuizGameView: View {
                 }
             }
         }
-        .edgesIgnoringSafeArea(.top)
     }
 }
 

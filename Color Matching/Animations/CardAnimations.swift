@@ -18,7 +18,7 @@ struct SwipeCardAnimation: ViewModifier {
     
     func body(content: Content) -> some View {
         return content
-            .rotationEffect(.degrees(isActive ? (direction == .toLeft ? -15 : 15) : 0))
+            .rotationEffect(.degrees(isActive ? (direction == .toLeft ? -20 : 20) : 0))
 //            .opacity(isActive ? 0 : 1)
             .offset(x: isActive ? (direction == .toLeft ? -500 : 500) : 0)
     }
