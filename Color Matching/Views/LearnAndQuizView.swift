@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-fileprivate let _definedHardness: Hardness = .easy
-fileprivate let _cardsCount: Int = 7
+fileprivate let _definedHardness: Hardness = .hard
+fileprivate let _cardsCount: Int = _definedHardness == .easy ? 5 : 7
 
 class LearnAndQuizState: ObservableObject  {
     @Published var quizModeOn = false

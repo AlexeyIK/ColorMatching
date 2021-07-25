@@ -97,7 +97,7 @@ public class SimilarColorPicker {
                 break
         }
         
-        print("new hues: \(similarColor1?.colorHSV[0]), \(similarColor2?.colorHSV[0]); new saturations: \(similarColor1?.colorHSV[1]), \(similarColor2?.colorHSV[1]), new values: \(similarColor1?.colorHSV[2]), \(similarColor2?.colorHSV[2])")
+//        print("new hues: \(similarColor1?.colorHSV[0]), \(similarColor2?.colorHSV[0]); new saturations: \(similarColor1?.colorHSV[1]), \(similarColor2?.colorHSV[1]), new values: \(similarColor1?.colorHSV[2]), \(similarColor2?.colorHSV[2])")
         
         if (similarColor1 != nil) {
             result.append(similarColor1!)
@@ -141,7 +141,7 @@ public class SimilarColorPicker {
             }
         } while similarColor == nil && iterations < 30
 
-        print("iterations: \(iterations)")
+//        print("iterations: \(iterations)")
         
         return similarColor
     }
@@ -168,7 +168,7 @@ public class SimilarColorPicker {
             }
         } while similarColor == nil && iterations < 30
         
-        print("iterations: \(iterations)")
+//        print("iterations: \(iterations)")
         
         return similarColor
     }

@@ -42,13 +42,10 @@ struct QuizGameView: View {
                                              drawBorder: true,
                                              drawShadow: index == cardsList.count - 1,
                                              showName: showColorName)
-                            .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
-                            .scaleEffect(1.0 - CGFloat(index) / 100)
+                            .offset(y: CGFloat(index) * -2).zIndex(-Double(index))
+                            .scaleEffect(1.0 - CGFloat(index) / 275)
                             .zIndex(Double(index))
                             .transition(.swipeToLeft)
-                            .onDisappear() {
-                                highlightCorrectAnswer = false
-                            }
                     }
                 }
                 
@@ -63,7 +60,6 @@ struct QuizGameView: View {
                             Button(colorName) {
                                 if answer == correctColor {
                                     correctAnswers += 1
-                                    highlightCorrectAnswer = true
                                 }
                                 
                                 withAnimation {
@@ -72,7 +68,7 @@ struct QuizGameView: View {
                                 }
                             }
                             .buttonStyle(QuizButton())
-                            .brightness(answer == correctColor ? 0.05 : 0)
+                            .brightness(highlightCorrectAnswer && answer == correctColor ? 0.05 : 0)
                             .transition(.opacity)
                         }
                     }

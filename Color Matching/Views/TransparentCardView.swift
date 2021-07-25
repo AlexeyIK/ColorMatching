@@ -15,7 +15,7 @@ struct TransparentCardView: View {
     var drawBorder: Bool
     var drawShadow: Bool
     var showName: Bool
-    var glowOffset: (CGSize, CGSize) = (CGSize(width: 0.75, height: 0.75), CGSize(width: 1.25, height: 1.5))
+    var glowOffset: (CGSize, CGSize) = (CGSize(width: 0.9, height: 0.9), CGSize(width: 1.5, height: 1.75))
     
     var body: some View {
         
@@ -34,15 +34,16 @@ struct TransparentCardView: View {
                 RoundedRectangle(cornerRadius: 24)
                     .fill(currentColor)
                     .shadow(color: drawShadow ? shadowColor : Color.clear, radius: 12, x: -1, y: -3)
+                    // эффект градиентной обводки
                     .overlay(drawBorder ?
                         RoundedRectangle(cornerRadius: 24)
                                 .stroke(AngularGradient(gradient: Gradient(colors: [currentColor, Color.clear]), center: .topTrailing, startAngle: .degrees(-30), endAngle: .degrees(225)), lineWidth: 3)
                                 .brightness(0.45)
                         : nil
                     )
-                    // glow-эффект
-                    .overlay(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.init(red: 120, green: 120, blue: 120), Color.clear]), startPoint: UnitPoint(x: glowOffset.0.width, y: glowOffset.0.height), endPoint: UnitPoint(x: glowOffset.1.width, y: glowOffset.1.height)).blur(radius: 40).clipShape(RoundedRectangle(cornerRadius: 24)), alignment: .center)
-                    .opacity(0.9)
+                    // эффект блика
+                    .overlay(LinearGradient(gradient: Gradient(colors: [Color.clear, Color.init(red: 200, green: 200, blue: 200), Color.clear]), startPoint: UnitPoint(x: glowOffset.0.width, y: glowOffset.0.height), endPoint: UnitPoint(x: glowOffset.1.width, y: glowOffset.1.height)).blur(radius: 40).opacity(0.75).clipShape(RoundedRectangle(cornerRadius: 24)), alignment: .center)
+                    .opacity(0.85)
                 
                 if showName {
                     Text(String(colorModel.name != "" ? colorModel.name : colorModel.englishName))
