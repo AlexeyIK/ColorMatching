@@ -49,10 +49,10 @@ struct DeckView: View {
                         if (i >= currentIndex) {
                             TransparentCardView(colorModel: cardsList[i],
                                                  drawBorder: true,
-                                                 drawShadow: i == cardsList.count - 1,
+                                                 drawShadow: i == cardsList.count - 1 || i == currentIndex,
                                                  showName: false,
 //                                                 showName: i == currentIndex,
-                                                 glowOffset: (CGSize(width: 0.9 + self.cardsState[i].angle / 5, height: 0.9 + self.cardsState[i].angle / 5), CGSize(width: 1.25 + self.cardsState[i].angle / 10, height: 1.5 + self.cardsState[i].angle / 10)))
+                                                 glowOffset: (CGSize(width: 0.9 + self.cardsState[i].angle / 5, height: 0.9 + self.cardsState[i].angle / 5), CGSize(width: 1.25 + self.cardsState[i].angle / 10, height: 1.25 + self.cardsState[i].angle / 10)))
                                 .offset(
                                     x: self.cardsState[i].posX,
                                     y: CGFloat(i) * -2).zIndex(-Double(i)
