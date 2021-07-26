@@ -11,23 +11,20 @@ struct AllModesView: View {
     
     var body: some View {
         TabView(selection: .constant(0)) {
-            DeckView()
-                .tabItem {
+            LearnAndQuizView().tabItem {
                 Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
-                }.tag(1)
+            }.tag(1)
             
-            SimilarColorsView()
-                .tabItem {
-                Image(systemName: "circle.fill").resizable().foregroundColor(.gray)
+            SimilarColorsView().tabItem {
+                Image(systemName: "square.stack.3d.up.badge.a.fill").resizable().foregroundColor(.gray)
             }.tag(2)
             
-            AnimationsTest()
-                .tabItem {
-                Image(systemName: "textformat.superscript").resizable().foregroundColor(.gray)
+            SimilarColorsView().tabItem {
+                Image(systemName: "rectangle.split.3x1").resizable().foregroundColor(.gray)
             }.tag(3)
             
-            Text("Mode 4").tabItem {
-                Image(systemName: "text.justify").resizable().foregroundColor(.gray)
+            AnimationsTest().tabItem {
+                Image(systemName: "square.stack.3d.forward.dottedline").resizable().foregroundColor(.gray)
             }.tag(4)
         }
         .accentColor(_globalTabBarBackground)
