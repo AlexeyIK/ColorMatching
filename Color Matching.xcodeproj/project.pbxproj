@@ -338,6 +338,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = BD3CF11F2692F07600FF0D68;
 			productRefGroup = BD3CF1292692F07700FF0D68 /* Products */;
@@ -567,6 +568,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
+				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Color Matching/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -575,7 +577,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appledrochers.Color-Matching";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alexdave.color-matching";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -589,6 +591,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
+				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Color Matching/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -597,7 +600,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.5;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.appledrochers.Color-Matching";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alexdave.color-matching";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
