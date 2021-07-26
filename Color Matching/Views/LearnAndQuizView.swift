@@ -37,13 +37,3 @@ struct LearnAndQuizView_Previews: PreviewProvider {
         LearnAndQuizView()
     }
 }
-
-struct MenuButton: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
-            .foregroundColor(Color.white)
-            .background(configuration.isPressed ? Color.init(hue: 270 / 360, saturation: 0.7, brightness: 0.8, opacity: 1) : Color.init(hue: 270 / 360, saturation: 0.7, brightness: 0.7, opacity: 1))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-    }
-}
