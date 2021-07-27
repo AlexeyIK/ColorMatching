@@ -9,8 +9,8 @@ import SwiftUI
 
 struct SimilarColorsView: View {
     
-    @State var cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 1, with: .hard)
-    @State var simCard = SimilarColorPicker.shared.getSimilarColors(colorRef: LearnColorsGameManager.shared.savedCardsArray[0], for: LearnColorsGameManager.shared.currentHardness)
+    @State var cardsList = QuizGameManager.shared.startGameSession(cardsInDeck: 1, with: .hard)
+    @State var simCard = SimilarColorPicker.shared.getSimilarColors(colorRef: QuizGameManager.shared.savedCardsArray[0], for: QuizGameManager.shared.currentHardness)
     @State var cardsState = CardState(posX: 0, angle: 0)
     
     var body: some View {
@@ -47,8 +47,8 @@ struct SimilarColorsView: View {
                             .transition(.opacity)
                             .onDisappear() {
                                 withAnimation {
-                                    self.cardsList = LearnColorsGameManager.shared.StartGameSession(cardsInDeck: 1, with: LearnColorsGameManager.shared.currentHardness)
-                                    self.simCard = SimilarColorPicker.shared.getSimilarColors(colorRef: LearnColorsGameManager.shared.savedCardsArray[0], for: LearnColorsGameManager.shared.currentHardness)
+                                    self.cardsList = QuizGameManager.shared.startGameSession(cardsInDeck: 1, with: QuizGameManager.shared.currentHardness)
+                                    self.simCard = SimilarColorPicker.shared.getSimilarColors(colorRef: QuizGameManager.shared.savedCardsArray[0], for: QuizGameManager.shared.currentHardness)
                                 }
                             }
                             .zIndex(1)
