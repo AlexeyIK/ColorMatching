@@ -112,7 +112,7 @@ struct DeckView: View {
                     
                     Button("GO!") {
                         cardsList = QuizGameManager.shared.startQuiz(cards: cardsList, shuffled: true)
-                        gameState.quizModeOn = true
+                        gameState.activeGameMode = .quiz
                     }
                     .buttonStyle(GoButton())
                 }

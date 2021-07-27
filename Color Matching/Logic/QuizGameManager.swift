@@ -14,7 +14,11 @@ public class QuizGameManager {
     
     private init() { }
     
-    var countdown: Float = 0
+    private var countdownTimer: Timer.TimerPublisher? = nil
+    private var endDateTime = Date()
+    private var currentDateTime = Date()
+    
+    var countdown: Double = 0
     var currentHardness: Hardness = .easy
     var savedCardsArray: [ColorModel] = []
     var quizItemsList: [QuizItem] = []
@@ -74,7 +78,23 @@ public class QuizGameManager {
                 countdown  = 60
         }
         
-        return Timer.publish(every: 0.1, on: .main, in: .common)
+        currentDateTime = Date()
+        endDateTime = Date.init(timeIntervalSinceNow: countdown)
+        countdownTimer = Timer.publish(every: 0.02, on: .main, in: .common)
+        
+        return countdownTimer!
+    }
+    
+    func getRemainingTime() -> (time: String, active: Bool) {
+        currentDateTime = Date()
+        
+        let timeRemainsStr = countDownString(from: endDateTime, until: currentDateTime)
+        if endDateTime.timeIntervalSinceReferenceDate - currentDateTime.timeIntervalSinceReferenceDate > 0 {
+            return (timeRemainsStr, true)
+        }
+        else {
+            return ("00:00:000", false)
+        }
     }
     
     func getQuizItem() -> QuizItem? {
@@ -83,11 +103,14 @@ public class QuizGameManager {
         return quizItemsList[quizPosition]
     }
     
-    func stopQuiz(timer: Timer.TimerPublisher? = nil) -> QuizResults  {
-        if let tm = timer {
-            tm.connect().cancel()
+    func stopQuiz() -> QuizResults  {
+        if let timer = countdownTimer {
+            timer.connect().cancel()
         }
-        return QuizResults()
+        
+        print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition)")
+        
+        return QuizResults(correctAnswers: correctAnswers, cardsViewed: quizPosition, cardsCount: quizItemsList.count, allCorrect: correctAnswers == quizItemsList.count)
     }
     
     func checkAnswer(for quizItem: QuizItem, answer: Int = 0) -> Bool {
@@ -101,14 +124,25 @@ public class QuizGameManager {
             return false
         }
     }
+    
+    func countDownString(from date: Date, until nowDate: Date) -> String {
+            let calendar = Calendar(identifier: .gregorian)
+            let components = calendar.dateComponents([.minute, .second, .nanosecond], from: nowDate, to: date)
+            return String(format: "%02d:%02d:%03d",
+                          components.minute ?? 00,
+                          components.second ?? 00,
+                          (components.nanosecond ?? 000) / 1000000)
+    }
 }
 
 struct QuizItem {
-    var answers: [ColorModel]
-    var correctId: Int
+    let answers: [ColorModel]
+    let correctId: Int
 }
 
 struct QuizResults {
-    var correctAnswers = 0
-    var cardsViewed = 0
+    let correctAnswers: Int
+    let cardsViewed: Int
+    let cardsCount: Int
+    let allCorrect: Bool
 }

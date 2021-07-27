@@ -88,7 +88,7 @@ struct QuizGameView: View {
                     }
                 }
                 
-                if gameState.cardsList.count > 0 && !gameState.timeRunOut {
+                if gameState.cardsList.count > 0 && gameState.gameActive {
                     Spacer()
 
                     TimerView(refDateTime: Date(timeIntervalSinceNow: 10))
@@ -97,7 +97,9 @@ struct QuizGameView: View {
 //                        .padding(.bottom, 10)
                     
                 } else {
-                    if QuizGameManager.shared.correctAnswers == QuizGameManager.shared.quizItemsList.count {
+                    let results = QuizGameManager.shared.stopQuiz()
+                    
+                    if results.correctAnswers == results.cardsCount {
                         Text("Игра окончена!\nВы угадали все карты!")
                             .foregroundColor(_globalMainTextColor)
                             .font(.title2)
@@ -105,7 +107,7 @@ struct QuizGameView: View {
                             .multilineTextAlignment(.center)
                             .transition(.slide)
                     } else {
-                        Text("Игра окончена!\nУгадано \(QuizGameManager.shared.correctAnswers) \(QuizGameManager.shared.correctAnswers > 0 && QuizGameManager.shared.correctAnswers < 5 ? "карты" : "карт")")
+                        Text("Игра окончена!\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
                             .foregroundColor(_globalMainTextColor)
                             .font(.title2)
                             .padding()
