@@ -18,6 +18,7 @@ struct TimerView: View {
                 self.currentDateTime = Date()
             } else {
                 withAnimation {
+                    self.timer.invalidate()
                     gameState.timeRunOut = true
                 }
             }
@@ -28,14 +29,15 @@ struct TimerView: View {
         let time = gameState.timeRunOut ? "00:00:000" : countDownString(from: refDateTime, until: currentDateTime)
         
         Text(time)
-            .font(.largeTitle)
-            .fontWeight(.thin)
-            .multilineTextAlignment(.leading)
+            .font( .system(.largeTitle, design: .monospaced))
+            .fontWeight(.ultraLight)
+            .multilineTextAlignment(.center)
             .onAppear(perform: {
                 if !gameState.timeRunOut {
                     let _ = self.timer
                 }
             })
+            .frame(width: 190, height: 70, alignment: .center)
     }
 }
 
@@ -55,5 +57,6 @@ func timeBetweenDates(from startDate: Date, to endDate: Date) -> TimeInterval {
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
         TimerView(refDateTime: Date(timeIntervalSinceNow: 60))
+            .environmentObject(LearnAndQuizState(definedHardness: .easy))
     }
 }

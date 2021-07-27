@@ -94,7 +94,7 @@ struct QuizGameView: View {
                     TimerView(refDateTime: Date(timeIntervalSinceNow: 10))
                         .foregroundColor(Color.white)
                         .environmentObject(gameState)
-                        .padding(.bottom, 10)
+//                        .padding(.bottom, 10)
                     
                 } else {
                     if QuizGameManager.shared.correctAnswers == QuizGameManager.shared.quizItemsList.count {
