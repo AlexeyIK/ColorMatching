@@ -36,82 +36,81 @@ struct QuizGameView: View {
             BackgroundView()
 
             VStack {
-                if (gameState.cardsList.count > 0) {
-                    Text("Осталось карточек: \(gameState.cardsList.count)")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title3)
-                        .padding(.top, 10)
-                    
-                    Spacer()
-                }
-
-                ZStack {
-                    ForEach(Array(gameState.cardsList.enumerated()), id: \.element) { (index, card) in
+                if (QuizGameManager.shared.gameSessionActive && !gameState.timeRunOut) {
+                    if (gameState.cardsList.count > 0) {
+                        Text("Осталось карточек: \(gameState.cardsList.count)")
+                            .foregroundColor(_globalMainTextColor)
+                            .font(.title3)
+                            .padding(.top, 10)
                         
-                        TransparentCardView(colorModel: card,
-                                             drawBorder: true,
-                                             drawShadow: index == gameState.cardsList.count - 1,
-                                             showName: showColorNames)
-                            .offset(y: CGFloat(index) * -3).zIndex(-Double(index))
-                            .scaleEffect(1.0 - CGFloat(index) / 250)
-                            .zIndex(-Double(index))
-                            .transition(.swipeToLeft)
+                        Spacer()
                     }
-                }
-                
-                if gameState.cardsList.count > 0
-                {
-                    VStack {
-                        if let quizItem = QuizGameManager.shared.getQuizItem() {
-                            ForEach(quizItem.answers) { answer in
-                                let colorName = answer.name != "" ? answer.name : answer.englishName
 
-                                Button(colorName) {
-                                    if QuizGameManager.shared.checkAnswer(for: quizItem, answer: answer.id) {
-                                        correctAnswers = QuizGameManager.shared.correctAnswers
-                                    }
-
-                                    withAnimation {
-                                        gameState.cardsList.removeFirst()
-                                    }
-                                }
-                                .buttonStyle(QuizButton())
-                                .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
-                                .transition(.identity)
-                            }
+                    ZStack {
+                        ForEach(Array(gameState.cardsList.enumerated()), id: \.element) { (index, card) in
+                            
+                            TransparentCardView(colorModel: card,
+                                                 drawBorder: true,
+                                                 drawShadow: index == gameState.cardsList.count - 1,
+                                                 showName: showColorNames)
+                                .offset(y: CGFloat(index) * -3).zIndex(-Double(index))
+                                .scaleEffect(1.0 - CGFloat(index) / 250)
+                                .zIndex(-Double(index))
+                                .transition(.swipeToLeft)
                         }
                     }
-                    .padding(.top, 25)
-                    .padding(.bottom, 25)
+                    
+                    if gameState.cardsList.count > 0
+                    {
+                        VStack {
+                            if let quizItem = QuizGameManager.shared.getQuizItem() {
+                                ForEach(quizItem.answers) { answer in
+                                    let colorName = answer.name != "" ? answer.name : answer.englishName
+
+                                    Button(colorName) {
+                                        if QuizGameManager.shared.checkAnswer(for: quizItem, answer: answer.id) {
+                                            correctAnswers = QuizGameManager.shared.correctAnswers
+                                        }
+
+                                        withAnimation {
+                                            gameState.cardsList.removeFirst()
+                                        }
+                                    }
+                                    .buttonStyle(QuizButton())
+                                    .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
+                                    .transition(.identity)
+                                }
+                            }
+                        }
+                        .padding(.top, 25)
+                        .padding(.bottom, 25)
+                        .transition(.move(edge: .trailing))
+                    }
                 }
                 
-                if gameState.cardsList.count > 0 {
+                if gameState.cardsList.count > 0 && !gameState.timeRunOut {
                     Spacer()
 
                     TimerView(refDateTime: Date(timeIntervalSinceNow: 10))
                         .foregroundColor(Color.white)
                         .environmentObject(gameState)
+                        .padding(.bottom, 10)
                     
-//                    Text("Countdown: \(countdown)")
-//                        .foregroundColor(Color.white)
-//                        .font(.title)
-//                        .onReceive(timer) { time in
-//                            countdown -= 0.1
-//                        }
-//                    TimerView(refDateTime: Date(timeIntervalSinceNow: 60))
                 } else {
-                    if (QuizGameManager.shared.correctAnswers == QuizGameManager.shared.quizPosition) {
+                    if QuizGameManager.shared.correctAnswers == QuizGameManager.shared.quizItemsList.count {
                         Text("Игра окончена!\nВы угадали все карты!")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title2)
-                        .padding()
-                        .multilineTextAlignment(.center)
+                            .foregroundColor(_globalMainTextColor)
+                            .font(.title2)
+                            .padding()
+                            .multilineTextAlignment(.center)
+                            .transition(.slide)
                     } else {
                         Text("Игра окончена!\nУгадано \(QuizGameManager.shared.correctAnswers) \(QuizGameManager.shared.correctAnswers > 0 && QuizGameManager.shared.correctAnswers < 5 ? "карты" : "карт")")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title2)
-                        .padding()
-                        .multilineTextAlignment(.center)
+                            .foregroundColor(_globalMainTextColor)
+                            .font(.title2)
+                            .padding()
+                            .multilineTextAlignment(.center)
+                            .transition(.slide)
                     }
                 }
             }

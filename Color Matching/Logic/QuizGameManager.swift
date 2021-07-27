@@ -14,13 +14,12 @@ public class QuizGameManager {
     
     private init() { }
     
-    private var gameSessionActive: Bool = false
-    
     var countdown: Float = 0
     var currentHardness: Hardness = .easy
     var savedCardsArray: [ColorModel] = []
     var quizItemsList: [QuizItem] = []
     
+    public var gameSessionActive: Bool = false
     public var quizPosition: Int = 0
     public var correctAnswers: Int = 0
     
@@ -43,6 +42,8 @@ public class QuizGameManager {
     }
     
     func startQuiz(cards: [ColorModel], shuffled: Bool) -> [ColorModel] {
+        guard gameSessionActive else { return [] }
+        
         quizPosition = 0
         
         // перемешиваем карточки, если надо

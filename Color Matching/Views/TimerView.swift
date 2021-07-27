@@ -17,7 +17,9 @@ struct TimerView: View {
             if timeBetweenDates(from: currentDateTime, to: refDateTime) > 0.01 {
                 self.currentDateTime = Date()
             } else {
-                gameState.timeRunOut = true
+                withAnimation {
+                    gameState.timeRunOut = true
+                }
             }
         }
     }
