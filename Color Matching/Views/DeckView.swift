@@ -31,9 +31,10 @@ struct DeckView: View {
             
             VStack {
                 if (currentIndex < cardsList.count) {
-                    Text("Осталось карточек: \(cardsList.count - currentIndex)")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title3)
+                    Text("Remember the color")
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .fontWeight(.light)
                         .padding(.bottom, 10)
                     
                     Spacer()
@@ -65,15 +66,11 @@ struct DeckView: View {
                                             .onEnded({ value in
                                                 if value.translation.width > swipeTreshold {
                                                     withAnimation() {
-//                                                        self.cardsState[i].posX = 400
-//                                                        self.cardsState[i].angle = 15
                                                         currentIndex += 1
                                                     }
                                                 }
                                                 else if value.translation.width < -swipeTreshold {
                                                     withAnimation() {
-//                                                        self.cardsState[i].posX = -400
-//                                                        self.cardsState[i].angle = -15
                                                         currentIndex += 1
                                                     }
                                                 }
@@ -111,7 +108,6 @@ struct DeckView: View {
                         .multilineTextAlignment(.center)
                     
                     Button("GO!") {
-                        cardsList = QuizGameManager.shared.startQuiz(cards: cardsList, shuffled: true)
                         gameState.activeGameMode = .quiz
                     }
                     .buttonStyle(GoButton())

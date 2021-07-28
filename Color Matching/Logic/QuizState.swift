@@ -1,0 +1,132 @@
+//
+//  QuizState.swift
+//  Color Matching
+//
+//  Created by Алексей Кузнецов on 28.07.2021.
+//
+
+import Foundation
+import SwiftUI
+
+class QuizState: ObservableObject {
+    
+    init() {}
+    
+    private var countdownTimer: Timer?
+    private var endDateTime = Date()
+    private var currentDateTime = Date()
+    
+    public var quizQuestions = 0
+    public var results: QuizResults? = nil
+    
+    @Published var quizItemsList: [QuizItem] = []
+    @Published var quizActive: Bool = false
+    @Published var timeRunOut: Bool = false
+    @Published var quizPosition: Int = 0
+    @Published var correctAnswers: Int = 0
+    @Published var timerString: String = "00:00:000"
+    
+    func startQuiz(cards: [ColorModel], hardness: Hardness, shuffled: Bool = true) -> Void {
+        if cards.count == 0 { return }
+        
+        var cardsList = cards
+        self.quizActive = true
+        quizPosition = 0
+        quizQuestions = cards.count
+        
+        // перемешиваем карточки, если надо
+        if (shuffled) {
+            cardsList = ShuffleCards(cardsArray: cards)
+        }
+        
+        // создаем лист квизов заранее
+        cardsList.forEach { (card) in
+            let correctColor = card
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true))
+            quizItemsList.append(QuizItem(answers: colorVariants, correctId: correctColor.id))
+        }
+        
+        // запуск таймера
+        var countdown: Double = 0
+        switch hardness
+        {
+            case .easy:
+                countdown = 5
+            case .normal:
+                countdown  = 90
+            case .hard:
+                countdown  = 90
+            case .hell:
+                countdown  = 60
+        }
+        
+        startTimer(for: countdown)
+    }
+    
+    func startTimer(for time: Double) {
+        currentDateTime = Date()
+        endDateTime = Date.init(timeIntervalSinceNow: time)
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true, block: { _ in
+            self.currentDateTime = Date()
+            self.timerString = TimerManager.shared.countDownString(from: self.endDateTime, until: self.currentDateTime)
+            
+            if self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate <= 0 {
+                self.timeRunOut = true
+                self.stopQuiz()
+            }
+        })
+    }
+    
+    func getQuizItem() -> QuizItem? {
+        guard quizActive && quizItemsList.count > 0 else { return nil }
+        
+//        print("quiz position: \(quizPosition), quizItemsRemains: \(quizItemsList.count)")
+        return quizItemsList.first
+    }
+    
+    func stopQuiz() -> Void  {
+        guard quizActive else { return }
+        
+        if let timer = countdownTimer {
+            timer.invalidate()
+        }
+        
+        quizActive = false
+        
+        print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition)")
+        
+        results = QuizResults(correctAnswers: correctAnswers,
+                              cardsViewed: quizPosition,
+                              cardsCount: quizQuestions)
+    }
+    
+    func checkAnswer(for quizItem: QuizItem, answer: Int = 0) -> Bool {
+        var result = false
+        
+        if answer > 0 && answer == quizItem.correctId {
+            correctAnswers += 1
+            quizPosition += 1
+            result = true
+        }
+        else {
+            quizPosition += 1
+        }
+        
+        if quizPosition == quizQuestions || timeRunOut {
+            stopQuiz()
+        }
+        
+        return result
+    }
+}
+
+struct QuizItem: Hashable {
+    let answers: [ColorModel]
+    let correctId: Int
+}
+
+struct QuizResults {
+    let correctAnswers: Int
+    let cardsViewed: Int
+    let cardsCount: Int
+}

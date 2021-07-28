@@ -10,48 +10,38 @@ import SwiftUI
 struct QuizGameView: View {
     
     @EnvironmentObject var gameState: LearnAndQuizState
+    @StateObject var quizState: QuizState = QuizState()
     
-    var hardnessLvl: Hardness
-    var showColorNames: Bool
+    var highlightCorrectAnswer: Bool = false
     var useTimer: Bool = false
+    var showColorNames: Bool = false
     
-//    @State var cardsList = QuizGameManager.shared.startGameSession(cardsInDeck: 7, with: .normal, shuffle: true)
-//    @State var cardsList: [ColorModel] = []
-    @State var currentQuizStep: Int = 0
-    @State var correctAnswers: Int = 0
-    @State var highlightCorrectAnswer: Bool = false
     @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var countdown: Float = 60.0
-    
-//    init(hardness: Hardness, showColorNames: Bool, useTimer: Bool = false) {
-//        self.hardnessLvl = hardness
-//        self.showColorNames = showColorNames
-//        self.cardsList = cardsList
-//        self.useTimer = useTimer
-//        self.timer = QuizGameManager.shared.startTimer(for: gameState.hardness)
-//    }
     
     var body: some View {
         ZStack {
             BackgroundView()
 
             VStack {
-                if (QuizGameManager.shared.gameSessionActive && !gameState.timeRunOut) {
-                    if (gameState.cardsList.count > 0) {
-                        Text("Осталось карточек: \(gameState.cardsList.count)")
-                            .foregroundColor(_globalMainTextColor)
-                            .font(.title3)
-                            .padding(.top, 10)
-                        
-                        Spacer()
-                    }
-
+                
+                if quizState.results == nil {
+                    Text("Quiz")
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .fontWeight(.light)
+                        .padding(.bottom, 10)
+                    
+                    Spacer()
+                }
+                
+                if quizState.quizActive {
                     ZStack {
-                        ForEach(Array(gameState.cardsList.enumerated()), id: \.element) { (index, card) in
+                        ForEach(Array(quizState.quizItemsList.enumerated()), id: \.element) { (index, card) in
                             
-                            TransparentCardView(colorModel: card,
+                            TransparentCardView(colorModel: colorsData[card.correctId],
                                                  drawBorder: true,
-                                                 drawShadow: index == gameState.cardsList.count - 1,
+                                                 drawShadow: index == quizState.quizItemsList.count - 1,
                                                  showName: showColorNames)
                                 .offset(y: CGFloat(index) * -3).zIndex(-Double(index))
                                 .scaleEffect(1.0 - CGFloat(index) / 250)
@@ -60,21 +50,19 @@ struct QuizGameView: View {
                         }
                     }
                     
-                    if gameState.cardsList.count > 0
+                    if quizState.quizItemsList.count > 0
                     {
                         VStack {
-                            if let quizItem = QuizGameManager.shared.getQuizItem() {
+                            if let quizItem = quizState.getQuizItem() {
                                 ForEach(quizItem.answers) { answer in
                                     let colorName = answer.name != "" ? answer.name : answer.englishName
 
                                     Button(colorName) {
-                                        if QuizGameManager.shared.checkAnswer(for: quizItem, answer: answer.id) {
-                                            correctAnswers = QuizGameManager.shared.correctAnswers
+                                        withAnimation() {
+                                            quizState.quizItemsList.removeFirst()
                                         }
-
-                                        withAnimation {
-                                            gameState.cardsList.removeFirst()
-                                        }
+                                        
+                                        _ = quizState.checkAnswer(for: quizItem, answer: answer.id)
                                     }
                                     .buttonStyle(QuizButton())
                                     .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
@@ -88,47 +76,54 @@ struct QuizGameView: View {
                     }
                 }
                 
-                if gameState.cardsList.count > 0 && gameState.gameActive {
+                if quizState.quizActive {
                     Spacer()
 
-                    TimerView(refDateTime: Date(timeIntervalSinceNow: 10))
+                    TimerView()
                         .foregroundColor(Color.white)
-                        .environmentObject(gameState)
-//                        .padding(.bottom, 10)
-                    
-                } else {
-                    let results = QuizGameManager.shared.stopQuiz()
-                    
-                    if results.correctAnswers == results.cardsCount {
-                        Text("Игра окончена!\nВы угадали все карты!")
+                        .environmentObject(quizState)
+                }
+                else if let results = quizState.results {
+                    let finishText = quizState.timeRunOut ? "Время вышло!" : "Игра окончена!"
+
+                    if results.correctAnswers == quizState.quizQuestions {
+                        Text("\(finishText)\nВы угадали все карты!")
                             .foregroundColor(_globalMainTextColor)
                             .font(.title2)
                             .padding()
                             .multilineTextAlignment(.center)
                             .transition(.slide)
                     } else {
-                        Text("Игра окончена!\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
+                        Text("\(finishText)\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
                             .foregroundColor(_globalMainTextColor)
                             .font(.title2)
                             .padding()
                             .multilineTextAlignment(.center)
                             .transition(.slide)
                     }
+                    
+                    Button("Еще раз!") {
+                        gameState.gameActive = false
+                        gameState.activeGameMode = .learn
+                    }
+                    .buttonStyle(GoButton())
                 }
             }
         }
-//        .onAppear() {
-//            self.timer = QuizGameManager.shared.startTimer().autoconnect()
-//        }
+        .onAppear(perform: {
+            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness)
+        })
     }
 }
 
 struct QuizGameView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone 8", "iPhone Xs"], id: \.self) { device in
-            QuizGameView(hardnessLvl: .normal, showColorNames: true)
+        ForEach(["iPhone Xs"], id: \.self) { device in
+//        ForEach(["iPhone 8", "iPhone Xs"], id: \.self) { device in
+            QuizGameView()
                 .previewDevice(PreviewDevice(stringLiteral: device))
                 .previewDisplayName(device)
+                .environmentObject(LearnAndQuizState(definedHardness: .easy))
         }
     }
 }
