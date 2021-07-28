@@ -153,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				BD2978EA2697C4B100F19AEF /* colorsData.json */,
-				F1A8428726A623DE0068A897 /* DefinedColors.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -250,6 +249,7 @@
 			children = (
 				F14A3C33269B27B800B9A710 /* ColorModel.swift */,
 				F14A3C4A269B28FB00B9A710 /* DataHelper.swift */,
+				F1A8428726A623DE0068A897 /* DefinedColors.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";

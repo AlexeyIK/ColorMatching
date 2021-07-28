@@ -16,10 +16,9 @@ struct DeckView: View {
     
     @EnvironmentObject var gameState: LearnAndQuizState
     
-    @State var cardsList: [ColorModel] = [colorsData[1000], colorsData[0]]
     @State var needToDropCard: Bool = false
     @State var showColorNames: Bool = true
-    @State var cardsState: [CardState] = Array(repeating: CardState(), count: 3)
+    @State var cardsState: [CardState] = Array(repeating: CardState(), count: 10)
     @State var currentIndex: Int = 0
     
     let swipeTreshold: CGFloat = 120
@@ -30,7 +29,7 @@ struct DeckView: View {
             BackgroundView()
             
             VStack {
-                if (currentIndex < cardsList.count) {
+                if (currentIndex < gameState.cardsList.count) {
                     Text("Remember the color")
                         .foregroundColor(.white)
                         .font(.title)
@@ -41,23 +40,24 @@ struct DeckView: View {
                 }
                 
                 ZStack {
-                    ForEach(cardsList.indices, id: \.self) { i in
-                        // ToDo: подумать над тем, как сделать это через анимацию удаления
+                    // отрисовка стопки карточек
+                    ForEach(gameState.cardsList.indices, id: \.self) { i in
                         if (i >= currentIndex) {
-                            TransparentCardView(colorModel: cardsList[i],
+                            TransparentCardView(colorModel: gameState.cardsList[i],
                                                  drawBorder: true,
-                                                 drawShadow: i == cardsList.count - 1 || i == currentIndex,
+                                                 drawShadow: i == currentIndex,
                                                  showName: false,
-//                                                 showName: i == currentIndex,
+                                                 showColor: i == currentIndex || i == currentIndex + 1, // окрашиваем в цвет не всё
                                                  glowOffset: (CGSize(width: 0.9 + self.cardsState[i].angle / 5, height: 0.9 + self.cardsState[i].angle / 5), CGSize(width: 1.25 + self.cardsState[i].angle / 10, height: 1.25 + self.cardsState[i].angle / 10)))
                                 .offset(
                                     x: self.cardsState[i].posX,
-                                    y: CGFloat(i) * -2.5).zIndex(-Double(i)
-                                )
-                                .scaleEffect(1.0 - CGFloat(i) / 250)
+                                    y: CGFloat(i) * -4)
+                                .zIndex(-Double(i))
+                                .scaleEffect(1.0 - CGFloat(i) / 150)
                                 .rotationEffect(Angle(degrees: self.cardsState[i].angle))
                                 .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0.01))
                                 .transition(self.cardsState[i].posX > 0 ? .swipeToRight : .swipeToLeft)
+                                // обработка драгов
                                 .gesture(DragGesture()
                                             .onChanged({ value in
                                                 self.cardsState[i].posX = value.translation.width
@@ -84,9 +84,9 @@ struct DeckView: View {
                     }
                 }
                 
-                // имя цвета
-                if showColorNames && currentIndex < cardsList.count {
-                    let colorName = cardsList[currentIndex].name != "" ? cardsList[currentIndex].name : cardsList[currentIndex].englishName
+                // Вывод имени текущего цвета
+                if showColorNames && currentIndex < gameState.cardsList.count {
+                    let colorName = gameState.cardsList[currentIndex].name != "" ? gameState.cardsList[currentIndex].name : gameState.cardsList[currentIndex].englishName
                     
                     Text(colorName)
                         .transition(.identity)
@@ -98,7 +98,7 @@ struct DeckView: View {
                         .padding(.top, 25)
                 }
                 
-                if currentIndex < cardsList.count {
+                if currentIndex < gameState.cardsList.count {
                     Spacer()
                 } else {
                     Text("Теперь постарайся вспомнить названия цветов!")
@@ -119,7 +119,8 @@ struct DeckView: View {
 
 struct DeckView_Previews: PreviewProvider {
     static var previews: some View {
-        DeckView(cardsList: [colorsData[1900], colorsData[1920], colorsData[2000]])
+        DeckView()
+            .environmentObject(LearnAndQuizState())
     }
 }
 

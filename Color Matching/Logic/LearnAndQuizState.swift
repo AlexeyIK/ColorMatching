@@ -13,6 +13,8 @@ enum GameMode {
     case quiz
 }
 
+var _definedHardness: Hardness = .normal
+
 class LearnAndQuizState: ObservableObject  {
     
     private var savedCardsArray: [ColorModel] = []
@@ -24,15 +26,16 @@ class LearnAndQuizState: ObservableObject  {
     @Published var hardness: Hardness
     @Published var cardsCount = 7
     
-    init(definedHardness: Hardness) {
+    init(definedHardness: Hardness = _definedHardness) {
         self.hardness = definedHardness
-        self.cardsCount = definedHardness == .easy ? 5 : 7
-        self.cardsList = startGameSession(cardsInDeck: cardsCount, with: hardness, shuffle: true)
-        self.gameActive = true
+        self.cardsCount = getDefaultNumOfCards(for: definedHardness)
+        startGameSession(cardsInDeck: cardsCount, with: hardness, shuffle: true)
     }
     
-    func startGameSession(cardsInDeck numOfCards: Int, with hardness: Hardness, shuffle: Bool = false) -> [ColorModel] {
+    func startGameSession(cardsInDeck numOfCards: Int, with hardness: Hardness, shuffle: Bool = false) {
         self.hardness = hardness
+        self.cardsCount = numOfCards
+        
         var cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness)
         if shuffle {
             cardsByHardness = ShuffleCards(cardsArray: cardsByHardness)
@@ -41,11 +44,28 @@ class LearnAndQuizState: ObservableObject  {
         savedCardsArray = GetSequentalNumOfCards(cardsArray: cardsByHardness, numberOfCards: numOfCards)
         self.cardsList = savedCardsArray
         self.gameActive = true;
-        
-        return savedCardsArray
     }
     
     func endGameSession() {
         self.gameActive = false
+    }
+    
+    func restartGameSession() {
+        endGameSession()
+        activeGameMode = .learn
+        startGameSession(cardsInDeck: getDefaultNumOfCards(for: hardness), with: _definedHardness)
+    }
+    
+    func getDefaultNumOfCards(for hardness: Hardness) -> Int {
+        switch hardness {
+            case .easy:
+                return 5
+            case .normal:
+                return 7
+            case .hard:
+                return 7
+            case .hell:
+                return 9
+        }
     }
 }

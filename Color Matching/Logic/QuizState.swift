@@ -51,7 +51,7 @@ class QuizState: ObservableObject {
         switch hardness
         {
             case .easy:
-                countdown = 5
+                countdown = 10
             case .normal:
                 countdown  = 90
             case .hard:

@@ -9,13 +9,13 @@ import SwiftUI
 
 struct LearnAndQuizView: View {
     
-    @StateObject var gameState: LearnAndQuizState = LearnAndQuizState(definedHardness: .easy)
+    @StateObject var gameState: LearnAndQuizState = LearnAndQuizState()
     
     var body: some View {
         switch gameState.activeGameMode
         {
             case .learn:
-                DeckView(cardsList: gameState.cardsList, cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
+                DeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                     .environmentObject(gameState)
             case .quiz:
                 QuizGameView(useTimer: true, showColorNames: false)

@@ -16,9 +16,6 @@ struct QuizGameView: View {
     var useTimer: Bool = false
     var showColorNames: Bool = false
     
-    @State var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-    @State var countdown: Float = 60.0
-    
     var body: some View {
         ZStack {
             BackgroundView()
@@ -30,7 +27,7 @@ struct QuizGameView: View {
                         .foregroundColor(.white)
                         .font(.title)
                         .fontWeight(.light)
-                        .padding(.bottom, 10)
+                        .padding(10)
                     
                     Spacer()
                 }
@@ -41,10 +38,11 @@ struct QuizGameView: View {
                             
                             TransparentCardView(colorModel: colorsData[card.correctId],
                                                  drawBorder: true,
-                                                 drawShadow: index == quizState.quizItemsList.count - 1,
-                                                 showName: showColorNames)
-                                .offset(y: CGFloat(index) * -3).zIndex(-Double(index))
-                                .scaleEffect(1.0 - CGFloat(index) / 250)
+                                                 drawShadow: index == 0,
+                                                 showName: showColorNames,
+                                                 showColor: index == 0)
+                                .offset(y: CGFloat(index) * -5).zIndex(-Double(index))
+                                .scaleEffect(1.0 - CGFloat(index) / 75)
                                 .zIndex(-Double(index))
                                 .transition(.swipeToLeft)
                         }
@@ -58,11 +56,10 @@ struct QuizGameView: View {
                                     let colorName = answer.name != "" ? answer.name : answer.englishName
 
                                     Button(colorName) {
-                                        withAnimation() {
+                                        withAnimation {
                                             quizState.quizItemsList.removeFirst()
+                                            _ = quizState.checkAnswer(for: quizItem, answer: answer.id)
                                         }
-                                        
-                                        _ = quizState.checkAnswer(for: quizItem, answer: answer.id)
                                     }
                                     .buttonStyle(QuizButton())
                                     .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
@@ -70,9 +67,9 @@ struct QuizGameView: View {
                                 }
                             }
                         }
-                        .padding(.top, 25)
-                        .padding(.bottom, 25)
-                        .transition(.move(edge: .trailing))
+                        .frame(height: 140)
+                        .padding(.top, 20)
+                        .transition(.identity)
                     }
                 }
                 
@@ -103,9 +100,9 @@ struct QuizGameView: View {
                     }
                     
                     Button("Еще раз!") {
-                        gameState.gameActive = false
-                        gameState.activeGameMode = .learn
+                        gameState.restartGameSession()
                     }
+                    .transition(.slide)
                     .buttonStyle(GoButton())
                 }
             }
@@ -118,12 +115,12 @@ struct QuizGameView: View {
 
 struct QuizGameView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone Xs"], id: \.self) { device in
-//        ForEach(["iPhone 8", "iPhone Xs"], id: \.self) { device in
+//        ForEach(["iPhone Xs"], id: \.self) { device in
+        ForEach(["iPhone 8", "iPhone 11", "iPhone 12 mini"], id: \.self) { device in
             QuizGameView()
                 .previewDevice(PreviewDevice(stringLiteral: device))
                 .previewDisplayName(device)
-                .environmentObject(LearnAndQuizState(definedHardness: .easy))
+                .environmentObject(LearnAndQuizState())
         }
     }
 }
