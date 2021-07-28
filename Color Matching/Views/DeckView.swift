@@ -34,6 +34,7 @@ struct DeckView: View {
                         .foregroundColor(.white)
                         .font(.title)
                         .fontWeight(.light)
+                        .padding(.top, 16)
                         .padding(.bottom, 10)
                     
                     Spacer()
