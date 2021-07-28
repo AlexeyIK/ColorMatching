@@ -15,7 +15,7 @@ struct LearnAndQuizView: View {
         switch gameState.activeGameMode
         {
             case .learn:
-                DeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
+                LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                     .environmentObject(gameState)
             case .quiz:
                 QuizGameView(useTimer: true, showColorNames: false)

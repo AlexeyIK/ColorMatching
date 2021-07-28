@@ -41,8 +41,8 @@ struct QuizGameView: View {
                                                  drawShadow: index == 0,
                                                  showName: showColorNames,
                                                  showColor: index == 0)
-                                .offset(y: CGFloat(index) * -5).zIndex(-Double(index))
-                                .scaleEffect(1.0 - CGFloat(index) / 75)
+                                .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
+                                .scaleEffect(1.0 - CGFloat(index) / 80)
                                 .zIndex(-Double(index))
                                 .transition(.swipeToLeft)
                         }

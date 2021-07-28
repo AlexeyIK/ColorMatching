@@ -11,6 +11,7 @@ struct AllModesView: View {
     
     init() {
         UINavigationBar.appearance().barTintColor = .clear
+        UINavigationBar.appearance().barStyle = .default
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
         UINavigationBar.appearance().titleTextAttributes = [

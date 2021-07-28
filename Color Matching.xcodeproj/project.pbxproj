@@ -26,7 +26,7 @@
 		F14A3C4B269B28FB00B9A710 /* DataHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F14A3C4A269B28FB00B9A710 /* DataHelper.swift */; };
 		F169585226A9F89200E1E86A /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = F169585126A9F89200E1E86A /* Math.swift */; };
 		F169585726AA0B3900E1E86A /* SimilarColorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F169585626AA0B3900E1E86A /* SimilarColorsView.swift */; };
-		F1758E6926A0DEB20035E6B5 /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1758E6826A0DEB20035E6B5 /* DeckView.swift */; };
+		F1758E6926A0DEB20035E6B5 /* LearnDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1758E6826A0DEB20035E6B5 /* LearnDeckView.swift */; };
 		F1758E6E26A0DFA60035E6B5 /* ColorCardMinimalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */; };
 		F1913CB026AC7BAB006D8D19 /* LearnAndQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1913CAF26AC7BAB006D8D19 /* LearnAndQuizView.swift */; };
 		F197014926A6DF4800494B2F /* AnimationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F197014826A6DF4800494B2F /* AnimationsTest.swift */; };
@@ -86,7 +86,7 @@
 		F14A3C4A269B28FB00B9A710 /* DataHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHelper.swift; sourceTree = "<group>"; };
 		F169585126A9F89200E1E86A /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		F169585626AA0B3900E1E86A /* SimilarColorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarColorsView.swift; sourceTree = "<group>"; };
-		F1758E6826A0DEB20035E6B5 /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
+		F1758E6826A0DEB20035E6B5 /* LearnDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnDeckView.swift; sourceTree = "<group>"; };
 		F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCardMinimalView.swift; sourceTree = "<group>"; };
 		F1913CAF26AC7BAB006D8D19 /* LearnAndQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnAndQuizView.swift; sourceTree = "<group>"; };
 		F197014826A6DF4800494B2F /* AnimationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationsTest.swift; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 				F1D656EE26AB758A007BCDAE /* QuizGameView.swift */,
 				BDFAB12626AF653F00BF65CD /* TimerView.swift */,
 				F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */,
-				F1758E6826A0DEB20035E6B5 /* DeckView.swift */,
+				F1758E6826A0DEB20035E6B5 /* LearnDeckView.swift */,
 				F1B568D226A608B20008494D /* BackgroundView.swift */,
 				F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */,
 				F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */,
@@ -405,7 +405,7 @@
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
 				BDFAB12726AF653F00BF65CD /* TimerView.swift in Sources */,
 				F1D22CA8269B89AE009D4BD2 /* SwipeView.swift in Sources */,
-				F1758E6926A0DEB20035E6B5 /* DeckView.swift in Sources */,
+				F1758E6926A0DEB20035E6B5 /* LearnDeckView.swift in Sources */,
 				F1D656E726AB552B007BCDAE /* TransparentCardView.swift in Sources */,
 				F1E28E0B26AB0D6000B62054 /* ColorsPickerHelper.swift in Sources */,
 				BD3FB45B26B1FF9600BA5F3B /* LearnAndQuizState.swift in Sources */,

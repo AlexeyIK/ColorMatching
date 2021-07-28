@@ -1,5 +1,5 @@
 //
-//  DeckView.swift
+//  LearnDeckView.swift
 //  Color Matching
 //
 //  Created by Alexey on 16.07.2021.
@@ -12,7 +12,7 @@ struct CardState {
     var angle: Double = 0
 }
 
-struct DeckView: View {
+struct LearnDeckView: View {
     
     @EnvironmentObject var gameState: LearnAndQuizState
     
@@ -54,7 +54,7 @@ struct DeckView: View {
                                     x: self.cardsState[i].posX,
                                     y: CGFloat(i) * -4)
                                 .zIndex(-Double(i))
-                                .scaleEffect(1.0 - CGFloat(i) / 150)
+                                .scaleEffect(1.0 - CGFloat(i) / 80)
                                 .rotationEffect(Angle(degrees: self.cardsState[i].angle))
                                 .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0.01))
                                 .transition(self.cardsState[i].posX > 0 ? .swipeToRight : .swipeToLeft)
@@ -122,7 +122,7 @@ struct DeckView: View {
 
 struct DeckView_Previews: PreviewProvider {
     static var previews: some View {
-        DeckView()
+        LearnDeckView()
             .environmentObject(LearnAndQuizState())
     }
 }
