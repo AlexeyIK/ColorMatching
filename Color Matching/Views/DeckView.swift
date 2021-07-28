@@ -61,8 +61,10 @@ struct DeckView: View {
                                 // обработка драгов
                                 .gesture(DragGesture()
                                             .onChanged({ value in
-                                                self.cardsState[i].posX = value.translation.width
-                                                self.cardsState[i].angle = Double(value.translation.width / 50)
+                                                if (currentIndex == i) {
+                                                    self.cardsState[i].posX = value.translation.width
+                                                    self.cardsState[i].angle = Double(value.translation.width / 50)
+                                                }
                                             })
                                             .onEnded({ value in
                                                 if value.translation.width > swipeTreshold {
