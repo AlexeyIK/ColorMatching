@@ -9,8 +9,15 @@ import SwiftUI
 
 struct BackgroundView: View {
     var body: some View {
-        RadialGradient(gradient: Gradient(colors: [Color.init(hue: 0, saturation: 0, brightness: 0.18), Color.init(hue: 0, saturation: 0, brightness: 0.08)]), center: .center, startRadius: 5, endRadius: 400).ignoresSafeArea()
-//        _globalBackgroundColor.ignoresSafeArea()
+        RadialGradient(gradient:
+                        Gradient(colors: [
+                            Color.init(hue: 0, saturation: 0, brightness: 0.16),
+                            Color.init(hue: 0, saturation: 0, brightness: 0.08)
+                        ]),
+                       center: UnitPoint(x: 0.5, y: 0.6),
+                       startRadius: 1, endRadius: 400
+        )
+        .ignoresSafeArea()
     }
 }
 
