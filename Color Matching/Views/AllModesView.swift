@@ -9,25 +9,50 @@ import SwiftUI
 
 struct AllModesView: View {
     
+    init() {
+        UINavigationBar.appearance().barTintColor = .clear
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        
+        UINavigationBar.appearance().titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
+    }
+    
     var body: some View {
-        TabView(selection: .constant(0)) {
-            LearnAndQuizView().tabItem {
-                Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
-            }.tag(1)
-            
-            SimilarColorsView().tabItem {
-                Image(systemName: "square.stack.3d.up.badge.a.fill").resizable().foregroundColor(.gray)
-            }.tag(2)
-            
-            SimilarColorsView().tabItem {
-                Image(systemName: "rectangle.split.3x1").resizable().foregroundColor(.gray)
-            }.tag(3)
-            
-            AnimationsTest().tabItem {
-                Image(systemName: "square.stack.3d.forward.dottedline").resizable().foregroundColor(.gray)
-            }.tag(4)
+        
+        NavigationView {
+            LearnAndQuizView()
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(leading:
+                    HStack {
+                        Button("< back") {
+                            
+                        }
+                        .font(.body)
+                        .foregroundColor(Color.init(hue: 0, saturation: 0, brightness: 0.34, opacity: 1))
+                    }
+                )
+                
         }
-        .accentColor(_globalTabBarBackground)
+        
+//        TabView(selection: .constant(0)) {
+//            LearnAndQuizView().tabItem {
+//                Image(systemName: "square.stack.3d.down.right.fill").resizable().foregroundColor(.gray)
+//            }.tag(1)
+//
+//            SimilarColorsView().tabItem {
+//                Image(systemName: "square.stack.3d.up.badge.a.fill").resizable().foregroundColor(.gray)
+//            }.tag(2)
+//
+//            SimilarColorsView().tabItem {
+//                Image(systemName: "rectangle.split.3x1").resizable().foregroundColor(.gray)
+//            }.tag(3)
+//
+//            AnimationsTest().tabItem {
+//                Image(systemName: "square.stack.3d.forward.dottedline").resizable().foregroundColor(.gray)
+//            }.tag(4)
+//        }
+//        .accentColor(_globalTabBarBackground)
     }
     
     

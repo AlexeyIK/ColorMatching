@@ -31,9 +31,10 @@ struct DeckView: View {
             
             VStack {
                 if (currentIndex < cardsList.count) {
-                    Text("Осталось карточек: \(cardsList.count - currentIndex)")
+                    Text("Remember the color")
                         .foregroundColor(_globalMainTextColor)
-                        .font(.title3)
+                        .font(.title)
+                        .fontWeight(.light)
                         .padding(.bottom, 10)
                     
                     Spacer()
