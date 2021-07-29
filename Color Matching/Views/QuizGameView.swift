@@ -47,10 +47,11 @@ struct QuizGameView: View {
                                 .transition(.swipeToLeft)
                         }
                     }
+                    .transition(.opacity)
                     
                     if quizState.quizItemsList.count > 0
                     {
-                        VStack {
+                        VStack(spacing: 8) {
                             if let quizItem = quizState.getQuizItem() {
                                 ForEach(quizItem.answers) { answer in
                                     let colorName = answer.name != "" ? answer.name : answer.englishName
@@ -68,7 +69,7 @@ struct QuizGameView: View {
                             }
                         }
                         .frame(height: 140)
-                        .padding(.top, 20)
+                        .padding(.top, 24)
                         .transition(.identity)
                     }
                 }
@@ -102,13 +103,16 @@ struct QuizGameView: View {
                     Button("Еще раз!") {
                         gameState.restartGameSession()
                     }
-                    .transition(.slide)
+                    .transition(.opacity)
                     .buttonStyle(GoButton())
                 }
             }
+            .transition(.opacity)
         }
         .onAppear(perform: {
-            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness)
+            withAnimation() {
+                quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness)
+            }
         })
     }
 }
@@ -128,19 +132,22 @@ struct QuizGameView_Previews: PreviewProvider {
 struct QuizButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             .foregroundColor(_globalMainTextColor)
-            .background(configuration.isPressed ? Color.init(hue: 0, saturation: 0, brightness: 0.5, opacity: 1) : Color.init(hue: 0, saturation: 0, brightness: 0.33, opacity: 1))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .background(RoundedRectangle(cornerRadius: 36)
+                            .stroke(configuration.isPressed ? Color.init(hue: 0, saturation: 0, brightness: 0.5, opacity: 1) : Color.init(hue: 0, saturation: 0, brightness: 0.33, opacity: 1), lineWidth: 3)
+                            .overlay(configuration.isPressed ? RoundedRectangle(cornerRadius: 36).fill(Color.init(hue: 0, saturation: 0, brightness: 0.5, opacity: 1)) : nil)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 36))
     }
 }
 
 struct QuizButtonCorrect: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+            .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
             .foregroundColor(_globalMainTextColor)
             .background(configuration.isPressed ? Color.init(red: 0.2, green: 1, blue: 0.2) : Color.init(hue: 0, saturation: 0, brightness: 0.33, opacity: 1))
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .clipShape(RoundedRectangle(cornerRadius: 36))
     }
 }

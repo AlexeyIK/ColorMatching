@@ -109,6 +109,7 @@ struct LearnDeckView: View {
                         .font(.title2)
                         .padding()
                         .multilineTextAlignment(.center)
+                        .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
                     
                     Button("GO!") {
                         gameState.activeGameMode = .quiz
@@ -134,5 +135,6 @@ struct GoButton: ButtonStyle {
             .foregroundColor(Color.white)
             .background(configuration.isPressed ? Color.init(hue: 240 / 360, saturation: 0.7, brightness: 0.8, opacity: 1) : Color.init(hue: 240 / 360, saturation: 0.7, brightness: 0.7, opacity: 1))
             .clipShape(RoundedRectangle(cornerRadius: 16))
+            .shadow(color: configuration.isPressed ? Color.white.opacity(0.2) : Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
     }
 }
