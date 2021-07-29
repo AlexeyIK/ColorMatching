@@ -9,6 +9,8 @@ import SwiftUI
 
 struct QuizGameView: View {
     
+    @Environment(\.scenePhase) private var scenePhase
+    
     @EnvironmentObject var gameState: LearnAndQuizState
     @StateObject var quizState: QuizState = QuizState()
     
@@ -23,11 +25,13 @@ struct QuizGameView: View {
 
                 VStack {
                     if quizState.results == nil {
-                        Text("Quiz")
-                            .foregroundColor(.white)
-                            .font(.title)
-                            .fontWeight(.light)
-                            .padding(10)
+                        if contentZone.size.height > 550 {
+                            Text("Quiz")
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .fontWeight(.light)
+                                .padding(.bottom, 10)
+                        }
                         
                         Spacer()
                     }
@@ -40,7 +44,7 @@ struct QuizGameView: View {
                                                      drawBorder: true,
                                                      drawShadow: index == 0,
                                                      showName: showColorNames,
-                                                     showColor: index == 0)
+                                                     showColor: index == 0 && !quizState.isTimerPaused)
                                     .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
                                     .scaleEffect(1.0 - CGFloat(index) / 80)
                                     .zIndex(-Double(index))
@@ -71,8 +75,8 @@ struct QuizGameView: View {
                                     }
                                 }
                             }
-                            .frame(height: 140)
-                            .padding(.vertical, 12)
+                            .frame(height: 120)
+                            .padding(.vertical, 10)
                             .transition(.identity)
                         }
                         else if quizState.timeRunOut && quizState.results == nil {
@@ -82,7 +86,7 @@ struct QuizGameView: View {
                                 .padding()
                                 .multilineTextAlignment(.center)
                                 .padding(.vertical, 24)
-                                .frame(height: 164)
+                                .frame(height: 144)
                                 .transition(.asymmetric(insertion: .scale, removal: .identity))
                         }
                     }
@@ -94,7 +98,6 @@ struct QuizGameView: View {
                         TimerView()
                             .foregroundColor(Color.white)
                             .environmentObject(quizState)
-                            .padding(.bottom, 15)
                     }
                     else if let results = quizState.results {
                         let finishText = "Игра окончена!"
@@ -128,12 +131,29 @@ struct QuizGameView: View {
                         .animation(Animation.linear.delay(0.3))
                     }
                 }
+                .padding()
                 .frame(width: contentZone.size.width * 0.9, alignment: .center)
 //                .animation(Animation.default.delay(0.25))
             }
             .onAppear(perform: {
                 quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness)
             })
+            .onChange(of: scenePhase) { phase in
+                switch phase {
+                    case .inactive:
+                        print("Goes to background!")
+                        quizState.pauseTimer()
+                    case .active:
+                        print("Goes active!")
+                        quizState.resumeTimer()
+                    default:
+                        return
+                }
+            }
+//            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
+//                print("Goes to background!")
+//                quizState.pauseTimer()
+//            }
         }
     }
 }
@@ -141,7 +161,7 @@ struct QuizGameView: View {
 struct QuizGameView_Previews: PreviewProvider {
     static var previews: some View {
 //        ForEach(["iPhone Xs"], id: \.self) { device in
-        ForEach(["iPhone 8", "iPhone 11", "iPhone 12 mini"], id: \.self) { device in
+        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
             QuizGameView()
                 .previewDevice(PreviewDevice(stringLiteral: device))
                 .previewDisplayName(device)

@@ -15,6 +15,7 @@ class QuizState: ObservableObject {
     private var countdownTimer: Timer?
     private var endDateTime = Date()
     private var currentDateTime = Date()
+    private var saveElapsedTime: TimeInterval = 0
     
     public var quizQuestions = 0
     public var results: QuizResults? = nil
@@ -25,6 +26,7 @@ class QuizState: ObservableObject {
     @Published var quizPosition: Int = 0
     @Published var correctAnswers: Int = 0
     @Published var timerString: String = "00:00:000"
+    @Published var isTimerPaused: Bool = false
     
     func startQuiz(cards: [ColorModel], hardness: Hardness, shuffled: Bool = true) -> Void {
         if cards.count == 0 { return }
@@ -51,9 +53,9 @@ class QuizState: ObservableObject {
         switch hardness
         {
             case .easy:
-                countdown = 30
+                countdown = 15
             case .normal:
-                countdown  = 5
+                countdown  = 10
             case .hard:
                 countdown  = 10
             case .hell:
@@ -66,7 +68,10 @@ class QuizState: ObservableObject {
     func startTimer(for time: Double) {
         currentDateTime = Date()
         endDateTime = Date.init(timeIntervalSinceNow: time)
+        
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true, block: { _ in
+            guard !self.isTimerPaused else { return }
+            
             self.currentDateTime = Date()
             self.timerString = TimerManager.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
             
@@ -75,6 +80,18 @@ class QuizState: ObservableObject {
                 self.startGameEndPause()
             }
         })
+    }
+    
+    func pauseTimer() {
+        isTimerPaused = true
+        saveElapsedTime = self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate
+        print("Timer paused")
+    }
+    
+    func resumeTimer() {
+        endDateTime = Date.init(timeIntervalSinceNow: saveElapsedTime)
+        isTimerPaused = false
+        print("Timer resumed")
     }
     
     func startGameEndPause() {

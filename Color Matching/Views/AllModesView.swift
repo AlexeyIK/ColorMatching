@@ -62,7 +62,7 @@ struct AllModesView: View {
 
 struct SingleModeView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone 8", "iPhone Xs"], id: \.self) { device in
+        ForEach(["iPhone 8", "iPhone SE (1st generation)", "iPhone 12"], id: \.self) { device in
             AllModesView()
                 .previewDevice(PreviewDevice(stringLiteral: device))
                 .previewDisplayName(device)

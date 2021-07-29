@@ -15,7 +15,7 @@ struct TimerView: View {
         VStack {
 //            Text("00:00:000")
             Text(quizState.timerString)
-                .font( .system(.title, design: .monospaced))
+                .font( .system(.largeTitle, design: .monospaced))
                 .fontWeight(.ultraLight)
                 .multilineTextAlignment(.center)
                 .frame(width: 300, alignment: .center)

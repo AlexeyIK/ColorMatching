@@ -13,7 +13,7 @@ enum GameMode {
     case quiz
 }
 
-var _definedHardness: Hardness = .normal
+var _definedHardness: Hardness = .easy
 
 class LearnAndQuizState: ObservableObject  {
     
