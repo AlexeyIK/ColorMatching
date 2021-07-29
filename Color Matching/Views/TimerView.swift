@@ -18,7 +18,7 @@ struct TimerView: View {
                 .font( .system(.largeTitle, design: .monospaced))
                 .fontWeight(.ultraLight)
                 .multilineTextAlignment(.center)
-                .frame(width: 300, height: 70, alignment: .center)
+                .frame(width: 300, alignment: .center)
         }
     }
 }

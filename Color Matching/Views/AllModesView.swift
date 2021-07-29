@@ -24,6 +24,7 @@ struct AllModesView: View {
         NavigationView {
             LearnAndQuizView()
                 .navigationBarTitleDisplayMode(.inline)
+//                .navigationTitle("Learn and Guess")
                 .navigationBarItems(leading:
                     HStack {
                         Button("< back") {
@@ -33,7 +34,6 @@ struct AllModesView: View {
                         .foregroundColor(Color.init(hue: 0, saturation: 0, brightness: 0.34, opacity: 1))
                     }
                 )
-                
         }
         
 //        TabView(selection: .constant(0)) {
@@ -61,7 +61,7 @@ struct AllModesView: View {
 
 struct SingleModeView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone 8", "iPhone Xs"], id: \.self) { device in
+        ForEach(["iPhone 8", "iPhone SE (1st generation)", "iPhone 12"], id: \.self) { device in
             AllModesView()
                 .previewDevice(PreviewDevice(stringLiteral: device))
                 .previewDisplayName(device)
