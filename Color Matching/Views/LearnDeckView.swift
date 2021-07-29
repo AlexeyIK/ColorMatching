@@ -89,7 +89,7 @@ struct LearnDeckView: View {
                             }
                         }
                         .transition(.identity)
-                        .frame(width: contentZone.size.width * 0.65, height: contentZone.size.height * 0.5, alignment: .center)
+                        .frame(width: contentZone.size.width * 0.68, height: contentZone.size.height * 0.55, alignment: .center)
                     }
                     
                     // Вывод имени текущего цвета
@@ -116,7 +116,7 @@ struct LearnDeckView: View {
                             .padding()
                             .multilineTextAlignment(.center)
                             .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-                            .frame(width: 350, alignment: .center)
+                            .frame(width: contentZone.size.width, alignment: .center)
                             .transition(.slide)
                             .animation(Animation.default.delay(0.4))
                         
@@ -124,7 +124,7 @@ struct LearnDeckView: View {
                             gameState.activeGameMode = .quiz
                         }
                         .buttonStyle(GoButton())
-                        .frame(width: 350, alignment: .center)
+                        .frame(width: contentZone.size.width, alignment: .center)
                         .transition(.move(edge: .trailing))
                         .animation(Animation.linear.delay(0.6))
                     }

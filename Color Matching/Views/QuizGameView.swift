@@ -48,7 +48,7 @@ struct QuizGameView: View {
                             }
                         }
                         .transition(.opacity)
-                        .frame(width: contentZone.size.width * 0.65, height: contentZone.size.height * 0.5, alignment: .center)
+                        .frame(width: contentZone.size.width * 0.68, height: contentZone.size.height * 0.55, alignment: .center)
                     }
                     
                     VStack {
@@ -123,7 +123,7 @@ struct QuizGameView: View {
                             }
                             .buttonStyle(GoButton())
                         }
-                        .frame(width: 400)
+                        .frame(width: contentZone.size.width, alignment: .center)
                         .transition(.move(edge: .trailing))
                         .animation(Animation.linear.delay(0.3))
                     }
