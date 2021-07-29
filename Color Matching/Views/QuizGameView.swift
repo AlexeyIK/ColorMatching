@@ -48,7 +48,7 @@ struct QuizGameView: View {
                             }
                         }
                         .transition(.opacity)
-                        .frame(width: contentZone.size.width * 0.7, height: contentZone.size.height * 0.55, alignment: .center)
+                        .frame(width: contentZone.size.width * 0.65, height: contentZone.size.height * 0.5, alignment: .center)
                     }
                     
                     VStack {
