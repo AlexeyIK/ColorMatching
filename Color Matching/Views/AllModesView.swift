@@ -34,7 +34,6 @@ struct AllModesView: View {
                         .foregroundColor(Color.init(hue: 0, saturation: 0, brightness: 0.34, opacity: 1))
                     }
                 )
-                
         }
         
 //        TabView(selection: .constant(0)) {

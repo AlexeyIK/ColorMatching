@@ -27,7 +27,7 @@ class QuizState: ObservableObject {
     @Published var quizPosition: Int = 0
     @Published var correctAnswers: Int = 0
     @Published var timerString: String = "00:00:000"
-    @Published var isAppActive: Bool = false
+    @Published var isAppActive: Bool = true
     
     func startQuiz(cards: [ColorModel], hardness: Hardness, shuffled: Bool = true) -> Void {
         if cards.count == 0 { return }

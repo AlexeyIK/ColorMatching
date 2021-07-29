@@ -48,7 +48,8 @@ struct QuizGameView: View {
                                     .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
                                     .scaleEffect(1.0 - CGFloat(index) / 80)
                                     .zIndex(-Double(index))
-                                    .transition(.swipeToLeft)
+                                    .transition(quizState.isAppActive ? .swipeToLeft : .opacity)
+                                    .animation(.easeInOut)
                             }
                         }
                         .transition(.opacity)
@@ -83,7 +84,7 @@ struct QuizGameView: View {
                         else if quizState.timeRunOut && quizState.results == nil {
                             Text("Время вышло!")
                                 .foregroundColor(_globalMainTextColor)
-                                .font(.title2)
+                                .font(.title)
                                 .padding()
                                 .multilineTextAlignment(.center)
                                 .padding(.vertical, 24)
@@ -109,6 +110,7 @@ struct QuizGameView: View {
                                 .font(.title2)
                                 .padding()
                                 .multilineTextAlignment(.center)
+                                .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
                                 .transition(.slide)
                                 .animation(.easeInOut)
                         } else {
@@ -117,22 +119,26 @@ struct QuizGameView: View {
                                 .font(.title2)
                                 .padding()
                                 .multilineTextAlignment(.center)
+                                .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
                                 .transition(.slide)
                                 .animation(.easeInOut)
                         }
                         
                         ZStack {
-                            Button("Еще раз!") {
+                            Button("Restart") {
                                 gameState.restartGameSession()
                             }
-                            .buttonStyle(GoButton())
+                            .buttonStyle(GoButton2())
                         }
+                        .font(.title)
                         .frame(width: contentZone.size.width, alignment: .center)
                         .transition(.move(edge: .trailing))
                         .animation(Animation.linear.delay(0.3))
+                        .offset(y: contentZone.size.height * 0.25)
                     }
                 }
                 .padding()
+                .blur(radius: quizState.isAppActive ? .nan : 10)
                 .frame(width: contentZone.size.width * 0.9, alignment: .center)
 //                .animation(Animation.default.delay(0.25))
             }

@@ -111,7 +111,7 @@ struct LearnDeckView: View {
                         Spacer()
                     } else {
                         Text("Теперь постарайся вспомнить названия цветов!")
-                            .foregroundColor(_globalMainTextColor)
+                            .foregroundColor(.white)
                             .font(.title2)
                             .padding()
                             .multilineTextAlignment(.center)
@@ -120,13 +120,15 @@ struct LearnDeckView: View {
                             .transition(.slide)
                             .animation(Animation.default.delay(0.4))
                         
-                        Button("GO!") {
+                        Button("Go!") {
                             gameState.activeGameMode = .quiz
                         }
-                        .buttonStyle(GoButton())
+                        .buttonStyle(GoButton2())
+                        .font(.system(size: 40))
                         .frame(width: contentZone.size.width, alignment: .center)
                         .transition(.move(edge: .trailing))
                         .animation(Animation.linear.delay(0.6))
+                        .offset(y: contentZone.size.height * 0.25)
                     }
                 }
                 .transition(.identity)
@@ -149,6 +151,20 @@ struct GoButton: ButtonStyle {
             .foregroundColor(Color.white)
             .background(configuration.isPressed ? Color.init(hue: 240 / 360, saturation: 0.7, brightness: 0.8, opacity: 1) : Color.init(hue: 240 / 360, saturation: 0.7, brightness: 0.7, opacity: 1))
             .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: configuration.isPressed ? Color.white.opacity(0.2) : Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
+            .shadow(color: configuration.isPressed ? Color.white.opacity(0.2) : Color.black.opacity(0.2), radius: 8, x: -1, y: -1)
+    }
+}
+
+struct GoButton2: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(EdgeInsets(top: 12, leading: 32, bottom: 12, trailing: 32))
+            .foregroundColor(.white)
+            .background(RoundedRectangle(cornerRadius: 36)
+                            .stroke(configuration.isPressed ? Color.init(hue: 0, saturation: 0, brightness: 0.5, opacity: 1) : Color.init(hue: 0, saturation: 0, brightness: 0.54, opacity: 1), lineWidth: 2)
+                            .overlay(configuration.isPressed ? RoundedRectangle(cornerRadius: 36).fill(Color.init(hue: 0, saturation: 0, brightness: 0.5, opacity: 1)) : nil)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 36))
+            .shadow(color: configuration.isPressed ? Color.white.opacity(0.4) : Color.black.opacity(0.2), radius: 8, x: -1, y: -1)
     }
 }
