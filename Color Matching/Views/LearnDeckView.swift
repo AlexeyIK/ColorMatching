@@ -30,7 +30,7 @@ struct LearnDeckView: View {
             
             VStack {
                 if (currentIndex < gameState.cardsList.count) {
-                    Text("Remember the color")
+                    Text("Remember the colors")
                         .foregroundColor(.white)
                         .font(.title)
                         .fontWeight(.light)
