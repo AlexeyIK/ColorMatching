@@ -21,7 +21,7 @@ struct LearnDeckView: View {
     @State var cardsState: [CardState] = Array(repeating: CardState(), count: 10)
     @State var currentIndex: Int = 0
     
-    let swipeTreshold: CGFloat = 130
+    let swipeTreshold: CGFloat = 110
     
     var body: some View {
         GeometryReader { contentZone in
