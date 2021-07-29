@@ -44,7 +44,7 @@ struct QuizGameView: View {
                                                      drawBorder: true,
                                                      drawShadow: index == 0,
                                                      showName: showColorNames,
-                                                     showColor: index == 0 && !quizState.isTimerPaused)
+                                                     showColor: index == 0 && quizState.isAppActive)
                                     .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
                                     .scaleEffect(1.0 - CGFloat(index) / 80)
                                     .zIndex(-Double(index))
@@ -71,6 +71,7 @@ struct QuizGameView: View {
                                         }
                                         .transition(.identity)
                                         .buttonStyle(QuizButton())
+                                        .animation(.none)
                                         .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
                                     }
                                 }
@@ -138,22 +139,19 @@ struct QuizGameView: View {
             .onAppear(perform: {
                 quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness)
             })
+            // мониторим, что приложение свернули и паузим таймер и сменяем статус
             .onChange(of: scenePhase) { phase in
                 switch phase {
                     case .inactive:
-                        print("Goes to background!")
+                        quizState.isAppActive = false
                         quizState.pauseTimer()
                     case .active:
-                        print("Goes active!")
+                        quizState.isAppActive = true
                         quizState.resumeTimer()
                     default:
                         return
                 }
             }
-//            .onReceive(NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)) { _ in
-//                print("Goes to background!")
-//                quizState.pauseTimer()
-//            }
         }
     }
 }
