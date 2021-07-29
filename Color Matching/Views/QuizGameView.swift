@@ -47,7 +47,7 @@ struct QuizGameView: View {
                                                      showColor: index == 0 && quizState.isAppActive)
                                     .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
                                     .scaleEffect(1.0 - CGFloat(index) / 80)
-                                    .zIndex(-Double(index))
+                                    .zIndex(Double(index))
                                     .transition(quizState.isAppActive ? .swipeToLeft : .opacity)
                                     .animation(.easeInOut)
                             }
@@ -82,7 +82,7 @@ struct QuizGameView: View {
                             .transition(.identity)
                         }
                         else if quizState.timeRunOut && quizState.results == nil {
-                            Text("Время вышло!")
+                            Text("Time is over!")
                                 .foregroundColor(_globalMainTextColor)
                                 .font(.title)
                                 .padding()
@@ -102,10 +102,10 @@ struct QuizGameView: View {
                             .environmentObject(quizState)
                     }
                     else if let results = quizState.results {
-                        let finishText = "Игра окончена!"
+                        let finishText = "Game is over!"
 
                         if results.correctAnswers == quizState.quizQuestions {
-                            Text("\(finishText)\nВы угадали все карты!")
+                            Text("\(finishText)\nYou have guessed all cards!")
                                 .foregroundColor(_globalMainTextColor)
                                 .font(.title2)
                                 .padding()
@@ -114,7 +114,8 @@ struct QuizGameView: View {
                                 .transition(.slide)
                                 .animation(.easeInOut)
                         } else {
-                            Text("\(finishText)\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
+//                            Text("\(finishText)\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
+                            Text("\(finishText)\nYou guessed \(results.correctAnswers) \(results.correctAnswers > 1 ? "cards" : "card" )")
                                 .foregroundColor(_globalMainTextColor)
                                 .font(.title2)
                                 .padding()
@@ -125,7 +126,7 @@ struct QuizGameView: View {
                         }
                         
                         ZStack {
-                            Button("Restart") {
+                            Button("One more") {
                                 gameState.restartGameSession()
                             }
                             .buttonStyle(GoButton2())

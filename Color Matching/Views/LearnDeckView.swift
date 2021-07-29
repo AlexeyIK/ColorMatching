@@ -110,7 +110,7 @@ struct LearnDeckView: View {
                     if currentIndex < gameState.cardsList.count {
                         Spacer()
                     } else {
-                        Text("Теперь постарайся вспомнить названия цветов!")
+                        Text("Let's try to remember the names of the colors!")
                             .foregroundColor(.white)
                             .font(.title2)
                             .padding()
