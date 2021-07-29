@@ -17,114 +17,124 @@ struct QuizGameView: View {
     var showColorNames: Bool = false
     
     var body: some View {
-        ZStack {
-            BackgroundView()
+        GeometryReader { contentZone in
+            ZStack {
+                BackgroundView()
 
-            VStack {
-                
-                if quizState.results == nil {
-                    Text("Quiz")
-                        .foregroundColor(.white)
-                        .font(.title)
-                        .fontWeight(.light)
-                        .padding(10)
-                    
-                    Spacer()
-                }
-                
-                if quizState.quizActive {
-                    ZStack {
-                        ForEach(Array(quizState.quizItemsList.enumerated()), id: \.element) { (index, card) in
-                            
-                            TransparentCardView(colorModel: colorsData[card.correctId],
-                                                 drawBorder: true,
-                                                 drawShadow: index == 0,
-                                                 showName: showColorNames,
-                                                 showColor: index == 0)
-                                .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
-                                .scaleEffect(1.0 - CGFloat(index) / 80)
-                                .zIndex(-Double(index))
-                                .transition(.swipeToLeft)
-                        }
+                VStack {
+                    if quizState.results == nil {
+                        Text("Quiz")
+                            .foregroundColor(.white)
+                            .font(.title)
+                            .fontWeight(.light)
+                            .padding(10)
+                        
+                        Spacer()
                     }
-                    .transition(.opacity)
-                }
-                
-                if quizState.quizItemsList.count > 0 && !quizState.timeRunOut
-                {
-                    VStack(spacing: 8) {
-                        if let quizItem = quizState.getQuizItem() {
-                            ForEach(quizItem.answers) { answer in
-                                let colorName = answer.name != "" ? answer.name : answer.englishName
-
-                                Button(colorName) {
-                                    withAnimation {
-                                        quizState.quizItemsList.removeFirst()
-                                        _ = quizState.checkAnswer(for: quizItem, answer: answer.id)
-                                    }
-                                }
-                                .buttonStyle(QuizButton())
-                                .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
-                                .transition(.identity)
+                    
+                    if quizState.quizActive {
+                        ZStack {
+                            ForEach(Array(quizState.quizItemsList.enumerated()), id: \.element) { (index, card) in
+                                
+                                TransparentCardView(colorModel: colorsData[card.correctId],
+                                                     drawBorder: true,
+                                                     drawShadow: index == 0,
+                                                     showName: showColorNames,
+                                                     showColor: index == 0)
+                                    .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
+                                    .scaleEffect(1.0 - CGFloat(index) / 80)
+                                    .zIndex(-Double(index))
+                                    .transition(.swipeToLeft)
                             }
                         }
-                    }
-                    .frame(height: 140)
-                    .padding(.vertical, 12)
-                    .transition(.identity)
-                }
-                else if quizState.timeRunOut {
-                    Text("Время вышло!")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title2)
-                        .padding()
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 24)
-                        .frame(height: 140)
-                        .transition(.slide)
-                }
-                
-                if quizState.quizActive {
-                    Spacer()
-
-                    TimerView()
-                        .foregroundColor(Color.white)
-                        .environmentObject(quizState)
-                        .padding(.bottom, 10)
-                }
-                else if let results = quizState.results {
-                    let finishText = quizState.timeRunOut ? "Время вышло!" : "Игра окончена!"
-
-                    if results.correctAnswers == quizState.quizQuestions {
-                        Text("\(finishText)\nВы угадали все карты!")
-                            .foregroundColor(_globalMainTextColor)
-                            .font(.title2)
-                            .padding()
-                            .multilineTextAlignment(.center)
-                            .transition(.slide)
-                    } else {
-                        Text("\(finishText)\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
-                            .foregroundColor(_globalMainTextColor)
-                            .font(.title2)
-                            .padding()
-                            .multilineTextAlignment(.center)
-                            .transition(.slide)
+                        .transition(.opacity)
+                        .frame(width: contentZone.size.width * 0.7, height: contentZone.size.height * 0.55, alignment: .center)
                     }
                     
-                    Button("Еще раз!") {
-                        gameState.restartGameSession()
+                    VStack {
+                        if quizState.quizItemsList.count > 0 && !quizState.timeRunOut
+                        {
+                            VStack(spacing: 8) {
+                                if let quizItem = quizState.getQuizItem() {
+                                    ForEach(quizItem.answers) { answer in
+                                        let colorName = answer.name != "" ? answer.name : answer.englishName
+
+                                        Button(colorName) {
+                                            withAnimation {
+                                                quizState.quizItemsList.removeFirst()
+                                                _ = quizState.checkAnswer(for: quizItem, answer: answer.id)
+                                            }
+                                        }
+                                        .transition(.identity)
+                                        .buttonStyle(QuizButton())
+                                        .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
+                                    }
+                                }
+                            }
+                            .frame(height: 140)
+                            .padding(.vertical, 12)
+                            .transition(.identity)
+                        }
+                        else if quizState.timeRunOut && quizState.results == nil {
+                            Text("Время вышло!")
+                                .foregroundColor(_globalMainTextColor)
+                                .font(.title2)
+                                .padding()
+                                .multilineTextAlignment(.center)
+                                .padding(.vertical, 24)
+                                .frame(height: 164)
+                                .transition(.asymmetric(insertion: .scale, removal: .identity))
+                        }
                     }
-                    .transition(.opacity)
-                    .buttonStyle(GoButton())
+                    .animation(.easeIn(duration: 0.25))
+                    
+                    if quizState.quizActive {
+                        Spacer()
+
+                        TimerView()
+                            .foregroundColor(Color.white)
+                            .environmentObject(quizState)
+                            .padding(.bottom, 15)
+                    }
+                    else if let results = quizState.results {
+                        let finishText = "Игра окончена!"
+
+                        if results.correctAnswers == quizState.quizQuestions {
+                            Text("\(finishText)\nВы угадали все карты!")
+                                .foregroundColor(_globalMainTextColor)
+                                .font(.title2)
+                                .padding()
+                                .multilineTextAlignment(.center)
+                                .transition(.slide)
+                                .animation(.easeInOut)
+                        } else {
+                            Text("\(finishText)\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
+                                .foregroundColor(_globalMainTextColor)
+                                .font(.title2)
+                                .padding()
+                                .multilineTextAlignment(.center)
+                                .transition(.slide)
+                                .animation(.easeInOut)
+                        }
+                        
+                        ZStack {
+                            Button("Еще раз!") {
+                                gameState.restartGameSession()
+                            }
+                            .buttonStyle(GoButton())
+                        }
+                        .frame(width: 400)
+                        .transition(.move(edge: .trailing))
+                        .animation(Animation.linear.delay(0.3))
+                    }
                 }
+                .frame(width: contentZone.size.width * 0.9, alignment: .center)
+//                .animation(Animation.default.delay(0.25))
             }
-            .transition(.opacity)
-        }
-        .onAppear(perform: {
-            withAnimation() {
+            .onAppear(perform: {
                 quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness)
-            }
-        })
+            })
+        }
     }
 }
 

@@ -21,101 +21,115 @@ struct LearnDeckView: View {
     @State var cardsState: [CardState] = Array(repeating: CardState(), count: 10)
     @State var currentIndex: Int = 0
     
-    let swipeTreshold: CGFloat = 120
+    let swipeTreshold: CGFloat = 130
     
     var body: some View {
-       ZStack {
-            // фон
-            BackgroundView()
-            
-            VStack {
-                if (currentIndex < gameState.cardsList.count) {
-                    Text("Remember the colors")
-                        .foregroundColor(.white)
-                        .font(.title)
-                        .fontWeight(.light)
-//                        .padding(.top, 10)
-                        .padding(.bottom, 20)
-                    
-                    Spacer()
-                }
+        GeometryReader { contentZone in
+            ZStack {
+                // фон
+                BackgroundView()
                 
-                ZStack {
-                    // отрисовка стопки карточек
-                    ForEach(gameState.cardsList.indices, id: \.self) { i in
-                        if (i >= currentIndex) {
-                            TransparentCardView(colorModel: gameState.cardsList[i],
-                                                 drawBorder: true,
-                                                 drawShadow: i == currentIndex,
-                                                 showName: false,
-                                                 showColor: i == currentIndex || i == currentIndex + 1, // окрашиваем в цвет не всё
-                                                 glowOffset: (CGSize(width: 0.9 + self.cardsState[i].angle / 5, height: 0.9 + self.cardsState[i].angle / 5), CGSize(width: 1.25 + self.cardsState[i].angle / 10, height: 1.25 + self.cardsState[i].angle / 10)))
-                                .offset(
-                                    x: self.cardsState[i].posX,
-                                    y: CGFloat(i) * -4)
-                                .zIndex(-Double(i))
-                                .scaleEffect(1.0 - CGFloat(i) / 80)
-                                .rotationEffect(Angle(degrees: self.cardsState[i].angle))
-                                .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0.01))
-                                .transition(self.cardsState[i].posX > 0 ? .swipeToRight : .swipeToLeft)
-                                // обработка драгов
-                                .gesture(DragGesture()
-                                            .onChanged({ value in
-                                                if (currentIndex == i) {
-                                                    self.cardsState[i].posX = value.translation.width
-                                                    self.cardsState[i].angle = Double(value.translation.width / 50)
-                                                }
-                                            })
-                                            .onEnded({ value in
-                                                if value.translation.width > swipeTreshold {
-                                                    withAnimation() {
-                                                        currentIndex += 1
-                                                    }
-                                                }
-                                                else if value.translation.width < -swipeTreshold {
-                                                    withAnimation() {
-                                                        currentIndex += 1
-                                                    }
-                                                }
-                                                else {
-                                                    self.cardsState[i].posX = 0
-                                                    self.cardsState[i].angle = 0
-                                                }
-                                            })
-                                )
+                VStack {
+                    if (currentIndex < gameState.cardsList.count) {
+                        Text("Remember the colors")
+                            .foregroundColor(.white)
+                            .font(.title)
+                            .fontWeight(.light)
+    //                        .padding(.top, 10)
+                            .padding(.bottom, 20)
+                        
+                        Spacer()
+                    }
+                    
+                    if currentIndex < gameState.cardsList.count {
+                        ZStack {
+                            // отрисовка стопки карточек
+                            ForEach(gameState.cardsList.indices, id: \.self) { i in
+                                if (i >= currentIndex) {
+                                    TransparentCardView(colorModel: gameState.cardsList[i],
+                                                         drawBorder: true,
+                                                         drawShadow: i == currentIndex,
+                                                         showName: false,
+                                                         showColor: i == currentIndex || i == currentIndex + 1, // окрашиваем в цвет не всё
+                                                         glowOffset: (CGSize(width: 0.9 + self.cardsState[i].angle / 5, height: 0.9 + self.cardsState[i].angle / 5), CGSize(width: 1.25 + self.cardsState[i].angle / 10, height: 1.25 + self.cardsState[i].angle / 10)))
+                                        .offset(
+                                            x: self.cardsState[i].posX,
+                                            y: CGFloat(i) * -4)
+                                        .zIndex(-Double(i))
+                                        .scaleEffect(1.0 - CGFloat(i) / 80)
+                                        .rotationEffect(Angle(degrees: self.cardsState[i].angle))
+                                        .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0.01))
+                                        .transition(self.cardsState[i].posX > 0 ? .swipeToRight : .swipeToLeft)
+                                        // обработка драгов
+                                        .gesture(DragGesture()
+                                                    .onChanged({ value in
+                                                        if (currentIndex == i) {
+                                                            self.cardsState[i].posX = value.translation.width
+                                                            self.cardsState[i].angle = Double(value.translation.width / 50)
+                                                        }
+                                                    })
+                                                    .onEnded({ value in
+                                                        if value.translation.width > swipeTreshold {
+                                                            withAnimation() {
+                                                                currentIndex += 1
+                                                            }
+                                                        }
+                                                        else if value.translation.width < -swipeTreshold {
+                                                            withAnimation() {
+                                                                currentIndex += 1
+                                                            }
+                                                        }
+                                                        else {
+                                                            self.cardsState[i].posX = 0
+                                                            self.cardsState[i].angle = 0
+                                                        }
+                                                    })
+                                        )
+                                }
+                            }
                         }
-                    }
-                }
-                
-                // Вывод имени текущего цвета
-                if showColorNames && currentIndex < gameState.cardsList.count {
-                    let colorName = gameState.cardsList[currentIndex].name != "" ? gameState.cardsList[currentIndex].name : gameState.cardsList[currentIndex].englishName
-                    
-                    Text(colorName)
                         .transition(.identity)
-                        .lineLimit(2)
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title2)
-                        .frame(width: 280, height: 78, alignment: .top)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, 25)
-                }
-                
-                if currentIndex < gameState.cardsList.count {
-                    Spacer()
-                } else {
-                    Text("Теперь постарайся вспомнить названия цветов!")
-                        .foregroundColor(_globalMainTextColor)
-                        .font(.title2)
-                        .padding()
-                        .multilineTextAlignment(.center)
-                        .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-                    
-                    Button("GO!") {
-                        gameState.activeGameMode = .quiz
+                        .frame(width: contentZone.size.width * 0.7, height: contentZone.size.height * 0.55, alignment: .center)
                     }
-                    .buttonStyle(GoButton())
+                    
+                    // Вывод имени текущего цвета
+                    if showColorNames && currentIndex < gameState.cardsList.count {
+                        let colorName = gameState.cardsList[currentIndex].name != "" ? gameState.cardsList[currentIndex].name : gameState.cardsList[currentIndex].englishName
+                        
+                        Text(colorName)
+                            .lineLimit(2)
+                            .foregroundColor(_globalMainTextColor)
+                            .font(.title2)
+                            .frame(width: 280, height: 78, alignment: .top)
+                            .multilineTextAlignment(.center)
+                            .padding(.top, 25)
+                            .transition(.opacity)
+                            .animation(.none)
+                    }
+
+                    if currentIndex < gameState.cardsList.count {
+                        Spacer()
+                    } else {
+                        Text("Теперь постарайся вспомнить названия цветов!")
+                            .foregroundColor(_globalMainTextColor)
+                            .font(.title2)
+                            .padding()
+                            .multilineTextAlignment(.center)
+                            .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
+                            .frame(width: 400, alignment: .center)
+                            .transition(.slide)
+                            .animation(Animation.default.delay(0.4))
+                        
+                        Button("GO!") {
+                            gameState.activeGameMode = .quiz
+                        }
+                        .buttonStyle(GoButton())
+                        .frame(width: 400, alignment: .center)
+                        .transition(.move(edge: .trailing))
+                        .animation(Animation.linear.delay(0.6))
+                    }
                 }
+                .transition(.identity)
             }
         }
     }
