@@ -34,8 +34,8 @@ struct LearnDeckView: View {
                         .foregroundColor(.white)
                         .font(.title)
                         .fontWeight(.light)
-                        .padding(.top, 16)
-                        .padding(.bottom, 10)
+//                        .padding(.top, 10)
+                        .padding(.bottom, 20)
                     
                     Spacer()
                 }

@@ -13,23 +13,18 @@ class TimerManager {
     
     static let shared = TimerManager()
     
-    private var countdownTimer: Timer.TimerPublisher? = nil
-    private var endDateTime = Date()
-    private var currentDateTime = Date()
+//    func startTimer(for time: Double) -> Timer.TimerPublisher {
+//        currentDateTime = Date()
+//        endDateTime = Date.init(timeIntervalSinceNow: time)
+//        countdownTimer = Timer.publish(every: 0.02, on: .main, in: .common)
+//
+//        return countdownTimer!
+//    }
     
-    func startTimer(for time: Double) -> Timer.TimerPublisher {
-        currentDateTime = Date()
-        endDateTime = Date.init(timeIntervalSinceNow: time)
-        countdownTimer = Timer.publish(every: 0.02, on: .main, in: .common)
-
-        return countdownTimer!
-    }
-    
-    func getRemainingTime() -> String {
-        currentDateTime = Date()
-        
-        let timeRemainsStr = countDownString(from: endDateTime, until: currentDateTime)
-        if endDateTime.timeIntervalSinceReferenceDate - currentDateTime.timeIntervalSinceReferenceDate > 0 {
+    func getTimeIntervalFomatted(from refDateTime: Date, until endDateTime: Date) -> String
+    {
+        let timeRemainsStr = countDownString(from: endDateTime, until: refDateTime)
+        if endDateTime.timeIntervalSinceReferenceDate - refDateTime.timeIntervalSinceReferenceDate > 0 {
             return timeRemainsStr
         }
         else {

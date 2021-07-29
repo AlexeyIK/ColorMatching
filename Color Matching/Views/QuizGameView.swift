@@ -48,30 +48,40 @@ struct QuizGameView: View {
                         }
                     }
                     .transition(.opacity)
-                    
-                    if quizState.quizItemsList.count > 0
-                    {
-                        VStack(spacing: 8) {
-                            if let quizItem = quizState.getQuizItem() {
-                                ForEach(quizItem.answers) { answer in
-                                    let colorName = answer.name != "" ? answer.name : answer.englishName
+                }
+                
+                if quizState.quizItemsList.count > 0 && !quizState.timeRunOut
+                {
+                    VStack(spacing: 8) {
+                        if let quizItem = quizState.getQuizItem() {
+                            ForEach(quizItem.answers) { answer in
+                                let colorName = answer.name != "" ? answer.name : answer.englishName
 
-                                    Button(colorName) {
-                                        withAnimation {
-                                            quizState.quizItemsList.removeFirst()
-                                            _ = quizState.checkAnswer(for: quizItem, answer: answer.id)
-                                        }
+                                Button(colorName) {
+                                    withAnimation {
+                                        quizState.quizItemsList.removeFirst()
+                                        _ = quizState.checkAnswer(for: quizItem, answer: answer.id)
                                     }
-                                    .buttonStyle(QuizButton())
-                                    .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
-                                    .transition(.identity)
                                 }
+                                .buttonStyle(QuizButton())
+                                .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
+                                .transition(.identity)
                             }
                         }
-                        .frame(height: 140)
-                        .padding(.top, 24)
-                        .transition(.identity)
                     }
+                    .frame(height: 140)
+                    .padding(.vertical, 12)
+                    .transition(.identity)
+                }
+                else if quizState.timeRunOut {
+                    Text("Время вышло!")
+                        .foregroundColor(_globalMainTextColor)
+                        .font(.title2)
+                        .padding()
+                        .multilineTextAlignment(.center)
+                        .padding(.top, 24)
+                        .frame(height: 140)
+                        .transition(.slide)
                 }
                 
                 if quizState.quizActive {
@@ -80,6 +90,7 @@ struct QuizGameView: View {
                     TimerView()
                         .foregroundColor(Color.white)
                         .environmentObject(quizState)
+                        .padding(.bottom, 10)
                 }
                 else if let results = quizState.results {
                     let finishText = quizState.timeRunOut ? "Время вышло!" : "Игра окончена!"

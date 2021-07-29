@@ -68,13 +68,19 @@ class QuizState: ObservableObject {
         endDateTime = Date.init(timeIntervalSinceNow: time)
         countdownTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true, block: { _ in
             self.currentDateTime = Date()
-            self.timerString = TimerManager.shared.countDownString(from: self.endDateTime, until: self.currentDateTime)
+            self.timerString = TimerManager.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
             
             if self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate <= 0 {
                 self.timeRunOut = true
-                self.stopQuiz()
+                self.startGameEndPause()
             }
         })
+    }
+    
+    func startGameEndPause() {
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
+            self.stopQuiz()
+        }
     }
     
     func getQuizItem() -> QuizItem? {

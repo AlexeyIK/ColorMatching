@@ -24,6 +24,7 @@ struct AllModesView: View {
         NavigationView {
             LearnAndQuizView()
                 .navigationBarTitleDisplayMode(.inline)
+//                .navigationTitle("Learn and Guess")
                 .navigationBarItems(leading:
                     HStack {
                         Button("< back") {
