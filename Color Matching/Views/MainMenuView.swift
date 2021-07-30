@@ -19,12 +19,22 @@ struct MainMenuView: View {
         ]
     }
     
+    var repeatingLinesAnimation: Animation {
+        Animation
+            .linear(duration: 20)
+            .repeatForever()
+    }
+    
+    @State var linesOffset: CGFloat = 0.0
+    @State var hueRotation: Double = 0.0
+    
     var body: some View {
         
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
                     BackgroundView()
+                        .animation(.none)
                     
                     VStack {
                         Spacer()
@@ -54,6 +64,8 @@ struct MainMenuView: View {
                         
                         Spacer()
                     }
+                    .animation(.none)
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                     
                     HStack {
                         Spacer()
@@ -68,6 +80,7 @@ struct MainMenuView: View {
                             Spacer()
                         }
                     }
+                    .animation(.none)
                 
                     HStack(alignment: .center) {
                         Rectangle()
@@ -79,7 +92,10 @@ struct MainMenuView: View {
                                                     ]),
                                                  startPoint: .top,
                                                  endPoint: .bottom))
-                            .frame(width: 5, alignment: .center)
+                            .hueRotation(Angle(degrees: hueRotation))
+                            .transition(.identity)
+                            .frame(width: 6, alignment: .center)
+                            .animation(repeatingLinesAnimation, value: hueRotation)
                         
                         Spacer()
                         
@@ -92,11 +108,19 @@ struct MainMenuView: View {
                                                     ]),
                                                  startPoint: .top,
                                                  endPoint: .bottom))
-                            .frame(width: 5, alignment: .center)
+                            .hueRotation(Angle(degrees: -hueRotation))
+                            .transition(.identity)
+                            .frame(width: 6, alignment: .center)
+                            .animation(repeatingLinesAnimation, value: hueRotation)
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                    .ignoresSafeArea()
+//                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                    .onAppear() {
+                        self.hueRotation = 3600
+                    }
                 }
             }
+            .transition(.identity)
             .navigationBarHidden(true)
             .statusBar(hidden: true)
         }
