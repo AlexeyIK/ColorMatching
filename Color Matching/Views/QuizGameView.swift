@@ -83,7 +83,7 @@ struct QuizGameView: View {
                         }
                         else if quizState.timeRunOut && quizState.results == nil {
                             Text("Time is over!")
-                                .foregroundColor(_globalMainTextColor)
+                                .foregroundColor(.white)
                                 .font(.title)
                                 .padding()
                                 .multilineTextAlignment(.center)
@@ -106,7 +106,7 @@ struct QuizGameView: View {
 
                         if results.correctAnswers == quizState.quizQuestions {
                             Text("\(finishText)\nYou have guessed all cards!")
-                                .foregroundColor(_globalMainTextColor)
+                                .foregroundColor(.white)
                                 .font(.title2)
                                 .padding()
                                 .multilineTextAlignment(.center)
@@ -115,7 +115,7 @@ struct QuizGameView: View {
                                 .animation(.easeInOut)
                         } else {
 //                            Text("\(finishText)\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
-                            Text("\(finishText)\nYou guessed \(results.correctAnswers) \(results.correctAnswers > 1 ? "cards" : "card" )")
+                            Text("\(finishText)\nYou guessed \(results.correctAnswers) of \(results.cardsCount) \(results.cardsCount > 1 ? "cards" : "card" )")
                                 .foregroundColor(_globalMainTextColor)
                                 .font(.title2)
                                 .padding()
