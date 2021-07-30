@@ -21,7 +21,7 @@ struct MenuButtonView: View {
                 .fill(Color.init(hue: 0, saturation: 0, brightness: 0.16, opacity: 1))
                 .frame(height: 58, alignment: .center)
             
-            HStack(spacing: 4) {
+            HStack(spacing: 0) {
                 if (!noImage) {
                     if (imageName == "") {
                         Rectangle()
@@ -35,6 +35,8 @@ struct MenuButtonView: View {
                             .padding(.leading, 16)
                             .foregroundColor(.gray)
                     }
+                    
+                    Spacer()
                 }
                 
                 Text(text)
@@ -46,6 +48,8 @@ struct MenuButtonView: View {
                     .padding(.leading, noImage ? 20 : 0)
                 
                 if (!noImage) {
+                    Spacer()
+                    
                     Image(systemName: "arrow.right.circle").scaleEffect(0.9)
                         .foregroundColor(foregroundColor)
                         .font(.title)
