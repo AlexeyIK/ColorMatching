@@ -48,7 +48,7 @@ struct MainMenuView: View {
                         
                         MenuButtonView(text: "Warm VS Cold", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1)))
                         
-                        MenuButtonView(text: "More games soon", noImage: true, foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                        MenuButtonView(text: "More games soon", noImage: true)
                     }
                     
                     Spacer()

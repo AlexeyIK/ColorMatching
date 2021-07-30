@@ -43,12 +43,14 @@ struct MenuButtonView: View {
                     .layoutPriority(1)
                     .lineLimit(1)
                     .padding(.leading, noImage ? 20 : 0)
-                    .frame(width: noImage ? 280 : 170, alignment: .center)
+                    .frame(width: noImage ? 280 : 160, alignment: .center)
                 
                 if (!noImage) {
-                    Text(">")
+                    Image(systemName: "arrow.right.circle").scaleEffect(0.9)
+//                    Text(">")
                         .foregroundColor(foregroundColor)
                         .font(.title)
+                        .padding(.trailing, 5)
                 }
                     
             }
