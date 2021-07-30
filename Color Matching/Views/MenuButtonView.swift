@@ -15,7 +15,8 @@ struct MenuButtonView: View {
     var foregroundColor: Color = .gray
     
     var body: some View {
-        ZStack(alignment: .leading) {
+        ZStack(alignment: noImage ? .center : .leading) {
+            
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.init(hue: 0, saturation: 0, brightness: 0.16, opacity: 1))
                 .frame(height: 58, alignment: .center)
@@ -43,11 +44,9 @@ struct MenuButtonView: View {
                     .layoutPriority(1)
                     .lineLimit(1)
                     .padding(.leading, noImage ? 20 : 0)
-                    .frame(width: noImage ? 280 : 160, alignment: .center)
                 
                 if (!noImage) {
                     Image(systemName: "arrow.right.circle").scaleEffect(0.9)
-//                    Text(">")
                         .foregroundColor(foregroundColor)
                         .font(.title)
                         .padding(.trailing, 5)
