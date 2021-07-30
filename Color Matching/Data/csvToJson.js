@@ -60,13 +60,12 @@ let colors = [];
 
 // matching columns vs array
 let hexCodeColumn = 1;
-let nameColumn = 4;
-let newEngNameColumn = 2;
-let engNameColumn = 3;
-let difficulty = 5;
-let colorRColumn = 6;
-let colorGColumn = 7;
-let colorBColumn = 8;
+let nameColumn = 3;
+let engNameColumn = 2;
+let difficulty = 4;
+let colorRColumn = 5;
+let colorGColumn = 6;
+let colorBColumn = 7;
 
 
 
@@ -77,42 +76,15 @@ for (var line in arr ) {
     || arr[line].split(',')[nameColumn].includes('Крайола')
     ){ continue; };
 
-  /* if ( i != 0 ){
-    if ( arr[line].split(',')[hexCodeColumn] == colors[i-1]['hexCode'] && colors[i-1]['hexCode'] != undefined ) {
-      console.log('twin finded');
-      if ( arr[line].split(',')[newEngNameColumn] != undefined
-        && arr[line].split(',')[newEngNameColumn] != '' ) {
-          colors[i-1]['newEnglishName'] = arr[line].split(',')[newEngNameColumn]; 
-      };
-      if ( arr[line].split(',')[nameColumn] != undefined 
-        && arr[line].split(',')[engNameColumn] != '') { 
-          colors[i-1]['name'] = arr[line].split(',')[nameColumn]; 
-      };
-      twins++;
-      continue;    
-    };
-  }; */
-
   colors[i] = {};
   colors[i]['id'] = i;
   colors[i]['hexCode'] = arr[line].split(',')[hexCodeColumn];
   colors[i]['name'] = arr[line].split(',')[nameColumn].trim();
-  if ( arr[line].split(',')[engNameColumn] != ''){
-    colors[i]['englishName'] = arr[line].split(',')[engNameColumn]
-  } else {
-    colors[i]['englishName'] = arr[line].split(',')[newEngNameColumn]
-  };
-
-  /* if ( arr[line].split(',')[colorRColumn] != '')
-    { var oldRGB = [+arr[line].split(',')[colorRColumn], +arr[line].split(',')[colorGColumn], +arr[line].split(',')[colorBColumn]];
-    } else { var oldRGB = null; }
-   */
-  //var newRGB = [hexToRgb(arr[line].split(',')[hexCodeColumn]).r, hexToRgb(arr[line].split(',')[hexCodeColumn]).g, hexToRgb(arr[line].split(',')[hexCodeColumn]).b ];
-  //console.log(newRGB);
+  colors[i]['englishName'] = arr[line].split(',')[engNameColumn]
   colors[i]['colorRGB'] = [+arr[line].split(',')[colorRColumn], +arr[line].split(',')[colorGColumn], +arr[line].split(',')[colorBColumn]];
   colors[i]['colorHSV'] = rgbToHsv(...colors[i]['colorRGB']);
-  colors[i]['difficulty'] = arr[line].split(',')[difficulty] ? arr[line].split(',')[difficulty] : "0" ;
-  //console.log(`${oldRGB} - ${newRGB} - ${colors[i]['englishName'] || 'noname'} - ${colors[i]['name']}`);
+  colors[i]['difficulty'] = arr[line].split(',')[difficulty] ? arr[line].split(',')[difficulty] : "-1" ;
+  colors[i]['isGuessed'] = false;
   i++;
 }
 
