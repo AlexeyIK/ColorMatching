@@ -28,7 +28,8 @@ struct LearnAndQuizView: View {
         .navigationBarItems(
             leading:
                 HStack {
-                    Button("< to menu") {
+                    Button("< menu") {
+                        gameState.endGameSession()
                         presentationMode.wrappedValue.dismiss()
                     }
                     .font(.body)

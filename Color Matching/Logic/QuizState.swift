@@ -70,7 +70,7 @@ class QuizState: ObservableObject {
         currentDateTime = Date()
         endDateTime = Date.init(timeIntervalSinceNow: time)
         
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true, block: { _ in
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { _ in
             guard !self.isTimerPaused else { return }
             
             self.currentDateTime = Date()

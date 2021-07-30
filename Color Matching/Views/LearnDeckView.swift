@@ -110,13 +110,14 @@ struct LearnDeckView: View {
                     if currentIndex < gameState.cardsList.count {
                         Spacer()
                     } else {
-                        Text("Let's try to remember the names of the colors!")
+                        Text("Get ready to remember the names of the colors!")
                             .foregroundColor(.white)
                             .font(.title2)
                             .padding()
                             .multilineTextAlignment(.center)
                             .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-                            .frame(width: contentZone.size.width, alignment: .center)
+                            .frame(width: contentZone.size.width * 0.8, alignment: .center)
+                            .padding()
                             .transition(.slide)
                             .animation(Animation.default.delay(0.4))
                         

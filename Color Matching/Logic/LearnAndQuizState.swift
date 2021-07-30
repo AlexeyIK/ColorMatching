@@ -48,6 +48,7 @@ class LearnAndQuizState: ObservableObject  {
     
     func endGameSession() {
         self.gameActive = false
+        self.activeGameMode = .learn
     }
     
     func restartGameSession() {

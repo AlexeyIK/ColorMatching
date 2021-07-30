@@ -87,8 +87,8 @@ struct QuizGameView: View {
                                 .font(.title)
                                 .padding()
                                 .multilineTextAlignment(.center)
-                                .padding(.vertical, 24)
-                                .frame(height: 144)
+                                .padding(.vertical, 10)
+                                .frame(height: 140)
                                 .transition(.asymmetric(insertion: .scale, removal: .identity))
                         }
                     }
@@ -102,10 +102,10 @@ struct QuizGameView: View {
                             .environmentObject(quizState)
                     }
                     else if let results = quizState.results {
-                        let finishText = "Game is over!"
+//                        let finishText = "Game is over!"
 
                         if results.correctAnswers == quizState.quizQuestions {
-                            Text("\(finishText)\nYou have guessed all cards!")
+                            Text("You have guessed all cards!")
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .padding()
@@ -114,8 +114,7 @@ struct QuizGameView: View {
                                 .transition(.slide)
                                 .animation(.easeInOut)
                         } else {
-//                            Text("\(finishText)\nУгадано \(results.correctAnswers) \(results.correctAnswers > 0 && results.correctAnswers < 5 ? "карты" : "карт") из \(results.cardsCount)")
-                            Text("\(finishText)\nYou guessed \(results.correctAnswers) of \(results.cardsCount) \(results.cardsCount > 1 ? "cards" : "card" )")
+                            Text("You guessed \(results.correctAnswers) of \(results.cardsCount) \(results.cardsCount > 1 ? "cards" : "card" )")
                                 .foregroundColor(_globalMainTextColor)
                                 .font(.title2)
                                 .padding()
