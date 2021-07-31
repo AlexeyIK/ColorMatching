@@ -25,13 +25,14 @@ struct MenuButtonView: View {
                 if (!noImage) {
                     if (imageName == "") {
                         Rectangle()
-                            .frame(width: 80, height: 80, alignment: .center)
+                            .frame(width: 100, height: 100, alignment: .center)
                             .padding(.leading, 16)
                             .foregroundColor(.gray)
                     } else {
                         Image(imageName)
                             .resizable()
-                            .frame(width: 80, height: 80, alignment: .center)
+                            .aspectRatio(1.5, contentMode: .fill)
+                            .frame(width: 100, height: 100, alignment: .center)
                             .padding(.leading, 16)
                             .foregroundColor(.gray)
                     }
@@ -50,13 +51,14 @@ struct MenuButtonView: View {
                 if (!noImage) {
                     Spacer()
                     
-                    Image(systemName: "arrow.right.circle").scaleEffect(0.9)
+                    Image(systemName: "chevron.right").scaleEffect(0.9)
                         .foregroundColor(foregroundColor)
                         .font(.title2)
                         .padding(.trailing, 5)
                 }
                     
             }
+            .frame(height: 80, alignment: .center)
         }
         .padding(.horizontal, 20)
     }
@@ -64,6 +66,6 @@ struct MenuButtonView: View {
 
 struct MenuButton_Previews: PreviewProvider {
     static var previews: some View {
-        MenuButtonView(text: "More mini-games soon")
+        MenuButtonView(text: "More mini-games soon", imageName: "iconColdVsWarm")
     }
 }

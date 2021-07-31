@@ -52,11 +52,11 @@ struct MainMenuView: View {
                                     .navigationBarTitleDisplayMode(.inline),
                                     
                                 label: {
-                                    MenuButtonView(text: "Color QUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
                                 })
                                 
                             
-                            MenuButtonView(text: "Warm VS Cold", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1)))
+                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1)))
                             
                             MenuButtonView(text: "More games soon", noImage: true)
                         }
@@ -73,11 +73,19 @@ struct MainMenuView: View {
                             destination: StatsView(),
                             label: {
                             VStack {
-                                Image(systemName: "arrow.right.doc.on.clipboard")
-                                    .resizable()
-                                    .foregroundColor(.gray)
-                                    .frame(width: 40, height: 40, alignment: .topTrailing)
-                                    .padding()
+                                ZStack {
+                                    Image(systemName: "hexagon")
+                                        .resizable()
+                                        .aspectRatio(0.9, contentMode: .fit)
+                                        .foregroundColor(ConvertColor(colorType: .rgba, value: (41, 41, 41, 1)))
+                                    
+                                    Circle()
+                                        .strokeBorder(lineWidth: 2, antialiased: true)
+                                        .foregroundColor(ConvertColor(colorType: .rgba, value: (77, 77, 77, 1)))
+                                        .scaleEffect(0.7)
+                                }
+                                .frame(width: 50, height: 50, alignment: .topTrailing)
+                                .padding(.all, 10)
                                 
                                 Spacer()
                             }
