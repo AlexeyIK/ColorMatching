@@ -14,7 +14,7 @@ struct Color_MatchingApp: App {
     var body: some Scene {
         WindowGroup {
 //            TimerView()
-            AllModesView()
+            MainMenuView()
 //            LearnAndQuizView()
 //            QuizGameView(hardnessLvl: .easy)
 //            DeckView()

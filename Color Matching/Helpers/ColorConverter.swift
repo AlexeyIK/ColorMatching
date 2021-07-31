@@ -20,7 +20,7 @@ func ConvertColor(colorType: ColorValueType, value: (Int, Int, Int, Double)) -> 
         case .rgba:
             return Color.init(red: doubleValue.0 / 255, green: doubleValue.1 / 255, blue: doubleValue.2 / 255, opacity: doubleValue.3)
         case .hsba:
-            return Color.init(hue: doubleValue.0 / 100, saturation: doubleValue.1 / 100, brightness: doubleValue.2 / 100, opacity: doubleValue.3)
+            return Color.init(hue: doubleValue.0 / 360, saturation: doubleValue.1 / 100, brightness: doubleValue.2 / 100, opacity: doubleValue.3)
     }
 }
 

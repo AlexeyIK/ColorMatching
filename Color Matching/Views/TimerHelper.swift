@@ -7,11 +7,11 @@
 
 import Foundation
 
-class TimerManager {
+class TimerHelper {
     
     private init() { }
     
-    static let shared = TimerManager()
+    static let shared = TimerHelper()
     
 //    func startTimer(for time: Double) -> Timer.TimerPublisher {
 //        currentDateTime = Date()
