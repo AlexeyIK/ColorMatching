@@ -21,7 +21,7 @@ struct MainMenuView: View {
     
     var repeatingLinesAnimation: Animation {
         Animation
-            .linear(duration: 20)
+            .linear(duration: 30)
             .repeatForever()
     }
     
@@ -29,7 +29,6 @@ struct MainMenuView: View {
     @State var hueRotation: Double = 0.0
     
     var body: some View {
-        
         NavigationView {
             GeometryReader { geometry in
                 ZStack {
@@ -122,7 +121,6 @@ struct MainMenuView: View {
             }
             .transition(.identity)
             .navigationBarHidden(true)
-            .statusBar(hidden: true)
         }
     }
 }

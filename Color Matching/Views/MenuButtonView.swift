@@ -25,13 +25,13 @@ struct MenuButtonView: View {
                 if (!noImage) {
                     if (imageName == "") {
                         Rectangle()
-                            .frame(width: 84, height: 84, alignment: .center)
+                            .frame(width: 80, height: 80, alignment: .center)
                             .padding(.leading, 16)
                             .foregroundColor(.gray)
                     } else {
                         Image(imageName)
                             .resizable()
-                            .frame(width: 84, height: 84, alignment: .center)
+                            .frame(width: 80, height: 80, alignment: .center)
                             .padding(.leading, 16)
                             .foregroundColor(.gray)
                     }
@@ -52,13 +52,13 @@ struct MenuButtonView: View {
                     
                     Image(systemName: "arrow.right.circle").scaleEffect(0.9)
                         .foregroundColor(foregroundColor)
-                        .font(.title)
+                        .font(.title2)
                         .padding(.trailing, 5)
                 }
                     
             }
         }
-        .padding(.horizontal, 30)
+        .padding(.horizontal, 20)
     }
 }
 

@@ -21,7 +21,7 @@ struct LearnDeckView: View {
     @State var cardsState: [CardState] = Array(repeating: CardState(), count: 10)
     @State var currentIndex: Int = 0
     
-    let swipeTreshold: CGFloat = 110
+    let swipeTreshold: CGFloat = UIScreen.main.bounds.width / 4
     
     var body: some View {
         GeometryReader { contentZone in
@@ -58,7 +58,7 @@ struct LearnDeckView: View {
                                         .zIndex(-Double(i))
                                         .scaleEffect(1.0 - CGFloat(i) / 80)
                                         .rotationEffect(Angle(degrees: self.cardsState[i].angle))
-                                        .animation(.spring(response: 0.3, dampingFraction: 0.6, blendDuration: 0.01))
+                                        .animation(.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0.01), value: self.cardsState[i].posX)
                                         .transition(self.cardsState[i].posX > 0 ? .swipeToRight : .swipeToLeft)
                                         // обработка драгов
                                         .gesture(DragGesture()
@@ -88,7 +88,7 @@ struct LearnDeckView: View {
                                 }
                             }
                         }
-                        .transition(.identity)
+                        .transition(.opacity)
                         .frame(width: contentZone.size.width * 0.68, height: contentZone.size.height * 0.55, alignment: .center)
                     }
                     
@@ -129,7 +129,7 @@ struct LearnDeckView: View {
                         .frame(width: contentZone.size.width, alignment: .center)
                         .transition(.move(edge: .trailing))
                         .animation(Animation.linear.delay(0.6))
-                        .offset(y: contentZone.size.height * 0.25)
+                        .offset(y: contentZone.size.height * 0.2)
                     }
                 }
                 .transition(.identity)
