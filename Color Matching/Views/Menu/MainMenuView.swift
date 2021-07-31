@@ -64,6 +64,7 @@ struct MainMenuView: View {
                             
                             MenuButtonView(text: "More games soon", noImage: true)
                         }
+                        .offset(y: -geometry.size.height * 0.05)
                         
                         Spacer()
                     }

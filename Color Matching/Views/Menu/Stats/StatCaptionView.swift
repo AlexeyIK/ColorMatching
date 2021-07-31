@@ -14,7 +14,7 @@ struct StatCaptionView: View {
     var body: some View {
         Text(caption)
             .foregroundColor(.white)
-            .font(.callout)
+            .font(.body)
             .fontWeight(.bold)
             .padding(.top, 40)
             .padding(.bottom, 12)

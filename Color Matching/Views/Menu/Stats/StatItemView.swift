@@ -16,16 +16,17 @@ struct StatItemView: View {
         HStack {
             Text(caption + ":")
                 .foregroundColor(.white)
-                .font(.callout)
+                .font(.body)
                 .fontWeight(.thin)
             
             Spacer()
             
             Text(value)
                 .foregroundColor(.white)
-                .font(.callout)
+                .font(.body)
                 .fontWeight(.bold)
         }
+        .padding(.bottom, 4)
     }
 }
 
@@ -39,7 +40,7 @@ struct StatItemView_Previews: PreviewProvider {
                 StatItemView(caption: "Guessed unique colors", value: "54")
                 StatItemView(caption: "Played games", value: "87")
             }
-            .frame(width: UIScreen.main.bounds.width * 0.6, alignment: .center)
+            .frame(width: UIScreen.main.bounds.width * 0.65, alignment: .center)
         }
     }
 }

@@ -41,7 +41,7 @@ struct StatsView: View {
                 
                 Spacer()
             }
-            .frame(width: UIScreen.main.bounds.width * 0.6, height: UIScreen.main.bounds.height * 0.8, alignment: .center)
+            .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.8, alignment: .center)
         }
         .navigationBarItems(
             leading:
@@ -60,9 +60,14 @@ struct StatsView: View {
 
 struct StatsView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            BackgroundView()
-            StatsView()
+        ForEach(["iPhone 8", "iPhone SE (1st generation)", "iPhone 12"], id: \.self) { device in
+            ZStack {
+                BackgroundView()
+                StatsView()
+            }
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .previewDevice(PreviewDevice(stringLiteral: device))
+            .previewDisplayName(device)
         }
     }
 }

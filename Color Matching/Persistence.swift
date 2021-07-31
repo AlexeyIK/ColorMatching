@@ -15,15 +15,19 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         
         let overallStats = OverallStats(context: viewContext)
-        overallStats.totalScore = 0
-        overallStats.lastGameScore = 0
-        overallStats.totalFinishedGames = 0
+        overallStats.totalScore = 2200
+        overallStats.lastGameScore = 68
+        overallStats.totalFinishedGames = 11
         
         let quizStats = ColorQuizStats(context: viewContext)
-        quizStats.colorsGuessed = 0
-        quizStats.finishedGames = 0
-        quizStats.bestStrike = 0
-        quizStats.strikesCount = 0
+        quizStats.colorsGuessed = 65
+        quizStats.finishedGames = 11
+        quizStats.bestStrike = 7
+        quizStats.strikesCount = 1
+        
+        let color = ViewedColor(context: viewContext)
+        color.colorId = "000000"
+        color.isGuessed = false
         
         do {
             try viewContext.save()
@@ -34,18 +38,6 @@ struct PersistenceController {
             let nsError = error as NSError
             fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
         }
-//        for _ in 0..<10 {
-//            let newItem = Item(context: viewContext)
-//            newItem.timestamp = Date()
-//        }
-//        do {
-//            try viewContext.save()
-//        } catch {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
         return result
     }()
 
