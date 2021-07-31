@@ -116,9 +116,10 @@ struct QuizGameView: View {
                     }
                     .animation(.easeIn(duration: 0.25))
                     
-                    if !quizState.quizActive, let results = quizState.results {
-//                        let finishText = "Game is over!"
-
+                    if (quizState.quizActive) {
+                        Spacer()
+                    }
+                    else if let results = quizState.results {
                         if results.correctAnswers == quizState.quizQuestions {
                             Text("You have guessed all cards!")
                                 .foregroundColor(.white)
