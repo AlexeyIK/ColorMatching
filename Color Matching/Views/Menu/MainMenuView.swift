@@ -25,6 +25,9 @@ struct MainMenuView: View {
             .repeatForever()
     }
     
+    @Environment(\.managedObjectContext) var dataStorage
+    @FetchRequest(entity: PlayerStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<PlayerStats>
+    
     @State var linesOffset: CGFloat = 0.0
     @State var hueRotation: Double = 0.0
     
@@ -133,6 +136,14 @@ struct MainMenuView: View {
             }
             .transition(.identity)
             .navigationBarHidden(true)
+        }
+        .onAppear() {
+            if playerStats.count == 0 {
+                let stats = PlayerStats(context: dataStorage)
+                stats.playedGamesCount = 0
+                stats.totalScore = 0
+                stats.guessedColors = 0
+            }
         }
     }
 }

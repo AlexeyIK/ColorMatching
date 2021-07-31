@@ -18,6 +18,9 @@ struct PersistenceController {
         playerStats.totalScore = 0
         playerStats.guessedColors = 0
         playerStats.lastGameScore = 0
+        playerStats.colorStrikes = 0
+        playerStats.bestStrike = 0
+        playerStats.playedGamesCount = 0
         
         do {
             try viewContext.save()
