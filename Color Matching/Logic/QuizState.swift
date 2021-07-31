@@ -12,6 +12,8 @@ class QuizState: ObservableObject {
     
     init() {}
     
+    private let definedTimerFrequence: Double = 0.01
+    
     private var countdownTimer: Timer?
     private var endDateTime = Date()
     private var currentDateTime = Date()
@@ -22,10 +24,12 @@ class QuizState: ObservableObject {
     public var results: QuizResults? = nil
     
     @Published var quizItemsList: [QuizItem] = []
+    @Published var quizAnswersAndScore: [QuizAnswer] = []
     @Published var quizActive: Bool = false
     @Published var timeRunOut: Bool = false
     @Published var quizPosition: Int = 0
     @Published var correctAnswers: Int = 0
+    @Published var lastScoreChange: Int = 0
     @Published var timerString: String = "00:00:000"
     @Published var isAppActive: Bool = true
     
@@ -70,11 +74,15 @@ class QuizState: ObservableObject {
         currentDateTime = Date()
         endDateTime = Date.init(timeIntervalSinceNow: time)
         
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { _ in
+        countdownTimer = Timer.scheduledTimer(withTimeInterval: definedTimerFrequence, repeats: true, block: { _ in
             guard !self.isTimerPaused else { return }
             
             self.currentDateTime = Date()
-            self.timerString = TimerManager.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
+            self.timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
+            
+            self.quizAnswersAndScore.forEach { quizAnswer in
+                quizAnswer.liveTimeInc(seconds: self.definedTimerFrequence)
+            }
             
             if self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate <= 0 {
                 self.timeRunOut = true
@@ -128,7 +136,7 @@ class QuizState: ObservableObject {
                               cardsCount: quizQuestions)
     }
     
-    func checkAnswer(for quizItem: QuizItem, answer: Int = 0) -> Bool {
+    func checkAnswer(for quizItem: QuizItem, answer: Int = 0, hardness: Hardness) -> Bool {
         var result = false
         
         if answer > 0 && answer == quizItem.correctId {
@@ -140,11 +148,35 @@ class QuizState: ObservableObject {
             quizPosition += 1
         }
         
+        lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
+        quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
+        
         if quizPosition == quizQuestions || timeRunOut {
             stopQuiz()
         }
         
         return result
+    }
+}
+
+class QuizAnswer: Identifiable {
+    let isCorrect: Bool
+    let scoreEarned: Int
+    let startOffset: CGFloat
+    private(set) var lifetime: Double = 0
+    
+    var scoreStr: String {
+        get { return scoreEarned > 0 ? "+\(scoreEarned)" : String(scoreEarned) }
+    }
+    
+    init(isCorrect: Bool, scoreEarned: Int) {
+        self.isCorrect = isCorrect
+        self.scoreEarned = scoreEarned
+        self.startOffset = CGFloat.random(in: -1...1)
+    }
+    
+    func liveTimeInc(seconds: Double) {
+        lifetime += seconds
     }
 }
 
