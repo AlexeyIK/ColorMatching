@@ -165,10 +165,6 @@ class QuizAnswer: Identifiable {
     let startOffset: CGFloat
     private(set) var lifetime: Double = 0
     
-    var scoreStr: String {
-        get { return scoreEarned > 0 ? "+\(scoreEarned)" : String(scoreEarned) }
-    }
-    
     init(isCorrect: Bool, scoreEarned: Int) {
         self.isCorrect = isCorrect
         self.scoreEarned = scoreEarned

@@ -46,20 +46,15 @@ struct QuizGameView: View {
                         
                         ZStack(alignment: .leading) {
                             ForEach(quizState.quizAnswersAndScore) { quizAnswer in
-                                Text(quizAnswer.scoreStr)
-                                    .font(.title)
-                                    .foregroundColor(quizAnswer.isCorrect ? .white : .red)
-                                    .fontWeight(.bold)
-                                    .transition(.identity)
+                                ScorePointView(score: quizAnswer.scoreEarned, isCorrect: quizAnswer.isCorrect)
                                     .offset(x: quizAnswer.startOffset * 10.0, y: -CGFloat(quizAnswer.lifetime) * scoreFlowSpeed)
                                     .opacity(1 - quizAnswer.lifetime)
                                     .scaleEffect(1 + CGFloat(quizAnswer.lifetime) / 10)
-                                    .shadow(color: .gray, radius: 12, x: 0, y: 0)
-//                                    .animation(.easeIn)
+                                    .animation(.easeOut)
                             }
                         }
 //                        .offset(x: contentZone.size.width * 0.4, y: 12)
-                        .offset(y: 12)
+                        .offset(y: 6)
                         .frame(width: contentZone.size.width * 0.5, height: contentZone.size.height * 0.05, alignment: .bottom)
                     }
                     
