@@ -7,14 +7,11 @@
 
 import SwiftUI
 
-struct BackButtonView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct BackButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        BackButtonView()
+struct BackButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .font(.body)
+            .foregroundColor(_globalNavBarButtonsColor)
+            .shadow(color: configuration.isPressed ? Color.white.opacity(0.4) : Color.black.opacity(0.2), radius: 8, x: -1, y: -1)
     }
 }

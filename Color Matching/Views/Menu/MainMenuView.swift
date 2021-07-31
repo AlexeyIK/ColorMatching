@@ -73,7 +73,10 @@ struct MainMenuView: View {
                         Spacer()
                         
                         NavigationLink(
-                            destination: StatsView(),
+                            destination: StatsView()
+                                .navigationBarBackButtonHidden(true)
+                                .navigationBarTitleDisplayMode(.inline),
+                            
                             label: {
                             VStack {
                                 ZStack {

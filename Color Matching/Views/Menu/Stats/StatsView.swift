@@ -9,6 +9,8 @@ import SwiftUI
 
 struct StatsView: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @FetchRequest(entity: PlayerStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<PlayerStats>
     
     var body: some View {
@@ -38,6 +40,18 @@ struct StatsView: View {
             }
             .frame(width: UIScreen.main.bounds.width * 0.6, height: UIScreen.main.bounds.height * 0.8, alignment: .center)
         }
+        .navigationBarItems(
+            leading:
+                HStack {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(_globalNavBarButtonsColor)
+                    
+                    Button("Back") {
+                        presentationMode.wrappedValue.dismiss()
+                    }
+                    .buttonStyle(BackButton())
+                }
+        )
     }
 }
 
