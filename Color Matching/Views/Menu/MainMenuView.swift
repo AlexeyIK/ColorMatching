@@ -69,15 +69,19 @@ struct MainMenuView: View {
                     HStack {
                         Spacer()
                         
-                        VStack {
-                            Image(systemName: "arrow.right.doc.on.clipboard")
-                                .resizable()
-                                .foregroundColor(.gray)
-                                .frame(width: 40, height: 40, alignment: .topTrailing)
-                                .padding()
-                            
-                            Spacer()
-                        }
+                        NavigationLink(
+                            destination: StatsView(),
+                            label: {
+                            VStack {
+                                Image(systemName: "arrow.right.doc.on.clipboard")
+                                    .resizable()
+                                    .foregroundColor(.gray)
+                                    .frame(width: 40, height: 40, alignment: .topTrailing)
+                                    .padding()
+                                
+                                Spacer()
+                            }
+                        })
                     }
                     .animation(.none)
                 

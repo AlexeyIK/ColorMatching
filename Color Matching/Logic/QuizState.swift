@@ -148,7 +148,11 @@ class QuizState: ObservableObject {
             quizPosition += 1
         }
         
+        // смотрим сколько получили очков при текущем уровне сложности
         lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
+        // записываем эти очки в CoreData
+        CoreDataManager.shared.updatePlayerStats(scoreIncrement: lastScoreChange)
+        
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
         if quizPosition == quizQuestions || timeRunOut {

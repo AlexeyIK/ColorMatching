@@ -21,6 +21,9 @@
 		BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */; };
 		BD3FB45626B1F84500BA5F3B /* QuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45526B1F84500BA5F3B /* QuizState.swift */; };
 		BD3FB45B26B1FF9600BA5F3B /* LearnAndQuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */; };
+		BD6C17A926B55E7D00C28F20 /* StatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17A826B55E7D00C28F20 /* StatItemView.swift */; };
+		BD6C17AE26B5605100C28F20 /* StatCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17AD26B5605100C28F20 /* StatCaptionView.swift */; };
+		BD6C17B726B5755500C28F20 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17B626B5755500C28F20 /* CoreDataManager.swift */; };
 		BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */; };
 		BDFAB12726AF653F00BF65CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFAB12626AF653F00BF65CD /* TimerView.swift */; };
 		F125010F26A5819700B521F1 /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F125010E26A5819700B521F1 /* ColorConverter.swift */; };
@@ -85,6 +88,9 @@
 		BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerHelper.swift; path = "Color Matching/Views/TimerHelper.swift"; sourceTree = SOURCE_ROOT; };
 		BD3FB45526B1F84500BA5F3B /* QuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizState.swift; sourceTree = "<group>"; };
 		BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnAndQuizState.swift; sourceTree = "<group>"; };
+		BD6C17A826B55E7D00C28F20 /* StatItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatItemView.swift; sourceTree = "<group>"; };
+		BD6C17AD26B5605100C28F20 /* StatCaptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCaptionView.swift; sourceTree = "<group>"; };
+		BD6C17B626B5755500C28F20 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		BDFAB12626AF653F00BF65CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		F125010E26A5819700B521F1 /* ColorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColorConverter.swift; path = "Color Matching/Helpers/ColorConverter.swift"; sourceTree = SOURCE_ROOT; };
@@ -139,9 +145,9 @@
 		BD215CD626B5547300B1D493 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
+				BD6C17B226B5610E00C28F20 /* Stats */,
 				F1469CAD2698D8A1006A14BC /* MainMenuView.swift */,
 				BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */,
-				BD215CD126B5546A00B1D493 /* StatsView.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -270,9 +276,20 @@
 			path = "Color MatchingUITests";
 			sourceTree = "<group>";
 		};
+		BD6C17B226B5610E00C28F20 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				BD215CD126B5546A00B1D493 /* StatsView.swift */,
+				BD6C17A826B55E7D00C28F20 /* StatItemView.swift */,
+				BD6C17AD26B5605100C28F20 /* StatCaptionView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		F145D0FC26A446A30044476F /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				BD6C17B626B5755500C28F20 /* CoreDataManager.swift */,
 				BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */,
 				F1E28E1226AB128400B62054 /* Hardness.swift */,
 				F1E28E0526AB0D1200B62054 /* SimilarColorPicker.swift */,
@@ -446,6 +463,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1B568D326A608B20008494D /* BackgroundView.swift in Sources */,
+				BD6C17A926B55E7D00C28F20 /* StatItemView.swift in Sources */,
 				F14A3C4B269B28FB00B9A710 /* DataHelper.swift in Sources */,
 				BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */,
 				F1E28E0626AB0D1200B62054 /* SimilarColorPicker.swift in Sources */,
@@ -453,6 +471,8 @@
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
 				BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */,
 				F1D22CAD269BA14A009D4BD2 /* ColorCardView.swift in Sources */,
+				BD6C17AE26B5605100C28F20 /* StatCaptionView.swift in Sources */,
+				BD6C17B726B5755500C28F20 /* CoreDataManager.swift in Sources */,
 				F169585726AA0B3900E1E86A /* SimilarColorsView.swift in Sources */,
 				F197014926A6DF4800494B2F /* AnimationsTest.swift in Sources */,
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
