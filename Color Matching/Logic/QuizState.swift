@@ -50,7 +50,7 @@ class QuizState: ObservableObject {
         // создаем лист квизов заранее
         cardsList.forEach { (card) in
             let correctColor = card
-            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true))
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true, noClamp: true))
             quizItemsList.append(QuizItem(answers: colorVariants, correctId: correctColor.id))
         }
         
@@ -162,8 +162,9 @@ class QuizState: ObservableObject {
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
-        if quizPosition == quizQuestions || timeRunOut {
-            stopQuiz()
+        if quizPosition == quizQuestions {
+            pauseTimer()
+            startGameEndPause()
         }
         
         return result

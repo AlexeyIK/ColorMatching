@@ -295,7 +295,6 @@
 				BD6C17B626B5755500C28F20 /* CoreDataManager.swift */,
 				BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */,
 				F1E28E1226AB128400B62054 /* Hardness.swift */,
-				F1E28E0526AB0D1200B62054 /* SimilarColorPicker.swift */,
 				BD3FB45526B1F84500BA5F3B /* QuizState.swift */,
 				BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */,
 			);
@@ -325,6 +324,7 @@
 		F1C519D8269DE1730096B9B4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				F1E28E0526AB0D1200B62054 /* SimilarColorPicker.swift */,
 				F1E28E0A26AB0D6000B62054 /* ColorsPickerHelper.swift */,
 				F1C519D9269DE18C0096B9B4 /* ReadSizeExtension.swift */,
 				F1F3757726A75D4700FBA06A /* GameHelpers.swift */,

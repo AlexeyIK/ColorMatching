@@ -14,7 +14,7 @@ public class SimilarColorPicker {
     
     private init() { }
     
-    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, withRef packRef: Bool = false) -> [ColorModel] {
+    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, withRef packRef: Bool = false, noClamp: Bool = false) -> [ColorModel] {
         
         var result: [ColorModel] = []
         var similarColor1: ColorModel?
@@ -38,11 +38,13 @@ public class SimilarColorPicker {
                 
                 similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: hardnessCardPickerParameters[.easy]!.saturationRange, valueClamp: hardnessCardPickerParameters[.easy]!.valueRange)
+                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange)
                 
                 similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: hardnessCardPickerParameters[.easy]!.saturationRange, valueClamp: hardnessCardPickerParameters[.easy]!.valueRange)
+                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange)
                 break
                 
             case .normal:
@@ -62,11 +64,13 @@ public class SimilarColorPicker {
                 
                 similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: hardnessCardPickerParameters[.normal]!.saturationRange, valueClamp: hardnessCardPickerParameters[.normal]!.valueRange)
+                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.saturationRange,
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.valueRange)
                 
                 similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: hardnessCardPickerParameters[.normal]!.saturationRange, valueClamp: hardnessCardPickerParameters[.normal]!.valueRange)
+                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.saturationRange,
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.valueRange)
                 break
             
             case .hard:
@@ -86,11 +90,13 @@ public class SimilarColorPicker {
                 
                 similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: hardnessCardPickerParameters[.hard]!.saturationRange, valueClamp: hardnessCardPickerParameters[.hard]!.valueRange)
+                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.saturationRange,
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.valueRange)
                 
                 similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: hardnessCardPickerParameters[.hard]!.saturationRange, valueClamp: hardnessCardPickerParameters[.hard]!.valueRange)
+                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.saturationRange,
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.valueRange)
                 break
             
             case .hell:
