@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */; };
+		BD215CD226B5546A00B1D493 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD215CD126B5546A00B1D493 /* StatsView.swift */; };
 		BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* colorsData.json */; };
 		BD2E41E226B5415900D19D50 /* ScorePointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2E41E126B5415900D19D50 /* ScorePointView.swift */; };
 		BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */; };
@@ -65,6 +66,7 @@
 
 /* Begin PBXFileReference section */
 		BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
+		BD215CD126B5546A00B1D493 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		BD2978EA2697C4B100F19AEF /* colorsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colorsData.json; sourceTree = "<group>"; };
 		BD2E41E126B5415900D19D50 /* ScorePointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointView.swift; sourceTree = "<group>"; };
 		BD3CF1282692F07700FF0D68 /* Color Matching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Matching.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,23 +136,63 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BD2978E02697C45600F19AEF /* Views */ = {
+		BD215CD626B5547300B1D493 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				F169585626AA0B3900E1E86A /* SimilarColorsView.swift */,
 				F1469CAD2698D8A1006A14BC /* MainMenuView.swift */,
 				BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */,
-				F1D656EE26AB758A007BCDAE /* QuizGameView.swift */,
-				BD2E41E126B5415900D19D50 /* ScorePointView.swift */,
-				BDFAB12626AF653F00BF65CD /* TimerView.swift */,
+				BD215CD126B5546A00B1D493 /* StatsView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		BD215CD726B5548300B1D493 /* GamesView */ = {
+			isa = PBXGroup;
+			children = (
+				BD215CDA26B554EA00B1D493 /* Elements */,
+				F1913CAF26AC7BAB006D8D19 /* LearnAndQuizView.swift */,
 				F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */,
+				F1D656EE26AB758A007BCDAE /* QuizGameView.swift */,
 				F1758E6826A0DEB20035E6B5 /* LearnDeckView.swift */,
-				F1B568D226A608B20008494D /* BackgroundView.swift */,
+			);
+			path = GamesView;
+			sourceTree = "<group>";
+		};
+		BD215CD826B554A800B1D493 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
 				F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */,
 				F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */,
 				F1D656E626AB552B007BCDAE /* TransparentCardView.swift */,
-				F125010E26A5819700B521F1 /* ColorConverter.swift */,
-				F1913CAF26AC7BAB006D8D19 /* LearnAndQuizView.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		BD215CD926B554C000B1D493 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F169585626AA0B3900E1E86A /* SimilarColorsView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BD215CDA26B554EA00B1D493 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				BD2E41E126B5415900D19D50 /* ScorePointView.swift */,
+				BDFAB12626AF653F00BF65CD /* TimerView.swift */,
+				F1B568D226A608B20008494D /* BackgroundView.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		BD2978E02697C45600F19AEF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BD215CD926B554C000B1D493 /* Helpers */,
+				BD215CD826B554A800B1D493 /* Cards */,
+				BD215CD726B5548300B1D493 /* GamesView */,
+				BD215CD626B5547300B1D493 /* Menu */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,6 +309,7 @@
 				F1C519D9269DE18C0096B9B4 /* ReadSizeExtension.swift */,
 				F1F3757726A75D4700FBA06A /* GameHelpers.swift */,
 				F169585126A9F89200E1E86A /* Math.swift */,
+				F125010E26A5819700B521F1 /* ColorConverter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -413,6 +456,7 @@
 				F169585726AA0B3900E1E86A /* SimilarColorsView.swift in Sources */,
 				F197014926A6DF4800494B2F /* AnimationsTest.swift in Sources */,
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
+				BD215CD226B5546A00B1D493 /* StatsView.swift in Sources */,
 				BDFAB12726AF653F00BF65CD /* TimerView.swift in Sources */,
 				BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */,
 				F1D22CA8269B89AE009D4BD2 /* SwipeView.swift in Sources */,
