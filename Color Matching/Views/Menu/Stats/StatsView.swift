@@ -11,7 +11,7 @@ struct StatsView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @FetchRequest(entity: PlayerStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<PlayerStats>
+    @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<OverallStats>
     
     var body: some View {
         ZStack {
@@ -27,12 +27,13 @@ struct StatsView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     StatItemView(caption: "Collected Соlor Coins", value: String(playerStats[0].totalScore))
-                    StatItemView(caption: "Guessed unique colors", value: String(playerStats[0].guessedColors))
+//                    StatItemView(caption: "Guessed unique colors", value: String(playerStats[0]))
+                    StatItemView(caption: "Total Games Finished", value: String(playerStats[0].totalFinishedGames))
                     
                     StatCaptionView(caption: "Color QUIZ")
-                    StatItemView(caption: "Played games", value: String(playerStats[0].playedGamesCount))
-                    StatItemView(caption: "Guessed colors:", value: String(playerStats[0].guessedColors))
-                    StatItemView(caption: "Guessed unique colors", value: String(playerStats[0].guessedColors))
+//                    StatItemView(caption: "Played games", value: String(playerStats[0].playedGamesCount))
+//                    StatItemView(caption: "Guessed colors:", value: String(playerStats[0].guessedColors))
+//                    StatItemView(caption: "Guessed unique colors", value: String(playerStats[0].guessedColors))
                 }
                 
                 

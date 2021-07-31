@@ -26,7 +26,7 @@ struct MainMenuView: View {
     }
     
     @Environment(\.managedObjectContext) var dataStorage
-    @FetchRequest(entity: PlayerStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<PlayerStats>
+    @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<OverallStats>
     
     @State var linesOffset: CGFloat = 0.0
     @State var hueRotation: Double = 0.0
@@ -142,10 +142,7 @@ struct MainMenuView: View {
         }
         .onAppear() {
             if playerStats.count == 0 {
-                let stats = PlayerStats(context: dataStorage)
-                stats.playedGamesCount = 0
-                stats.totalScore = 0
-                stats.guessedColors = 0
+                CoreDataManager.shared.createOverallStatsTable()
             }
         }
     }

@@ -19,6 +19,7 @@ class QuizState: ObservableObject {
     private var currentDateTime = Date()
     private var saveElapsedTime: TimeInterval = 0
     private var isTimerPaused: Bool = false
+    private var colorsViewed: [ColorModel: Bool] = [:]
     
     public var quizQuestions = 0
     public var results: QuizResults? = nil
@@ -130,6 +131,8 @@ class QuizState: ObservableObject {
         quizActive = false
         
         print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition)")
+//        let onlyGuessedColors = colorsGuessed.filter({ $0.value })
+        CoreDataManager.shared.updateQuizScore(correctAnswers: correctAnswers, totalCards: quizQuestions, cardsViewed: colorsViewed)
         
         results = QuizResults(correctAnswers: correctAnswers,
                               cardsViewed: quizPosition,
@@ -148,10 +151,12 @@ class QuizState: ObservableObject {
             quizPosition += 1
         }
         
+        // записываем результат разгадывания цвета
+        colorsViewed[colorsData[quizItem.correctId]] = result
         // смотрим сколько получили очков при текущем уровне сложности
         lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
         // записываем эти очки в CoreData
-        CoreDataManager.shared.updatePlayerStats(scoreIncrement: lastScoreChange)
+        CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
