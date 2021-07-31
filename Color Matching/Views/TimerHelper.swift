@@ -1,5 +1,5 @@
 //
-//  TimerManager.swift
+//  TimerHelper.swift
 //  Color Matching
 //
 //  Created by Алексей Кузнецов on 28.07.2021.

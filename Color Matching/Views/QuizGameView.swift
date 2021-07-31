@@ -14,9 +14,12 @@ struct QuizGameView: View {
     @EnvironmentObject var gameState: LearnAndQuizState
     @StateObject var quizState: QuizState = QuizState()
     
+    @State var lastAnswerIsCorrect: Bool? = nil
+    
     var highlightCorrectAnswer: Bool = false
     var useTimer: Bool = false
     var showColorNames: Bool = false
+    let scoreFlowSpeed: CGFloat = 55
     
     var body: some View {
         GeometryReader { contentZone in
@@ -26,14 +29,33 @@ struct QuizGameView: View {
                 VStack {
                     if quizState.results == nil {
                         if contentZone.size.height > 550 {
-                            Text("Quiz")
+                            Text("Guess the color")
                                 .foregroundColor(.white)
-                                .font(.title)
+                                .font(.title2)
                                 .fontWeight(.light)
-                                .padding(.bottom, 10)
+//                                .padding(.bottom, 10)
                         }
+                    }
+                    
+                    if quizState.quizActive {
+                        TimerView()
+                            .foregroundColor(Color.white)
+                            .environmentObject(quizState)
                         
                         Spacer()
+                        
+                        ZStack(alignment: .leading) {
+                            ForEach(quizState.quizAnswersAndScore) { quizAnswer in
+                                ScorePointView(score: quizAnswer.scoreEarned, isCorrect: quizAnswer.isCorrect)
+                                    .offset(x: quizAnswer.startOffset * 10.0, y: -CGFloat(quizAnswer.lifetime) * scoreFlowSpeed)
+                                    .opacity(1 - quizAnswer.lifetime)
+                                    .scaleEffect(1 + CGFloat(quizAnswer.lifetime) / 10)
+                                    .animation(.easeOut)
+                            }
+                        }
+//                        .offset(x: contentZone.size.width * 0.4, y: 12)
+                        .offset(y: 6)
+                        .frame(width: contentZone.size.width * 0.5, height: contentZone.size.height * 0.05, alignment: .bottom)
                     }
                     
                     if quizState.quizActive {
@@ -47,13 +69,13 @@ struct QuizGameView: View {
                                                      showColor: index == 0 && quizState.isAppActive)
                                     .offset(y: CGFloat(index) * -4).zIndex(-Double(index))
                                     .scaleEffect(1.0 - CGFloat(index) / 80)
-                                    .zIndex(Double(index))
+//                                    .zIndex(-Double(index))
                                     .transition(quizState.isAppActive ? .swipeToLeft : .opacity)
                                     .animation(.easeInOut)
                             }
                         }
                         .transition(.opacity)
-                        .frame(width: contentZone.size.width * 0.68, height: contentZone.size.height * 0.55, alignment: .center)
+                        .frame(width: contentZone.size.width * 0.68, height: contentZone.size.height * 0.5, alignment: .center)
                     }
                     
                     VStack {
@@ -67,7 +89,7 @@ struct QuizGameView: View {
                                         Button(colorName) {
                                             withAnimation {
                                                 quizState.quizItemsList.removeFirst()
-                                                _ = quizState.checkAnswer(for: quizItem, answer: answer.id)
+                                                lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: answer.id, hardness: gameState.hardness)
                                             }
                                         }
                                         .transition(.identity)
@@ -94,14 +116,7 @@ struct QuizGameView: View {
                     }
                     .animation(.easeIn(duration: 0.25))
                     
-                    if quizState.quizActive {
-                        Spacer()
-
-                        TimerView()
-                            .foregroundColor(Color.white)
-                            .environmentObject(quizState)
-                    }
-                    else if let results = quizState.results {
+                    if !quizState.quizActive, let results = quizState.results {
 //                        let finishText = "Game is over!"
 
                         if results.correctAnswers == quizState.quizQuestions {

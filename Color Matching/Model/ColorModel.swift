@@ -15,6 +15,7 @@ struct ColorModel: Codable, Hashable, Identifiable {
     var colorRGB: [Int?]
     var colorHSV: [Int?]
     var difficulty: Difficulty
+    var isGuessed: Bool
     
     enum Difficulty: CustomStringConvertible, Codable, Hashable {
         case base
