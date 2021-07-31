@@ -12,6 +12,8 @@ struct StatsView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<OverallStats>
+    @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
+    @FetchRequest(entity: ViewedColor.entity(), sortDescriptors: [], predicate: NSPredicate(format: "isGuessed == true")) var viewedColors: FetchedResults<ViewedColor>
     
     var body: some View {
         ZStack {
@@ -27,15 +29,15 @@ struct StatsView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     StatItemView(caption: "Collected Соlor Coins", value: String(playerStats[0].totalScore))
-//                    StatItemView(caption: "Guessed unique colors", value: String(playerStats[0]))
                     StatItemView(caption: "Total Games Finished", value: String(playerStats[0].totalFinishedGames))
                     
                     StatCaptionView(caption: "Color QUIZ")
-//                    StatItemView(caption: "Played games", value: String(playerStats[0].playedGamesCount))
-//                    StatItemView(caption: "Guessed colors:", value: String(playerStats[0].guessedColors))
-//                    StatItemView(caption: "Guessed unique colors", value: String(playerStats[0].guessedColors))
+                    StatItemView(caption: "Played games", value: String(colorQuizStats[0].finishedGames))
+                    StatItemView(caption: "Guessed colors:", value: String(colorQuizStats[0].colorsGuessed))
+                    StatItemView(caption: "Guessed unique colors", value: String(viewedColors.count))
+                    StatItemView(caption: "Color Strikes:", value: String(colorQuizStats[0].strikesCount))
+                    StatItemView(caption: "Best Strike:", value: String(colorQuizStats[0].bestStrike))
                 }
-                
                 
                 Spacer()
             }

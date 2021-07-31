@@ -17,7 +17,54 @@ class CoreDataManager {
     
     let context = PersistenceController.shared.container.viewContext
     
-    func updateQuizScore(correctAnswers: Int, totalCards: Int, cardsViewed: [ColorModel: Bool]) {
+    func addViewedColors(_ viewedCards: [ColorModel]) {
+        
+        viewedCards.forEach { (color) in
+            let fetchRequest: NSFetchRequest<ViewedColor> = ViewedColor.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "colorId == %@", color.hexCode)
+            
+            do {
+                let colorsArray = try context.fetch(fetchRequest)
+                
+                if colorsArray.count != 0 {
+                    colorsArray[0].isGuessed = color.isGuessed
+                }
+                else {
+                    let viewedColor = ViewedColor(context: context)
+                    viewedColor.colorId = color.hexCode
+                    viewedColor.isGuessed = color.isGuessed
+                }
+                
+                do {
+                    try context.save()
+                } catch {
+                    print("Error during viewed colors update")
+                }
+            }
+            catch {
+                print("Couldn't fetch Viewed Colors data")
+            }
+        }
+    }
+    
+    func showAllReadings() {
+        let fetchRequest: NSFetchRequest<ViewedColor> = ViewedColor.fetchRequest()
+        
+        do {
+            let colorsArray = try context.fetch(fetchRequest)
+            
+            colorsArray.forEach { (color) in
+                print("color with hex: \(color.colorId ?? "-"), guessed: \(color.isGuessed)")
+            }
+            
+            print("total count: \(colorsArray.count)")
+            
+        } catch {
+            
+        }
+    }
+    
+    func updateQuizScore(correctAnswers: Int, totalCards: Int) {
         let fetchRequest: NSFetchRequest<ColorQuizStats> = ColorQuizStats.fetchRequest()
         
         do {
@@ -32,19 +79,23 @@ class CoreDataManager {
                 colorQuizStats = createColorQuizStatsTable() // если таблицы нет, то создаем
             }
             
+            colorQuizStats.finishedGames += 1
             colorQuizStats.colorsGuessed += Int16(correctAnswers)
-
-            cardsViewed.forEach { (color, isGuessed) in
-                let viewedColor = ViewedColors(context: context)
-                viewedColor.colorID = color.hexCode
-                viewedColor.isGuessed = isGuessed
-            }
-
             if correctAnswers == totalCards {
                 colorQuizStats.strikesCount += 1
+                if colorQuizStats.bestStrike < correctAnswers {
+                    colorQuizStats.bestStrike = Int16(correctAnswers)
+                }
             }
-        } catch {
-            print("Couldn't fetch a ColorQuiz data")
+            
+            do {
+                try context.save()
+            } catch {
+                print("Error during ColorQuiz result save")
+            }
+        }
+        catch {
+            print("Couldn't fetch ColorQuiz data")
         }
     }
     
@@ -68,13 +119,13 @@ class CoreDataManager {
             do {
                 try context.save()
             } catch {
-                print("error during score save")
+                print("Error during score save")
             }
             
             print("Now TotalScore is: \(playerStats.totalScore)")
         }
         catch {
-            print("Couldn't fetch a score data")
+            print("Couldn't fetch score data")
         }
     }
     
@@ -87,7 +138,7 @@ class CoreDataManager {
         do {
             try context.save()
         } catch {
-            print("error during create score table")
+            print("Error during create score table")
         }
         
         return playerStats
@@ -103,7 +154,7 @@ class CoreDataManager {
         do {
             try context.save()
         } catch {
-            print("error during create ColorQUIZ table")
+            print("Error during create ColorQUIZ table")
         }
         
         return quizStats

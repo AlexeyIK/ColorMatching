@@ -11,13 +11,13 @@
         <attribute name="totalFinishedGames" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalScore" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="ViewedColors" representedClassName="ViewedColors" syncable="YES" codeGenerationType="class">
-        <attribute name="colorID" optional="YES" attributeType="String"/>
+    <entity name="ViewedColor" representedClassName="ViewedColor" syncable="YES" codeGenerationType="class">
+        <attribute name="colorId" optional="YES" attributeType="String"/>
         <attribute name="isGuessed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="ViewedColors" positionX="-63" positionY="27" width="128" height="73"/>
-        <element name="OverallStats" positionX="-63" positionY="-18" width="128" height="88"/>
         <element name="ColorQuizStats" positionX="-54" positionY="36" width="128" height="103"/>
+        <element name="OverallStats" positionX="-63" positionY="-18" width="128" height="88"/>
+        <element name="ViewedColor" positionX="-63" positionY="27" width="128" height="73"/>
     </elements>
 </model>

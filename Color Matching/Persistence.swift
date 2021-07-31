@@ -14,10 +14,16 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         
-        let playerStats = OverallStats(context: viewContext)
-        playerStats.totalScore = 0
-        playerStats.lastGameScore = 0
-        playerStats.totalFinishedGames = 0
+        let overallStats = OverallStats(context: viewContext)
+        overallStats.totalScore = 0
+        overallStats.lastGameScore = 0
+        overallStats.totalFinishedGames = 0
+        
+        let quizStats = ColorQuizStats(context: viewContext)
+        quizStats.colorsGuessed = 0
+        quizStats.finishedGames = 0
+        quizStats.bestStrike = 0
+        quizStats.strikesCount = 0
         
         do {
             try viewContext.save()

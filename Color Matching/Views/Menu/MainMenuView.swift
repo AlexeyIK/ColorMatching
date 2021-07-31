@@ -26,7 +26,8 @@ struct MainMenuView: View {
     }
     
     @Environment(\.managedObjectContext) var dataStorage
-    @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<OverallStats>
+    @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var overallStats: FetchedResults<OverallStats>
+    @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
     
     @State var linesOffset: CGFloat = 0.0
     @State var hueRotation: Double = 0.0
@@ -141,9 +142,14 @@ struct MainMenuView: View {
             .navigationBarHidden(true)
         }
         .onAppear() {
-            if playerStats.count == 0 {
-                CoreDataManager.shared.createOverallStatsTable()
+            if overallStats.count == 0 {
+                _ = CoreDataManager.shared.createOverallStatsTable()
             }
+            if colorQuizStats.count == 0 {
+                _ = CoreDataManager.shared.createColorQuizStatsTable()
+            }
+            
+            CoreDataManager.shared.showAllReadings()
         }
     }
 }
