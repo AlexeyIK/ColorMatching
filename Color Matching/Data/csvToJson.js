@@ -78,7 +78,7 @@ for (var line in arr ) {
 
   colors[i] = {};
   colors[i]['id'] = i;
-  colors[i]['hexCode'] = arr[line].split(',')[hexCodeColumn];
+  colors[i]['hexCode'] = arr[line].split(',')[hexCodeColumn].replace('#','');
   colors[i]['name'] = arr[line].split(',')[nameColumn].trim();
   colors[i]['englishName'] = arr[line].split(',')[engNameColumn]
   colors[i]['colorRGB'] = [+arr[line].split(',')[colorRColumn], +arr[line].split(',')[colorGColumn], +arr[line].split(',')[colorBColumn]];
