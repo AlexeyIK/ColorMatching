@@ -32,11 +32,11 @@ struct StatsView: View {
                     StatItemView(caption: "Total Games Finished", value: String(playerStats[0].totalFinishedGames))
                     
                     StatCaptionView(caption: "Color QUIZ")
-                    StatItemView(caption: "Played games", value: String(colorQuizStats[0].finishedGames))
-                    StatItemView(caption: "Guessed colors:", value: String(colorQuizStats[0].colorsGuessed))
+                    StatItemView(caption: "Finished games", value: String(colorQuizStats[0].finishedGames))
+                    StatItemView(caption: "Guessed colors", value: String(colorQuizStats[0].colorsGuessed))
                     StatItemView(caption: "Guessed unique colors", value: String(viewedColors.count))
-                    StatItemView(caption: "Color Strikes:", value: String(colorQuizStats[0].strikesCount))
-                    StatItemView(caption: "Best Strike:", value: String(colorQuizStats[0].bestStrike))
+                    StatItemView(caption: "Color Strikes", value: String(colorQuizStats[0].strikesCount))
+                    StatItemView(caption: "Best Strike", value: String(colorQuizStats[0].bestStrike))
                 }
                 
                 Spacer()
