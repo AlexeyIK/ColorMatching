@@ -13,6 +13,14 @@ struct QuizResultsView: View {
     let strikeMultiplier: Float
     let strikeBonus: Int
     
+    @State var hueAngle: Double = 0.0
+    
+    var repeatingLinesAnimation: Animation {
+        Animation
+            .linear(duration: 1)
+            .repeatForever()
+    }
+    
     var body: some View {
         Group {
             VStack(alignment: .center) {
@@ -39,6 +47,11 @@ struct QuizResultsView: View {
             }
             .padding()
             .rainbowOverlay()
+            .hueRotation(Angle(degrees: hueAngle))
+            .animation(repeatingLinesAnimation, value: hueAngle)
+            .onAppear() {
+                self.hueAngle = 360
+            }
         }
 //        .transition(.scale)
 //        .animation(Animation.easeInOut(duration: 0.5).delay(1))
@@ -60,8 +73,8 @@ extension View {
         self
 //            .overlay(LinearGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), startPoint: .leading, endPoint: .trailing).scaleEffect(1.5))
             .overlay(AngularGradient(gradient: Gradient(colors: [.red, .yellow, .green, .blue, .purple, .red]), center: .center))
-            .mask(self.blur(radius: 6))
-            .brightness(0.4)
+            .brightness(0.3)
+            .mask(self.blur(radius: 8))
             .overlay(self.opacity(0.9))
     }
 }
