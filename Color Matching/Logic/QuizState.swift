@@ -12,7 +12,9 @@ class QuizState: ObservableObject {
     
     init() {}
     
+    // constants
     private let definedTimerFrequence: Double = 0.01
+    private let strikeBonusMultiplier: Float = 2
     
     private var countdownTimer: Timer?
     private var endDateTime = Date()
@@ -68,6 +70,7 @@ class QuizState: ObservableObject {
                 countdown  = 60
         }
         
+        CoreDataManager.shared.resetLastGameScore()
         startTimer(for: countdown)
     }
     
@@ -130,13 +133,25 @@ class QuizState: ObservableObject {
         
         quizActive = false
         
-        print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition)")
+        var overallScore = CoreDataManager.shared.getLastGameScore()
+        var strikeBonus = 0
+        // начисляем бонус за страйк
+        if correctAnswers == quizQuestions {
+            strikeBonus = Int(Float(overallScore) * strikeBonusMultiplier) - overallScore
+            CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
+            overallScore += strikeBonus
+        }
         CoreDataManager.shared.addViewedColors(colorsViewed)
-        CoreDataManager.shared.updateQuizScore(correctAnswers: correctAnswers, totalCards: quizQuestions)
+        CoreDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: overallScore)
+        
+        print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(overallScore)")
         
         results = QuizResults(correctAnswers: correctAnswers,
                               cardsViewed: quizPosition,
-                              cardsCount: quizQuestions)
+                              cardsCount: quizQuestions,
+                              scoreEarned: overallScore,
+                              strikeMultiplier: strikeBonusMultiplier,
+                              strikeBonus: strikeBonus)
     }
     
     func checkAnswer(for quizItem: QuizItem, answer: Int = 0, hardness: Hardness) -> Bool {
@@ -159,6 +174,7 @@ class QuizState: ObservableObject {
         lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
         // записываем эти очки в CoreData
         CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
+        CoreDataManager.shared.updateLastGameScore(by: lastScoreChange)
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
@@ -197,4 +213,7 @@ struct QuizResults {
     let correctAnswers: Int
     let cardsViewed: Int
     let cardsCount: Int
+    let scoreEarned: Int
+    let strikeMultiplier: Float
+    let strikeBonus: Int
 }

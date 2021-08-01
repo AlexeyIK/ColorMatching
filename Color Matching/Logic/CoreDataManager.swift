@@ -64,7 +64,7 @@ class CoreDataManager {
         }
     }
     
-    func updateQuizScore(correctAnswers: Int, totalCards: Int) {
+    func updateQuizStats(correctAnswers: Int, totalCards: Int, overallGameScore: Int) {
         let fetchRequest: NSFetchRequest<ColorQuizStats> = ColorQuizStats.fetchRequest()
         
         do {
@@ -83,6 +83,7 @@ class CoreDataManager {
             colorQuizStats.colorsGuessed += Int16(correctAnswers)
             if correctAnswers == totalCards {
                 colorQuizStats.strikesCount += 1
+                
                 if colorQuizStats.bestStrike < correctAnswers {
                     colorQuizStats.bestStrike = Int16(correctAnswers)
                 }
@@ -113,8 +114,10 @@ class CoreDataManager {
                 playerStats = createOverallStatsTable()
             }
 
-            let totalScore = playerStats.totalScore
-            playerStats.totalScore = totalScore + Int32(scoreIncrement)
+            playerStats.totalScore += Int32(scoreIncrement)
+            if playerStats.totalScore < 0 { // не даем сделать общее количество очков < 0
+                playerStats.totalScore = 0
+            }
             
             do {
                 try context.save()
@@ -123,6 +126,84 @@ class CoreDataManager {
             }
             
             print("Now TotalScore is: \(playerStats.totalScore)")
+        }
+        catch {
+            print("Couldn't fetch score data")
+        }
+    }
+    
+    func updateLastGameScore(by score: Int) {
+        let fetchRequest: NSFetchRequest<OverallStats> = OverallStats.fetchRequest()
+        
+        do {
+            let playerStatsArray = try context.fetch(fetchRequest)
+            var playerStats: OverallStats
+            
+            if playerStatsArray.count > 0  {
+                playerStats = playerStatsArray.first!
+            }
+            else {
+                playerStats = createOverallStatsTable()
+            }
+
+            playerStats.lastGameScore += Int16(score) // добавляем к статистике очков за последнюю игру
+            
+            do {
+                try context.save()
+            } catch {
+                print("Error during score save")
+            }
+            
+            print("Last game score is: \(playerStats.lastGameScore)")
+        }
+        catch {
+            print("Couldn't fetch score data")
+        }
+    }
+    
+    func getLastGameScore() -> Int {
+        let fetchRequest: NSFetchRequest<OverallStats> = OverallStats.fetchRequest()
+        
+        do {
+            let playerStatsArray = try context.fetch(fetchRequest)
+            var playerStats: OverallStats
+            
+            if playerStatsArray.count > 0  {
+                playerStats = playerStatsArray.first!
+                
+                return Int(playerStats.lastGameScore)
+            }
+        }
+        catch {
+            print("Couldn't fetch score data")
+        }
+        
+        return 0
+    }
+    
+    func resetLastGameScore() {
+        let fetchRequest: NSFetchRequest<OverallStats> = OverallStats.fetchRequest()
+        
+        do {
+            let playerStatsArray = try context.fetch(fetchRequest)
+            var playerStats: OverallStats
+            
+            if playerStatsArray.count > 0  {
+                playerStats = playerStatsArray.first!
+            }
+            else {
+                playerStats = createOverallStatsTable()
+            }
+
+            playerStats.lastGameScore = 0 // обнуляем статистику очков за последнюю игру
+            
+            do {
+                try context.save()
+            } catch {
+                print("Error during score save")
+            }
+            
+            print("Last game score is: \(playerStats.lastGameScore)")
         }
         catch {
             print("Couldn't fetch score data")
