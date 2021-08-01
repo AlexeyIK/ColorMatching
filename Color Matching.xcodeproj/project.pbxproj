@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */; };
+		BD215CD226B5546A00B1D493 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD215CD126B5546A00B1D493 /* StatsView.swift */; };
 		BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* colorsData.json */; };
 		BD2E41E226B5415900D19D50 /* ScorePointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2E41E126B5415900D19D50 /* ScorePointView.swift */; };
+		BD3A3F1826B5C680006C8CDC /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */; };
 		BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */; };
 		BD3CF1302692F07900FF0D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3CF12F2692F07900FF0D68 /* Assets.xcassets */; };
 		BD3CF1332692F07900FF0D68 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3CF1322692F07900FF0D68 /* Preview Assets.xcassets */; };
@@ -20,6 +22,10 @@
 		BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */; };
 		BD3FB45626B1F84500BA5F3B /* QuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45526B1F84500BA5F3B /* QuizState.swift */; };
 		BD3FB45B26B1FF9600BA5F3B /* LearnAndQuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */; };
+		BD65930A26B6A3FB004E27C4 /* QuizResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65930926B6A3FB004E27C4 /* QuizResultsView.swift */; };
+		BD6C17A926B55E7D00C28F20 /* StatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17A826B55E7D00C28F20 /* StatItemView.swift */; };
+		BD6C17AE26B5605100C28F20 /* StatCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17AD26B5605100C28F20 /* StatCaptionView.swift */; };
+		BD6C17B726B5755500C28F20 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17B626B5755500C28F20 /* CoreDataManager.swift */; };
 		BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */; };
 		BDFAB12726AF653F00BF65CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFAB12626AF653F00BF65CD /* TimerView.swift */; };
 		F125010F26A5819700B521F1 /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F125010E26A5819700B521F1 /* ColorConverter.swift */; };
@@ -65,8 +71,10 @@
 
 /* Begin PBXFileReference section */
 		BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
+		BD215CD126B5546A00B1D493 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		BD2978EA2697C4B100F19AEF /* colorsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colorsData.json; sourceTree = "<group>"; };
 		BD2E41E126B5415900D19D50 /* ScorePointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointView.swift; sourceTree = "<group>"; };
+		BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		BD3CF1282692F07700FF0D68 /* Color Matching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Matching.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_MatchingApp.swift; sourceTree = "<group>"; };
 		BD3CF12F2692F07900FF0D68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,9 +88,13 @@
 		BD3CF1492692F07A00FF0D68 /* Color MatchingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Color MatchingUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3CF14D2692F07A00FF0D68 /* Color_MatchingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_MatchingUITests.swift; sourceTree = "<group>"; };
 		BD3CF14F2692F07A00FF0D68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerHelper.swift; path = "Color Matching/Views/TimerHelper.swift"; sourceTree = SOURCE_ROOT; };
+		BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerHelper.swift; path = "Color Matching/Helpers/TimerHelper.swift"; sourceTree = SOURCE_ROOT; };
 		BD3FB45526B1F84500BA5F3B /* QuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizState.swift; sourceTree = "<group>"; };
 		BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnAndQuizState.swift; sourceTree = "<group>"; };
+		BD65930926B6A3FB004E27C4 /* QuizResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsView.swift; sourceTree = "<group>"; };
+		BD6C17A826B55E7D00C28F20 /* StatItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatItemView.swift; sourceTree = "<group>"; };
+		BD6C17AD26B5605100C28F20 /* StatCaptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCaptionView.swift; sourceTree = "<group>"; };
+		BD6C17B626B5755500C28F20 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		BDFAB12626AF653F00BF65CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		F125010E26A5819700B521F1 /* ColorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColorConverter.swift; path = "Color Matching/Helpers/ColorConverter.swift"; sourceTree = SOURCE_ROOT; };
@@ -134,23 +146,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BD2978E02697C45600F19AEF /* Views */ = {
+		BD215CD626B5547300B1D493 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
-				F169585626AA0B3900E1E86A /* SimilarColorsView.swift */,
+				BD6C17B226B5610E00C28F20 /* Stats */,
 				F1469CAD2698D8A1006A14BC /* MainMenuView.swift */,
 				BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */,
-				F1D656EE26AB758A007BCDAE /* QuizGameView.swift */,
-				BD2E41E126B5415900D19D50 /* ScorePointView.swift */,
-				BDFAB12626AF653F00BF65CD /* TimerView.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		BD215CD726B5548300B1D493 /* GamesView */ = {
+			isa = PBXGroup;
+			children = (
+				BD215CDA26B554EA00B1D493 /* Elements */,
+				F1913CAF26AC7BAB006D8D19 /* LearnAndQuizView.swift */,
 				F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */,
+				F1D656EE26AB758A007BCDAE /* QuizGameView.swift */,
+				BD65930926B6A3FB004E27C4 /* QuizResultsView.swift */,
 				F1758E6826A0DEB20035E6B5 /* LearnDeckView.swift */,
-				F1B568D226A608B20008494D /* BackgroundView.swift */,
+			);
+			path = GamesView;
+			sourceTree = "<group>";
+		};
+		BD215CD826B554A800B1D493 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
 				F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */,
 				F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */,
 				F1D656E626AB552B007BCDAE /* TransparentCardView.swift */,
-				F125010E26A5819700B521F1 /* ColorConverter.swift */,
-				F1913CAF26AC7BAB006D8D19 /* LearnAndQuizView.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		BD215CD926B554C000B1D493 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F169585626AA0B3900E1E86A /* SimilarColorsView.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BD215CDA26B554EA00B1D493 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */,
+				BD2E41E126B5415900D19D50 /* ScorePointView.swift */,
+				BDFAB12626AF653F00BF65CD /* TimerView.swift */,
+				F1B568D226A608B20008494D /* BackgroundView.swift */,
+			);
+			path = Elements;
+			sourceTree = "<group>";
+		};
+		BD2978E02697C45600F19AEF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BD215CD926B554C000B1D493 /* Helpers */,
+				BD215CD826B554A800B1D493 /* Cards */,
+				BD215CD726B5548300B1D493 /* GamesView */,
+				BD215CD626B5547300B1D493 /* Menu */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,12 +282,21 @@
 			path = "Color MatchingUITests";
 			sourceTree = "<group>";
 		};
+		BD6C17B226B5610E00C28F20 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				BD215CD126B5546A00B1D493 /* StatsView.swift */,
+				BD6C17A826B55E7D00C28F20 /* StatItemView.swift */,
+				BD6C17AD26B5605100C28F20 /* StatCaptionView.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
 		F145D0FC26A446A30044476F /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */,
+				BD6C17B626B5755500C28F20 /* CoreDataManager.swift */,
 				F1E28E1226AB128400B62054 /* Hardness.swift */,
-				F1E28E0526AB0D1200B62054 /* SimilarColorPicker.swift */,
 				BD3FB45526B1F84500BA5F3B /* QuizState.swift */,
 				BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */,
 			);
@@ -263,10 +326,13 @@
 		F1C519D8269DE1730096B9B4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */,
+				F1E28E0526AB0D1200B62054 /* SimilarColorPicker.swift */,
 				F1E28E0A26AB0D6000B62054 /* ColorsPickerHelper.swift */,
 				F1C519D9269DE18C0096B9B4 /* ReadSizeExtension.swift */,
 				F1F3757726A75D4700FBA06A /* GameHelpers.swift */,
 				F169585126A9F89200E1E86A /* Math.swift */,
+				F125010E26A5819700B521F1 /* ColorConverter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -403,6 +469,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1B568D326A608B20008494D /* BackgroundView.swift in Sources */,
+				BD6C17A926B55E7D00C28F20 /* StatItemView.swift in Sources */,
 				F14A3C4B269B28FB00B9A710 /* DataHelper.swift in Sources */,
 				BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */,
 				F1E28E0626AB0D1200B62054 /* SimilarColorPicker.swift in Sources */,
@@ -410,13 +477,17 @@
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
 				BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */,
 				F1D22CAD269BA14A009D4BD2 /* ColorCardView.swift in Sources */,
+				BD6C17AE26B5605100C28F20 /* StatCaptionView.swift in Sources */,
+				BD6C17B726B5755500C28F20 /* CoreDataManager.swift in Sources */,
 				F169585726AA0B3900E1E86A /* SimilarColorsView.swift in Sources */,
 				F197014926A6DF4800494B2F /* AnimationsTest.swift in Sources */,
 				BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */,
+				BD215CD226B5546A00B1D493 /* StatsView.swift in Sources */,
 				BDFAB12726AF653F00BF65CD /* TimerView.swift in Sources */,
 				BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */,
 				F1D22CA8269B89AE009D4BD2 /* SwipeView.swift in Sources */,
 				F1758E6926A0DEB20035E6B5 /* LearnDeckView.swift in Sources */,
+				BD3A3F1826B5C680006C8CDC /* BackButtonView.swift in Sources */,
 				F1D656E726AB552B007BCDAE /* TransparentCardView.swift in Sources */,
 				BD2E41E226B5415900D19D50 /* ScorePointView.swift in Sources */,
 				F1E28E0B26AB0D6000B62054 /* ColorsPickerHelper.swift in Sources */,
@@ -427,6 +498,7 @@
 				F1D656EF26AB758A007BCDAE /* QuizGameView.swift in Sources */,
 				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
 				F1E28E1326AB128400B62054 /* Hardness.swift in Sources */,
+				BD65930A26B6A3FB004E27C4 /* QuizResultsView.swift in Sources */,
 				F125010F26A5819700B521F1 /* ColorConverter.swift in Sources */,
 				F169585226A9F89200E1E86A /* Math.swift in Sources */,
 				F145D10726A44D500044476F /* CardAnimations.swift in Sources */,

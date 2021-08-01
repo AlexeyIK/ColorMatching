@@ -36,10 +36,7 @@ class LearnAndQuizState: ObservableObject  {
         self.hardness = hardness
         self.cardsCount = numOfCards
         
-        var cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness)
-        if shuffle {
-            cardsByHardness = ShuffleCards(cardsArray: cardsByHardness)
-        }
+        let cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness, shuffle: shuffle)
         
         savedCardsArray = GetSequentalNumOfCards(cardsArray: cardsByHardness, numberOfCards: numOfCards)
         self.cardsList = savedCardsArray

@@ -28,12 +28,14 @@ struct LearnAndQuizView: View {
         .navigationBarItems(
             leading:
                 HStack {
-                    Button("< menu") {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(_globalNavBarButtonsColor)
+                    
+                    Button("Menu") {
                         gameState.endGameSession()
                         presentationMode.wrappedValue.dismiss()
                     }
-                    .font(.body)
-                    .foregroundColor(Color.init(hue: 0, saturation: 0, brightness: 0.34, opacity: 1))
+                    .buttonStyle(BackButton())
                 }
         )
     }

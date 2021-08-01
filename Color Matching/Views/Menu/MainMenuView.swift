@@ -25,6 +25,10 @@ struct MainMenuView: View {
             .repeatForever()
     }
     
+    @Environment(\.managedObjectContext) var dataStorage
+    @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var overallStats: FetchedResults<OverallStats>
+    @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
+    
     @State var linesOffset: CGFloat = 0.0
     @State var hueRotation: Double = 0.0
     
@@ -52,14 +56,15 @@ struct MainMenuView: View {
                                     .navigationBarTitleDisplayMode(.inline),
                                     
                                 label: {
-                                    MenuButtonView(text: "Color QUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
                                 })
                                 
                             
-                            MenuButtonView(text: "Warm VS Cold", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1)))
+                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1)))
                             
                             MenuButtonView(text: "More games soon", noImage: true)
                         }
+                        .offset(y: -geometry.size.height * 0.05)
                         
                         Spacer()
                     }
@@ -69,15 +74,30 @@ struct MainMenuView: View {
                     HStack {
                         Spacer()
                         
-                        VStack {
-                            Image(systemName: "arrow.right.doc.on.clipboard")
-                                .resizable()
-                                .foregroundColor(.gray)
-                                .frame(width: 40, height: 40, alignment: .topTrailing)
-                                .padding()
+                        NavigationLink(
+                            destination: StatsView()
+                                .navigationBarBackButtonHidden(true)
+                                .navigationBarTitleDisplayMode(.inline),
                             
-                            Spacer()
-                        }
+                            label: {
+                            VStack {
+                                ZStack {
+                                    Image(systemName: "hexagon")
+                                        .resizable()
+                                        .aspectRatio(0.9, contentMode: .fit)
+                                        .foregroundColor(ConvertColor(colorType: .rgba, value: (41, 41, 41, 1)))
+                                    
+                                    Circle()
+                                        .strokeBorder(lineWidth: 2, antialiased: true)
+                                        .foregroundColor(ConvertColor(colorType: .rgba, value: (77, 77, 77, 1)))
+                                        .scaleEffect(0.7)
+                                }
+                                .frame(width: 50, height: 50, alignment: .topTrailing)
+                                .padding(.all, 10)
+                                
+                                Spacer()
+                            }
+                        })
                     }
                     .animation(.none)
                 
@@ -121,6 +141,16 @@ struct MainMenuView: View {
             }
             .transition(.identity)
             .navigationBarHidden(true)
+        }
+        .onAppear() {
+            if overallStats.count == 0 {
+                _ = CoreDataManager.shared.createOverallStatsTable()
+            }
+            if colorQuizStats.count == 0 {
+                _ = CoreDataManager.shared.createColorQuizStatsTable()
+            }
+            
+            CoreDataManager.shared.showAllReadings()
         }
     }
 }

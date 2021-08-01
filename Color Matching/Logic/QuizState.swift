@@ -12,13 +12,16 @@ class QuizState: ObservableObject {
     
     init() {}
     
+    // constants
     private let definedTimerFrequence: Double = 0.01
+    private let strikeBonusMultiplier: Float = 2
     
     private var countdownTimer: Timer?
     private var endDateTime = Date()
     private var currentDateTime = Date()
     private var saveElapsedTime: TimeInterval = 0
     private var isTimerPaused: Bool = false
+    private var colorsViewed: [ColorModel] = []
     
     public var quizQuestions = 0
     public var results: QuizResults? = nil
@@ -49,7 +52,7 @@ class QuizState: ObservableObject {
         // создаем лист квизов заранее
         cardsList.forEach { (card) in
             let correctColor = card
-            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true))
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true, noClamp: true))
             quizItemsList.append(QuizItem(answers: colorVariants, correctId: correctColor.id))
         }
         
@@ -58,15 +61,16 @@ class QuizState: ObservableObject {
         switch hardness
         {
             case .easy:
-                countdown = 15
+                countdown = 30
             case .normal:
-                countdown  = 10
+                countdown  = 20
             case .hard:
-                countdown  = 10
+                countdown  = 20
             case .hell:
                 countdown  = 60
         }
         
+        CoreDataManager.shared.resetLastGameScore()
         startTimer(for: countdown)
     }
     
@@ -104,11 +108,11 @@ class QuizState: ObservableObject {
     }
     
     func startGameEndPause() {
-        if let timer = countdownTimer {
-            timer.invalidate()
-        }
-        
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
+            if let timer = self.countdownTimer {
+                timer.invalidate()
+            }
+            
             self.stopQuiz()
         }
     }
@@ -129,11 +133,25 @@ class QuizState: ObservableObject {
         
         quizActive = false
         
-        print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition)")
+        var overallScore = CoreDataManager.shared.getLastGameScore()
+        var strikeBonus = 0
+        // начисляем бонус за страйк
+        if correctAnswers == quizQuestions {
+            strikeBonus = Int(Float(overallScore) * strikeBonusMultiplier) - overallScore
+            CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
+            overallScore += strikeBonus
+        }
+        CoreDataManager.shared.addViewedColors(colorsViewed)
+        CoreDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: overallScore)
+        
+        print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(overallScore)")
         
         results = QuizResults(correctAnswers: correctAnswers,
                               cardsViewed: quizPosition,
-                              cardsCount: quizQuestions)
+                              cardsCount: quizQuestions,
+                              scoreEarned: overallScore,
+                              strikeMultiplier: strikeBonusMultiplier,
+                              strikeBonus: strikeBonus)
     }
     
     func checkAnswer(for quizItem: QuizItem, answer: Int = 0, hardness: Hardness) -> Bool {
@@ -148,11 +166,21 @@ class QuizState: ObservableObject {
             quizPosition += 1
         }
         
+        // записываем результат разгадывания цвета
+        var currentColor = colorsData[quizItem.correctId]
+        currentColor.isGuessed = result
+        colorsViewed.append(currentColor)
+        // смотрим сколько получили очков при текущем уровне сложности
         lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
+        // записываем эти очки в CoreData
+        CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
+        CoreDataManager.shared.updateLastGameScore(by: lastScoreChange)
+        
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
-        if quizPosition == quizQuestions || timeRunOut {
-            stopQuiz()
+        if quizPosition == quizQuestions {
+            pauseTimer()
+            startGameEndPause()
         }
         
         return result
@@ -185,4 +213,7 @@ struct QuizResults {
     let correctAnswers: Int
     let cardsViewed: Int
     let cardsCount: Int
+    let scoreEarned: Int
+    let strikeMultiplier: Float
+    let strikeBonus: Int
 }

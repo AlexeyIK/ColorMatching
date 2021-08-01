@@ -11,11 +11,16 @@ public class ColorsPickerHelper {
     
     static let shared = ColorsPickerHelper()
     
-    func getColors(byHardness hardness: Hardness) -> [ColorModel] {
+    func getColors(byHardness hardness: Hardness, shuffle: Bool = false) -> [ColorModel] {
         
         var pickedCards: [ColorModel] = []
         
-        colorsData.forEach { (color) in
+        var shuffledColorsData = colorsData
+        if (shuffle) {
+            shuffledColorsData = colorsData.shuffled()
+        }
+        
+        shuffledColorsData.forEach { (color) in
             // проверяем, что цвет находится в зонах saturation и value, допустимых для уровня сложности
             if let saturationRange = hardnessCardPickerParameters[hardness]?.saturationRange,
                let valueRange = hardnessCardPickerParameters[hardness]?.valueRange {

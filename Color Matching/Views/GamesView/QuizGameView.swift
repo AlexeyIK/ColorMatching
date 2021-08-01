@@ -22,6 +22,7 @@ struct QuizGameView: View {
     let scoreFlowSpeed: CGFloat = 55
     
     var body: some View {
+        
         GeometryReader { contentZone in
             ZStack {
                 BackgroundView()
@@ -116,9 +117,10 @@ struct QuizGameView: View {
                     }
                     .animation(.easeIn(duration: 0.25))
                     
-                    if !quizState.quizActive, let results = quizState.results {
-//                        let finishText = "Game is over!"
-
+                    if (quizState.quizActive) {
+                        Spacer()
+                    }
+                    else if let results = quizState.results {
                         if results.correctAnswers == quizState.quizQuestions {
                             Text("You have guessed all cards!")
                                 .foregroundColor(.white)
@@ -126,18 +128,41 @@ struct QuizGameView: View {
                                 .padding()
                                 .multilineTextAlignment(.center)
                                 .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-                                .transition(.slide)
+                                .transition(.move(edge: .top))
                                 .animation(.easeInOut)
+                            
+//                            Text("Color coins earned:")
+//                                .foregroundColor(.white)
+//                                .font(.title2)
+//                                .padding()
+//                                .multilineTextAlignment(.center)
+//                                .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
+//                                .transition(.slide)
+//                                .animation(.easeInOut)
                         } else {
                             Text("You guessed \(results.correctAnswers) of \(results.cardsCount) \(results.cardsCount > 1 ? "cards" : "card" )")
-                                .foregroundColor(_globalMainTextColor)
+                                .foregroundColor(.white)
                                 .font(.title2)
                                 .padding()
                                 .multilineTextAlignment(.center)
                                 .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-                                .transition(.slide)
+                                .transition(.move(edge: .top))
                                 .animation(.easeInOut)
+                            
+//                            Text("Color coins earned:")
+//                                .foregroundColor(.white)
+//                                .font(.title2)
+//                                .padding()
+//                                .multilineTextAlignment(.center)
+//                                .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
+//                                .transition(.slide)
+//                                .animation(.easeInOut)
                         }
+                    
+                        QuizResultsView(scoreEarned: results.scoreEarned, strikeMultiplier: results.strikeMultiplier, strikeBonus: results.strikeBonus)
+                            .frame(width: contentZone.size.width, alignment: .center)
+                            .transition(.move(edge: .trailing))
+                            .animation(Animation.easeOut(duration: 0.3).delay(0.5))
                         
                         ZStack {
                             Button("One more") {
