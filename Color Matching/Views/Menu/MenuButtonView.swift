@@ -31,8 +31,8 @@ struct MenuButtonView: View {
                     } else {
                         Image(imageName)
                             .resizable()
-                            .aspectRatio(1.5, contentMode: .fill)
-                            .frame(width: 100, height: 100, alignment: .center)
+                            .aspectRatio(1, contentMode: .fill)
+                            .frame(width: 90, height: 110, alignment: .center)
                             .padding(.leading, 16)
                             .foregroundColor(.gray)
                     }
