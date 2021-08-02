@@ -64,7 +64,8 @@ class CoreDataManager {
         }
     }
     
-    func updateQuizStats(correctAnswers: Int, totalCards: Int, overallGameScore: Int) {
+    func updateQuizStats(correctAnswers: Int, totalCards: Int, overallGameScore: Int)
+    {
         let fetchRequest: NSFetchRequest<ColorQuizStats> = ColorQuizStats.fetchRequest()
         
         do {
@@ -75,8 +76,8 @@ class CoreDataManager {
             if statsArray.count > 0 {
                 colorQuizStats = statsArray.first!
             }
-            else {
-                colorQuizStats = createColorQuizStatsTable() // если таблицы нет, то создаем
+            else { // если таблицы нет, то создаем
+                colorQuizStats = createColorQuizStatsTable()
             }
             
             colorQuizStats.finishedGames += 1
@@ -100,7 +101,8 @@ class CoreDataManager {
         }
     }
     
-    func updatePlayerScore(by scoreIncrement: Int) {
+    func updatePlayerScore(by scoreIncrement: Int)
+    {
         let fetchRequest: NSFetchRequest<OverallStats> = OverallStats.fetchRequest()
         
         do {
@@ -147,6 +149,7 @@ class CoreDataManager {
             }
 
             playerStats.lastGameScore += Int16(score) // добавляем к статистике очков за последнюю игру
+            playerStats.totalFinishedGames += 1 // добавляем к статистике количества игр
             
             do {
                 try context.save()

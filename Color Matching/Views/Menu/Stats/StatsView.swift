@@ -29,7 +29,8 @@ struct StatsView: View {
                 
                 ScrollView(.vertical, showsIndicators: false) {
                     StatItemView(caption: "Collected Соlor Coins", value: String(playerStats[0].totalScore))
-                    StatItemView(caption: "Total Games Finished", value: String(playerStats[0].totalFinishedGames))
+                    StatItemView(caption: "Last game Color Coins", value: String(playerStats[0].lastGameScore))
+                    StatItemView(caption: "Total games finished", value: String(playerStats[0].totalFinishedGames))
                     
                     StatCaptionView(caption: "Color QUIZ")
                     StatItemView(caption: "Finished games", value: String(colorQuizStats[0].finishedGames))

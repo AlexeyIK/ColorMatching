@@ -13,7 +13,7 @@ struct ScorePointView: View {
     let isCorrect: Bool
     
     var body: some View {
-        Text(score > 0 ? "+\(score)" : "\(score)")
+        Text(score >= 0 ? "+\(score)" : "\(score)")
             .font(.title)
             .foregroundColor(isCorrect ? .white : .red)
             .fontWeight(.bold)

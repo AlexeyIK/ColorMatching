@@ -43,13 +43,13 @@ class ScoreManager {
         else {
             switch hardness {
                 case .easy:
-                    return -9
+                    return 0
                 case .normal:
-                    return -12
+                    return 0
                 case .hard:
-                    return -16
+                    return 0
                 case .hell:
-                    return -20
+                    return -10
             }
         }
     }
