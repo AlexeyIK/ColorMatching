@@ -24,6 +24,14 @@ func ConvertColor(colorType: ColorValueType, value: (Int, Int, Int, Double)) -> 
     }
 }
 
+func ConvertColor(rgb value: [Int?]) -> Color {
+    let r = Double(value[0] ?? 0)
+    let g = Double(value[1] ?? 0)
+    let b = Double(value[2] ?? 0)
+    
+    return Color.init(red: r / 255, green: g / 255, blue: b / 255)
+}
+
 enum ColorValueType {
     case rgba
     case hsba

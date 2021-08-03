@@ -60,7 +60,7 @@ struct MainMenuView: View {
                                 })
                                 
                             
-                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1)))
+                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0.3).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
                             
                             MenuButtonView(text: "More games soon", noImage: true)
                         }
@@ -74,30 +74,30 @@ struct MainMenuView: View {
                     HStack {
                         Spacer()
                         
-                        NavigationLink(
-                            destination: StatsView()
-                                .navigationBarBackButtonHidden(true)
-                                .navigationBarTitleDisplayMode(.inline),
-                            
-                            label: {
-                            VStack {
-                                ZStack {
-                                    Image(systemName: "hexagon")
-                                        .resizable()
-                                        .aspectRatio(0.9, contentMode: .fit)
-                                        .foregroundColor(ConvertColor(colorType: .rgba, value: (41, 41, 41, 1)))
-                                    
-                                    Circle()
-                                        .strokeBorder(lineWidth: 2, antialiased: true)
-                                        .foregroundColor(ConvertColor(colorType: .rgba, value: (77, 77, 77, 1)))
-                                        .scaleEffect(0.7)
-                                }
-                                .frame(width: 50, height: 50, alignment: .topTrailing)
-                                .padding(.all, 10)
+                        VStack {
+                            NavigationLink(
+                                destination: StatsView()
+                                    .navigationBarBackButtonHidden(true)
+                                    .navigationBarTitleDisplayMode(.inline),
                                 
-                                Spacer()
-                            }
-                        })
+                                label: {
+                                    ZStack {
+                                        Image(systemName: "hexagon")
+                                            .resizable()
+                                            .aspectRatio(0.9, contentMode: .fit)
+                                            .foregroundColor(ConvertColor(colorType: .rgba, value: (41, 41, 41, 1)))
+                                        
+                                        Circle()
+                                            .strokeBorder(lineWidth: 2, antialiased: true)
+                                            .foregroundColor(ConvertColor(colorType: .rgba, value: (77, 77, 77, 1)))
+                                            .scaleEffect(0.7)
+                                    }
+                                    .frame(width: 50, height: 50, alignment: .topTrailing)
+                                    .padding(.all, 10)
+                            })
+                            
+                            Spacer()
+                        }
                     }
                     .animation(.none)
                 
@@ -149,7 +149,7 @@ struct MainMenuView: View {
             if colorQuizStats.count == 0 {
                 _ = CoreDataManager.shared.createColorQuizStatsTable()
             }
-            
+
             CoreDataManager.shared.showAllReadings()
         }
     }

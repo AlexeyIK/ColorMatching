@@ -9,11 +9,13 @@ import Foundation
 import SwiftUI
 
 enum GameMode {
+    case prepare
     case learn
     case quiz
 }
 
-var _definedHardness: Hardness = .normal
+// уровень сложности по умолчанию
+var _definedHardness: Hardness = .easy
 
 class LearnAndQuizState: ObservableObject  {
     
@@ -21,7 +23,7 @@ class LearnAndQuizState: ObservableObject  {
     private var gameSessionActive: Bool = false
     
     @Published var cardsList: [ColorModel] = []
-    @Published var activeGameMode: GameMode = .learn
+    @Published var activeGameMode: GameMode = .prepare
     @Published var gameActive: Bool = false
     @Published var hardness: Hardness
     @Published var cardsCount = 7
