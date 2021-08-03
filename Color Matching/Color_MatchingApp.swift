@@ -13,14 +13,7 @@ struct Color_MatchingApp: App {
 
     var body: some Scene {
         WindowGroup {
-//            TimerView()
             MainMenuView()
-//            LearnAndQuizView()
-//            QuizGameView(hardnessLvl: .easy)
-//            DeckView()
-//            AnimationsTest()
-//            SimilarColorsView()
-//            ColorCardMinimalView(colorModel: colorsData[1201], drawBorder: true, drawShadow: true)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .accessibilityIgnoresInvertColors()
         }
