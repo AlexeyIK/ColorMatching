@@ -17,6 +17,9 @@ struct LearnAndQuizView: View {
         ZStack {
             switch gameState.activeGameMode
             {
+                case .prepare:
+                    QuizStartView()
+                        .environmentObject(gameState)
                 case .learn:
                     LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                         .environmentObject(gameState)

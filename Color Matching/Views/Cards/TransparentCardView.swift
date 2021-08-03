@@ -55,7 +55,7 @@ struct TransparentCardView: View {
                         .colorInvert()
                 }
             }
-            .frame(minWidth: 220, idealWidth: 250, maxWidth: 270, minHeight: 250, idealHeight: 340, maxHeight: 350, alignment: .top)
+            .frame(minWidth: 110, idealWidth: 250, maxWidth: 270, minHeight: 110, idealHeight: 340, maxHeight: 350, alignment: .top)
 //            .frame(width: 270, height: 350, alignment: .center)
         }
     }
