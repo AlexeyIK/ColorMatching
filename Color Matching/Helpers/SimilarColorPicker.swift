@@ -14,7 +14,7 @@ public class SimilarColorPicker {
     
     private init() { }
     
-    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, withRef packRef: Bool = false, noClamp: Bool = false) -> [ColorModel] {
+    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, withRef packRef: Bool = false, noClamp: Bool = false, isRussianOnly: Bool = true) -> [ColorModel] {
         
         var result: [ColorModel] = []
         var similarColor1: ColorModel?
@@ -39,12 +39,14 @@ public class SimilarColorPicker {
                 similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
                                                          satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange)
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange,
+                                                         isRussianOnly: isRussianOnly)
                 
                 similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
                                                          satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange)
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange,
+                                                         isRussianOnly: isRussianOnly)
                 break
                 
             case .normal:
@@ -65,12 +67,14 @@ public class SimilarColorPicker {
                 similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
                                                          satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.valueRange)
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.valueRange,
+                                                         isRussianOnly: isRussianOnly)
                 
                 similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
                                                          satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.valueRange)
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.valueRange,
+                                                         isRussianOnly: isRussianOnly)
                 break
             
             case .hard:
@@ -91,12 +95,14 @@ public class SimilarColorPicker {
                 similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
                                                          satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.valueRange)
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.valueRange,
+                                                         isRussianOnly: isRussianOnly)
                 
                 similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
                                                          hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
                                                          satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.valueRange)
+                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.valueRange,
+                                                         isRussianOnly: isRussianOnly)
                 break
             
             case .hell:
@@ -120,11 +126,11 @@ public class SimilarColorPicker {
     
     private func findSimilarColorByOffset(hue refHue: Int, saturation satRef: Int, value valueRef: Int,
                                           hueOffset: Int = 30, satOffset: Int = 10, valOffset: Int = 10,
-                                          satClamp: ClosedRange<Int> = 0...100, valueClamp: ClosedRange<Int> = 0...100) -> ColorModel? {
+                                          satClamp: ClosedRange<Int> = 0...100, valueClamp: ClosedRange<Int> = 0...100, isRussianOnly: Bool = true) -> ColorModel? {
         var similarColor: ColorModel?
         var newHue = refHue
         var iterations = 0
-        let shuffledColorData = ShuffleCards(cardsArray: colorsData)
+        let shuffledColorData = isRussianOnly ? ShuffleCards(cardsArray: colorsData.filter({ $0.name != "" })) : ShuffleCards(cardsArray: colorsData.filter({ $0.englishName != "" }))
         
         repeat {
             iterations += 1

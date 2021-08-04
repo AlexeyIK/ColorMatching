@@ -17,14 +17,34 @@ struct QuizStartView: View {
     @State var opacity2: Double = 0
     
     let rememberColorPreview: ColorModel = colorsData[1445] // заменить на randomElement(), когда база пополнится
+    let rememberColorPreviewRus: ColorModel = colorsData[1439]
     let guessColorPreview: ColorModel = colorsData[420] // заменить на randomElement(), когда база пополнится
-    let answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorsData[420], for: .easy, withRef: true, noClamp: true)
+    let guessColorPreviewRus: ColorModel = colorsData[401]
     let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
     
     var body: some View {
+        
+        let answers = SimilarColorPicker.shared.getSimilarColors(colorRef: gameState.russianNames ? guessColorPreviewRus : guessColorPreview, for: gameState.hardness, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames)
+        
         ZStack {
             BackgroundView()
+            
+            HStack {
+                Spacer()
+                
+                VStack {
+                    Button(gameState.russianNames ? "Rus" : "Eng") {
+                        gameState.russianNames.toggle()
+                    }
+                    .buttonStyle(GoButton2())
+                    .font(.system(size: 14))
+                    .transition(.identity)
+                    .animation(.none)
+                    
+                    Spacer()
+                }
+            }
             
             GeometryReader { contentZone in
                 VStack {
@@ -34,8 +54,6 @@ struct QuizStartView: View {
                         .multilineTextAlignment(.center)
                         .padding()
                         .transition(.opacity)
-//                        .transition(.slide)
-//                        .animation(Animation.default.delay(0.4))
                     
                     VStack {
                         ZStack {
@@ -59,9 +77,11 @@ struct QuizStartView: View {
                                 .animation(Animation.easeOut(duration: 0.3).delay(0.6), value: card1Offset)
                         }
                         
-                        FakeButtonsView(text: rememberColorPreview.englishName,
-                                        foregroundColor: ConvertColor(rgb: rememberColorPreview.colorRGB),
-                                        outlineColor: ConvertColor(rgb: rememberColorPreview.colorRGB))
+                        let previewColor = gameState.russianNames ? rememberColorPreviewRus : rememberColorPreview
+                        
+                        FakeButtonsView(text: previewColor.name != "" ? previewColor.name : previewColor.englishName,
+                                        foregroundColor: ConvertColor(rgb: previewColor.colorRGB),
+                                        outlineColor: ConvertColor(rgb: previewColor.colorRGB))
                             .scaleEffect(0.9)
                             .offset(x: -card1Offset)
                             .transition(.scale)
@@ -75,7 +95,7 @@ struct QuizStartView: View {
                         HStack {
                             VStack {
                                 ForEach(answers) { answer in
-                                    FakeButtonsView(text: answer.englishName != "" ? answer.englishName : answer.name,
+                                    FakeButtonsView(text: gameState.russianNames ? answer.name : answer.englishName,
                                                     foregroundColor: answersColor,
                                                     outlineColor: answersColor)
                                 }
@@ -104,7 +124,7 @@ struct QuizStartView: View {
                             .frame(width: 110, alignment: .center)
                             .transition(.identity)
                             .offset(x: card2Offset + contentZone.size.width * 0.3)
-                            .animation(Animation.easeOut(duration: 0.3).delay(2), value: card2Offset)
+                            .animation(Animation.easeOut(duration: 0.3).delay(1.8), value: card2Offset)
                     }
                     
                     Spacer()
@@ -133,7 +153,7 @@ struct QuizStartView: View {
                     }
                     .animation(.none)
                     .frame(width: contentZone.size.width, alignment: .center)
-                    
+                        
                     Button("Go!") {
                         gameState.activeGameMode = .learn
                     }

@@ -87,7 +87,7 @@ struct SimilarColorsView: View {
                     }
                 }
                 .padding()
-                .foregroundColor(_globalMainTextColor)
+                .foregroundColor(_globalAnswersColor)
                 .background(_globalButtonBackgroundColor)
                 .clipShape(RoundedRectangle(cornerRadius: 16))
                 .offset(y: -10)

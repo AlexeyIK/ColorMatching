@@ -22,6 +22,7 @@ class LearnAndQuizState: ObservableObject  {
     private var savedCardsArray: [ColorModel] = []
     private var gameSessionActive: Bool = false
     
+    @Published var russianNames: Bool = true
     @Published var cardsList: [ColorModel] = []
     @Published var activeGameMode: GameMode = .prepare
     @Published var gameActive: Bool = false
@@ -38,7 +39,7 @@ class LearnAndQuizState: ObservableObject  {
         self.hardness = hardness
         self.cardsCount = numOfCards
         
-        let cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness, shuffle: shuffle)
+        let cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness, shuffle: shuffle).filter({ russianNames ? $0.name != "" : $0.englishName != "" })
         
         savedCardsArray = GetSequentalNumOfCards(cardsArray: cardsByHardness, numberOfCards: numOfCards)
         self.cardsList = savedCardsArray
