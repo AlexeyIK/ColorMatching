@@ -98,7 +98,7 @@ struct LearnDeckView: View {
                         
                         Text(colorName)
                             .lineLimit(2)
-                            .foregroundColor(_globalMainTextColor)
+                            .foregroundColor(_globalAnswersColorHighlighted)
                             .font(.title2)
                             .frame(width: 280, height: 78, alignment: .top)
                             .multilineTextAlignment(.center)
