@@ -134,7 +134,7 @@ class CoreDataManager {
         }
     }
     
-    func updateLastGameScore(by score: Int) {
+    func writeLastGameScore(_ score: Int) {
         let fetchRequest: NSFetchRequest<OverallStats> = OverallStats.fetchRequest()
         
         do {
@@ -148,7 +148,7 @@ class CoreDataManager {
                 playerStats = createOverallStatsTable()
             }
 
-            playerStats.lastGameScore += Int16(score) // добавляем к статистике очков за последнюю игру
+            playerStats.lastGameScore = Int16(score) // добавляем к статистике очков за последнюю игру
             playerStats.totalFinishedGames += 1 // добавляем к статистике количества игр
             
             do {
