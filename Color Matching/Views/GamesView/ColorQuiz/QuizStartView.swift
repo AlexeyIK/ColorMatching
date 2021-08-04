@@ -104,7 +104,7 @@ struct QuizStartView: View {
                             .frame(width: 110, alignment: .center)
                             .transition(.identity)
                             .offset(x: card2Offset + contentZone.size.width * 0.3)
-                            .animation(Animation.easeOut(duration: 0.3).delay(2), value: card2Offset)
+                            .animation(Animation.easeOut(duration: 0.3).delay(1.8), value: card2Offset)
                     }
                     
                     Spacer()
