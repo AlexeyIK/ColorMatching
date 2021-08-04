@@ -62,7 +62,7 @@ struct QuizStartView: View {
                         FakeButtonsView(text: rememberColorPreview.englishName,
                                         foregroundColor: ConvertColor(rgb: rememberColorPreview.colorRGB),
                                         outlineColor: ConvertColor(rgb: rememberColorPreview.colorRGB))
-                            .scaleEffect(0.8)
+                            .scaleEffect(0.9)
                             .offset(x: -card1Offset)
                             .transition(.scale)
                             .opacity(opacity1)
@@ -149,7 +149,7 @@ struct QuizStartView: View {
                         card1Offset = 0
                         opacity1 = 1
                     }
-                    withAnimation(Animation.easeOut(duration: 0.3).delay(1.75)) {
+                    withAnimation(Animation.easeOut(duration: 0.3).delay(1.5)) {
                         card2Offset = 0
                         opacity2 = 1
                     }

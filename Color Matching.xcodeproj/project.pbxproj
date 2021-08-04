@@ -77,7 +77,7 @@
 		BD2978EA2697C4B100F19AEF /* colorsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colorsData.json; sourceTree = "<group>"; };
 		BD2E41E126B5415900D19D50 /* ScorePointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointView.swift; sourceTree = "<group>"; };
 		BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
-		BD3CF1282692F07700FF0D68 /* Color Matching.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Color Matching.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD3CF1282692F07700FF0D68 /* HueQueue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueQueue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_MatchingApp.swift; sourceTree = "<group>"; };
 		BD3CF12F2692F07900FF0D68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BD3CF1322692F07900FF0D68 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -231,7 +231,7 @@
 		BD3CF1292692F07700FF0D68 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BD3CF1282692F07700FF0D68 /* Color Matching.app */,
+				BD3CF1282692F07700FF0D68 /* HueQueue.app */,
 				BD3CF13E2692F07A00FF0D68 /* Color MatchingTests.xctest */,
 				BD3CF1492692F07A00FF0D68 /* Color MatchingUITests.xctest */,
 			);
@@ -354,9 +354,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BD3CF1272692F07700FF0D68 /* Color Matching */ = {
+		BD3CF1272692F07700FF0D68 /* HueQueue */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BD3CF1522692F07A00FF0D68 /* Build configuration list for PBXNativeTarget "Color Matching" */;
+			buildConfigurationList = BD3CF1522692F07A00FF0D68 /* Build configuration list for PBXNativeTarget "HueQueue" */;
 			buildPhases = (
 				BD3CF1242692F07700FF0D68 /* Sources */,
 				BD3CF1252692F07700FF0D68 /* Frameworks */,
@@ -366,9 +366,9 @@
 			);
 			dependencies = (
 			);
-			name = "Color Matching";
+			name = HueQueue;
 			productName = "Color Matching";
-			productReference = BD3CF1282692F07700FF0D68 /* Color Matching.app */;
+			productReference = BD3CF1282692F07700FF0D68 /* HueQueue.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BD3CF13D2692F07A00FF0D68 /* Color MatchingTests */ = {
@@ -443,7 +443,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BD3CF1272692F07700FF0D68 /* Color Matching */,
+				BD3CF1272692F07700FF0D68 /* HueQueue */,
 				BD3CF13D2692F07A00FF0D68 /* Color MatchingTests */,
 				BD3CF1482692F07A00FF0D68 /* Color MatchingUITests */,
 			);
@@ -546,12 +546,12 @@
 /* Begin PBXTargetDependency section */
 		BD3CF1402692F07A00FF0D68 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BD3CF1272692F07700FF0D68 /* Color Matching */;
+			target = BD3CF1272692F07700FF0D68 /* HueQueue */;
 			targetProxy = BD3CF13F2692F07A00FF0D68 /* PBXContainerItemProxy */;
 		};
 		BD3CF14B2692F07A00FF0D68 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BD3CF1272692F07700FF0D68 /* Color Matching */;
+			target = BD3CF1272692F07700FF0D68 /* HueQueue */;
 			targetProxy = BD3CF14A2692F07A00FF0D68 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -811,7 +811,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BD3CF1522692F07A00FF0D68 /* Build configuration list for PBXNativeTarget "Color Matching" */ = {
+		BD3CF1522692F07A00FF0D68 /* Build configuration list for PBXNativeTarget "HueQueue" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BD3CF1532692F07A00FF0D68 /* Debug */,

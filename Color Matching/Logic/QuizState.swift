@@ -22,6 +22,7 @@ class QuizState: ObservableObject {
     private var saveElapsedTime: TimeInterval = 0
     private var isTimerPaused: Bool = false
     private var colorsViewed: [ColorModel] = []
+    private var gameScore: Int = 0
     
     public var quizQuestions = 0
     public var results: QuizResults? = nil
@@ -133,24 +134,23 @@ class QuizState: ObservableObject {
         
         quizActive = false
         
-        var overallScore = CoreDataManager.shared.getLastGameScore()
         var strikeBonus = 0
         // начисляем бонус за страйк
         if correctAnswers == quizQuestions {
-            strikeBonus = Int(Float(overallScore) * strikeBonusMultiplier) - overallScore
+            strikeBonus = Int(Float(gameScore) * strikeBonusMultiplier) - gameScore
             CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
-            overallScore += strikeBonus
-            CoreDataManager.shared.updateLastGameScore(by: strikeBonus)
+            gameScore += strikeBonus
         }
         CoreDataManager.shared.addViewedColors(colorsViewed)
-        CoreDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: overallScore)
+        CoreDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
+        CoreDataManager.shared.writeLastGameScore(gameScore)
         
-        print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(overallScore)")
+        print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(gameScore)")
         
         results = QuizResults(correctAnswers: correctAnswers,
                               cardsViewed: quizPosition,
                               cardsCount: quizQuestions,
-                              scoreEarned: overallScore,
+                              scoreEarned: gameScore,
                               strikeMultiplier: strikeBonusMultiplier,
                               strikeBonus: strikeBonus)
     }
@@ -173,9 +173,9 @@ class QuizState: ObservableObject {
         colorsViewed.append(currentColor)
         // смотрим сколько получили очков при текущем уровне сложности
         lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
+        gameScore += lastScoreChange
         // записываем эти очки в CoreData
         CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
-        CoreDataManager.shared.updateLastGameScore(by: lastScoreChange)
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
