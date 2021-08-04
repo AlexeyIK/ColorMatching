@@ -25,6 +25,7 @@ struct FakeButtonsView: View {
             .clipShape(RoundedRectangle(cornerRadius: 36))
             .multilineTextAlignment(.center)
             .lineLimit(multiline ? 3 : 1)
+            .frame(minWidth: 50, idealWidth: 150, maxWidth: 200, alignment: .center)
     }
 }
 

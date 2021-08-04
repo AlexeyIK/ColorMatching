@@ -19,7 +19,7 @@ struct QuizStartView: View {
     let rememberColorPreview: ColorModel = colorsData[1445] // заменить на randomElement(), когда база пополнится
     let guessColorPreview: ColorModel = colorsData[420] // заменить на randomElement(), когда база пополнится
     let answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorsData[420], for: .easy, withRef: true, noClamp: true)
-    let aspectRatio: CGFloat = 0.7
+    let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
     
     var body: some View {
@@ -90,6 +90,8 @@ struct QuizStartView: View {
                                 .transition(.identity)
                                 .offset(x: card2Offset)
                                 .opacity(opacity2)
+                                .layoutPriority(1)
+                                .padding(.trailing, 24)
                         }
                         
                         Text("Choose the right name")
@@ -101,7 +103,7 @@ struct QuizStartView: View {
                             .shadow(color: .black, radius: 3)
                             .frame(width: 110, alignment: .center)
                             .transition(.identity)
-                            .offset(x: card2Offset + contentZone.size.width * 0.25)
+                            .offset(x: card2Offset + contentZone.size.width * 0.3)
                             .animation(Animation.easeOut(duration: 0.3).delay(2), value: card2Offset)
                     }
                     
