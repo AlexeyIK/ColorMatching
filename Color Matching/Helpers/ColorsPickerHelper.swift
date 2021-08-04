@@ -16,6 +16,7 @@ public class ColorsPickerHelper {
 //        var pickedCards: [ColorModel] = []
         
         var relevantCards = colorsData.filter({ $0.difficulty.rawValue <= 1 && hardness == .easy || $0.difficulty.rawValue == hardness.rawValue })
+        relevantCards = relevantCards.filter({ $0.name != "" })
         if (shuffle) {
             relevantCards = relevantCards.shuffled()
         }
