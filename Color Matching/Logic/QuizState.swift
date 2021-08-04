@@ -140,6 +140,7 @@ class QuizState: ObservableObject {
             strikeBonus = Int(Float(overallScore) * strikeBonusMultiplier) - overallScore
             CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
             overallScore += strikeBonus
+            CoreDataManager.shared.updateLastGameScore(by: strikeBonus)
         }
         CoreDataManager.shared.addViewedColors(colorsViewed)
         CoreDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: overallScore)
