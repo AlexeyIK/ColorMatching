@@ -16,6 +16,7 @@ class QuizState: ObservableObject {
     private let definedTimerFrequence: Double = 0.01
     private let strikeBonusMultiplier: Float = 2
     
+    // private
     private var countdownTimer: Timer?
     private var endDateTime = Date()
     private var currentDateTime = Date()
@@ -24,9 +25,11 @@ class QuizState: ObservableObject {
     private var colorsViewed: [ColorModel] = []
     private var gameScore: Int = 0
     
+    // public
     public var quizQuestions = 0
     public var results: QuizResults? = nil
     
+    // Published
     @Published var quizItemsList: [QuizItem] = []
     @Published var quizAnswersAndScore: [QuizAnswer] = []
     @Published var quizActive: Bool = false
@@ -37,7 +40,7 @@ class QuizState: ObservableObject {
     @Published var timerString: String = "00:00:000"
     @Published var isAppActive: Bool = true
     
-    func startQuiz(cards: [ColorModel], hardness: Hardness, shuffled: Bool = true) -> Void {
+    func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true) -> Void {
         if cards.count == 0 { return }
         
         var cardsList = cards
@@ -53,7 +56,7 @@ class QuizState: ObservableObject {
         // создаем лист квизов заранее
         cardsList.forEach { (card) in
             let correctColor = card
-            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true, noClamp: true))
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true, noClamp: true, isRussianOnly: russianNames))
             quizItemsList.append(QuizItem(answers: colorVariants, correctId: correctColor.id))
         }
         
