@@ -30,31 +30,30 @@ class LearnAndQuizState: ObservableObject  {
     @Published var cardsCount = 7
     
     init(definedHardness: Hardness = _definedHardness) {
-        self.hardness = definedHardness
+        let lastHardness = CoreDataManager.shared.getLastQuizHardness()
+        self.hardness = lastHardness == 0 ? definedHardness : Hardness.init(rawValue: lastHardness) ?? .easy
         self.cardsCount = getDefaultNumOfCards(for: definedHardness)
-        startGameSession(cardsInDeck: cardsCount, with: hardness, shuffle: true)
     }
     
-    func startGameSession(cardsInDeck numOfCards: Int, with hardness: Hardness, shuffle: Bool = false) {
-        self.hardness = hardness
-        self.cardsCount = numOfCards
-        
+    func startGameSession(shuffle: Bool = false) {
         let cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness, shuffle: shuffle).filter({ russianNames ? $0.name != "" : $0.englishName != "" })
         
-        savedCardsArray = GetSequentalNumOfCards(cardsArray: cardsByHardness, numberOfCards: numOfCards)
+        savedCardsArray = GetSequentalNumOfCards(cardsArray: cardsByHardness, numberOfCards: cardsCount)
         self.cardsList = savedCardsArray
+        self.activeGameMode = .learn
         self.gameActive = true;
+        
+        CoreDataManager.shared.writeCurrentHardness(hardness)
     }
     
     func endGameSession() {
         self.gameActive = false
-        self.activeGameMode = .learn
     }
     
     func restartGameSession() {
         endGameSession()
         activeGameMode = .learn
-        startGameSession(cardsInDeck: getDefaultNumOfCards(for: hardness), with: _definedHardness)
+        startGameSession()
     }
     
     func getDefaultNumOfCards(for hardness: Hardness) -> Int {
