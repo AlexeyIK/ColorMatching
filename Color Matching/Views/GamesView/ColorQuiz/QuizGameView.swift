@@ -83,7 +83,7 @@ struct QuizGameView: View {
                     VStack(spacing: 8) {
                         if let quizItem = quizState.getQuizItem() {
                             ForEach(quizItem.answers) { answer in
-                                let colorName = answer.name != "" ? answer.name : answer.englishName
+                                let colorName = gameState.russianNames ? answer.name : answer.englishName
 
                                 Button(colorName) {
                                     withAnimation {
@@ -121,7 +121,11 @@ struct QuizGameView: View {
         }
         .padding()
         .blur(radius: quizState.isAppActive ? .nan : 10)
-        .onChange(of: quizState.quizActive, perform: { _game in
+        .onAppear(perform: {
+            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames)
+        })
+        // мониторим, что квиз сменил активность
+        .onChange(of: quizState.quizActive) { _ in
             if let results = quizState.results {
                 resultStore.quizResults = results
                 resultStore.colorsViewed = quizState.colorsViewed
@@ -130,10 +134,7 @@ struct QuizGameView: View {
                     gameState.activeGameMode = .results
                 }
             }
-        })
-        .onAppear(perform: {
-            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness)
-        })
+        }
         // мониторим, что приложение свернули и паузим таймер и сменяем статус
         .onChange(of: scenePhase) { phase in
             switch phase {
