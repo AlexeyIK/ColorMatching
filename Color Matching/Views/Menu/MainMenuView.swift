@@ -90,15 +90,8 @@ struct MainMenuView: View {
                                 
                                 label: {
                                     ZStack {
-                                        Image(systemName: "hexagon")
+                                        Image("iconStats")
                                             .resizable()
-                                            .aspectRatio(0.9, contentMode: .fit)
-                                            .foregroundColor(ConvertColor(colorType: .rgba, value: (41, 41, 41, 1)))
-                                        
-                                        Circle()
-                                            .strokeBorder(lineWidth: 2, antialiased: true)
-                                            .foregroundColor(ConvertColor(colorType: .rgba, value: (77, 77, 77, 1)))
-                                            .scaleEffect(0.7)
                                     }
                                     .frame(width: 50, height: 50, alignment: .topTrailing)
                                     .padding(.all, 10)
