@@ -32,11 +32,12 @@ class LearnAndQuizState: ObservableObject  {
     init(definedHardness: Hardness = _definedHardness) {
         let lastHardness = CoreDataManager.shared.getLastQuizHardness()
         self.hardness = lastHardness == 0 ? definedHardness : Hardness.init(rawValue: lastHardness) ?? .easy
-        self.cardsCount = getDefaultNumOfCards(for: definedHardness)
     }
     
     func startGameSession(shuffle: Bool = false) {
         let cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness, shuffle: shuffle).filter({ russianNames ? $0.name != "" : $0.englishName != "" })
+        
+        self.cardsCount = getDefaultNumOfCards(for: hardness)
         
         savedCardsArray = GetSequentalNumOfCards(cardsArray: cardsByHardness, numberOfCards: cardsCount)
         self.cardsList = savedCardsArray
