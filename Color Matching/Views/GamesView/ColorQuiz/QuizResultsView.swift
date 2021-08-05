@@ -110,7 +110,16 @@ struct QuizResultsView: View {
             
             Spacer()
             
-            Button("One more") {
+            Button("Main menu") {
+                gameState.restartGameSession()
+            }
+            .buttonStyle(GoButton2())
+            .font(.body)
+            .frame(width: contentZone.width, alignment: .center)
+            .transition(.move(edge: .bottom))
+            .animation(Animation.easeOut(duration: 0.3).delay(0.3))
+            
+            Button("Next one") {
                 gameState.restartGameSession()
             }
             .buttonStyle(GoButton2())
@@ -118,16 +127,8 @@ struct QuizResultsView: View {
             .frame(width: contentZone.width, alignment: .center)
             .transition(.move(edge: .bottom))
             .animation(Animation.easeOut(duration: 0.3).delay(0.3))
-            
-            Button("Main menu") {
-                gameState.restartGameSession()
-            }
-            .buttonStyle(GoButton2())
-            .font(.title2)
-            .frame(width: contentZone.width, alignment: .center)
             .padding(.bottom, 50)
-            .transition(.move(edge: .bottom))
-            .animation(Animation.easeOut(duration: 0.3).delay(0.3))
+            
         }
         .frame(height: contentZone.height, alignment: .center)
         .onAppear() {
