@@ -12,6 +12,7 @@ enum GameMode {
     case prepare
     case learn
     case quiz
+    case results
 }
 
 // уровень сложности по умолчанию

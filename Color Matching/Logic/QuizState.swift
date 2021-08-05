@@ -14,18 +14,18 @@ class QuizState: ObservableObject {
     
     // constants
     private let definedTimerFrequence: Double = 0.01
-    private let strikeBonusMultiplier: Float = 2
+    private let strikeBonusMultiplier: Int = 2
     
     private var countdownTimer: Timer?
     private var endDateTime = Date()
     private var currentDateTime = Date()
     private var saveElapsedTime: TimeInterval = 0
     private var isTimerPaused: Bool = false
-    private var colorsViewed: [ColorModel] = []
     private var gameScore: Int = 0
     
     public var quizQuestions = 0
     public var results: QuizResults? = nil
+    public var colorsViewed: [ColorModel] = []
     
     @Published var quizItemsList: [QuizItem] = []
     @Published var quizAnswersAndScore: [QuizAnswer] = []
@@ -137,7 +137,7 @@ class QuizState: ObservableObject {
         var strikeBonus = 0
         // начисляем бонус за страйк
         if correctAnswers == quizQuestions {
-            strikeBonus = Int(Float(gameScore) * strikeBonusMultiplier) - gameScore
+            strikeBonus = gameScore * strikeBonusMultiplier - gameScore
             CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
             gameScore += strikeBonus
         }
@@ -215,6 +215,6 @@ struct QuizResults {
     let cardsViewed: Int
     let cardsCount: Int
     let scoreEarned: Int
-    let strikeMultiplier: Float
+    let strikeMultiplier: Int
     let strikeBonus: Int
 }

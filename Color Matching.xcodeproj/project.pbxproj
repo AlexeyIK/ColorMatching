@@ -26,6 +26,8 @@
 		BD6C17B726B5755500C28F20 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17B626B5755500C28F20 /* CoreDataManager.swift */; };
 		BD6EC87226B9CAAF001B563E /* QuizStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6EC87126B9CAAF001B563E /* QuizStartView.swift */; };
 		BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */; };
+		BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */; };
+		BDC817D726BB3A3900DD0B45 /* QuizResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */; };
 		BDE58DF426BB27CF00387545 /* QuizButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE58DF326BB27CF00387545 /* QuizButtons.swift */; };
 		BDEC060026B9DC9C0087833D /* FakeButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEC05FF26B9DC9C0087833D /* FakeButtonsView.swift */; };
 		BDFAB12726AF653F00BF65CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFAB12626AF653F00BF65CD /* TimerView.swift */; };
@@ -79,6 +81,8 @@
 		BD6C17B626B5755500C28F20 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BD6EC87126B9CAAF001B563E /* QuizStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStartView.swift; sourceTree = "<group>"; };
 		BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
+		BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizColorPickView.swift; sourceTree = "<group>"; };
+		BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsStore.swift; sourceTree = "<group>"; };
 		BDE58DF326BB27CF00387545 /* QuizButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizButtons.swift; sourceTree = "<group>"; };
 		BDEC05FF26B9DC9C0087833D /* FakeButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeButtonsView.swift; sourceTree = "<group>"; };
 		BDFAB12626AF653F00BF65CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 		BD215CDA26B554EA00B1D493 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				BDEC05FF26B9DC9C0087833D /* FakeButtonsView.swift */,
+				BDE58DF326BB27CF00387545 /* QuizButtons.swift */,
 				BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */,
 				BD2E41E126B5415900D19D50 /* ScorePointView.swift */,
 				BDFAB12626AF653F00BF65CD /* TimerView.swift */,
@@ -263,11 +269,10 @@
 			children = (
 				F1913CAF26AC7BAB006D8D19 /* LearnAndQuizView.swift */,
 				BD6EC87126B9CAAF001B563E /* QuizStartView.swift */,
-				BDEC05FF26B9DC9C0087833D /* FakeButtonsView.swift */,
-				F1D656EE26AB758A007BCDAE /* QuizGameView.swift */,
-				BDE58DF326BB27CF00387545 /* QuizButtons.swift */,
-				BD65930926B6A3FB004E27C4 /* QuizResultsView.swift */,
 				F1758E6826A0DEB20035E6B5 /* LearnDeckView.swift */,
+				F1D656EE26AB758A007BCDAE /* QuizGameView.swift */,
+				BD65930926B6A3FB004E27C4 /* QuizResultsView.swift */,
+				BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */,
 			);
 			path = ColorQuiz;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				F1E28E1226AB128400B62054 /* Hardness.swift */,
 				BD3FB45526B1F84500BA5F3B /* QuizState.swift */,
 				BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */,
+				BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -399,6 +405,7 @@
 				BDE58DF426BB27CF00387545 /* QuizButtons.swift in Sources */,
 				F1D22CAD269BA14A009D4BD2 /* ColorCardView.swift in Sources */,
 				BDEC060026B9DC9C0087833D /* FakeButtonsView.swift in Sources */,
+				BDC817D726BB3A3900DD0B45 /* QuizResultsStore.swift in Sources */,
 				BD6C17AE26B5605100C28F20 /* StatCaptionView.swift in Sources */,
 				BD6C17B726B5755500C28F20 /* CoreDataManager.swift in Sources */,
 				F169585726AA0B3900E1E86A /* SimilarColorsView.swift in Sources */,
@@ -420,6 +427,7 @@
 				F1D656EF26AB758A007BCDAE /* QuizGameView.swift in Sources */,
 				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
 				BD6EC87226B9CAAF001B563E /* QuizStartView.swift in Sources */,
+				BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */,
 				F1E28E1326AB128400B62054 /* Hardness.swift in Sources */,
 				BD65930A26B6A3FB004E27C4 /* QuizResultsView.swift in Sources */,
 				F125010F26A5819700B521F1 /* ColorConverter.swift in Sources */,
