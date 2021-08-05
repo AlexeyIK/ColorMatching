@@ -95,7 +95,7 @@ struct QuizStartView: View {
                     ZStack {
                         HStack {
                             VStack {
-                                ForEach(answers) { answer in
+                                ForEach(answers, id: \.self) { answer in
                                     FakeButtonsView(text: gameState.russianNames ? answer.name : answer.englishName,
                                                     foregroundColor: answersColor,
                                                     outlineColor: answersColor)
@@ -162,8 +162,9 @@ struct QuizStartView: View {
                     .font(.system(size: 40))
                     .frame(width: contentZone.size.width, alignment: .center)
                     .transition(.identity)
+                    .padding(.bottom, 50)
                     
-                    Spacer()
+//                    Spacer()
                 }
                 .onAppear() {
                     withAnimation(Animation.easeOut(duration: 0.3).delay(0.3)) {

@@ -27,7 +27,7 @@ struct LearnAndQuizView: View {
                     LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                         .environmentObject(gameState)
                 case .quiz:
-                    QuizGameView(useTimer: true, showColorNames: false)
+                    QuizGameView(showColorNames: false)
                         .environmentObject(gameState)
                         .environmentObject(resultState)
                         .transition(.opacity)
@@ -35,7 +35,7 @@ struct LearnAndQuizView: View {
                     QuizResultsView()
                         .environmentObject(gameState)
                         .environmentObject(resultState)
-                        .transition(.move(edge: .top))
+                        .transition(.opacity)
             }
         }
         .navigationBarItems(

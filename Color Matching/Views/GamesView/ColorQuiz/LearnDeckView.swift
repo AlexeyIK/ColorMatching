@@ -116,7 +116,7 @@ struct LearnDeckView: View {
                     .frame(width: contentZone.width * 0.8, alignment: .center)
                     .padding()
                     .transition(.slide)
-                    .animation(Animation.default.delay(0.4))
+                    .animation(Animation.spring(response: 0.4, dampingFraction: 0.4, blendDuration: 0).delay(0.5))
                 
                 Button("Go!") {
                     gameState.activeGameMode = .quiz
@@ -125,7 +125,7 @@ struct LearnDeckView: View {
                 .font(.system(size: 40))
                 .frame(width: contentZone.width, alignment: .center)
                 .transition(.move(edge: .trailing))
-                .animation(Animation.linear.delay(0.6))
+                .animation(Animation.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0).delay(0.6))
                 .offset(y: contentZone.height * 0.2)
             }
         }

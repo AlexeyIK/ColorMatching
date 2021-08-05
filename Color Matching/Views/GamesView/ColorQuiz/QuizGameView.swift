@@ -18,7 +18,6 @@ struct QuizGameView: View {
     @State var lastAnswerIsCorrect: Bool? = nil
     
     var highlightCorrectAnswer: Bool = false
-    var useTimer: Bool = false
     var showColorNames: Bool = false
     let scoreFlowSpeed: CGFloat = 55
     
