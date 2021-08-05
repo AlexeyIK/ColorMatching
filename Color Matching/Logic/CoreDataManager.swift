@@ -82,6 +82,7 @@ class CoreDataManager {
             
             colorQuizStats.finishedGames += 1
             colorQuizStats.colorsGuessed += Int16(correctAnswers)
+            
             if correctAnswers == totalCards {
                 colorQuizStats.strikesCount += 1
                 
@@ -99,6 +100,55 @@ class CoreDataManager {
         catch {
             print("Couldn't fetch ColorQuiz data")
         }
+    }
+    
+    /// Сохраняем текущую выбранную сложность игры
+    func writeCurrentHardness(_ hardness: Hardness) {
+        let fetchRequest: NSFetchRequest<ColorQuizStats> = ColorQuizStats.fetchRequest()
+        
+        do {
+            let statsArray = try context.fetch(fetchRequest)
+            var colorQuizStats: ColorQuizStats
+            
+            // если таблица есть, то заносим данные
+            if statsArray.count > 0 {
+                colorQuizStats = statsArray.first!
+            }
+            else { // если таблицы нет, то создаем
+                colorQuizStats = createColorQuizStatsTable()
+            }
+            
+            colorQuizStats.lastPlayedHardness = Int16(hardness.rawValue)
+            
+            do {
+                try context.save()
+            } catch {
+                print("Error during ColorQuiz hardness save")
+            }
+        }
+        catch {
+            print("Couldn't fetch ColorQuiz data")
+        }
+    }
+    
+    func getLastQuizHardness() -> Int {
+        let fetchRequest: NSFetchRequest<ColorQuizStats> = ColorQuizStats.fetchRequest()
+        
+        do {
+            let quizStatsArray = try context.fetch(fetchRequest)
+            var quizStats: ColorQuizStats
+            
+            if quizStatsArray.count > 0  {
+                quizStats = quizStatsArray.first!
+                
+                return Int(quizStats.lastPlayedHardness)
+            }
+        }
+        catch {
+            print("Couldn't fetch last quiz played hardness data")
+        }
+        
+        return 0
     }
     
     func updatePlayerScore(by scoreIncrement: Int)
