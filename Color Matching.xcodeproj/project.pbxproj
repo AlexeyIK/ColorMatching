@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */; };
 		BD215CD226B5546A00B1D493 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD215CD126B5546A00B1D493 /* StatsView.swift */; };
+		BD279F9726BC800D005C8E3D /* Quiz2MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */; };
+		BD279F9B26BC805F005C8E3D /* GuessColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD279F9A26BC805F005C8E3D /* GuessColorView.swift */; };
 		BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* colorsData.json */; };
 		BD2E41E226B5415900D19D50 /* ScorePointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2E41E126B5415900D19D50 /* ScorePointView.swift */; };
 		BD3A3F1826B5C680006C8CDC /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */; };
@@ -58,6 +60,8 @@
 /* Begin PBXFileReference section */
 		BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
 		BD215CD126B5546A00B1D493 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz2MainView.swift; sourceTree = "<group>"; };
+		BD279F9A26BC805F005C8E3D /* GuessColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuessColorView.swift; sourceTree = "<group>"; };
 		BD2978EA2697C4B100F19AEF /* colorsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colorsData.json; sourceTree = "<group>"; };
 		BD2E41E126B5415900D19D50 /* ScorePointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointView.swift; sourceTree = "<group>"; };
 		BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 		BD215CD726B5548300B1D493 /* GamesView */ = {
 			isa = PBXGroup;
 			children = (
+				BD279F9526BC7FE5005C8E3D /* QuizV2 */,
 				BD6EC87626B9CD35001B563E /* ColorQuiz */,
 				BD215CDA26B554EA00B1D493 /* Elements */,
 				F1D22CA7269B89AE009D4BD2 /* SwipeView.swift */,
@@ -170,6 +175,15 @@
 				F1B568D226A608B20008494D /* BackgroundView.swift */,
 			);
 			path = Elements;
+			sourceTree = "<group>";
+		};
+		BD279F9526BC7FE5005C8E3D /* QuizV2 */ = {
+			isa = PBXGroup;
+			children = (
+				BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */,
+				BD279F9A26BC805F005C8E3D /* GuessColorView.swift */,
+			);
+			path = QuizV2;
 			sourceTree = "<group>";
 		};
 		BD2978E02697C45600F19AEF /* Views */ = {
@@ -397,6 +411,7 @@
 				F1B568D326A608B20008494D /* BackgroundView.swift in Sources */,
 				BD6C17A926B55E7D00C28F20 /* StatItemView.swift in Sources */,
 				F14A3C4B269B28FB00B9A710 /* DataHelper.swift in Sources */,
+				BD279F9B26BC805F005C8E3D /* GuessColorView.swift in Sources */,
 				BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */,
 				F1E28E0626AB0D1200B62054 /* SimilarColorPicker.swift in Sources */,
 				F1758E6E26A0DFA60035E6B5 /* ColorCardMinimalView.swift in Sources */,
@@ -427,6 +442,7 @@
 				F1D656EF26AB758A007BCDAE /* QuizGameView.swift in Sources */,
 				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
 				BD6EC87226B9CAAF001B563E /* QuizStartView.swift in Sources */,
+				BD279F9726BC800D005C8E3D /* Quiz2MainView.swift in Sources */,
 				BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */,
 				F1E28E1326AB128400B62054 /* Hardness.swift in Sources */,
 				BD65930A26B6A3FB004E27C4 /* QuizResultsView.swift in Sources */,
