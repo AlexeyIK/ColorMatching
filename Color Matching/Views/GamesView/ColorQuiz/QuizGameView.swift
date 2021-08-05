@@ -121,9 +121,6 @@ struct QuizGameView: View {
         }
         .padding()
         .blur(radius: quizState.isAppActive ? .nan : 10)
-//            .scaledToFill()
-//            .frame(width: contentZone.size.width * 0.9, alignment: .center)
-//            .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height, alignment: .center)
         .onChange(of: quizState.quizActive, perform: { _game in
             if let results = quizState.results {
                 resultStore.quizResults = results

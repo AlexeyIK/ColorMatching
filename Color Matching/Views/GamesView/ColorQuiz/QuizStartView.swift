@@ -156,7 +156,7 @@ struct QuizStartView: View {
                     .frame(width: contentZone.size.width, alignment: .center)
                         
                     Button("Go!") {
-                        gameState.activeGameMode = .learn
+                        gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
                     .font(.system(size: 40))
