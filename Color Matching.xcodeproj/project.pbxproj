@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD09136126BD1CA00082386C /* PetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09136026BD1CA00082386C /* PetalView.swift */; };
 		BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */; };
 		BD215CD226B5546A00B1D493 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD215CD126B5546A00B1D493 /* StatsView.swift */; };
 		BD279F9726BC800D005C8E3D /* Quiz2MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */; };
@@ -58,6 +59,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD09136026BD1CA00082386C /* PetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetalView.swift; sourceTree = "<group>"; };
 		BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
 		BD215CD126B5546A00B1D493 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz2MainView.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */,
 				BD279F9A26BC805F005C8E3D /* GuessColorView.swift */,
+				BD09136026BD1CA00082386C /* PetalView.swift */,
 			);
 			path = QuizV2;
 			sourceTree = "<group>";
@@ -439,6 +442,7 @@
 				F1469CAE2698D8A1006A14BC /* MainMenuView.swift in Sources */,
 				BD3FB45626B1F84500BA5F3B /* QuizState.swift in Sources */,
 				F1C519DA269DE18C0096B9B4 /* ReadSizeExtension.swift in Sources */,
+				BD09136126BD1CA00082386C /* PetalView.swift in Sources */,
 				F1D656EF26AB758A007BCDAE /* QuizGameView.swift in Sources */,
 				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
 				BD6EC87226B9CAAF001B563E /* QuizStartView.swift in Sources */,
