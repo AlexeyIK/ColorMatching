@@ -163,6 +163,16 @@ struct GuessColorView: View {
                 self.rotatePercentage = 1
             }
         }
+        .onChange(of: quizState.timeRunOut, perform: { runOut in
+            if runOut {
+                self.rotatePercentage = 0
+                
+                withAnimation() {
+                    self.newRotation -= 180
+                    self.rotatePercentage = 1
+                }
+            }
+        })
         // мониторим, что квиз сменил активность
         .onChange(of: quizState.quizActive) { _ in
             if let results = quizState.results {
