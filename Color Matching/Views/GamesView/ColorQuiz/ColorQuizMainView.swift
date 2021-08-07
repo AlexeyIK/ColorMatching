@@ -20,7 +20,7 @@ struct ColorQuizMainView: View {
             switch gameState.activeGameMode
             {
                 case .prepare:
-                    QuizStartView()
+                    ColorQuizStartView()
                         .environmentObject(gameState)
                 case .learn:
                     LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
