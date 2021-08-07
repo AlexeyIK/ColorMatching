@@ -12,10 +12,8 @@ public class ColorsPickerHelper {
     static let shared = ColorsPickerHelper()
     
     func getColors(byHardness hardness: Hardness, shuffle: Bool = false) -> [ColorModel] {
-        
-//        var pickedCards: [ColorModel] = []
-        
-        var relevantCards = colorsData.filter({ $0.difficulty.rawValue <= 1 && hardness == .easy || $0.difficulty.rawValue == hardness.rawValue })
+
+        var relevantCards = colorsData.filter({ hardness == .easy && 0...1 ~= $0.difficulty.rawValue || $0.difficulty.rawValue == hardness.rawValue })
         relevantCards = relevantCards.filter({ $0.name != "" })
         if (shuffle) {
             relevantCards = relevantCards.shuffled()

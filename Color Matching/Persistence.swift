@@ -19,11 +19,17 @@ struct PersistenceController {
         overallStats.lastGameScore = 68
         overallStats.totalFinishedGames = 11
         
-        let quizStats = ColorQuizStats(context: viewContext)
-        quizStats.colorsGuessed = 65
-        quizStats.finishedGames = 11
-        quizStats.bestStrike = 7
-        quizStats.strikesCount = 1
+        let nameQuizStats = NameQuizStats(context: viewContext)
+        nameQuizStats.namesGuessed = 65
+        nameQuizStats.finishedGames = 11
+        nameQuizStats.bestStrike = 7
+        nameQuizStats.strikesCount = 1
+        
+        let colorQuizStats = ColorQuizStats(context: viewContext)
+        colorQuizStats.colorsGuessed = 35
+        colorQuizStats.finishedGames = 6
+        colorQuizStats.bestStrike = 5
+        colorQuizStats.strikesCount = 2
         
         let color = ViewedColor(context: viewContext)
         color.colorId = "000000"

@@ -14,114 +14,80 @@ public class SimilarColorPicker {
     
     private init() { }
     
-    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, withRef packRef: Bool = false, noClamp: Bool = false, isRussianOnly: Bool = true) -> [ColorModel] {
+    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, variations: Int = 2, withRef packRef: Bool = false, noClamp: Bool = false, isRussianOnly: Bool = true) -> [ColorModel] {
         
-        var result: [ColorModel] = []
-        var similarColor1: ColorModel?
-        var similarColor2: ColorModel?
+        var similarColors: [ColorModel] = []
         
-        switch hardness {
-            case .easy:
-                let hueStep = 90
-                let hueOffset = 30
-                let saturationOffset = 10
-                let valueOffset = 10
-                
-                var newHue1 = (colorRef.colorHSV[0]! - hueStep)
-                if newHue1 < 0 {
-                    newHue1 = newHue1 + 360
-                }
-                var newHue2 = (colorRef.colorHSV[0]! + hueStep)
-                if newHue2 > 360 {
-                    newHue2 = newHue2 - 360
-                }
-                
-                similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
-                                                         hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange,
-                                                         isRussianOnly: isRussianOnly)
-                
-                similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
-                                                         hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange,
-                                                         isRussianOnly: isRussianOnly)
-                break
-                
-            case .normal:
-                let hueStep = 60
-                let hueOffset = 20
-                let saturationOffset = 10
-                let valueOffset = 10
+        for i in 0..<variations {
+            var hueStep = 0
+            var hueOffset = 0
+            var saturationOffset = 0
+            var valueOffset = 0
+            var newHue = 0
             
-                var newHue1 = (colorRef.colorHSV[0]! - hueStep)
-                if newHue1 > 360 {
-                    newHue1 = newHue1 + 360
-                }
-                var newHue2 = (colorRef.colorHSV[0]! + hueStep)
-                if newHue2 > 360 {
-                    newHue2 = newHue1 - 360
-                }
+            switch hardness {
+                case .easy:
+                    hueStep = 90
+                    hueOffset = 30
+                    saturationOffset = 10
+                    valueOffset = 10
+                    break
+                    
+                case .normal:
+                    hueStep = 60
+                    hueOffset = 20
+                    saturationOffset = 10
+                    valueOffset = 10
+                    break
                 
-                similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
-                                                         hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.valueRange,
-                                                         isRussianOnly: isRussianOnly)
+                case .hard:
+                    hueStep = 20
+                    hueOffset = 15
+                    saturationOffset = 20
+                    valueOffset = 30
+                    break
                 
-                similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
-                                                         hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.normal]!.valueRange,
-                                                         isRussianOnly: isRussianOnly)
-                break
+                case .hell:
+                    break
+            }
+        
+            let delimiter: Int = Int(i > 2 ? ceil(Float(i) / 2.0) : 1)
             
-            case .hard:
-                let hueStep = 20
-                let hueOffset = 15
-                let saturationOffset = 20
-                let valueOffset = 30
-                
-                var newHue1 = (colorRef.colorHSV[0]! - hueStep)
-                if newHue1 < 0 {
-                    newHue1 = newHue1 + 360
+            // смотрим не вышло ли значение Hue за рамки от 0 до 360 градусов
+            if i % 2 == 0 {
+                newHue = colorRef.colorHSV[0]! + hueStep / delimiter
+                if newHue > 360 {
+                    newHue -= 360
                 }
-                var newHue2 = (colorRef.colorHSV[0]! + hueStep)
-                if newHue2 > 360 {
-                    newHue2 = newHue2 - 360
+            }
+            else {
+                newHue = colorRef.colorHSV[0]! - hueStep / delimiter
+                if newHue < 0 {
+                    newHue += 360
                 }
-                
-                similarColor1 = findSimilarColorByOffset(hue: newHue1, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
-                                                         hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.valueRange,
-                                                         isRussianOnly: isRussianOnly)
-                
-                similarColor2 = findSimilarColorByOffset(hue: newHue2, saturation: colorRef.colorHSV[1]!, value: colorRef.colorHSV[2]!,
-                                                         hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                         satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.saturationRange,
-                                                         valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.hard]!.valueRange,
-                                                         isRussianOnly: isRussianOnly)
-                break
+            }
             
-            case .hell:
-                break
+            // получаем похожий цвет, если получится
+            let colorResult = findSimilarColorByOffset(hue: newHue,
+                                                     saturation: colorRef.colorHSV[1]!,
+                                                     value: colorRef.colorHSV[2]!,
+                                                     hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
+                                                     satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
+                                                     valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange,
+                                                     isRussianOnly: isRussianOnly)
+            // если цвет получен, то добавляем его в выдачу
+            if let simColor = colorResult {
+                similarColors.append(simColor)
+            }
         }
         
 //        print("new hues: \(similarColor1?.colorHSV[0]), \(similarColor2?.colorHSV[0]); new saturations: \(similarColor1?.colorHSV[1]), \(similarColor2?.colorHSV[1]), new values: \(similarColor1?.colorHSV[2]), \(similarColor2?.colorHSV[2])")
         
-        if (similarColor1 != nil) {
-            result.append(similarColor1!)
-        }
-        if (similarColor2 != nil) {
-            result.append(similarColor2!)
-        }
         if packRef {
-            result.append(colorRef)
+            similarColors.append(colorRef)
         }
         
-        return result
+        return similarColors
     }
     
     private func findSimilarColorByOffset(hue refHue: Int, saturation satRef: Int, value valueRef: Int,

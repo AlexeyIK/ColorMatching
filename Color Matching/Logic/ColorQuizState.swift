@@ -1,20 +1,20 @@
 //
-//  QuizState.swift
-//  Color Matching
+//  ColorQuizState.swift
+//  HueQueue
 //
-//  Created by Алексей Кузнецов on 28.07.2021.
+//  Created by Алексей Кузнецов on 07.08.2021.
 //
 
 import Foundation
 import SwiftUI
 
-class QuizState: ObservableObject {
+class ColorQuizState: ObservableObject {
     
     init() {}
     
     // constants
     private let definedTimerFrequence: Double = 0.01
-    private let strikeBonusMultiplier: Float = 2
+    private let strikeBonusMultiplier: Int = 2
     
     // private
     private var countdownTimer: Timer?
@@ -22,65 +22,87 @@ class QuizState: ObservableObject {
     private var currentDateTime = Date()
     private var saveElapsedTime: TimeInterval = 0
     private var isTimerPaused: Bool = false
-    private var colorsViewed: [ColorModel] = []
     private var gameScore: Int = 0
+    
+    private var quizPosition: Int = 0
+    private var correctAnswers: Int = 0
     
     // public
     public var quizQuestions = 0
     public var results: QuizResults? = nil
+    public var colorsViewed: [ColorModel] = []
     
     // Published
     @Published var quizItemsList: [QuizItem] = []
     @Published var quizAnswersAndScore: [QuizAnswer] = []
     @Published var quizActive: Bool = false
     @Published var timeRunOut: Bool = false
-    @Published var quizPosition: Int = 0
-    @Published var correctAnswers: Int = 0
-    @Published var lastScoreChange: Int = 0
     @Published var timerString: String = "00:00:000"
     @Published var isAppActive: Bool = true
     
     func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true) -> Void {
         if cards.count == 0 { return }
         
-        var cardsList = cards
-        self.quizActive = true
         quizPosition = 0
+        correctAnswers = 0
         quizQuestions = cards.count
         
+        var cardsList = cards
         // перемешиваем карточки, если надо
         if (shuffled) {
             cardsList = ShuffleCards(cardsArray: cards)
         }
         
-        // создаем лист квизов заранее
-        cardsList.forEach { (card) in
-            let correctColor = card
-            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true, noClamp: true, isRussianOnly: russianNames))
-            quizItemsList.append(QuizItem(answers: colorVariants, correctId: correctColor.id))
-        }
+        // создаем список вопросов заранее
+        createQuizItems(availableCards: cardsList, hardness: hardness, russianNames: russianNames)
         
-        // запуск таймера
+        // запуск таймера на указанное время от уровня сложности
         var countdown: Double = 0
         switch hardness
         {
             case .easy:
-                countdown = 30
+                countdown = 40
             case .normal:
-                countdown  = 20
+                countdown  = 30
             case .hard:
-                countdown  = 15
+                countdown  = 20
             case .hell:
                 countdown  = 60
         }
         
         CoreDataManager.shared.resetLastGameScore()
         startTimer(for: countdown)
+        
+        self.quizActive = true
+    }
+    
+    func createQuizItems(availableCards: [ColorModel], hardness: Hardness, russianNames: Bool) {
+        
+        var variationsNum = 2
+        
+        // определяем сколько нам надо вариаций цветов для одного задания
+        switch hardness {
+        case .easy:
+            variationsNum = 2
+        case .normal:
+            variationsNum = 3
+        case .hard:
+            variationsNum = 4
+        case .hell:
+            variationsNum = 4
+        }
+        
+        availableCards.forEach { (card) in
+            let correctColor = card
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: variationsNum, withRef: true, noClamp: true, isRussianOnly: russianNames))
+            quizItemsList.append(QuizItem(answers: colorVariants, correct: correctColor))
+        }
     }
     
     func startTimer(for time: Double) {
         currentDateTime = Date()
         endDateTime = Date.init(timeIntervalSinceNow: time)
+        timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
         
         countdownTimer = Timer.scheduledTimer(withTimeInterval: definedTimerFrequence, repeats: true, block: { _ in
             guard !self.isTimerPaused else { return }
@@ -123,8 +145,6 @@ class QuizState: ObservableObject {
     
     func getQuizItem() -> QuizItem? {
         guard quizActive && quizItemsList.count > 0 else { return nil }
-        
-//        print("quiz position: \(quizPosition), quizItemsRemains: \(quizItemsList.count)")
         return quizItemsList.first
     }
     
@@ -140,12 +160,12 @@ class QuizState: ObservableObject {
         var strikeBonus = 0
         // начисляем бонус за страйк
         if correctAnswers == quizQuestions {
-            strikeBonus = Int(Float(gameScore) * strikeBonusMultiplier) - gameScore
+            strikeBonus = gameScore * strikeBonusMultiplier - gameScore
             CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
             gameScore += strikeBonus
         }
+        ColorQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
         CoreDataManager.shared.addViewedColors(colorsViewed)
-        CoreDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
         CoreDataManager.shared.writeLastGameScore(gameScore)
         
         print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(gameScore)")
@@ -161,63 +181,34 @@ class QuizState: ObservableObject {
     func checkAnswer(for quizItem: QuizItem, answer: Int = 0, hardness: Hardness) -> Bool {
         var result = false
         
-        if answer > 0 && answer == quizItem.correctId {
+        if answer > 0 && answer == quizItem.correct.id {
             correctAnswers += 1
-            quizPosition += 1
             result = true
-        }
-        else {
-            quizPosition += 1
         }
         
         // записываем результат разгадывания цвета
-        var currentColor = colorsData[quizItem.correctId]
+        var currentColor = quizItem.correct
         currentColor.isGuessed = result
         colorsViewed.append(currentColor)
         // смотрим сколько получили очков при текущем уровне сложности
-        lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
+        let lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
         gameScore += lastScoreChange
         // записываем эти очки в CoreData
         CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
-        if quizPosition == quizQuestions {
+        if quizPosition == quizQuestions - 1 {
             pauseTimer()
             startGameEndPause()
         }
         
         return result
     }
-}
-
-class QuizAnswer: Identifiable {
-    let isCorrect: Bool
-    let scoreEarned: Int
-    let startOffset: CGFloat
-    private(set) var lifetime: Double = 0
     
-    init(isCorrect: Bool, scoreEarned: Int) {
-        self.isCorrect = isCorrect
-        self.scoreEarned = scoreEarned
-        self.startOffset = CGFloat.random(in: -1...1)
+    func nextQuizItem() {
+        if quizPosition < quizQuestions {
+            quizPosition += 1
+        }
     }
-    
-    func liveTimeInc(seconds: Double) {
-        lifetime += seconds
-    }
-}
-
-struct QuizItem: Hashable {
-    let answers: [ColorModel]
-    let correctId: Int
-}
-
-struct QuizResults {
-    let correctAnswers: Int
-    let cardsViewed: Int
-    let cardsCount: Int
-    let scoreEarned: Int
-    let strikeMultiplier: Float
-    let strikeBonus: Int
 }

@@ -11,10 +11,13 @@ struct LearnAndQuizView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @StateObject var gameState: LearnAndQuizState = LearnAndQuizState()
+    @StateObject var gameState: LearnAndQuizState = LearnAndQuizState(quizType: .nameQuiz)
+    @StateObject var resultState: QuizResultsStore = QuizResultsStore()
     
     var body: some View {
         ZStack {
+            BackgroundView()
+            
             switch gameState.activeGameMode
             {
                 case .prepare:
@@ -24,8 +27,15 @@ struct LearnAndQuizView: View {
                     LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                         .environmentObject(gameState)
                 case .quiz:
-                    QuizGameView(useTimer: true, showColorNames: false)
+                    NameQuizView(showColorNames: false, debugMode: false)
                         .environmentObject(gameState)
+                        .environmentObject(resultState)
+                        .transition(.opacity)
+                case .results:
+                    QuizResultsView()
+                        .environmentObject(gameState)
+                        .environmentObject(resultState)
+                        .transition(.opacity)
             }
         }
         .navigationBarItems(

@@ -4,7 +4,14 @@
         <attribute name="bestStrike" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="colorsGuessed" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="finishedGames" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastPlayedHardness" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="strikesCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="NameQuizStats" representedClassName="NameQuizStats" syncable="YES" codeGenerationType="class">
+        <attribute name="bestStrike" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="finishedGames" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lastPlayedHardness" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="namesGuessed" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="strikesCount" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="OverallStats" representedClassName="OverallStats" syncable="YES" codeGenerationType="class">
@@ -17,8 +24,9 @@
         <attribute name="isGuessed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
     </entity>
     <elements>
-        <element name="ColorQuizStats" positionX="-54" positionY="36" width="128" height="118"/>
+        <element name="NameQuizStats" positionX="-54" positionY="36" width="128" height="118"/>
         <element name="OverallStats" positionX="-63" positionY="-18" width="128" height="88"/>
         <element name="ViewedColor" positionX="-63" positionY="27" width="128" height="73"/>
+        <element name="ColorQuizStats" positionX="-54" positionY="45" width="128" height="118"/>
     </elements>
 </model>

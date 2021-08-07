@@ -13,6 +13,7 @@ struct StatsView: View {
     
     @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<OverallStats>
     @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
+    @FetchRequest(entity: NameQuizStats.entity(), sortDescriptors: []) var nameQuizStats: FetchedResults<NameQuizStats>
     @FetchRequest(entity: ViewedColor.entity(), sortDescriptors: [], predicate: NSPredicate(format: "isGuessed == true")) var viewedColors: FetchedResults<ViewedColor>
     
     var body: some View {
@@ -28,16 +29,28 @@ struct StatsView: View {
                     .padding(.bottom, 60)
                 
                 ScrollView(.vertical, showsIndicators: false) {
-                    StatItemView(caption: "Collected Соlor Coins", value: String(playerStats[0].totalScore))
-                    StatItemView(caption: "Last game Color Coins", value: String(playerStats[0].lastGameScore))
-                    StatItemView(caption: "Total games finished", value: String(playerStats[0].totalFinishedGames))
+                    Group {
+                        StatItemView(caption: "Collected Соlor Coins", value: String(playerStats[0].totalScore))
+                        StatItemView(caption: "Last game Color Coins", value: String(playerStats[0].lastGameScore))
+                        StatItemView(caption: "Total games finished", value: String(playerStats[0].totalFinishedGames))
+                        StatItemView(caption: "Guessed unique colors", value: String(viewedColors.count))
+                    }
                     
-                    StatCaptionView(caption: "Color QUIZ")
-                    StatItemView(caption: "Finished games", value: String(colorQuizStats[0].finishedGames))
-                    StatItemView(caption: "Guessed colors", value: String(colorQuizStats[0].colorsGuessed))
-                    StatItemView(caption: "Guessed unique colors", value: String(viewedColors.count))
-                    StatItemView(caption: "Color Strikes", value: String(colorQuizStats[0].strikesCount))
-                    StatItemView(caption: "Best Strike", value: String(colorQuizStats[0].bestStrike))
+                    Group {
+                        StatCaptionView(caption: "Color QUIZ")
+                        StatItemView(caption: "Finished games", value: String(colorQuizStats[0].finishedGames))
+                        StatItemView(caption: "Guessed colors", value: String(colorQuizStats[0].colorsGuessed))
+                        StatItemView(caption: "Color Strikes", value: String(colorQuizStats[0].strikesCount))
+                        StatItemView(caption: "Best Strike", value: String(colorQuizStats[0].bestStrike))
+                    }
+                    
+                    Group {
+                        StatCaptionView(caption: "Name QUIZ")
+                        StatItemView(caption: "Finished games", value: String(nameQuizStats[0].finishedGames))
+                        StatItemView(caption: "Guessed names", value: String(nameQuizStats[0].namesGuessed))
+                        StatItemView(caption: "Color Strikes", value: String(nameQuizStats[0].strikesCount))
+                        StatItemView(caption: "Best Strike", value: String(nameQuizStats[0].bestStrike))
+                    }
                 }
                 
                 Spacer()

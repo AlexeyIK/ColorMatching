@@ -27,6 +27,7 @@ struct MainMenuView: View {
     
     @Environment(\.managedObjectContext) var dataStorage
     @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var overallStats: FetchedResults<OverallStats>
+    @FetchRequest(entity: NameQuizStats.entity(), sortDescriptors: []) var nameQuizStats: FetchedResults<NameQuizStats>
     @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
     
     @State var linesOffset: CGFloat = 0.0
@@ -39,38 +40,7 @@ struct MainMenuView: View {
                     BackgroundView()
                         .animation(.none)
                     
-                    VStack {
-                        Spacer()
-                        
-                        Text("Color games collection")
-                            .font(.title)
-                            .fontWeight(.light)
-                            .foregroundColor(ConvertColor(colorType: .hsba, value: (179, 73, 40, 1)))
-                        
-                        Spacer()
-                        
-                        VStack(spacing: 16) {
-                            NavigationLink(
-                                destination: LearnAndQuizView()
-                                    .navigationBarBackButtonHidden(true)
-                                    .navigationBarTitleDisplayMode(.inline),
-                                    
-                                label: {
-                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
-                                })
-                                
-                            
-                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0.3).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
-                            
-                            MenuButtonView(text: "More games soon", noImage: true)
-                        }
-                        .offset(y: -geometry.size.height * 0.05)
-                        
-                        Spacer()
-                    }
-                    .animation(.none)
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    
+                    // кнопка статистики
                     HStack {
                         Spacer()
                         
@@ -93,7 +63,49 @@ struct MainMenuView: View {
                         }
                     }
                     .animation(.none)
+                    
+                    VStack {
+                        Spacer()
+                        
+                        Text("Color games collection")
+                            .font(.title)
+                            .fontWeight(.light)
+                            .foregroundColor(ConvertColor(colorType: .hsba, value: (179, 73, 40, 1)))
+                        
+                        Spacer()
+                        
+                        VStack(spacing: 16) {
+                            NavigationLink(
+                                destination: ColorQuizMainView()
+                                    .navigationBarBackButtonHidden(true)
+                                    .navigationBarTitleDisplayMode(.inline),
+                                    
+                                label: {
+                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                                })
+                            
+                            NavigationLink(
+                                destination: LearnAndQuizView()
+                                    .navigationBarBackButtonHidden(true)
+                                    .navigationBarTitleDisplayMode(.inline),
+                                    
+                                label: {
+                                    MenuButtonView(text: "Name QUIZ", imageName: "iconNameQIUZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                                })
+                            
+                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
+                            
+                            MenuButtonView(text: "More games soon", noImage: true)
+                        }
+                        .offset(y: -geometry.size.height * 0.05)
+                        
+                        Spacer()
+                    }
+                    .padding(.top, 25)
+                    .animation(.none)
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                 
+                    // цветные полоски по краям
                     HStack(alignment: .center) {
                         Rectangle()
                             .fill(LinearGradient(gradient: Gradient(
@@ -139,8 +151,11 @@ struct MainMenuView: View {
             if overallStats.count == 0 {
                 _ = CoreDataManager.shared.createOverallStatsTable()
             }
+            if nameQuizStats.count == 0 {
+                _ = NameQuizDataManager.shared.createStatsTable()
+            }
             if colorQuizStats.count == 0 {
-                _ = CoreDataManager.shared.createColorQuizStatsTable()
+                _ = ColorQuizDataManager.shared.createStatsTable()
             }
 
             CoreDataManager.shared.showAllReadings()

@@ -12,6 +12,12 @@ enum GameMode {
     case prepare
     case learn
     case quiz
+    case results
+}
+
+enum QuizType {
+    case nameQuiz
+    case colorQuiz
 }
 
 // уровень сложности по умолчанию
@@ -21,6 +27,7 @@ class LearnAndQuizState: ObservableObject  {
     
     private var savedCardsArray: [ColorModel] = []
     private var gameSessionActive: Bool = false
+    private var quizType: QuizType = .nameQuiz
     
     @Published var russianNames: Bool = true
     @Published var cardsList: [ColorModel] = []
@@ -29,8 +36,18 @@ class LearnAndQuizState: ObservableObject  {
     @Published var hardness: Hardness
     @Published var cardsCount = 7
     
-    init(definedHardness: Hardness = _definedHardness) {
-        let lastHardness = CoreDataManager.shared.getLastQuizHardness()
+    init(quizType: QuizType, definedHardness: Hardness = _definedHardness) {
+        self.quizType = quizType
+        
+        var lastHardness = 0
+        
+        switch quizType {
+            case .nameQuiz:
+                lastHardness = NameQuizDataManager.shared.getPreviousHardness()
+            case .colorQuiz:
+                lastHardness = ColorQuizDataManager.shared.getPreviousHardness()
+        }
+        
         self.hardness = lastHardness == 0 ? definedHardness : Hardness.init(rawValue: lastHardness) ?? .easy
     }
     
@@ -44,7 +61,12 @@ class LearnAndQuizState: ObservableObject  {
         self.activeGameMode = .learn
         self.gameActive = true;
         
-        CoreDataManager.shared.writeCurrentHardness(hardness)
+        switch quizType {
+            case .nameQuiz:
+                NameQuizDataManager.shared.writeCurrentHardness(hardness)
+            case .colorQuiz:
+                ColorQuizDataManager.shared.writeCurrentHardness(hardness)
+        }
     }
     
     func endGameSession() {

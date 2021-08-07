@@ -25,7 +25,7 @@ struct QuizStartView: View {
     
     var body: some View {
         
-        let answers = SimilarColorPicker.shared.getSimilarColors(colorRef: gameState.russianNames ? guessColorPreviewRus : guessColorPreview, for: gameState.hardness, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames)
+        let answers = SimilarColorPicker.shared.getSimilarColors(colorRef: gameState.russianNames ? guessColorPreviewRus : guessColorPreview, for: gameState.hardness, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames).shuffled()
         
         ZStack {
             BackgroundView()
@@ -34,6 +34,8 @@ struct QuizStartView: View {
                 Spacer()
                 
                 VStack {
+                    Spacer()
+                    
                     Button(gameState.russianNames ? "Rus" : "Eng") {
                         gameState.russianNames.toggle()
                     }
@@ -41,8 +43,7 @@ struct QuizStartView: View {
                     .font(.system(size: 14))
                     .transition(.identity)
                     .animation(.none)
-                    
-                    Spacer()
+                    .padding()
                 }
             }
             
@@ -57,7 +58,7 @@ struct QuizStartView: View {
                     
                     VStack {
                         ZStack {
-                            TransparentCardView(colorModel: rememberColorPreview, drawBorder: false, drawShadow: true, showName: false)
+                            TransparentCardView(colorModel: gameState.russianNames ? rememberColorPreviewRus : rememberColorPreview, drawBorder: false, drawShadow: true, showName: false)
                                 .aspectRatio(aspectRatio, contentMode: .fit)
                                 .frame(width: contentZone.size.width, height: contentZone.size.height * 0.22, alignment: .center)
                                 .transition(.identity)
@@ -94,7 +95,7 @@ struct QuizStartView: View {
                     ZStack {
                         HStack {
                             VStack {
-                                ForEach(answers) { answer in
+                                ForEach(answers, id: \.self) { answer in
                                     FakeButtonsView(text: gameState.russianNames ? answer.name : answer.englishName,
                                                     foregroundColor: answersColor,
                                                     outlineColor: answersColor)
@@ -104,7 +105,7 @@ struct QuizStartView: View {
                             .offset(x: -card2Offset)
                             .opacity(opacity1)
                             
-                            TransparentCardView(colorModel: guessColorPreview, drawBorder: false, drawShadow: true, showName: false)
+                            TransparentCardView(colorModel: gameState.russianNames ? guessColorPreviewRus : guessColorPreview, drawBorder: false, drawShadow: true, showName: false)
                                 .aspectRatio(aspectRatio, contentMode: .fit)
                                 .frame(height: contentZone.size.height * 0.22, alignment: .center)
                                 .transition(.identity)
@@ -161,8 +162,9 @@ struct QuizStartView: View {
                     .font(.system(size: 40))
                     .frame(width: contentZone.size.width, alignment: .center)
                     .transition(.identity)
+                    .padding(.bottom, 50)
                     
-                    Spacer()
+//                    Spacer()
                 }
                 .onAppear() {
                     withAnimation(Animation.easeOut(duration: 0.3).delay(0.3)) {
@@ -185,7 +187,7 @@ struct QuizStartView_Previews: PreviewProvider {
             QuizStartView()
                 .previewDevice(PreviewDevice(stringLiteral: device))
                 .previewDisplayName(device)
-                .environmentObject(LearnAndQuizState())
+                .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
         }
     }
 }
