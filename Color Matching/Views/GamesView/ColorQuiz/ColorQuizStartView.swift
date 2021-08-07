@@ -15,7 +15,7 @@ struct ColorQuizStartView: View {
     @State var card2Offset: CGFloat = UIScreen.main.bounds.width * 0.65
     @State var opacity1: Double = 0
     @State var opacity2: Double = 0
-    @State var angle: Double = -180
+    @State var angle: Double = 100
     @State var perc: Double = 0
     @State var blink: Bool = false
     @State var petalDelay: Double = 1.8
@@ -24,10 +24,10 @@ struct ColorQuizStartView: View {
     @State var colorRef: ColorModel = colorsData[0]
     @State var timer: Timer? = nil
     
-    let rememberColorPreview: ColorModel = colorsData[220] // заменить на randomElement(), когда база пополнится
-    let rememberColorPreviewRus: ColorModel = colorsData[118]
-    let guessColorPreview: ColorModel = colorsData[220] // заменить на randomElement(), когда база пополнится
-    let guessColorPreviewRus: ColorModel = colorsData[118]
+    let rememberColorPreview: ColorModel = colorsData[251] // FF8E0D, заменить на randomElement(), когда база пополнится
+    let rememberColorPreviewRus: ColorModel = colorsData[215] // E8793E
+    let guessColorPreview: ColorModel = colorsData[251] // заменить на randomElement(), когда база пополнится
+    let guessColorPreviewRus: ColorModel = colorsData[215]
     let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
     
@@ -114,7 +114,7 @@ struct ColorQuizStartView: View {
                                         self.blink = false
                                     }
                                 }))
-                                .animation(Animation.easeOut(duration: 0.4).delay(petalDelay + Double(answers.count - i) * 0.05), value: perc)
+                                .animation(Animation.easeOut(duration: 0.4 - Double(i) * 0.05).delay(petalDelay + Double(i) * 0.05), value: perc)
                         }
                         
                         Text("Choose the right color")
@@ -193,7 +193,7 @@ struct ColorQuizStartView: View {
                     
                     opacity2 = 0
                     perc = 0
-                    angle = -180
+                    angle = 100
                     petalDelay = 0.1
                     blink = false
                     
