@@ -18,10 +18,10 @@ class ColorQuizState: ObservableObject {
     
     // private
     private var countdownTimer: Timer?
+    private var countdown: Double = 0
     private var endDateTime = Date()
     private var currentDateTime = Date()
     private var saveElapsedTime: TimeInterval = 0
-    private var isTimerPaused: Bool = false
     private var gameScore: Int = 0
     
     private var quizPosition: Int = 0
@@ -37,10 +37,11 @@ class ColorQuizState: ObservableObject {
     @Published var quizAnswersAndScore: [QuizAnswer] = []
     @Published var quizActive: Bool = false
     @Published var timeRunOut: Bool = false
+    @Published var isTimerPaused: Bool = true
     @Published var timerString: String = "00:00:000"
     @Published var isAppActive: Bool = true
     
-    func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true) -> Void {
+    func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true, doNotRunTimer: Bool = false) -> Void {
         if cards.count == 0 { return }
         
         quizPosition = 0
@@ -57,7 +58,6 @@ class ColorQuizState: ObservableObject {
         createQuizItems(availableCards: cardsList, hardness: hardness, russianNames: russianNames)
         
         // запуск таймера на указанное время от уровня сложности
-        var countdown: Double = 0
         switch hardness
         {
             case .easy:
@@ -71,7 +71,11 @@ class ColorQuizState: ObservableObject {
         }
         
         CoreDataManager.shared.resetLastGameScore()
-        startTimer(for: countdown)
+        startTimer()
+        
+        if doNotRunTimer {
+            pauseTimer()
+        }
         
         self.quizActive = true
     }
@@ -99,9 +103,9 @@ class ColorQuizState: ObservableObject {
         }
     }
     
-    func startTimer(for time: Double) {
+    func startTimer() {
         currentDateTime = Date()
-        endDateTime = Date.init(timeIntervalSinceNow: time)
+        endDateTime = Date.init(timeIntervalSinceNow: countdown)
         timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
         
         countdownTimer = Timer.scheduledTimer(withTimeInterval: definedTimerFrequence, repeats: true, block: { _ in
@@ -119,6 +123,9 @@ class ColorQuizState: ObservableObject {
                 self.startGameEndPause()
             }
         })
+        
+        isTimerPaused = false
+        print("Timer started")
     }
     
     func pauseTimer() {

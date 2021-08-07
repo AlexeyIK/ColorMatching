@@ -120,8 +120,8 @@ struct ColorQuizView: View {
                                                 
                                                 self.rotatePercentage = 0
                                                 
-                                                if quizState.isAppActive {
-                                                    quizState.resumeTimer()
+                                                if quizState.isAppActive && quizState.quizActive && quizState.isTimerPaused {
+                                                    quizState.startTimer()
                                                 }
                                                 
                                                 if swapCards && !quizState.timeRunOut {
@@ -162,8 +162,7 @@ struct ColorQuizView: View {
             }
         }
         .onAppear() {
-            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames)
-            quizState.pauseTimer()
+            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames, doNotRunTimer: true)
             
             withAnimation(.easeOut(duration: 0.4)) {
                 self.newRotation = 0
