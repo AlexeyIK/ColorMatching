@@ -102,6 +102,7 @@ class ColorQuizState: ObservableObject {
     func startTimer(for time: Double) {
         currentDateTime = Date()
         endDateTime = Date.init(timeIntervalSinceNow: time)
+        timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
         
         countdownTimer = Timer.scheduledTimer(withTimeInterval: definedTimerFrequence, repeats: true, block: { _ in
             guard !self.isTimerPaused else { return }

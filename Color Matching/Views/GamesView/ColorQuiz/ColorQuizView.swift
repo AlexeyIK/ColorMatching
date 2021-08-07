@@ -120,6 +120,10 @@ struct ColorQuizView: View {
                                                 
                                                 self.rotatePercentage = 0
                                                 
+                                                if quizState.isAppActive {
+                                                    quizState.resumeTimer()
+                                                }
+                                                
                                                 if swapCards && !quizState.timeRunOut {
                                                     self.swapCards = false
                                                     self.lastAnswerIsCorrect = nil
@@ -145,7 +149,7 @@ struct ColorQuizView: View {
                                                 }
                                             }
                                         }
-                                        .animation(Animation.easeInOut(duration: 0.75 - 0.125 * Double(index)).delay(0.25 + 0.125 * Double(index)), value: rotatePercentage)
+                                        .animation(Animation.easeInOut(duration: 0.65 - 0.14 * Double(index)).delay(0.2 + 0.14 * Double(index)), value: rotatePercentage)
                                 }
                             }
                             .transition(.opacity)
@@ -159,8 +163,9 @@ struct ColorQuizView: View {
         }
         .onAppear() {
             quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames)
+            quizState.pauseTimer()
             
-            withAnimation() {
+            withAnimation(.easeOut(duration: 0.4)) {
                 self.newRotation = 0
                 self.rotatePercentage = 1
             }
