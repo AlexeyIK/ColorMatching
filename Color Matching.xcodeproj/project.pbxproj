@@ -21,6 +21,7 @@
 		BD3CF1352692F07900FF0D68 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF1342692F07900FF0D68 /* Persistence.swift */; };
 		BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF1362692F07900FF0D68 /* Color_Matching.xcdatamodeld */; };
 		BD3DB4AB26BED66500763AAA /* OuterGlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3DB4AA26BED66500763AAA /* OuterGlow.swift */; };
+		BD3DB4B026BEE0E200763AAA /* RollingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3DB4AF26BEE0E200763AAA /* RollingAnimation.swift */; };
 		BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */; };
 		BD3FB45626B1F84500BA5F3B /* NameQuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45526B1F84500BA5F3B /* NameQuizState.swift */; };
 		BD3FB45B26B1FF9600BA5F3B /* LearnAndQuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */; };
@@ -85,6 +86,7 @@
 		BD3CF14D2692F07A00FF0D68 /* Color_MatchingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_MatchingUITests.swift; sourceTree = "<group>"; };
 		BD3CF14F2692F07A00FF0D68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD3DB4AA26BED66500763AAA /* OuterGlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OuterGlow.swift; sourceTree = "<group>"; };
+		BD3DB4AF26BEE0E200763AAA /* RollingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RollingAnimation.swift; sourceTree = "<group>"; };
 		BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerHelper.swift; path = "Color Matching/Helpers/TimerHelper.swift"; sourceTree = SOURCE_ROOT; };
 		BD3FB45526B1F84500BA5F3B /* NameQuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuizState.swift; sourceTree = "<group>"; };
 		BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnAndQuizState.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 			children = (
 				F197014826A6DF4800494B2F /* AnimationsTest.swift */,
 				F145D10626A44D500044476F /* CardAnimations.swift */,
+				BD3DB4AF26BEE0E200763AAA /* RollingAnimation.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				F1469CAE2698D8A1006A14BC /* MainMenuView.swift in Sources */,
 				BD3FB45626B1F84500BA5F3B /* NameQuizState.swift in Sources */,
 				F1C519DA269DE18C0096B9B4 /* ReadSizeExtension.swift in Sources */,
+				BD3DB4B026BEE0E200763AAA /* RollingAnimation.swift in Sources */,
 				BD09136126BD1CA00082386C /* PetalTestView.swift in Sources */,
 				F1D656EF26AB758A007BCDAE /* NameQuizView.swift in Sources */,
 				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
