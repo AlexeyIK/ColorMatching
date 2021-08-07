@@ -57,7 +57,7 @@ class QuizState: ObservableObject {
         cardsList.forEach { (card) in
             let correctColor = card
             let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true, noClamp: true, isRussianOnly: russianNames))
-            quizItemsList.append(QuizItem(answers: colorVariants, correctId: correctColor.id))
+            quizItemsList.append(QuizItem(answers: colorVariants, correct: correctColor))
         }
         
         // запуск таймера
@@ -161,17 +161,13 @@ class QuizState: ObservableObject {
     func checkAnswer(for quizItem: QuizItem, answer: Int = 0, hardness: Hardness) -> Bool {
         var result = false
         
-        if answer > 0 && answer == quizItem.correctId {
+        if answer > 0 && answer == quizItem.correct.id {
             correctAnswers += 1
-            quizPosition += 1
             result = true
-        }
-        else {
-            quizPosition += 1
         }
         
         // записываем результат разгадывания цвета
-        var currentColor = colorsData[quizItem.correctId]
+        var currentColor = quizItem.correct
         currentColor.isGuessed = result
         colorsViewed.append(currentColor)
         // смотрим сколько получили очков при текущем уровне сложности
@@ -182,12 +178,18 @@ class QuizState: ObservableObject {
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
-        if quizPosition == quizQuestions {
-            pauseTimer()
+        if quizPosition == quizQuestions - 1 {
+//            pauseTimer()
             startGameEndPause()
         }
         
         return result
+    }
+    
+    func nextQuizItem() {
+        if quizPosition < quizQuestions {
+            quizPosition += 1
+        }
     }
 }
 
@@ -210,7 +212,7 @@ class QuizAnswer: Identifiable {
 
 struct QuizItem: Hashable {
     let answers: [ColorModel]
-    let correctId: Int
+    let correct: ColorModel
 }
 
 struct QuizResults {

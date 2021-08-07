@@ -9,13 +9,15 @@ import SwiftUI
 
 struct QuizResultsView: View {
     
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
     @EnvironmentObject var gameState: LearnAndQuizState
     @EnvironmentObject var resultsStore: QuizResultsStore
     
     @State var resultsCaptionOffset: CGFloat = -UIScreen.main.bounds.height * 0.5
-    @State var scoreCaptionOffset: CGFloat = -UIScreen.main.bounds.width * 0.7
+    @State var scoreCaptionOffset: CGFloat = -UIScreen.main.bounds.width * 0.8
     @State var bonusScale: CGFloat = 0
-    @State var totalCaptionOffset: CGFloat = UIScreen.main.bounds.width * 0.7
+    @State var totalCaptionOffset: CGFloat = UIScreen.main.bounds.width * 0.8
     @State var isVisible: Bool = false
     @State var hueAngle: Double = 0.0
     
@@ -111,7 +113,7 @@ struct QuizResultsView: View {
             Spacer()
             
             Button("Main menu") {
-                gameState.restartGameSession()
+                presentationMode.wrappedValue.dismiss()
             }
             .buttonStyle(GoButton2())
             .font(.body)

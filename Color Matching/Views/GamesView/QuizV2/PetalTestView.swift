@@ -1,5 +1,5 @@
 //
-//  PetalView.swift
+//  PetalTestView.swift
 //  HueQueue
 //
 //  Created by Алексей Кузнецов on 06.08.2021.
@@ -71,7 +71,7 @@ struct RollingModifier: AnimatableModifier {
     
 }
 
-struct PetalView_Previews: PreviewProvider {
+struct PetalTestView_Previews: PreviewProvider {
     static var previews: some View {
         PetalTestView()
     }
@@ -99,6 +99,7 @@ struct Petal: Shape {
         path.addCurve(to: CGPoint(x: rect.midX - rect.width * outerWidth / 100, y: topPoint.y),
                       control1: CGPoint(x: rect.midX + rect.width * outerRoundness * 0.95, y: -rect.height * 0.09),
                       control2: CGPoint(x: rect.midX - rect.width * outerRoundness * 0.95, y: -rect.height * 0.09))
+        path.closeSubpath()
         
         return path
     }

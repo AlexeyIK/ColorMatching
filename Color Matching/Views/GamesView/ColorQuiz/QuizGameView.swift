@@ -60,7 +60,7 @@ struct QuizGameView: View {
                 ZStack {
                     ForEach(Array(quizState.quizItemsList.enumerated()), id: \.element) { (index, card) in
                         
-                        TransparentCardView(colorModel: colorsData[card.correctId],
+                        TransparentCardView(colorModel: card.correct,
                                              drawBorder: true,
                                              drawShadow: index == 0,
                                              showName: showColorNames,
@@ -93,7 +93,7 @@ struct QuizGameView: View {
                                 .transition(.identity)
                                 .buttonStyle(QuizButton())
                                 .animation(.none)
-                                .brightness(highlightCorrectAnswer && answer.id == quizItem.correctId ? 0.05 : 0)
+                                .brightness(highlightCorrectAnswer && answer.id == quizItem.correct.id ? 0.05 : 0)
                             }
                         }
                     }

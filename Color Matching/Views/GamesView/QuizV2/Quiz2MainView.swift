@@ -26,7 +26,7 @@ struct Quiz2MainView: View {
                     LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                         .environmentObject(gameState)
                 case .quiz:
-                    GuessColorView(showColorNames: false)
+                    GuessColorView(showColorNames: false, debugMode: false)
                         .environmentObject(gameState)
                         .environmentObject(resultState)
                         .transition(.opacity)

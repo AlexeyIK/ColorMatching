@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BD09136126BD1CA00082386C /* PetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09136026BD1CA00082386C /* PetalView.swift */; };
+		BD09136126BD1CA00082386C /* PetalTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD09136026BD1CA00082386C /* PetalTestView.swift */; };
 		BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */; };
 		BD215CD226B5546A00B1D493 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD215CD126B5546A00B1D493 /* StatsView.swift */; };
 		BD279F9726BC800D005C8E3D /* Quiz2MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */; };
@@ -27,6 +27,8 @@
 		BD6C17A926B55E7D00C28F20 /* StatItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17A826B55E7D00C28F20 /* StatItemView.swift */; };
 		BD6C17AE26B5605100C28F20 /* StatCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17AD26B5605100C28F20 /* StatCaptionView.swift */; };
 		BD6C17B726B5755500C28F20 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6C17B626B5755500C28F20 /* CoreDataManager.swift */; };
+		BD6D1F5026BDE33300CF34BF /* PetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6D1F4F26BDE33300CF34BF /* PetalView.swift */; };
+		BD6D1F5326BDE49C00CF34BF /* BackgroundView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6D1F5226BDE49C00CF34BF /* BackgroundView2.swift */; };
 		BD6EC87226B9CAAF001B563E /* QuizStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6EC87126B9CAAF001B563E /* QuizStartView.swift */; };
 		BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */; };
 		BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */; };
@@ -59,7 +61,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BD09136026BD1CA00082386C /* PetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetalView.swift; sourceTree = "<group>"; };
+		BD09136026BD1CA00082386C /* PetalTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetalTestView.swift; sourceTree = "<group>"; };
 		BD142D7726B36E9300CB5F2C /* MenuButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButtonView.swift; sourceTree = "<group>"; };
 		BD215CD126B5546A00B1D493 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz2MainView.swift; sourceTree = "<group>"; };
@@ -85,6 +87,8 @@
 		BD6C17A826B55E7D00C28F20 /* StatItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatItemView.swift; sourceTree = "<group>"; };
 		BD6C17AD26B5605100C28F20 /* StatCaptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatCaptionView.swift; sourceTree = "<group>"; };
 		BD6C17B626B5755500C28F20 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		BD6D1F4F26BDE33300CF34BF /* PetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetalView.swift; sourceTree = "<group>"; };
+		BD6D1F5226BDE49C00CF34BF /* BackgroundView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView2.swift; sourceTree = "<group>"; };
 		BD6EC87126B9CAAF001B563E /* QuizStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizStartView.swift; sourceTree = "<group>"; };
 		BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizColorPickView.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 				F1D22CAC269BA14A009D4BD2 /* ColorCardView.swift */,
 				F1758E6D26A0DFA60035E6B5 /* ColorCardMinimalView.swift */,
 				F1D656E626AB552B007BCDAE /* TransparentCardView.swift */,
+				BD6D1F4F26BDE33300CF34BF /* PetalView.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				BD2E41E126B5415900D19D50 /* ScorePointView.swift */,
 				BDFAB12626AF653F00BF65CD /* TimerView.swift */,
 				F1B568D226A608B20008494D /* BackgroundView.swift */,
+				BD6D1F5226BDE49C00CF34BF /* BackgroundView2.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -184,7 +190,7 @@
 			children = (
 				BD279F9626BC800D005C8E3D /* Quiz2MainView.swift */,
 				BD279F9A26BC805F005C8E3D /* GuessColorView.swift */,
-				BD09136026BD1CA00082386C /* PetalView.swift */,
+				BD09136026BD1CA00082386C /* PetalTestView.swift */,
 			);
 			path = QuizV2;
 			sourceTree = "<group>";
@@ -419,7 +425,9 @@
 				F1E28E0626AB0D1200B62054 /* SimilarColorPicker.swift in Sources */,
 				F1758E6E26A0DFA60035E6B5 /* ColorCardMinimalView.swift in Sources */,
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
+				BD6D1F5326BDE49C00CF34BF /* BackgroundView2.swift in Sources */,
 				BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */,
+				BD6D1F5026BDE33300CF34BF /* PetalView.swift in Sources */,
 				BDE58DF426BB27CF00387545 /* QuizButtons.swift in Sources */,
 				F1D22CAD269BA14A009D4BD2 /* ColorCardView.swift in Sources */,
 				BDEC060026B9DC9C0087833D /* FakeButtonsView.swift in Sources */,
@@ -442,7 +450,7 @@
 				F1469CAE2698D8A1006A14BC /* MainMenuView.swift in Sources */,
 				BD3FB45626B1F84500BA5F3B /* QuizState.swift in Sources */,
 				F1C519DA269DE18C0096B9B4 /* ReadSizeExtension.swift in Sources */,
-				BD09136126BD1CA00082386C /* PetalView.swift in Sources */,
+				BD09136126BD1CA00082386C /* PetalTestView.swift in Sources */,
 				F1D656EF26AB758A007BCDAE /* QuizGameView.swift in Sources */,
 				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
 				BD6EC87226B9CAAF001B563E /* QuizStartView.swift in Sources */,
