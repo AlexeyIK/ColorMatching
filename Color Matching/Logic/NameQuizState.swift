@@ -1,5 +1,5 @@
 //
-//  QuizState.swift
+//  NameQuizState.swift
 //  Color Matching
 //
 //  Created by Алексей Кузнецов on 28.07.2021.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class QuizState: ObservableObject {
+class NameQuizState: ObservableObject {
     
     init() {}
     
@@ -43,20 +43,20 @@ class QuizState: ObservableObject {
     func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true) -> Void {
         if cards.count == 0 { return }
         
-        var cardsList = cards
-        self.quizActive = true
         quizPosition = 0
+        correctAnswers = 0
         quizQuestions = cards.count
         
+        var cardsList = cards
         // перемешиваем карточки, если надо
         if (shuffled) {
             cardsList = ShuffleCards(cardsArray: cards)
         }
         
-        // создаем лист квизов заранее
+        // создаем список вопросов заранее
         cardsList.forEach { (card) in
             let correctColor = card
-            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, withRef: true, noClamp: true, isRussianOnly: russianNames))
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: 2, withRef: true, noClamp: true, isRussianOnly: russianNames))
             quizItemsList.append(QuizItem(answers: colorVariants, correct: correctColor))
         }
         
@@ -76,6 +76,8 @@ class QuizState: ObservableObject {
         
         CoreDataManager.shared.resetLastGameScore()
         startTimer(for: countdown)
+        
+        self.quizActive = true
     }
     
     func startTimer(for time: Double) {

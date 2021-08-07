@@ -1,5 +1,5 @@
 //
-//  GuessColorView.swift
+//  ColorQuizView.swift
 //  HueQueue
 //
 //  Created by Алексей Кузнецов on 05.08.2021.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct GuessColorView: View {
+struct ColorQuizView: View {
     
     @Environment(\.scenePhase) private var scenePhase
     
     @EnvironmentObject var gameState: LearnAndQuizState
     @EnvironmentObject var resultStore: QuizResultsStore
-    @StateObject var quizState: QuizState = QuizState()
+    @StateObject var quizState: ColorQuizState = ColorQuizState()
     
     var highlightCorrectAnswer: Bool = false
     var showColorNames: Bool = false
@@ -25,7 +25,7 @@ struct GuessColorView: View {
     @State var newRotation: Double = 180
     @State var swapCards: Bool = false
     
-    private let debugAnswers = QuizItem(answers: [colorsData[170], colorsData[180], colorsData[190]], correct: colorsData[190])
+    private let debugAnswers = QuizItem(answers: [colorsData[170], colorsData[180], colorsData[190], colorsData[200]], correct: colorsData[190])
     private let debugScores = [QuizAnswer(isCorrect: true, scoreEarned: 12)]
     
     var body: some View {
@@ -52,9 +52,8 @@ struct GuessColorView: View {
                         }
                         
                         if quizState.quizActive || debugMode {
-                            TimerView()
+                            TimerView(timerString: quizState.timerString)
                                 .foregroundColor(Color.white)
-                                .environmentObject(quizState)
                             
                             Spacer()
                             
@@ -103,6 +102,8 @@ struct GuessColorView: View {
                             ZStack(alignment: .center) {
                                 let angleStep = Double(90 / quizItem.answers.count)
                                 let appActive = lastAnswerIsCorrect == nil && quizState.isAppActive
+                                let flowerZoneDemention = min(300, contentZone.size.width * 0.85)
+                                let startAngle = 90 - angleStep / 2
                                 
                                 ForEach(quizItem.answers.indices) { index in
                                     PetalView(colorModel: quizItem.answers[index],
@@ -111,10 +112,10 @@ struct GuessColorView: View {
                                               showColor: appActive || quizState.isAppActive && quizItem.answers[index] == quizItem.correct,
                                               hightlight: lastAnswerIsCorrect ?? false && quizItem.answers[index] == quizItem.correct,
                                               blink: lastAnswerIsCorrect == false && quizItem.answers[index] == quizItem.correct)
-                                        .frame(width: 340 / CGFloat(quizItem.answers.count), height: 300, alignment: .center)
+                                        .frame(width: flowerZoneDemention / CGFloat(quizItem.answers.count), height: flowerZoneDemention, alignment: .center)
                                         .transition(.identity)
                                         .modifier(
-                                            RollingModifier(toAngle: -75 + angleStep * Double(index) + newRotation, percentage: rotatePercentage, anchor: .bottom) {
+                                            RollingModifier(toAngle: -startAngle + angleStep * Double(index) + newRotation, percentage: rotatePercentage, anchor: .bottom) {
                                                 
                                                 self.rotatePercentage = 0
                                                 
@@ -143,7 +144,7 @@ struct GuessColorView: View {
                                                 }
                                             }
                                         }
-                                        .animation(Animation.easeInOut(duration: 0.7 - 0.15 * Double(index)).delay(0.15 * Double(index)), value: rotatePercentage)
+                                        .animation(Animation.easeInOut(duration: 0.75 - 0.125 * Double(index)).delay(0.125 * Double(index)), value: rotatePercentage)
                                 }
                             }
                             .transition(.opacity)
@@ -202,11 +203,15 @@ struct GuessColorView: View {
 
 struct GuessColorView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            BackgroundView()
-            GuessColorView(debugMode: true)
-                .environmentObject(LearnAndQuizState())
-                .environmentObject(QuizResultsStore())
+        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12"], id: \.self) { device in
+            ZStack {
+                BackgroundView()
+                ColorQuizView(debugMode: true)
+                    .environmentObject(LearnAndQuizState())
+                    .environmentObject(QuizResultsStore())
+            }
+            .previewDevice(PreviewDevice(stringLiteral: device))
+            .previewDisplayName(device)
         }
     }
 }

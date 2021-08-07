@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct TimerView: View {
-    
-    @EnvironmentObject var quizState: QuizState
+
+    let timerString: String
     
     var body: some View {
         VStack {
 //            Text("00:00:000")
-            Text(quizState.timerString)
+            Text(timerString)
                 .font( .system(.largeTitle, design: .monospaced))
                 .fontWeight(.ultraLight)
                 .multilineTextAlignment(.center)
@@ -25,7 +25,7 @@ struct TimerView: View {
 
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
-        TimerView()
-            .environmentObject(QuizState())
+        TimerView(timerString: "00:01:000")
+            .environmentObject(NameQuizState())
     }
 }

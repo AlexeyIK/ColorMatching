@@ -1,5 +1,5 @@
 //
-//  QuizGameView.swift
+//  NameQuizView.swift
 //  Color Matching
 //
 //  Created by Alexey on 24.07.2021.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct QuizGameView: View {
+struct NameQuizView: View {
     
     @Environment(\.scenePhase) private var scenePhase
     
     @EnvironmentObject var gameState: LearnAndQuizState
     @EnvironmentObject var resultStore: QuizResultsStore
-    @StateObject var quizState: QuizState = QuizState()
+    @StateObject var quizState: NameQuizState = NameQuizState()
     
     @State var lastAnswerIsCorrect: Bool? = nil
     
@@ -36,9 +36,8 @@ struct QuizGameView: View {
             }
             
             if quizState.quizActive {
-                TimerView()
+                TimerView(timerString: quizState.timerString)
                     .foregroundColor(Color.white)
-                    .environmentObject(quizState)
                 
                 Spacer()
                 
@@ -157,7 +156,7 @@ struct QuizGameView_Previews: PreviewProvider {
         ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
             ZStack {
                 BackgroundView()
-                QuizGameView()
+                NameQuizView()
                     .environmentObject(LearnAndQuizState())
                     .environmentObject(QuizResultsStore())
             }

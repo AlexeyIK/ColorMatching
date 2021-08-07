@@ -80,7 +80,7 @@ struct MainMenuView: View {
                                     .navigationBarTitleDisplayMode(.inline),
                                     
                                 label: {
-                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    MenuButtonView(text: "Name QUIZ", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
                                 })
                             
                             NavigationLink(
@@ -89,7 +89,7 @@ struct MainMenuView: View {
                                     .navigationBarTitleDisplayMode(.inline),
                                     
                                 label: {
-                                    MenuButtonView(text: "Color QUIZ v2", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
                                 })
                             
                             MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
