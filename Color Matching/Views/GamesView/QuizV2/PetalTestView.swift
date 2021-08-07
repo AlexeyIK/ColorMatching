@@ -15,27 +15,37 @@ struct PetalTestView: View {
     let innerRoundness: CGFloat = 0.12
     let outerRoundness: CGFloat = 0.65
     
-    @State var angle: Double = 0
+    @State var angle: Double = -30
     @State var perc: Double = 0
+    @State var needToRestore: Bool = false
     
     var body: some View {
         VStack {
-            Petal()
-                .fill(Color.yellow)
-                .frame(width: 100, height: 300, alignment: .center)
-                .modifier(RollingModifier(toAngle: angle, percentage: perc, onFinish: {
-                    perc = 0
-                    
-                    withAnimation() {
-                        angle += 180
-                    }
-                }))
+            ZStack {
+                ForEach(0..<3) { i in
+                    PetalView(colorModel: colorsData[300 + i], blink: needToRestore)
+                        .frame(width: 100, height: 300, alignment: .center)
+                        .modifier(RollingModifier(toAngle: angle + Double(i * 30), percentage: perc, anchor: .bottom, onFinish: {
+                            perc = 0
+                            
+                            if needToRestore {
+//                                withAnimation(Animation.easeInOut(duration: 0.7 - 0.1 * Double(3 - i)).delay(0.1 * Double(3 - i))) {
+                                    angle += 180
+                                    perc = 1
+                                    needToRestore = false
+//                                }
+                            }
+                        }))
+                        .animation(Animation.easeInOut(duration: 0.7 - 0.1 * Double(3 - i)).delay(0.2 + 0.1 * Double(3 - i)), value: perc)
+                }
+            }
         
             Button("Animate") {
-                withAnimation() {
+//                withAnimation(.easeInOut(duration: 0.7)) {
                     angle += 180
                     perc = 1
-                }
+                    needToRestore = true
+//                }
             }
         }
     }
@@ -73,34 +83,9 @@ struct RollingModifier: AnimatableModifier {
 
 struct PetalTestView_Previews: PreviewProvider {
     static var previews: some View {
-        PetalTestView()
-    }
-}
-
-struct Petal: Shape {
-    
-    var outerWidth: CGFloat = 49
-    var innerWidth: CGFloat = 18
-    
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        
-        let innerRoundness: CGFloat = 0.1
-        let outerRoundness: CGFloat = 0.6
-        
-        let startPoint = CGPoint(x: rect.midX - rect.width * innerWidth / 100, y: rect.midY + rect.height * 0.2)
-        let topPoint = CGPoint(x: rect.midX, y: rect.midY - rect.height / 3)
-        
-        path.move(to: startPoint)
-        path.addCurve(to: CGPoint(x: rect.midX + rect.width * innerWidth / 100, y: startPoint.y),
-                      control1: CGPoint(x: rect.midX - rect.width * innerWidth / 135, y: startPoint.y + rect.height * innerRoundness),
-                      control2: CGPoint(x: rect.midX + rect.width * innerWidth / 135, y: startPoint.y + rect.height * innerRoundness))
-        path.addLine(to: CGPoint(x: rect.midX + rect.width * outerWidth / 100, y: topPoint.y))
-        path.addCurve(to: CGPoint(x: rect.midX - rect.width * outerWidth / 100, y: topPoint.y),
-                      control1: CGPoint(x: rect.midX + rect.width * outerRoundness * 0.95, y: -rect.height * 0.09),
-                      control2: CGPoint(x: rect.midX - rect.width * outerRoundness * 0.95, y: -rect.height * 0.09))
-        path.closeSubpath()
-        
-        return path
+        ZStack {
+            BackgroundView()
+            PetalTestView()
+        }
     }
 }
