@@ -118,7 +118,7 @@ struct GuessColorView: View {
                                                 
                                                 self.rotatePercentage = 0
                                                 
-                                                if swapCards {
+                                                if swapCards && !quizState.timeRunOut {
                                                     withAnimation(Animation.easeOut(duration: 0.5).delay(0.1 * Double(index))) {
                                                         self.newRotation -= 180
                                                         self.swapCards = false
@@ -131,12 +131,14 @@ struct GuessColorView: View {
                                         )
 //                                        .animation(Animation.easeOut(duration: 0.6).delay(0.1 * Double(index)), value: rotatePercentage)
                                         .onTapGesture {
-                                            lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
-                                                
-                                            withAnimation(Animation.easeInOut(duration: 0.5).delay(0.3 + 0.1 * Double(index))) {
-                                                self.newRotation -= 180
-                                                rotatePercentage = 1
-                                                self.swapCards = true
+                                            if !quizState.timeRunOut {
+                                                lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
+                                                    
+                                                withAnimation(Animation.easeInOut(duration: 0.5).delay(0.3 + 0.1 * Double(index))) {
+                                                    self.newRotation -= 180
+                                                    rotatePercentage = 1
+                                                    self.swapCards = true
+                                                }
                                             }
                                         }
                                 }
