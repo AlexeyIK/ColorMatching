@@ -88,6 +88,7 @@ struct QuizGameView: View {
                                     withAnimation {
                                         quizState.quizItemsList.removeFirst()
                                         lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: answer.id, hardness: gameState.hardness)
+                                        quizState.nextQuizItem()
                                     }
                                 }
                                 .transition(.identity)

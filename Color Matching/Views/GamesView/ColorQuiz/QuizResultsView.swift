@@ -40,18 +40,7 @@ struct QuizResultsView: View {
                     .padding()
                     .multilineTextAlignment(.center)
                     .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-//                    .offset(y: resultsCaptionOffset)
                     .transition(.identity)
-//                    .animation(Animation.easeOut(duration: 0.3).delay(0.2), value: resultsCaptionOffset)
-                
-//                            Text("Color coins earned:")
-//                                .foregroundColor(.white)
-//                                .font(.title2)
-//                                .padding()
-//                                .multilineTextAlignment(.center)
-//                                .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-//                                .transition(.slide)
-//                                .animation(.easeInOut)
             } else {
                 Text("You guessed \(resultsStore.quizResults.correctAnswers) of \(resultsStore.quizResults.cardsCount) \(resultsStore.quizResults.cardsCount > 1 ? "cards" : "card" )")
                     .foregroundColor(.white)
@@ -59,18 +48,6 @@ struct QuizResultsView: View {
                     .padding()
                     .multilineTextAlignment(.center)
                     .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-//                    .offset(y: resultsCaptionOffset)
-//                    .transition(.identity)
-//                    .animation(Animation.spring(response: 0.4, dampingFraction: 0.2, blendDuration: 0).delay(0.2), value: resultsCaptionOffset)
-                
-//                            Text("Color coins earned:")
-//                                .foregroundColor(.white)
-//                                .font(.title2)
-//                                .padding()
-//                                .multilineTextAlignment(.center)
-//                                .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-//                                .transition(.slide)
-//                                .animation(.easeInOut)
             }
         
             VStack(spacing: 12) {
@@ -132,7 +109,6 @@ struct QuizResultsView: View {
             .animation(Animation.easeOut(duration: 0.3).delay(0.3))
             
         }
-//        .frame(height: contentZone.height, alignment: .center)
         .onAppear() {
             withAnimation() {
                 self.isVisible.toggle()
