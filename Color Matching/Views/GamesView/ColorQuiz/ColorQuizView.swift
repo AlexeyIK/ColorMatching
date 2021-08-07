@@ -54,6 +54,7 @@ struct ColorQuizView: View {
                         if quizState.quizActive || debugMode {
                             TimerView(timerString: quizState.timerString)
                                 .foregroundColor(Color.white)
+                                .padding(.top, 10)
                             
                             Spacer()
                             

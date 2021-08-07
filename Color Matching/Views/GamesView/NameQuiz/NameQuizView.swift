@@ -20,24 +20,26 @@ struct NameQuizView: View {
     var highlightCorrectAnswer: Bool = false
     var showColorNames: Bool = false
     let scoreFlowSpeed: CGFloat = 55
+    let debugMode: Bool
     
     var body: some View {
         VStack {
             let contentZone = UIScreen.main.bounds
             
-            if quizState.results == nil {
-                if contentZone.height > 550 {
+            if quizState.results == nil || debugMode {
+                if contentZone.height > 570 {
                     Text("Guess the color")
                         .foregroundColor(.white)
                         .font(.title2)
                         .fontWeight(.light)
-//                                .padding(.bottom, 10)
+//                        .padding(.top, 10)
                 }
             }
             
-            if quizState.quizActive {
+            if quizState.quizActive || debugMode {
                 TimerView(timerString: quizState.timerString)
                     .foregroundColor(Color.white)
+                    .padding(.top, 10)
                 
                 Spacer()
                 
@@ -156,7 +158,7 @@ struct QuizGameView_Previews: PreviewProvider {
         ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
             ZStack {
                 BackgroundView()
-                NameQuizView()
+                NameQuizView(debugMode: true)
                     .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
                     .environmentObject(QuizResultsStore())
             }

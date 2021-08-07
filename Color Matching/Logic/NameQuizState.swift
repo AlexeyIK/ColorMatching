@@ -24,6 +24,9 @@ class NameQuizState: ObservableObject {
     private var isTimerPaused: Bool = false
     private var gameScore: Int = 0
     
+    private var quizPosition: Int = 0
+    private var correctAnswers: Int = 0
+    
     // public
     public var quizQuestions = 0
     public var results: QuizResults? = nil
@@ -34,8 +37,6 @@ class NameQuizState: ObservableObject {
     @Published var quizAnswersAndScore: [QuizAnswer] = []
     @Published var quizActive: Bool = false
     @Published var timeRunOut: Bool = false
-    @Published var quizPosition: Int = 0
-    @Published var correctAnswers: Int = 0
     @Published var lastScoreChange: Int = 0
     @Published var timerString: String = "00:00:000"
     @Published var isAppActive: Bool = true
