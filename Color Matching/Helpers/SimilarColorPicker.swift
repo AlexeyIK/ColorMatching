@@ -41,7 +41,7 @@ public class SimilarColorPicker {
                     break
                 
                 case .hard:
-                    hueStep = 20
+                    hueStep = 30
                     hueOffset = 15
                     saturationOffset = 20
                     valueOffset = 30
@@ -51,7 +51,8 @@ public class SimilarColorPicker {
                     break
             }
         
-            let delimiter: Int = Int(i > 2 ? ceil(Float(i) / 2.0) : 1)
+            let delimiter: Int = Int(ceil(Float(i + 1) / 2))
+            print("current delimiter: \(delimiter)")
             
             // смотрим не вышло ли значение Hue за рамки от 0 до 360 градусов
             if i % 2 == 0 {
