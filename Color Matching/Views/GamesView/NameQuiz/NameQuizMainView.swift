@@ -11,7 +11,7 @@ struct LearnAndQuizView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @StateObject var gameState: LearnAndQuizState = LearnAndQuizState()
+    @StateObject var gameState: LearnAndQuizState = LearnAndQuizState(quizType: .nameQuiz)
     @StateObject var resultState: QuizResultsStore = QuizResultsStore()
     
     var body: some View {

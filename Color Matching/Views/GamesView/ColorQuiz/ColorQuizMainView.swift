@@ -1,5 +1,5 @@
 //
-//  Quiz2MainView.swift
+//  ColorQuizMainView.swift
 //  HueQueue
 //
 //  Created by Алексей Кузнецов on 05.08.2021.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct Quiz2MainView: View {
+struct ColorQuizMainView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
-    @StateObject var gameState: LearnAndQuizState = LearnAndQuizState()
+    @StateObject var gameState: LearnAndQuizState = LearnAndQuizState(quizType: .colorQuiz)
     @StateObject var resultState: QuizResultsStore = QuizResultsStore()
     
     var body: some View {
@@ -55,6 +55,6 @@ struct Quiz2MainView: View {
 
 struct Quiz2MainView_Previews: PreviewProvider {
     static var previews: some View {
-        Quiz2MainView()
+        ColorQuizMainView()
     }
 }

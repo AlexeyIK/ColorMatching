@@ -163,8 +163,8 @@ class ColorQuizState: ObservableObject {
             CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
             gameScore += strikeBonus
         }
+        ColorQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
         CoreDataManager.shared.addViewedColors(colorsViewed)
-        CoreDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
         CoreDataManager.shared.writeLastGameScore(gameScore)
         
         print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(gameScore)")
@@ -198,7 +198,7 @@ class ColorQuizState: ObservableObject {
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
         if quizPosition == quizQuestions - 1 {
-//            pauseTimer()
+            pauseTimer()
             startGameEndPause()
         }
         

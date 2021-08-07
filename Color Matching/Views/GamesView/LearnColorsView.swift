@@ -138,7 +138,7 @@ struct DeckView_Previews: PreviewProvider {
         ZStack {
             BackgroundView()
             LearnDeckView()
-                .environmentObject(LearnAndQuizState())
+                .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
         }
     }
 }

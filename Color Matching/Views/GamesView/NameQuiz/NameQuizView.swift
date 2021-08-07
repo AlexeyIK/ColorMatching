@@ -157,7 +157,7 @@ struct QuizGameView_Previews: PreviewProvider {
             ZStack {
                 BackgroundView()
                 NameQuizView()
-                    .environmentObject(LearnAndQuizState())
+                    .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
                     .environmentObject(QuizResultsStore())
             }
             .previewDevice(PreviewDevice(stringLiteral: device))

@@ -144,7 +144,7 @@ struct ColorQuizView: View {
                                                 }
                                             }
                                         }
-                                        .animation(Animation.easeInOut(duration: 0.75 - 0.125 * Double(index)).delay(0.125 * Double(index)), value: rotatePercentage)
+                                        .animation(Animation.easeInOut(duration: 0.75 - 0.125 * Double(index)).delay(0.25 + 0.125 * Double(index)), value: rotatePercentage)
                                 }
                             }
                             .transition(.opacity)
@@ -207,7 +207,7 @@ struct GuessColorView_Previews: PreviewProvider {
             ZStack {
                 BackgroundView()
                 ColorQuizView(debugMode: true)
-                    .environmentObject(LearnAndQuizState())
+                    .environmentObject(LearnAndQuizState(quizType: .colorQuiz))
                     .environmentObject(QuizResultsStore())
             }
             .previewDevice(PreviewDevice(stringLiteral: device))

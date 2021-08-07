@@ -126,7 +126,7 @@ struct QuizResultsView_Previews: PreviewProvider {
         ZStack {
             BackgroundView()
             QuizResultsView()
-                .environmentObject(LearnAndQuizState())
+                .environmentObject(LearnAndQuizState(quizType: .colorQuiz))
                 .environmentObject(QuizResultsStore())
         }
     }

@@ -21,7 +21,7 @@ struct PetalView: View {
     var body: some View {
         ZStack {
             let color = showColor ? ConvertColor(rgb: colorModel.colorRGB) : _globalGrayedCardColor
-            let hightlightColor = Color.white.opacity(0.75)
+            let hightlightColor = Color.white.opacity(0.6)
 //            let shadowColor = Color.init(hue: Double(colorModel.colorHSV[0] ?? 0) / 360,
 //                                         saturation: Double(colorModel.colorHSV[1] ?? 0) / 100,
 //                                         brightness: Double(colorModel.colorHSV[2] ?? 0) / 220,
@@ -32,10 +32,9 @@ struct PetalView: View {
                 .fill(color)
                 .overlay(Petal().stroke(AngularGradient(gradient: Gradient(colors: [color, Color.clear]), center: .topTrailing, startAngle: .degrees(-30), endAngle: .degrees(225)), lineWidth: 2).brightness(0.4))
                 .shadow(color: shadowColor, radius: 6, x: 0, y: 0)
-                .shadow(color: hightlight || blink ? hightlightColor.opacity(highlightOpacity) : .clear, radius: 8, x: 0, y: 0)
-                .shadow(color: hightlight || blink ? hightlightColor.opacity(highlightOpacity) : .clear, radius: 8, x: 0, y: 0)
+                .glow(color: hightlight || blink ? hightlightColor.opacity(highlightOpacity) : .clear, radius: 12)
                 .transition(.identity)
-                .animation(blink ? Animation.easeInOut(duration: 0.15).repeatForever() : .none, value: blink)
+                .animation(blink ? Animation.easeInOut(duration: 0.12).repeatForever() : .none, value: blink)
                 
             if showNames {
                 Text(name)
@@ -61,7 +60,8 @@ struct PetalView_Previews: PreviewProvider {
         ZStack {
             BackgroundView()
             
-            PetalView(colorModel: colorsData[300], name: colorsData[300].name, showNames: true, hightlight: false)
+            PetalView(colorModel: colorsData[300], name: colorsData[300].name, showNames: true, hightlight: true, blink: false)
+                .frame(width: 120, height: 350, alignment: .center)
         }
     }
 }

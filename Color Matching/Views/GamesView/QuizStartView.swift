@@ -187,7 +187,7 @@ struct QuizStartView_Previews: PreviewProvider {
             QuizStartView()
                 .previewDevice(PreviewDevice(stringLiteral: device))
                 .previewDisplayName(device)
-                .environmentObject(LearnAndQuizState())
+                .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
         }
     }
 }
