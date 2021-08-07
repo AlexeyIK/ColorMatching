@@ -30,10 +30,10 @@ struct LearnDeckView: View {
             if (currentIndex < gameState.cardsList.count) {
                 Text("Remember the colors")
                     .foregroundColor(.white)
-                    .font(.title)
+                    .font(.title2)
                     .fontWeight(.light)
-                    .padding(.top, 8)
-                    .padding(.bottom, 20)
+                    .padding(.top, 10)
+                    .padding(.bottom, 10)
                 
                 Spacer()
             }
@@ -86,7 +86,7 @@ struct LearnDeckView: View {
                     }
                 }
                 .transition(.opacity)
-                .frame(width: contentZone.width * 0.68, height: contentZone.height * 0.55, alignment: .center)
+                .frame(width: contentZone.width * 0.68, height: contentZone.height * 0.5, alignment: .center)
             }
             
             // Вывод имени текущего цвета

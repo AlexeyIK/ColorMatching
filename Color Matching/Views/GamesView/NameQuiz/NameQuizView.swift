@@ -32,14 +32,14 @@ struct NameQuizView: View {
                         .foregroundColor(.white)
                         .font(.title2)
                         .fontWeight(.light)
-//                        .padding(.top, 10)
+                        .padding(10)
                 }
             }
             
             if quizState.quizActive || debugMode {
                 TimerView(timerString: quizState.timerString)
                     .foregroundColor(Color.white)
-                    .padding(.top, 10)
+//                    .padding(.top, 10)
                 
                 Spacer()
                 
@@ -54,10 +54,10 @@ struct NameQuizView: View {
                 }
 //                        .offset(x: contentZone.size.width * 0.4, y: 12)
                 .offset(y: 6)
-                .frame(width: contentZone.width * 0.5, height: contentZone.height * 0.05, alignment: .bottom)
+                .frame(width: contentZone.width * 0.5, height: contentZone.height * 0.04, alignment: .bottom)
             }
             
-            if quizState.quizActive {
+            if quizState.quizActive || debugMode {
                 ZStack {
                     ForEach(Array(quizState.quizItemsList.enumerated()), id: \.element) { (index, card) in
                         
@@ -74,7 +74,7 @@ struct NameQuizView: View {
                     }
                 }
                 .transition(.opacity)
-                .frame(width: contentZone.width * 0.68, height: contentZone.height * 0.5, alignment: .center)
+                .frame(width: contentZone.width * 0.68, height: contentZone.height * 0.45, alignment: .center)
             }
             
             VStack {
