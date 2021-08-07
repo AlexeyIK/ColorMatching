@@ -16,10 +16,10 @@ struct NameQuizStartView: View {
     @State var opacity1: Double = 0
     @State var opacity2: Double = 0
     
-    let rememberColorPreview: ColorModel = colorsData[1445] // заменить на randomElement(), когда база пополнится
-    let rememberColorPreviewRus: ColorModel = colorsData[1439]
-    let guessColorPreview: ColorModel = colorsData[420] // заменить на randomElement(), когда база пополнится
-    let guessColorPreviewRus: ColorModel = colorsData[402]
+    let rememberColorPreview: ColorModel = colorsData[1542] // 009DC4, заменить на randomElement(), когда база пополнится
+    let rememberColorPreviewRus: ColorModel = colorsData[1536] // 1CA9C9
+    let guessColorPreview: ColorModel = colorsData[330] // D1E231, заменить на randomElement(), когда база пополнится
+    let guessColorPreviewRus: ColorModel = colorsData[330] // D1E231
     let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
     
