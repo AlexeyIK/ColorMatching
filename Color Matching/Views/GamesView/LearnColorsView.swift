@@ -91,7 +91,7 @@ struct LearnDeckView: View {
             
             // Вывод имени текущего цвета
             if showColorNames && currentIndex < gameState.cardsList.count {
-                let colorName = gameState.cardsList[currentIndex].name != "" ? gameState.cardsList[currentIndex].name : gameState.cardsList[currentIndex].englishName
+                let colorName = gameState.russianNames ? gameState.cardsList[currentIndex].name : gameState.cardsList[currentIndex].englishName
                 
                 Text(colorName)
                     .lineLimit(2)

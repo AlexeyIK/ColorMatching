@@ -120,7 +120,9 @@ public class SimilarColorPicker {
             }
         } while similarColor == nil && iterations < 30
 
-//        print("iterations: \(iterations)")
+        if iterations > 5 {
+            print("iterations: \(iterations)")
+        }
         
         return similarColor
     }
