@@ -19,7 +19,7 @@ struct QuizStartView: View {
     let rememberColorPreview: ColorModel = colorsData[1445] // заменить на randomElement(), когда база пополнится
     let rememberColorPreviewRus: ColorModel = colorsData[1439]
     let guessColorPreview: ColorModel = colorsData[420] // заменить на randomElement(), когда база пополнится
-    let guessColorPreviewRus: ColorModel = colorsData[401]
+    let guessColorPreviewRus: ColorModel = colorsData[402]
     let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
     
