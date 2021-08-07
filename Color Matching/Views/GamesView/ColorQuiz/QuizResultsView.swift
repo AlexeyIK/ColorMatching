@@ -127,12 +127,12 @@ struct QuizResultsView: View {
             .buttonStyle(GoButton2())
             .font(.title)
             .frame(width: contentZone.width, alignment: .center)
+            .padding(.bottom, 50)
             .transition(.move(edge: .bottom))
             .animation(Animation.easeOut(duration: 0.3).delay(0.3))
-            .padding(.bottom, 50)
             
         }
-        .frame(height: contentZone.height, alignment: .center)
+//        .frame(height: contentZone.height, alignment: .center)
         .onAppear() {
             withAnimation() {
                 self.isVisible.toggle()
