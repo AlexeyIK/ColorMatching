@@ -119,28 +119,31 @@ struct GuessColorView: View {
                                                 self.rotatePercentage = 0
                                                 
                                                 if swapCards && !quizState.timeRunOut {
-                                                    withAnimation(Animation.easeOut(duration: 0.5).delay(0.1 * Double(index))) {
+                                                    self.swapCards = false
+                                                    self.lastAnswerIsCorrect = nil
+                                                    quizState.quizItemsList.removeFirst()
+                                                    quizState.nextQuizItem()
+                                                    
+//                                                    withAnimation(Animation.easeOut(duration: 0.5).delay(0.1 * Double(index))) {
+                                                    withAnimation() {
                                                         self.newRotation -= 180
-                                                        self.swapCards = false
-                                                        self.lastAnswerIsCorrect = nil
-                                                        quizState.quizItemsList.removeFirst()
-                                                        quizState.nextQuizItem()
+                                                        self.rotatePercentage = 1
                                                     }
                                                 }
                                             }
                                         )
-//                                        .animation(Animation.easeOut(duration: 0.6).delay(0.1 * Double(index)), value: rotatePercentage)
                                         .onTapGesture {
                                             if !quizState.timeRunOut {
                                                 lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                     
-                                                withAnimation(Animation.easeInOut(duration: 0.5).delay(0.3 + 0.1 * Double(index))) {
+                                                withAnimation() {
                                                     self.newRotation -= 180
                                                     rotatePercentage = 1
                                                     self.swapCards = true
                                                 }
                                             }
                                         }
+                                        .animation(Animation.easeInOut(duration: 0.7 - 0.15 * Double(index)).delay(0.15 * Double(index)), value: rotatePercentage)
                                 }
                             }
                             .transition(.opacity)
@@ -155,9 +158,9 @@ struct GuessColorView: View {
         .onAppear() {
             quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames)
             
-            withAnimation(.easeOut(duration: 0.5)) {
+            withAnimation() {
                 self.newRotation = 0
-                rotatePercentage = 1
+                self.rotatePercentage = 1
             }
         }
         // мониторим, что квиз сменил активность
