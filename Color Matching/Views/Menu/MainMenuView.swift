@@ -39,6 +39,30 @@ struct MainMenuView: View {
                     BackgroundView()
                         .animation(.none)
                     
+                    // кнопка статистики
+                    HStack {
+                        Spacer()
+                        
+                        VStack {
+                            NavigationLink(
+                                destination: StatsView()
+                                    .navigationBarBackButtonHidden(true)
+                                    .navigationBarTitleDisplayMode(.inline),
+                                
+                                label: {
+                                    ZStack {
+                                        Image("iconStats")
+                                            .resizable()
+                                    }
+                                    .frame(width: 50, height: 50, alignment: .topTrailing)
+                                    .padding(.all, 10)
+                            })
+                            
+                            Spacer()
+                        }
+                    }
+                    .animation(.none)
+                    
                     VStack {
                         Spacer()
                         
@@ -76,32 +100,11 @@ struct MainMenuView: View {
                         
                         Spacer()
                     }
+                    .padding(.top, 25)
                     .animation(.none)
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    
-                    HStack {
-                        Spacer()
-                        
-                        VStack {
-                            NavigationLink(
-                                destination: StatsView()
-                                    .navigationBarBackButtonHidden(true)
-                                    .navigationBarTitleDisplayMode(.inline),
-                                
-                                label: {
-                                    ZStack {
-                                        Image("iconStats")
-                                            .resizable()
-                                    }
-                                    .frame(width: 50, height: 50, alignment: .topTrailing)
-                                    .padding(.all, 10)
-                            })
-                            
-                            Spacer()
-                        }
-                    }
-                    .animation(.none)
                 
+                    // цветные полоски по краям
                     HStack(alignment: .center) {
                         Rectangle()
                             .fill(LinearGradient(gradient: Gradient(
