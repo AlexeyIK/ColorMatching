@@ -23,10 +23,11 @@ struct PetalView: View {
         ZStack {
             let color = showColor ? ConvertColor(rgb: colorModel.colorRGB) : _globalGrayedCardColor
             let hightlightColor = Color.white.opacity(0.6)
-            let shadowColor = Color.init(hue: Double(colorModel.colorHSV[0] ?? 0) / 360,
+            let shadowColor = showColor ? Color.init(hue: Double(colorModel.colorHSV[0] ?? 0) / 360,
                                          saturation: Double(colorModel.colorHSV[1] ?? 0) / 100,
                                          brightness: Double(colorModel.colorHSV[2] ?? 0) / 200,
                                          opacity: 0.6)
+                : Color.init(hue: 0, saturation: 0, brightness: 0.07)
 //            let shadowColor = Color.init(hue: 0, saturation: 0, brightness: 0.07)
             
             Petal()
@@ -34,8 +35,9 @@ struct PetalView: View {
                 .overlay(Petal().stroke(AngularGradient(gradient: Gradient(colors: [color, Color.clear]), center: .topTrailing, startAngle: .degrees(-30), endAngle: .degrees(225)), lineWidth: 2).brightness(0.4))
                 .shadow(color: shadowColor, radius: 6, x: 0, y: 0)
                 .glow(color: hightlight || blink ? hightlightColor.opacity(highlightOpacity) : .clear, radius: 10)
-                .transition(.identity)
                 .animation(blink ? Animation.easeInOut(duration: blinkFreq).repeatForever() : .none, value: blink)
+                .transition(.opacity)
+                .animation(.easeInOut(duration: 0.15))
                 
             if showNames {
                 Text(name)

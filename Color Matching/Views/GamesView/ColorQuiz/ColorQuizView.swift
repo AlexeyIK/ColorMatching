@@ -149,7 +149,7 @@ struct ColorQuizView: View {
                                             if quizState.timerStatus != .runout {
                                                 lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                 
-                                                answerTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
+                                                answerTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) {_ in
                                                     withAnimation() {
                                                         self.newRotation -= 120
                                                         self.rotatePercentage = 1
