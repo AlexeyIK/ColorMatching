@@ -156,9 +156,13 @@ class ColorQuizState: ObservableObject {
             CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
             gameScore += strikeBonus
         }
-        ColorQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
+        // записываем увиденные и разгаданные цвета
         CoreDataManager.shared.addViewedColors(colorsViewed)
+        // записываем результаты квиза
+        ColorQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
+        // записываем эти очки в CoreData
         CoreDataManager.shared.writeLastGameScore(gameScore)
+        CoreDataManager.shared.updatePlayerScore(by: gameScore)
         
         print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(gameScore)")
         
@@ -185,8 +189,6 @@ class ColorQuizState: ObservableObject {
         // смотрим сколько получили очков при текущем уровне сложности
         let lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
         gameScore += lastScoreChange
-        // записываем эти очки в CoreData
-        CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
