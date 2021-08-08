@@ -78,7 +78,7 @@ struct ColorQuizView: View {
                         
                         if let quizItem = item {
                             VStack {
-                                if !quizState.timeRunOut {
+                                if quizState.timerStatus != .runout {
                                     Text(gameState.russianNames ? quizItem.correct.name : quizItem.correct.englishName)
                                         .font(.title)
                                         .foregroundColor(.white)
@@ -86,7 +86,7 @@ struct ColorQuizView: View {
                                         .transition(.slide)
                                         .animation(.none)
                                 }
-                                else if quizState.timeRunOut && quizState.results == nil {
+                                else if quizState.timerStatus == .runout && quizState.results == nil {
                                     Text("Time is over!")
                                         .foregroundColor(.white)
                                         .font(.title)
@@ -120,11 +120,11 @@ struct ColorQuizView: View {
                                                 
                                                 self.rotatePercentage = 0
                                                 
-                                                if quizState.isAppActive && quizState.quizActive && quizState.isTimerPaused {
-                                                    quizState.startTimer()
+                                                if quizState.isAppActive && quizState.quizActive && quizState.timerStatus == .stopped {
+                                                    quizState.runTimer()
                                                 }
                                                 
-                                                if swapCards && !quizState.timeRunOut {
+                                                if swapCards && quizState.timerStatus != .runout {
                                                     self.swapCards = false
                                                     self.lastAnswerIsCorrect = nil
                                                     quizState.quizItemsList.removeFirst()
@@ -139,7 +139,7 @@ struct ColorQuizView: View {
                                             }
                                         )
                                         .onTapGesture {
-                                            if !quizState.timeRunOut {
+                                            if quizState.timerStatus != .runout {
                                                 lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                     
                                                 withAnimation() {
@@ -162,15 +162,15 @@ struct ColorQuizView: View {
             }
         }
         .onAppear() {
-            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames, doNotRunTimer: true)
+            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames, runTimer: false)
             
             withAnimation(.easeOut(duration: 0.4)) {
                 self.newRotation = 0
                 self.rotatePercentage = 1
             }
         }
-        .onChange(of: quizState.timeRunOut, perform: { runOut in
-            if runOut {
+        .onChange(of: quizState.timerStatus, perform: { status in
+            if status == .runout {
                 self.rotatePercentage = 0
                 
                 withAnimation() {
