@@ -107,7 +107,7 @@ struct LearnDeckView: View {
             if currentIndex < gameState.cardsList.count {
                 Spacer()
             } else {
-                Text("Get ready to remember the names of the colors!")
+                Text("Get ready to remember the colors!")
                     .foregroundColor(.white)
                     .font(.title2)
                     .padding()
@@ -116,7 +116,7 @@ struct LearnDeckView: View {
                     .frame(width: contentZone.width * 0.8, alignment: .center)
                     .padding()
                     .transition(.slide)
-                    .animation(Animation.spring(response: 0.4, dampingFraction: 0.4, blendDuration: 0).delay(0.5))
+                    .animation(Animation.spring(response: 0.3, dampingFraction: 0.4, blendDuration: 0).delay(0.5))
                 
                 Button("Go!") {
                     gameState.activeGameMode = .quiz
