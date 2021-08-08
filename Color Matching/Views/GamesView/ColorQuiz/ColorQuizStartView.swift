@@ -85,8 +85,8 @@ struct ColorQuizStartView: View {
                         let previewColor = gameState.russianNames ? rememberColorPreviewRus : rememberColorPreview
                         
                         FakeButtonsView(text: gameState.russianNames ? previewColor.name : previewColor.englishName,
-                                        foregroundColor: ConvertColor(rgb: previewColor.colorRGB),
-                                        outlineColor: ConvertColor(rgb: previewColor.colorRGB))
+                                        foregroundColor: ColorConvert(rgb: previewColor.colorRGB),
+                                        outlineColor: ColorConvert(rgb: previewColor.colorRGB))
                             .scaleEffect(0.9)
                             .offset(x: -card1Offset)
                             .transition(.scale)
@@ -180,7 +180,7 @@ struct ColorQuizStartView: View {
                 }
                 .onAppear() {
                     colorRef = gameState.russianNames ? guessColorPreviewRus : guessColorPreview
-                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames).shuffled()
+                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
                     
                     withAnimation(Animation.easeOut(duration: 0.3).delay(0.3)) {
                         card1Offset = 0
@@ -192,11 +192,11 @@ struct ColorQuizStartView: View {
                     }
                 }
                 .onChange(of: gameState.hardness, perform: { _ in
-                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames).shuffled()
+                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
                 })
                 .onChange(of: gameState.russianNames, perform: { _ in
                     colorRef = gameState.russianNames ? guessColorPreviewRus : guessColorPreview
-                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames).shuffled()
+                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
                     
                     opacity2 = 0
                     perc = 0
