@@ -21,7 +21,6 @@ class NameQuizState: ObservableObject {
     private var endDateTime = Date()
     private var currentDateTime = Date()
     private var saveElapsedTime: TimeInterval = 0
-    private var isTimerPaused: Bool = false
     private var gameScore: Int = 0
     
     private var quizPosition: Int = 0
@@ -36,9 +35,9 @@ class NameQuizState: ObservableObject {
     @Published var quizItemsList: [QuizItem] = []
     @Published var quizAnswersAndScore: [QuizAnswer] = []
     @Published var quizActive: Bool = false
-    @Published var timeRunOut: Bool = false
     @Published var lastScoreChange: Int = 0
     @Published var timerString: String = "00:00:000"
+    @Published var timerStatus: TimerState = .stopped
     @Published var isAppActive: Bool = true
     
     func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true) -> Void {
@@ -84,9 +83,10 @@ class NameQuizState: ObservableObject {
     func startTimer(for time: Double) {
         currentDateTime = Date()
         endDateTime = Date.init(timeIntervalSinceNow: time)
+        timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
         
         countdownTimer = Timer.scheduledTimer(withTimeInterval: definedTimerFrequence, repeats: true, block: { _ in
-            guard !self.isTimerPaused else { return }
+            guard self.timerStatus != .paused && self.timerStatus != .runout else { return }
             
             self.currentDateTime = Date()
             self.timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
@@ -96,21 +96,21 @@ class NameQuizState: ObservableObject {
             }
             
             if self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate <= 0 {
-                self.timeRunOut = true
+                self.timerStatus = .runout
                 self.startGameEndPause()
             }
         })
     }
     
     func pauseTimer() {
-        isTimerPaused = true
         saveElapsedTime = self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate
+        timerStatus = .paused
         print("Timer paused")
     }
     
     func resumeTimer() {
         endDateTime = Date.init(timeIntervalSinceNow: saveElapsedTime)
-        isTimerPaused = false
+        timerStatus = .running
         print("Timer resumed")
     }
     
@@ -118,6 +118,7 @@ class NameQuizState: ObservableObject {
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
             if let timer = self.countdownTimer {
                 timer.invalidate()
+                print("Timer deleted")
             }
             
             self.stopQuiz()

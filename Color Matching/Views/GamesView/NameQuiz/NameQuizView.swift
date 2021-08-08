@@ -32,14 +32,14 @@ struct NameQuizView: View {
                         .foregroundColor(.white)
                         .font(.title2)
                         .fontWeight(.light)
-                        .padding(10)
+                        .padding(.top, 10)
                 }
             }
             
             if quizState.quizActive || debugMode {
                 TimerView(timerString: quizState.timerString)
                     .foregroundColor(Color.white)
-//                    .padding(.top, 10)
+                    .padding(.top, 2)
                 
                 Spacer()
                 
@@ -78,7 +78,7 @@ struct NameQuizView: View {
             }
             
             VStack {
-                if quizState.quizItemsList.count > 0 && !quizState.timeRunOut
+                if quizState.quizItemsList.count > 0 && quizState.timerStatus != .runout
                 {
                     VStack(spacing: 8) {
                         if let quizItem = quizState.getQuizItem() {
@@ -103,7 +103,7 @@ struct NameQuizView: View {
                     .padding(.vertical, 10)
                     .transition(.identity)
                 }
-                else if quizState.timeRunOut && quizState.results == nil {
+                else if quizState.timerStatus == .runout && quizState.results == nil {
                     Text("Time is over!")
                         .foregroundColor(.white)
                         .font(.title)

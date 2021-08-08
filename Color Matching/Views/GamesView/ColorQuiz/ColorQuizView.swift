@@ -48,13 +48,13 @@ struct ColorQuizView: View {
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .fontWeight(.light)
-                                .padding()
+                                .padding(.top, 10)
                         }
                         
                         if quizState.quizActive || debugMode {
                             TimerView(timerString: quizState.timerString)
                                 .foregroundColor(Color.white)
-                                .padding(.top, 10)
+                                .padding(.top, 2)
                             
                             Spacer()
                             
