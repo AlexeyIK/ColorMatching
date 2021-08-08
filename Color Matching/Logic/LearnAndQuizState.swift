@@ -71,6 +71,7 @@ class LearnAndQuizState: ObservableObject  {
     
     func endGameSession() {
         self.gameActive = false
+        TimerHelper.shared.cancelTimer()
     }
     
     func restartGameSession() {
