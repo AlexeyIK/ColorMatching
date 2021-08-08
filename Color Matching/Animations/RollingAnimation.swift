@@ -32,6 +32,6 @@ struct RollingModifier: AnimatableModifier {
     
     func body(content: Content) -> some View {
         content
-            .rotationEffect(Angle(degrees: toAngle), anchor: anchor)
+            .rotationEffect(.degrees(toAngle), anchor: anchor)
     }
 }
