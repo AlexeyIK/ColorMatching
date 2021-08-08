@@ -105,7 +105,10 @@ struct ColorQuizStartView: View {
 //                            .animation
                         
                         ForEach(answers.indices, id: \.self) { i in
-                            PetalView(colorModel: answers[i], blink: blink && answers[i].id == colorRef.id, blinkFreq: 0.25)
+                            PetalView(colorModel: answers[i],
+                                      showColor: !blink || blink && answers[i].id == colorRef.id,
+                                      blink: blink && answers[i].id == colorRef.id,
+                                      blinkFreq: 0.25)
                                 .frame(width: contentZone.size.height * 0.075, height: contentZone.size.height * 0.25, alignment: .center)
                                 .opacity(perc)
                                 .modifier(RollingModifier(toAngle: -37.5 + angle + Double(i * 25), percentage: perc, anchor: .bottom, onFinish: {

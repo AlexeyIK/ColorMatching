@@ -128,6 +128,7 @@ struct ColorQuizView: View {
                                                 }
                                                 
                                                 if swapCards && quizState.timerStatus != .runout {
+                                                    self.newRotation -= 120
                                                     self.swapCards = false
                                                     self.lastAnswerIsCorrect = nil
                                                     if (self.answerTimer != nil) {
@@ -136,11 +137,9 @@ struct ColorQuizView: View {
                                                     quizState.quizItemsList.removeFirst()
                                                     quizState.nextQuizItem()
                                                     
-                                                    self.newRotation = 130
-                                                    
 //                                                    withAnimation(Animation.easeOut(duration: 0.5).delay(0.1 * Double(index))) {
                                                     withAnimation() {
-                                                        self.newRotation = 0
+                                                        self.newRotation -= 120
                                                         self.rotatePercentage = 1
                                                     }
                                                 }
@@ -150,21 +149,21 @@ struct ColorQuizView: View {
                                             if quizState.timerStatus != .runout {
                                                 lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                 
-                                                answerTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
+                                                answerTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) {_ in
                                                     withAnimation() {
-                                                        self.newRotation = -110
+                                                        self.newRotation -= 120
                                                         self.rotatePercentage = 1
                                                         self.swapCards = true
                                                     }
                                                 }
                                             }
                                         }
-                                        .animation(Animation.easeInOut(duration: 0.6 - 0.1 * Double(index)).delay(0.1 * Double(index)), value: rotatePercentage)
+                                        .animation(Animation.easeInOut(duration: 0.15 + Double(quizItem.answers.count) * 0.1 - 0.1 * Double(index)).delay(0.1 * Double(index)), value: rotatePercentage)
                                 }
                             }
                             .transition(.opacity)
                             .frame(width: contentZone.size.width * 0.68, height: contentZone.size.height * 0.5, alignment: .bottom)
-                            .offset(x: contentZone.size.width * 0.5 - 20, y: -20)
+                            .offset(x: contentZone.size.width * 0.5 - 10, y: -10)
                         }
                     }
                 }
