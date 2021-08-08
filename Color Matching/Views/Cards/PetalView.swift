@@ -70,12 +70,12 @@ struct PetalView_Previews: PreviewProvider {
 struct Petal: Shape {
     
     var outerWidth: CGFloat = 49
-    var innerWidth: CGFloat = 18
+    var innerWidth: CGFloat = 15
     
     func path(in rect: CGRect) -> Path {
         var path = Path()
         
-        let innerRoundness: CGFloat = 0.1
+        let innerRoundness: CGFloat = 0.075
         let outerRoundness: CGFloat = 0.65
         
         let startPoint = CGPoint(x: rect.midX - rect.width * innerWidth / 100, y: rect.midY + rect.height * 0.2)
