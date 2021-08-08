@@ -183,7 +183,7 @@ struct ColorQuizView: View {
                 self.rotatePercentage = 0
                 
                 withAnimation() {
-                    self.newRotation -= 180
+                    self.newRotation -= 120
                     self.rotatePercentage = 1
                 }
             }

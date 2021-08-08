@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+import Combine
 
 enum TimerState {
     case stopped
@@ -18,30 +20,65 @@ class TimerHelper {
     
     private init() { }
     
+    static let shared = TimerHelper()
+    
     // constants
     private let definedTimerFrequence: Double = 0.01
     
     // private
-    private var isTimerPaused: Bool = false
+    private var countdownTimer: Timer.TimerPublisher? = nil
+    private var currentDateTime: Date = Date()
+    private var endDateTime: Date = Date()
+    private var saveElapsedTime: TimeInterval = 0
+    private var cancellable: AnyCancellable? = nil
     
-    var countdownTimer: Timer?
-    var currentDateTime: Date = Date()
-    var endDateTime: Date = Date()
+    /// Запускает внутренний таймер, который выступает в роли счетчика времени
+    func setTimer(for time: Double, run: Bool = true) -> Publishers.Autoconnect<Timer.TimerPublisher> {
+        currentDateTime = Date()
+        endDateTime = Date.init(timeIntervalSinceNow: time)
+        
+        cancellable?.cancel()
+        countdownTimer = Timer.publish(every: definedTimerFrequence, on: .main, in: .common)
+        cancellable = countdownTimer!.autoconnect().sink(receiveValue: { (date) in
+            self.currentDateTime = date
+        })
+        
+        return countdownTimer!.autoconnect()
+    }
     
-    static let shared = TimerHelper()
+    func compensateTimer(for time: TimeInterval) {
+        endDateTime = Date.init(timeIntervalSinceNow: time)
+    }
     
-//    func startTimer(for time: Double) -> Timer.TimerPublisher {
-//        currentDateTime = Date()
-//        endDateTime = Date.init(timeIntervalSinceNow: time)
-//        countdownTimer = Timer.publish(every: 0.02, on: .main, in: .common)
-//
-//        return countdownTimer!
-//    }
+    func pauseTimer() {
+        saveElapsedTime = self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate
+    }
+    
+    func resumeTimer() {
+        endDateTime = Date.init(timeIntervalSinceNow: saveElapsedTime)
+        print("Timer resumed")
+    }
+    
+    func cancelTimer() {
+        cancellable?.cancel()
+        print("Timer canceled")
+    }
     
     func getTimeIntervalFomatted(from refDateTime: Date, until endDateTime: Date) -> String
     {
         let timeRemainsStr = countDownString(from: endDateTime, until: refDateTime)
         if endDateTime.timeIntervalSinceReferenceDate - refDateTime.timeIntervalSinceReferenceDate > 0 {
+            return timeRemainsStr
+        }
+        else {
+            return "00:00:000"
+        }
+    }
+    
+    func getRemainingTimeFomatted() -> String
+    {
+        let timeRemainsStr = countDownString(from: endDateTime, until: currentDateTime)
+        if endDateTime.timeIntervalSinceReferenceDate - currentDateTime.timeIntervalSinceReferenceDate > 0 {
             return timeRemainsStr
         }
         else {
@@ -58,8 +95,8 @@ class TimerHelper {
                           (components.nanosecond ?? 000) / 1000000)
     }
 
-    func timeBetweenDates(from startDate: Date, to endDate: Date) -> TimeInterval {
-        return endDate.timeIntervalSinceReferenceDate - startDate.timeIntervalSinceReferenceDate
+    func timeBetweenDates() -> TimeInterval {
+        return endDateTime.timeIntervalSinceReferenceDate - currentDateTime.timeIntervalSinceReferenceDate
     }
 
     // ToDo: сделать нормальный единый менеджер таймера
