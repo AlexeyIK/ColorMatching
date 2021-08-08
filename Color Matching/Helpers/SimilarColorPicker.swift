@@ -52,7 +52,7 @@ public class SimilarColorPicker {
             }
         
             let delimiter: Int = Int(ceil(Float(i + 1) / 2))
-            print("current delimiter: \(delimiter)")
+//            print("current delimiter: \(delimiter)")
             
             // смотрим не вышло ли значение Hue за рамки от 0 до 360 градусов
             if i % 2 == 0 {
