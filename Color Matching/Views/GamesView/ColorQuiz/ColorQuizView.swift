@@ -152,7 +152,7 @@ struct ColorQuizView: View {
                                                 
                                                 answerTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) {_ in
                                                     withAnimation() {
-                                                        self.newRotation = -110
+                                                        self.newRotation = -120
                                                         self.rotatePercentage = 1
                                                         self.swapCards = true
                                                     }
