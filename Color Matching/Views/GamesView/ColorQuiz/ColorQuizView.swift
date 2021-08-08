@@ -146,14 +146,14 @@ struct ColorQuizView: View {
                                             }
                                         )
                                         .onTapGesture {
-                                            if quizState.timerStatus != .runout {
+                                            if quizState.timerStatus != .runout && !swapCards {
                                                 lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
+                                                self.swapCards = true
                                                 
                                                 answerTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) {_ in
                                                     withAnimation() {
                                                         self.newRotation -= 120
                                                         self.rotatePercentage = 1
-                                                        self.swapCards = true
                                                     }
                                                 }
                                             }
