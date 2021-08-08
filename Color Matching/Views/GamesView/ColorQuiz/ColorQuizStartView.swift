@@ -18,7 +18,7 @@ struct ColorQuizStartView: View {
     @State var angle: Double = 100
     @State var perc: Double = 0
     @State var blink: Bool = false
-    @State var petalDelay: Double = 1.8
+    @State var petalDelay: Double = 2
     
     @State var answers: [ColorModel] = []
     @State var colorRef: ColorModel = colorsData[0]
@@ -131,7 +131,7 @@ struct ColorQuizStartView: View {
                             .frame(width: 140, alignment: .center)
                             .transition(.identity)
                             .offset(x: card2Offset, y: contentZone.size.height * 0.05)
-                            .animation(Animation.easeOut(duration: 0.3).delay(1.55), value: card2Offset)
+                            .animation(Animation.easeOut(duration: 0.3).delay(1.4), value: card2Offset)
                     }
                     .onAppear {
                         withAnimation() {
@@ -186,7 +186,7 @@ struct ColorQuizStartView: View {
                         card1Offset = 0
                         opacity1 = 1
                     }
-                    withAnimation(Animation.easeOut(duration: 0.3).delay(1.4)) {
+                    withAnimation(Animation.easeOut(duration: 0.3).delay(1.6)) {
                         card2Offset = 0
                         opacity2 = 1
                     }
