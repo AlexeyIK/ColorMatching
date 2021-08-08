@@ -20,7 +20,7 @@ struct TransparentCardView: View {
     
     var body: some View {
         
-        let currentColor: Color = ConvertColor(rgb: colorModel.colorRGB)
+        let currentColor: Color = ColorConvert(rgb: colorModel.colorRGB)
         let shadowColor: Color = Color.init(hue: Double(colorModel.colorHSV[0] ?? 0) / 360,
                                             saturation: Double(colorModel.colorHSV[1] ?? 0) / 100,
                                             brightness: Double(colorModel.colorHSV[2] ?? 0) / 220,

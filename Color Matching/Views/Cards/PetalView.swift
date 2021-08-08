@@ -21,7 +21,7 @@ struct PetalView: View {
     
     var body: some View {
         ZStack {
-            let color = showColor ? ConvertColor(rgb: colorModel.colorRGB) : _globalGrayedCardColor
+            let color = showColor ? ColorConvert(rgb: colorModel.colorRGB) : _globalGrayedCardColor
             let hightlightColor = Color.white.opacity(0.6)
             let shadowColor = showColor ? Color.init(hue: Double(colorModel.colorHSV[0] ?? 0) / 360,
                                          saturation: Double(colorModel.colorHSV[1] ?? 0) / 100,
