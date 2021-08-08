@@ -37,7 +37,7 @@ struct ColorQuizView: View {
                 Circle()
                     .fill(Color.init(hue: 0, saturation: 0, brightness: 0.12))
                     .frame(width: 160, height: 160, alignment: .center)
-                    .offset(x: contentZone.size.width - 100, y: contentZone.size.height - 100)
+                    .offset(x: contentZone.size.width - 80, y: contentZone.size.height - 80)
                 
                 let item = debugMode ? debugAnswers : quizState.getQuizItem()
             
@@ -103,7 +103,7 @@ struct ColorQuizView: View {
                             ZStack(alignment: .center) {
                                 let angleStep = Double(90 / quizItem.answers.count)
                                 let appActive = lastAnswerIsCorrect == nil && quizState.isAppActive
-                                let flowerZoneDemention = min(300, contentZone.size.width * 0.85)
+                                let flowerZoneDemention = max(260, contentZone.size.width * 0.8)
                                 let startAngle = 90 - angleStep / 2
                                 
                                 ForEach(quizItem.answers.indices) { index in
@@ -113,7 +113,7 @@ struct ColorQuizView: View {
                                               showColor: appActive || quizState.isAppActive && quizItem.answers[index] == quizItem.correct,
                                               hightlight: lastAnswerIsCorrect ?? false && quizItem.answers[index] == quizItem.correct,
                                               blink: lastAnswerIsCorrect == false && quizItem.answers[index] == quizItem.correct)
-                                        .frame(width: flowerZoneDemention / CGFloat(quizItem.answers.count), height: flowerZoneDemention, alignment: .center)
+                                        .frame(width: (flowerZoneDemention + 50) / CGFloat(quizItem.answers.count), height: flowerZoneDemention, alignment: .center)
                                         .transition(.identity)
                                         .modifier(
                                             RollingModifier(toAngle: -startAngle + angleStep * Double(index) + newRotation, percentage: rotatePercentage, anchor: .bottom) {
@@ -154,7 +154,7 @@ struct ColorQuizView: View {
                             }
                             .transition(.opacity)
                             .frame(width: contentZone.size.width * 0.68, height: contentZone.size.height * 0.5, alignment: .bottom)
-                            .offset(x: contentZone.size.width * 0.5 - 25, y: -25)
+                            .offset(x: contentZone.size.width * 0.5 - 20, y: -20)
                         }
                     }
                 }
