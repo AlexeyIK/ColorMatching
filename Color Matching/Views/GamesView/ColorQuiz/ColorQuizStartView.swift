@@ -12,7 +12,7 @@ struct ColorQuizStartView: View {
     @EnvironmentObject var gameState: LearnAndQuizState
     
     @State var card1Offset: CGFloat = -UIScreen.main.bounds.width * 0.6
-    @State var card2Offset: CGFloat = UIScreen.main.bounds.width * 0.65
+    @State var card2Offset: CGFloat = UIScreen.main.bounds.width * 0.6
     @State var opacity1: Double = 0
     @State var opacity2: Double = 0
     @State var angle: Double = 100
@@ -74,6 +74,7 @@ struct ColorQuizStartView: View {
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .fontWeight(.medium)
+                                .opacity(opacity1)
                                 .multilineTextAlignment(.trailing)
                                 .shadow(color: .black, radius: 3)
                                 .frame(width: 150, alignment: .center)
@@ -105,7 +106,7 @@ struct ColorQuizStartView: View {
                         
                         ForEach(answers.indices, id: \.self) { i in
                             PetalView(colorModel: answers[i], blink: blink && answers[i].id == colorRef.id, blinkFreq: 0.25)
-                                .frame(width: 45, height: contentZone.size.height * 0.25, alignment: .center)
+                                .frame(width: contentZone.size.height * 0.075, height: contentZone.size.height * 0.25, alignment: .center)
                                 .opacity(perc)
                                 .modifier(RollingModifier(toAngle: -37.5 + angle + Double(i * 25), percentage: perc, anchor: .bottom, onFinish: {
                                     blink = true
@@ -121,7 +122,7 @@ struct ColorQuizStartView: View {
                             .foregroundColor(.white)
                             .font(.title2)
                             .fontWeight(.medium)
-//                            .padding()
+                            .opacity(opacity2)
                             .multilineTextAlignment(.center)
                             .shadow(color: .black, radius: 3)
                             .frame(width: 140, alignment: .center)
@@ -187,7 +188,10 @@ struct ColorQuizStartView: View {
                         opacity2 = 1
                     }
                 }
-                .onChange(of: gameState.russianNames, perform: { value in
+                .onChange(of: gameState.hardness, perform: { _ in
+                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames).shuffled()
+                })
+                .onChange(of: gameState.russianNames, perform: { _ in
                     colorRef = gameState.russianNames ? guessColorPreviewRus : guessColorPreview
                     answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames).shuffled()
                     

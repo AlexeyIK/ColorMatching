@@ -13,7 +13,19 @@ public class ColorsPickerHelper {
     
     func getColors(byHardness hardness: Hardness, shuffle: Bool = false) -> [ColorModel] {
 
-        var relevantCards = colorsData.filter({ hardness == .easy && 0...1 ~= $0.difficulty.rawValue || $0.difficulty.rawValue == hardness.rawValue })
+        var relevantCards: [ColorModel] = []
+        
+        switch hardness {
+        case .easy:
+            relevantCards = colorsData.filter({ 0...1 ~= $0.difficulty.rawValue })
+        case .normal:
+            relevantCards = colorsData.filter({ 1...2 ~= $0.difficulty.rawValue })
+        case .hard:
+            relevantCards = colorsData.filter({ 2...3 ~= $0.difficulty.rawValue })
+        default:
+            relevantCards = colorsData.filter({ $0.difficulty.rawValue == -1 })
+        }
+        
         relevantCards = relevantCards.filter({ $0.name != "" })
         if (shuffle) {
             relevantCards = relevantCards.shuffled()
