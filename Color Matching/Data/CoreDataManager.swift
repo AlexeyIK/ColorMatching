@@ -53,11 +53,13 @@ class CoreDataManager {
         do {
             let colorsArray = try context.fetch(fetchRequest)
 
+            /*
+            // Логи просмотренных цветов
             colorsArray.forEach { (color) in
                 print("color with hex: \(color.colorId ?? "-"), guessed: \(color.isGuessed)")
             }
 
-            print("total count: \(colorsArray.count)")
+            print("total count: \(colorsArray.count)")*/
 
         } catch {
 

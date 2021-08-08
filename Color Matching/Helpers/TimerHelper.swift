@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum TimerState {
+    case stopped
+    case paused
+    case running
+    case runout
+}
+
 class TimerHelper {
     
     private init() { }
