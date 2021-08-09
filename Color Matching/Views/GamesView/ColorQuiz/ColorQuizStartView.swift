@@ -112,10 +112,12 @@ struct ColorQuizStartView: View {
                                 .frame(width: contentZone.size.height * 0.075, height: contentZone.size.height * 0.25, alignment: .center)
                                 .opacity(perc)
                                 .modifier(RollingModifier(toAngle: -37.5 + angle + Double(i * 25), percentage: perc, anchor: .bottom, onFinish: {
-                                    blink = true
-                                    
-                                    timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-                                        self.blink = false
+                                    if timer == nil && !blink {
+                                        self.blink = true
+                                        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+                                            self.blink = false
+                                            print("animation finished")
+                                        }
                                     }
                                 }))
                                 .animation(Animation.easeOut(duration: 0.4 - Double(i) * 0.05).delay(petalDelay + Double(i) * 0.05), value: perc)
@@ -198,22 +200,8 @@ struct ColorQuizStartView: View {
                     colorRef = gameState.russianNames ? guessColorPreviewRus : guessColorPreview
                     answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
                     
-                    opacity2 = 0
-                    perc = 0
-                    angle = 100
-                    petalDelay = 0.1
+                    timer?.invalidate()
                     blink = false
-                    
-                    if timer != nil {
-                        timer!.invalidate()
-                        timer = nil
-                    }
-                    
-                    withAnimation() {
-                        opacity2 = 1
-                        perc = 1
-                        angle = 0
-                    }
                 })
             }
         }
