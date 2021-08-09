@@ -81,8 +81,8 @@ struct NameQuizStartView: View {
                         let previewColor = gameState.russianNames ? rememberColorPreviewRus : rememberColorPreview
                         
                         FakeButtonsView(text: previewColor.name != "" ? previewColor.name : previewColor.englishName,
-                                        foregroundColor: ConvertColor(rgb: previewColor.colorRGB),
-                                        outlineColor: ConvertColor(rgb: previewColor.colorRGB))
+                                        foregroundColor: ColorConvert(rgb: previewColor.colorRGB),
+                                        outlineColor: ColorConvert(rgb: previewColor.colorRGB))
                             .scaleEffect(0.9)
                             .offset(x: -card1Offset)
                             .transition(.scale)

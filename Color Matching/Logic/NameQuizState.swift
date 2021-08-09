@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class NameQuizState: ObservableObject {
     
@@ -17,14 +18,10 @@ class NameQuizState: ObservableObject {
     private let strikeBonusMultiplier: Int = 2
     
     // private
-    private var countdownTimer: Timer?
-    private var endDateTime = Date()
-    private var currentDateTime = Date()
-    private var saveElapsedTime: TimeInterval = 0
     private var gameScore: Int = 0
-    
     private var quizPosition: Int = 0
     private var correctAnswers: Int = 0
+    private var cancellable: AnyCancellable? = nil
     
     // public
     public var quizQuestions = 0
@@ -40,7 +37,7 @@ class NameQuizState: ObservableObject {
     @Published var timerStatus: TimerState = .stopped
     @Published var isAppActive: Bool = true
     
-    func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true) -> Void {
+    func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true, runTimer: Bool = true) -> Void {
         if cards.count == 0 { return }
         
         quizPosition = 0
@@ -67,78 +64,64 @@ class NameQuizState: ObservableObject {
             case .easy:
                 countdown = 30
             case .normal:
-                countdown  = 20
+                countdown  = 25
             case .hard:
-                countdown  = 15
+                countdown  = 20
             case .hell:
                 countdown  = 60
         }
         
         CoreDataManager.shared.resetLastGameScore()
-        startTimer(for: countdown)
+        attachTimer(for: countdown, and: runTimer)
         
         self.quizActive = true
     }
     
-    func startTimer(for time: Double) {
-        currentDateTime = Date()
-        endDateTime = Date.init(timeIntervalSinceNow: time)
-        timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
-        
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: definedTimerFrequence, repeats: true, block: { _ in
-            guard self.timerStatus != .paused && self.timerStatus != .runout else { return }
+    func attachTimer(for time: Double, and run: Bool) {
+        let timer = TimerHelper.shared.setTimer(for: time, run: run)
+        cancellable = timer.sink(receiveValue: { _ in
+            guard self.timerStatus != .paused else { return }
             
-            self.currentDateTime = Date()
-            self.timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
+            self.timerString = TimerHelper.shared.getRemainingTimeFomatted()
             
             self.quizAnswersAndScore.forEach { quizAnswer in
                 quizAnswer.liveTimeInc(seconds: self.definedTimerFrequence)
             }
             
-            if self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate <= 0 {
+            if TimerHelper.shared.timeBetweenDates() <= 0 {
                 self.timerStatus = .runout
                 self.startGameEndPause()
             }
         })
+        
+        timerStatus = run ? .running : .stopped
     }
     
     func pauseTimer() {
-        saveElapsedTime = self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate
+        TimerHelper.shared.pauseTimer()
         timerStatus = .paused
-        print("Timer paused")
     }
     
     func resumeTimer() {
-        endDateTime = Date.init(timeIntervalSinceNow: saveElapsedTime)
+        TimerHelper.shared.resumeTimer()
         timerStatus = .running
-        print("Timer resumed")
     }
     
     func startGameEndPause() {
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
-            if let timer = self.countdownTimer {
-                timer.invalidate()
-                print("Timer deleted")
-            }
-            
             self.stopQuiz()
         }
     }
     
     func getQuizItem() -> QuizItem? {
         guard quizActive && quizItemsList.count > 0 else { return nil }
-        
-//        print("quiz position: \(quizPosition), quizItemsRemains: \(quizItemsList.count)")
         return quizItemsList.first
     }
     
     func stopQuiz() -> Void  {
         guard quizActive else { return }
         
-        if let timer = countdownTimer {
-            timer.invalidate()
-        }
-        
+        TimerHelper.shared.cancelTimer()
         quizActive = false
         
         var strikeBonus = 0
@@ -148,9 +131,13 @@ class NameQuizState: ObservableObject {
             CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
             gameScore += strikeBonus
         }
+        // записываем увиденные и разгаданные карты
         CoreDataManager.shared.addViewedColors(colorsViewed)
+        // записываем результаты квиза
         NameQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
+        // записываем эти очки в CoreData
         CoreDataManager.shared.writeLastGameScore(gameScore)
+        CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
         
         print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(gameScore)")
         
@@ -177,13 +164,11 @@ class NameQuizState: ObservableObject {
         // смотрим сколько получили очков при текущем уровне сложности
         lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
         gameScore += lastScoreChange
-        // записываем эти очки в CoreData
-        CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
         if quizPosition == quizQuestions - 1 {
-            pauseTimer()
+            TimerHelper.shared.pauseTimer()
             startGameEndPause()
         }
         

@@ -123,7 +123,7 @@ struct NameQuizView: View {
         .padding()
         .blur(radius: quizState.isAppActive ? .nan : 10)
         .onAppear(perform: {
-            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames)
+            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames, runTimer: true)
         })
         // мониторим, что квиз сменил активность
         .onChange(of: quizState.quizActive) { _ in
@@ -141,10 +141,10 @@ struct NameQuizView: View {
             switch phase {
                 case .inactive:
                     quizState.isAppActive = false
-                    quizState.pauseTimer()
+                    TimerHelper.shared.pauseTimer()
                 case .active:
                     quizState.isAppActive = true
-                    quizState.resumeTimer()
+                    TimerHelper.shared.resumeTimer()
                 default:
                     return
             }

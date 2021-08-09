@@ -14,44 +14,46 @@ public class SimilarColorPicker {
     
     private init() { }
     
-    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, variations: Int = 2, withRef packRef: Bool = false, noClamp: Bool = false, isRussianOnly: Bool = true) -> [ColorModel] {
+    func getSimilarColors(colorRef: ColorModel, for hardness: Hardness, variations: Int = 2,
+                          withRef packRef: Bool = false, noClamp: Bool = false, isRussianOnly: Bool = true,
+                          useTrueColors: Bool = false) -> [ColorModel] {
         
         var similarColors: [ColorModel] = []
         
         for i in 0..<variations {
-            var hueStep = 0
-            var hueOffset = 0
-            var saturationOffset = 0
-            var valueOffset = 0
-            var newHue = 0
+            var hueStep: Int = 0
+            var hueOffset: Int = 0
+            var saturationOffset: Int = 0
+            var valueOffset: Int = 0
+            var newHue: Int = 0
+            
+            let delimiter: Int = Int(ceil(Float(i + 1) / 2))
             
             switch hardness {
                 case .easy:
                     hueStep = 90
-                    hueOffset = 30
-                    saturationOffset = 10
-                    valueOffset = 10
+                    hueOffset = 30 / delimiter
+                    saturationOffset = 30
+                    valueOffset = 30
                     break
                     
                 case .normal:
                     hueStep = 60
-                    hueOffset = 20
-                    saturationOffset = 10
-                    valueOffset = 10
+                    hueOffset = 20 / delimiter
+                    saturationOffset = 20
+                    valueOffset = 20
                     break
                 
                 case .hard:
                     hueStep = 30
-                    hueOffset = 15
-                    saturationOffset = 20
-                    valueOffset = 30
+                    hueOffset = 15 / delimiter
+                    saturationOffset = 10
+                    valueOffset = 20
                     break
                 
                 case .hell:
                     break
             }
-        
-            let delimiter: Int = Int(ceil(Float(i + 1) / 2))
 //            print("current delimiter: \(delimiter)")
             
             // смотрим не вышло ли значение Hue за рамки от 0 до 360 градусов
@@ -68,14 +70,29 @@ public class SimilarColorPicker {
                 }
             }
             
+            var colorResult: ColorModel?
             // получаем похожий цвет, если получится
-            let colorResult = findSimilarColorByOffset(hue: newHue,
+            if useTrueColors {
+                let newColorHSV = findTrueSimilarColor(hue: newHue,
+                                                       saturation: colorRef.colorHSV[1]!,
+                                                       value: colorRef.colorHSV[2]!,
+                                                       hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
+                                                       satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
+                                                       valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange)
+                
+                print("new sim color: \(newColorHSV)")
+                
+                colorResult = ColorModel(id: -variations, name: "-", englishName: "-", hexCode: "", colorRGB: HSVConvertToRGB(newColorHSV), colorHSV: newColorHSV, difficulty: .unknown, isGuessed: false)
+            }
+            else {
+                colorResult = findSimilarColorByOffset(hue: newHue,
                                                      saturation: colorRef.colorHSV[1]!,
                                                      value: colorRef.colorHSV[2]!,
                                                      hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
                                                      satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
                                                      valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange,
                                                      isRussianOnly: isRussianOnly)
+            }
             // если цвет получен, то добавляем его в выдачу
             if let simColor = colorResult {
                 similarColors.append(simColor)
@@ -89,6 +106,25 @@ public class SimilarColorPicker {
         }
         
         return similarColors
+    }
+    
+    private func findTrueSimilarColor(hue refHue: Int, saturation satRef: Int, value valueRef: Int,
+                                      hueOffset: Int = 30, satOffset: Int = 10, valOffset: Int = 10,
+                                      satClamp: ClosedRange<Int> = 0...100, valueClamp: ClosedRange<Int> = 0...100) -> [Int] {
+        var rndHue = Int.random(in: refHue - hueOffset...refHue + hueOffset)
+        if rndHue < 0 {
+            rndHue += 360
+        }
+        if rndHue > 360 {
+            rndHue -= 360
+        }
+        
+        let newHue = rndHue
+        let newSaturation = Int.random(in: satRef - satOffset...satRef + satOffset).clamped(to: satClamp)
+        let newValue = Int.random(in: valueRef - valOffset...valueRef + valOffset).clamped(to: valueClamp)
+        
+        return [newHue, newSaturation, newValue]
+//        return ConvertColor(colorType: .hsba, value: (newHue, newSaturation, newValue, 1))
     }
     
     private func findSimilarColorByOffset(hue refHue: Int, saturation satRef: Int, value valueRef: Int,

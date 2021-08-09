@@ -70,7 +70,7 @@ struct MainMenuView: View {
                         Text("Color games collection")
                             .font(.title)
                             .fontWeight(.light)
-                            .foregroundColor(ConvertColor(colorType: .hsba, value: (179, 73, 40, 1)))
+                            .foregroundColor(ColorConvert(colorType: .hsba, value: (179, 73, 40, 1)))
                         
                         Spacer()
                         
@@ -81,7 +81,7 @@ struct MainMenuView: View {
                                     .navigationBarTitleDisplayMode(.inline),
                                     
                                 label: {
-                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
                                 })
                             
                             NavigationLink(
@@ -90,10 +90,10 @@ struct MainMenuView: View {
                                     .navigationBarTitleDisplayMode(.inline),
                                     
                                 label: {
-                                    MenuButtonView(text: "Name QUIZ", imageName: "iconNameQIUZ", foregroundColor: ConvertColor(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    MenuButtonView(text: "Name QUIZ", imageName: "iconNameQIUZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
                                 })
                             
-                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ConvertColor(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
+                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ColorConvert(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
                             
                             MenuButtonView(text: "More games soon", noImage: true)
                         }
@@ -110,9 +110,9 @@ struct MainMenuView: View {
                         Rectangle()
                             .fill(LinearGradient(gradient: Gradient(
                                                     colors: [
-                                                        ConvertColor(colorType: .rgba, value: (0, 255, 127, 1)),
-                                                        ConvertColor(colorType: .rgba, value: (70, 63, 250, 1)),
-                                                        ConvertColor(colorType: .rgba, value: (255, 0, 255, 1))
+                                                        ColorConvert(colorType: .rgba, value: (0, 255, 127, 1)),
+                                                        ColorConvert(colorType: .rgba, value: (70, 63, 250, 1)),
+                                                        ColorConvert(colorType: .rgba, value: (255, 0, 255, 1))
                                                     ]),
                                                  startPoint: .top,
                                                  endPoint: .bottom))
@@ -126,9 +126,9 @@ struct MainMenuView: View {
                         Rectangle()
                             .fill(LinearGradient(gradient: Gradient(
                                                     colors: [
-                                                        ConvertColor(colorType: .rgba, value: (255, 0, 107, 1)),
-                                                        ConvertColor(colorType: .rgba, value: (255, 164, 2, 1)),
-                                                        ConvertColor(colorType: .rgba, value: (69, 215, 0, 1))
+                                                        ColorConvert(colorType: .rgba, value: (255, 0, 107, 1)),
+                                                        ColorConvert(colorType: .rgba, value: (255, 164, 2, 1)),
+                                                        ColorConvert(colorType: .rgba, value: (69, 215, 0, 1))
                                                     ]),
                                                  startPoint: .top,
                                                  endPoint: .bottom))

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class ColorQuizState: ObservableObject {
     
@@ -17,15 +18,10 @@ class ColorQuizState: ObservableObject {
     private let strikeBonusMultiplier: Int = 2
     
     // private
-    private var countdownTimer: Timer?
-    private var countdown: Double = 0
-    private var endDateTime = Date()
-    private var currentDateTime = Date()
-    private var saveElapsedTime: TimeInterval = 0
     private var gameScore: Int = 0
-    
     private var quizPosition: Int = 0
     private var correctAnswers: Int = 0
+    private var cancellable: AnyCancellable? = nil
     
     // public
     public var quizQuestions = 0
@@ -40,7 +36,7 @@ class ColorQuizState: ObservableObject {
     @Published var timerString: String = "00:00:000"
     @Published var isAppActive: Bool = true
     
-    func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true, runTimer: Bool = true) -> Void {
+    func startQuiz(cards: [ColorModel], hardness: Hardness, russianNames: Bool, shuffled: Bool = true, runTimer: Bool) -> Void {
         if cards.count == 0 { return }
         
         quizPosition = 0
@@ -56,13 +52,14 @@ class ColorQuizState: ObservableObject {
         // создаем список вопросов заранее
         createQuizItems(availableCards: cardsList, hardness: hardness, russianNames: russianNames)
         
+        var countdown: Double = 0
         // запуск таймера на указанное время от уровня сложности
         switch hardness
         {
             case .easy:
                 countdown = 30
             case .normal:
-                countdown  = 30
+                countdown  = 25
             case .hard:
                 countdown  = 20
             case .hell:
@@ -70,7 +67,7 @@ class ColorQuizState: ObservableObject {
         }
         
         CoreDataManager.shared.resetLastGameScore()
-        setTimer(run: runTimer)
+        attachTimer(for: countdown, run: runTimer)
         
         self.quizActive = true
     }
@@ -93,39 +90,26 @@ class ColorQuizState: ObservableObject {
         
         availableCards.forEach { (card) in
             let correctColor = card
-            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: variationsNum, withRef: true, noClamp: true, isRussianOnly: russianNames))
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: variationsNum, withRef: true, noClamp: true, isRussianOnly: russianNames, useTrueColors: true))
             quizItemsList.append(QuizItem(answers: colorVariants, correct: correctColor))
         }
     }
     
-    func setTimer(run: Bool = true) {
-        currentDateTime = Date()
-        endDateTime = Date.init(timeIntervalSinceNow: countdown)
-        timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
-        
-        countdownTimer = Timer.scheduledTimer(withTimeInterval: definedTimerFrequence, repeats: true, block: { _ in
+    func attachTimer(for time: Double, run: Bool = true) {
+        let timer = TimerHelper.shared.setTimer(for: time, run: run)
+        cancellable = timer.eraseToAnyPublisher().sink(receiveValue: { _ in
+            self.makeScoresFly()
             guard self.timerStatus != .paused && self.timerStatus != .runout else { return }
             
-            self.currentDateTime = Date()
-            self.timerString = TimerHelper.shared.getTimeIntervalFomatted(from: self.currentDateTime, until: self.endDateTime)
+            self.timerString = TimerHelper.shared.getRemainingTimeFomatted()
             
-            self.quizAnswersAndScore.forEach { quizAnswer in
-                quizAnswer.liveTimeInc(seconds: self.definedTimerFrequence)
-            }
-            
-            if self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate <= 0 {
+            if TimerHelper.shared.timeBetweenDates() <= 0 {
                 self.timerStatus = .runout
                 self.startGameEndPause()
             }
         })
         
-        if run {
-            timerStatus = .running
-        }
-        else {
-            timerStatus = .stopped
-        }
-        print("Timer started")
+        timerStatus = run ? .running : .stopped
     }
     
     func runTimer() {
@@ -133,24 +117,23 @@ class ColorQuizState: ObservableObject {
     }
     
     func pauseTimer() {
+        TimerHelper.shared.pauseTimer()
         timerStatus = .paused
-        saveElapsedTime = self.endDateTime.timeIntervalSinceReferenceDate - self.currentDateTime.timeIntervalSinceReferenceDate
-        print("Timer paused")
     }
     
     func resumeTimer() {
-        endDateTime = Date.init(timeIntervalSinceNow: saveElapsedTime)
+        TimerHelper.shared.resumeTimer()
         timerStatus = .running
-        print("Timer resumed")
+    }
+    
+    func makeScoresFly() {
+        self.quizAnswersAndScore.forEach { quizAnswer in
+            quizAnswer.liveTimeInc(seconds: self.definedTimerFrequence)
+        }
     }
     
     func startGameEndPause() {
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
-            if let timer = self.countdownTimer {
-                timer.invalidate()
-                print("Timer deleted")
-            }
-            
             self.stopQuiz()
         }
     }
@@ -163,10 +146,7 @@ class ColorQuizState: ObservableObject {
     func stopQuiz() -> Void  {
         guard quizActive else { return }
         
-        if let timer = countdownTimer {
-            timer.invalidate()
-        }
-        
+        TimerHelper.shared.cancelTimer()
         quizActive = false
         
         var strikeBonus = 0
@@ -176,9 +156,13 @@ class ColorQuizState: ObservableObject {
             CoreDataManager.shared.updatePlayerScore(by: strikeBonus)
             gameScore += strikeBonus
         }
-        ColorQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
+        // записываем увиденные и разгаданные цвета
         CoreDataManager.shared.addViewedColors(colorsViewed)
+        // записываем результаты квиза
+        ColorQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
+        // записываем эти очки в CoreData
         CoreDataManager.shared.writeLastGameScore(gameScore)
+        CoreDataManager.shared.updatePlayerScore(by: gameScore)
         
         print("Quiz finished with results: [correct answers: \(correctAnswers), cards viewed: \(quizPosition), scores collected: \(gameScore)")
         
@@ -205,8 +189,6 @@ class ColorQuizState: ObservableObject {
         // смотрим сколько получили очков при текущем уровне сложности
         let lastScoreChange = ScoreManager.shared.getScoreByHardness(hardness, answerCorrect: result)
         gameScore += lastScoreChange
-        // записываем эти очки в CoreData
-        CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)
         
         quizAnswersAndScore.append(QuizAnswer(isCorrect: result, scoreEarned: lastScoreChange))
         
