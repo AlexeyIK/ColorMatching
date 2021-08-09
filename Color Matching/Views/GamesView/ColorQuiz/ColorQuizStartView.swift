@@ -54,12 +54,17 @@ struct ColorQuizStartView: View {
             
             GeometryReader { contentZone in
                 VStack {
-                    Text("how to play?")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                        .transition(.opacity)
+                    if contentZone.size.height >= 570 {
+                        Text("how to play?")
+                            .foregroundColor(.white)
+                            .font(.title3)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .transition(.opacity)
+                    }
+                    else {
+                        Spacer()
+                    }
                     
                     VStack {
                         ZStack {
@@ -109,7 +114,7 @@ struct ColorQuizStartView: View {
                                       showColor: !blink || blink && answers[i].id == colorRef.id,
                                       blink: blink && answers[i].id == colorRef.id,
                                       blinkFreq: 0.25)
-                                .frame(width: contentZone.size.height * 0.075, height: contentZone.size.height * 0.25, alignment: .center)
+                                .frame(width: contentZone.size.height * 0.07, height: contentZone.size.height * 0.22, alignment: .center)
                                 .opacity(perc)
                                 .modifier(RollingModifier(toAngle: -37.5 + angle + Double(i * 25), percentage: perc, anchor: .bottom, onFinish: {
                                     if timer == nil && !blink {
