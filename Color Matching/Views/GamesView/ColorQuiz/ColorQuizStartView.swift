@@ -18,7 +18,7 @@ struct ColorQuizStartView: View {
     @State var angle: Double = 100
     @State var perc: Double = 0
     @State var blink: Bool = false
-    @State var petalDelay: Double = 1.8
+    @State var petalDelay: Double = 2
     
     @State var answers: [ColorModel] = []
     @State var colorRef: ColorModel = colorsData[0]
@@ -112,10 +112,12 @@ struct ColorQuizStartView: View {
                                 .frame(width: contentZone.size.height * 0.075, height: contentZone.size.height * 0.25, alignment: .center)
                                 .opacity(perc)
                                 .modifier(RollingModifier(toAngle: -37.5 + angle + Double(i * 25), percentage: perc, anchor: .bottom, onFinish: {
-                                    blink = true
-                                    
-                                    timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-                                        self.blink = false
+                                    if timer == nil && !blink {
+                                        self.blink = true
+                                        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
+                                            self.blink = false
+                                            print("animation finished")
+                                        }
                                     }
                                 }))
                                 .animation(Animation.easeOut(duration: 0.4 - Double(i) * 0.05).delay(petalDelay + Double(i) * 0.05), value: perc)
@@ -131,7 +133,7 @@ struct ColorQuizStartView: View {
                             .frame(width: 140, alignment: .center)
                             .transition(.identity)
                             .offset(x: card2Offset, y: contentZone.size.height * 0.05)
-                            .animation(Animation.easeOut(duration: 0.3).delay(1.55), value: card2Offset)
+                            .animation(Animation.easeOut(duration: 0.3).delay(1.4), value: card2Offset)
                     }
                     .onAppear {
                         withAnimation() {
@@ -186,7 +188,7 @@ struct ColorQuizStartView: View {
                         card1Offset = 0
                         opacity1 = 1
                     }
-                    withAnimation(Animation.easeOut(duration: 0.3).delay(1.4)) {
+                    withAnimation(Animation.easeOut(duration: 0.3).delay(1.6)) {
                         card2Offset = 0
                         opacity2 = 1
                     }
@@ -198,22 +200,8 @@ struct ColorQuizStartView: View {
                     colorRef = gameState.russianNames ? guessColorPreviewRus : guessColorPreview
                     answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
                     
-                    opacity2 = 0
-                    perc = 0
-                    angle = 100
-                    petalDelay = 0.1
+                    timer?.invalidate()
                     blink = false
-                    
-                    if timer != nil {
-                        timer!.invalidate()
-                        timer = nil
-                    }
-                    
-                    withAnimation() {
-                        opacity2 = 1
-                        perc = 1
-                        angle = 0
-                    }
                 })
             }
         }

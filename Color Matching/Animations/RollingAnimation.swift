@@ -18,7 +18,7 @@ struct RollingModifier: AnimatableModifier {
     }
     
     var toAngle: Double = 0
-    var percentage: Double
+    var percentage: Double = 0
     var anchor: UnitPoint = .center
     let onFinish: () -> ()
     

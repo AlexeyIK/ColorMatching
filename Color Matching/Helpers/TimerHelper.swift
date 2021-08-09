@@ -55,7 +55,7 @@ class TimerHelper {
     }
     
     func resumeTimer() {
-        endDateTime = Date.init(timeIntervalSinceNow: saveElapsedTime)
+        compensateTimer(for: saveElapsedTime)
         print("Timer resumed")
     }
     
