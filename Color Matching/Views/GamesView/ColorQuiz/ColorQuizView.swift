@@ -150,6 +150,9 @@ struct ColorQuizView: View {
                                                 lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                 self.swapCards = true
                                                 
+                                                let hapticImpact = UINotificationFeedbackGenerator()
+                                                hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
+                                                
                                                 answerTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) {_ in
                                                     withAnimation() {
                                                         self.newRotation -= 120

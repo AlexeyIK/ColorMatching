@@ -10,12 +10,25 @@ import SwiftUI
 struct QuizButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             .foregroundColor(_globalAnswersColor)
+            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             .background(RoundedRectangle(cornerRadius: 36)
-                            .stroke(configuration.isPressed ? _globalAnswersColorHighlighted : _globalAnswersColor, lineWidth: 3)
+                            .stroke(configuration.isPressed ? _globalAnswersColorHighlighted : _globalAnswersColor, lineWidth: 1)
                             .overlay(configuration.isPressed ? RoundedRectangle(cornerRadius: 36).fill(_globalAnswersColorHighlighted) : nil)
             )
+            .clipShape(RoundedRectangle(cornerRadius: 36))
+    }
+}
+
+struct QuizButtonIncorrect: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
+            .foregroundColor(Color.init(hue: 0, saturation: 1, brightness: 0.63))
+            .background(RoundedRectangle(cornerRadius: 36)
+                            .stroke(Color.init(hue: 0, saturation: 1, brightness: 0.63), lineWidth: 1)
+                            
+)
             .clipShape(RoundedRectangle(cornerRadius: 36))
     }
 }
@@ -23,17 +36,19 @@ struct QuizButton: ButtonStyle {
 struct QuizButtonCorrect: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
-            .foregroundColor(_globalAnswersColor)
-            .background(configuration.isPressed ? Color.init(red: 0.2, green: 1, blue: 0.2) : Color.init(hue: 0, saturation: 0, brightness: 0.33, opacity: 1))
-            .clipShape(RoundedRectangle(cornerRadius: 36))
+            .foregroundColor(.white)
+            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+            .background(RoundedRectangle(cornerRadius: 36)
+                            .stroke(configuration.isPressed ? _globalAnswersColorHighlighted : .white, lineWidth: 1))
+//            .clipShape(RoundedRectangle(cornerRadius: 36))
+            .shadow(color: Color.white.opacity(1), radius: 8, x: 0, y: 0)
     }
 }
 
 struct QuizButtons: View {
     var body: some View {
         Button("Some button") { }
-        .buttonStyle(QuizButton())
+        .buttonStyle(QuizButtonCorrect())
     }
 }
 

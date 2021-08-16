@@ -66,7 +66,7 @@ class NameQuizState: ObservableObject {
             case .normal:
                 countdown  = 25
             case .hard:
-                countdown  = 20
+                countdown  = 25
             case .hell:
                 countdown  = 60
         }
