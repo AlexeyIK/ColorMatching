@@ -15,12 +15,17 @@ struct NameQuizView: View {
     @EnvironmentObject var resultStore: QuizResultsStore
     @StateObject var quizState: NameQuizState = NameQuizState()
     
+    @State var needToShowAnswer: Bool = false
     @State var lastAnswerIsCorrect: Bool? = nil
+    @State var answerTimer: Timer? = nil
     
     var highlightCorrectAnswer: Bool = false
     var showColorNames: Bool = false
     let scoreFlowSpeed: CGFloat = 55
     let debugMode: Bool
+    
+    private let debugCards: [ColorModel] = [colorsData[100], colorsData[110], colorsData[120]]
+    private let debugScores = [QuizAnswer(isCorrect: true, scoreEarned: 12)]
     
     var body: some View {
         VStack {
@@ -85,20 +90,44 @@ struct NameQuizView: View {
                             ForEach(quizItem.answers) { answer in
                                 let colorName = gameState.russianNames ? answer.name : answer.englishName
 
-                                Button(colorName) {
-                                    withAnimation {
-                                        quizState.quizItemsList.removeFirst()
-                                        lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: answer.id, hardness: gameState.hardness)
-                                        quizState.nextQuizItem()
+                                if needToShowAnswer && answer.id == quizItem.correct.id {
+                                    if lastAnswerIsCorrect == true {
+                                        Button(colorName) { }
+                                            .transition(.opacity)
+                                            .buttonStyle(QuizButtonCorrect())
+                                            .animation(.none)
+                                    } else {
+                                        Button(colorName) { }
+                                            .transition(.opacity)
+                                            .buttonStyle(QuizButtonIncorrect())
+                                            .animation(.none)
                                     }
                                 }
-                                .transition(.identity)
-                                .buttonStyle(QuizButton())
-                                .animation(.none)
-                                .brightness(highlightCorrectAnswer && answer.id == quizItem.correct.id ? 0.05 : 0)
+                                else {
+                                    Button(colorName) {
+                                        lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: answer.id, hardness: gameState.hardness)
+                                        self.needToShowAnswer = true
+                                        
+                                        let hapticImpact = UINotificationFeedbackGenerator()
+                                        hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
+                                        
+                                        answerTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) {_ in
+                                            withAnimation() {
+                                                quizState.quizItemsList.removeFirst()
+                                                quizState.nextQuizItem()
+                                                self.needToShowAnswer = false
+                                            }
+                                        }
+                                    }
+                                    .transition(.opacity)
+                                    .buttonStyle(QuizButton())
+                                    .animation(.none)
+                                    .brightness(debugMode && answer.id == quizItem.correct.id ? 0.05 : 0)
+                                }
                             }
                         }
                     }
+                    .animation(Animation.easeOut(duration: 0.15))
                     .frame(height: 120)
                     .padding(.vertical, 10)
                     .transition(.identity)
@@ -123,7 +152,7 @@ struct NameQuizView: View {
         .padding()
         .blur(radius: quizState.isAppActive ? .nan : 10)
         .onAppear(perform: {
-            quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames, runTimer: true)
+            quizState.startQuiz(cards: debugMode ? debugCards : gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames, runTimer: true)
         })
         // мониторим, что квиз сменил активность
         .onChange(of: quizState.quizActive) { _ in
@@ -155,15 +184,15 @@ struct NameQuizView: View {
 struct QuizGameView_Previews: PreviewProvider {
     static var previews: some View {
 //        ForEach(["iPhone Xs"], id: \.self) { device in
-        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
+//        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
             ZStack {
                 BackgroundView()
                 NameQuizView(debugMode: true)
                     .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
                     .environmentObject(QuizResultsStore())
             }
-            .previewDevice(PreviewDevice(stringLiteral: device))
-            .previewDisplayName(device)
-        }
+//            .previewDevice(PreviewDevice(stringLiteral: device))
+//            .previewDisplayName(device)
+//        }
     }
 }
