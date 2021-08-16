@@ -108,8 +108,8 @@ struct NameQuizView: View {
                                         lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: answer.id, hardness: gameState.hardness)
                                         self.needToShowAnswer = true
                                         
-                                        let hapticImpact = UIImpactFeedbackGenerator(style: lastAnswerIsCorrect! ? .soft : .rigid)
-                                        hapticImpact.impactOccurred()
+                                        let hapticImpact = UINotificationFeedbackGenerator()
+                                        hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
                                         
                                         answerTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) {_ in
                                             withAnimation() {
