@@ -33,7 +33,7 @@ struct NameQuizView: View {
             
             if quizState.results == nil || debugMode {
                 if contentZone.height > 570 {
-                    Text("Guess the color")
+                    Text("color-quiz-title")
                         .foregroundColor(.white)
                         .font(.title2)
                         .fontWeight(.light)

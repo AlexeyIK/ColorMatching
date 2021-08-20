@@ -1,0 +1,46 @@
+/* 
+  Localizable.strings
+  Color Matching
+
+  Created by Алексей Кузнецов on 21.08.2021.
+  
+*/
+
+/* Game title */
+"main-menu-title" = "Color games collection";
+
+"more-games-soon" = "More games soon";
+
+"color-quiz" = "Color QUIZ";
+
+"name-quiz" = "Name QUIZ";
+
+"warm-vs-cold" = "Warm VS Cold";
+
+/* Hardness */
+"easy" = "Easy";
+"normal" = "Normal";
+"hard" = "Hard";
+"hell" = "Hell";
+
+/* Menus */
+"menu-button" = "Menu";
+
+/* Universal */
+"go-button.main" = "Go!";
+"go-button.second" = "Go!";
+"remember-the-colors" = "Remember the colors";
+"how-to-play" = "How to play?";
+"main-menu-button" = "Main menu";
+"next-game-button" = "Next one";
+
+/* Color Quiz texts */
+"color-quiz-title" = "Guess the color";
+
+"color-quiz-tutor-first" = "Remember the color and its name";
+
+"color-quiz-tutor-second" = "Choose the right color";
+
+"ready-to-guess" = "Get ready to remember the colors!";
+
+"pick-the-right-color" = "Pick right color";

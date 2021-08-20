@@ -89,7 +89,7 @@ struct QuizResultsView: View {
             
             Spacer()
             
-            Button("Main menu") {
+            Button("main-menu-button") {
                 presentationMode.wrappedValue.dismiss()
             }
             .buttonStyle(GoButton2())
@@ -98,7 +98,7 @@ struct QuizResultsView: View {
             .transition(.move(edge: .bottom))
             .animation(Animation.easeOut(duration: 0.3).delay(0.3))
             
-            Button("Next one") {
+            Button("next-game-button") {
                 gameState.restartGameSession()
             }
             .buttonStyle(GoButton2())

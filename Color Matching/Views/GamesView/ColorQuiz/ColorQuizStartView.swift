@@ -41,23 +41,25 @@ struct ColorQuizStartView: View {
                 VStack {
                     Spacer()
                     
-                    Button(gameState.russianNames ? "Rus" : "Eng") {
-                        gameState.russianNames.toggle()
+                    if Locale.current.languageCode == "ru" {
+                        Button(gameState.russianNames ? "Рус" : "Eng") {
+                            gameState.russianNames.toggle()
+                        }
+                        .buttonStyle(GoButton2())
+                        .font(.system(size: 14))
+                        .transition(.identity)
+                        .animation(.none)
+                        .padding()
                     }
-                    .buttonStyle(GoButton2())
-                    .font(.system(size: 14))
-                    .transition(.identity)
-                    .animation(.none)
-                    .padding()
                 }
             }
             
             GeometryReader { contentZone in
                 VStack {
                     if contentZone.size.height >= 570 {
-                        Text("how to play?")
+                        Text("how-to-play")
                             .foregroundColor(.white)
-                            .font(.title3)
+                            .font(.title2)
                             .multilineTextAlignment(.center)
                             .padding()
                             .transition(.opacity)
@@ -75,7 +77,7 @@ struct ColorQuizStartView: View {
                                 .offset(x: card1Offset)
                                 .opacity(opacity1)
                             
-                            Text("Remember the color and its name")
+                            Text("color-quiz-tutor-first")
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .fontWeight(.medium)
@@ -121,14 +123,14 @@ struct ColorQuizStartView: View {
                                         self.blink = true
                                         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
                                             self.blink = false
-                                            print("animation finished")
+//                                            print("animation finished")
                                         }
                                     }
                                 }))
                                 .animation(Animation.easeOut(duration: 0.4 - Double(i) * 0.05).delay(petalDelay + Double(i) * 0.05), value: perc)
                         }
                         
-                        Text("Choose the right color")
+                        Text("color-quiz-tutor-second")
                             .foregroundColor(.white)
                             .font(.title2)
                             .fontWeight(.medium)
@@ -162,23 +164,23 @@ struct ColorQuizStartView: View {
                             }
                         }, label: {
                             HStack {
-                                Text(String(describing: gameState.hardness).capitalized)
+                                Text(LocalizedStringKey(String(describing: gameState.hardness)))
                                 Image(systemName: "chevron.right")
                             }
                         })
                         .buttonStyle(GoButton2())
-                        .font(.system(size: 20))
+                        .font(.system(size: 18))
                         .transition(.identity)
                         .animation(.none)
                     }
                     .animation(.none)
                     .frame(width: contentZone.size.width, alignment: .center)
                         
-                    Button("Go!") {
+                    Button("go-button.main") {
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
-                    .font(.system(size: 40))
+                    .font(.system(size: 36))
                     .frame(width: contentZone.size.width, alignment: .center)
                     .transition(.identity)
                     .padding(.bottom, 50)
@@ -215,11 +217,16 @@ struct ColorQuizStartView: View {
 
 struct ColorQuizStartView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
+//        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
+        Group {
             ColorQuizStartView()
-                .previewDevice(PreviewDevice(stringLiteral: device))
-                .previewDisplayName(device)
                 .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
+            ColorQuizStartView()
+                .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
+                .environment(\.locale, Locale(identifier: "ru"))
         }
+//                .previewDevice(PreviewDevice(stringLiteral: device))
+//                .previewDisplayName(device)
+//        }
     }
 }

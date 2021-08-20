@@ -28,7 +28,7 @@ struct LearnDeckView: View {
             
         VStack {
             if (currentIndex < gameState.cardsList.count) {
-                Text("Remember the colors")
+                Text("remember-the-colors")
                     .foregroundColor(.white)
                     .font(.title2)
                     .fontWeight(.light)
@@ -107,7 +107,7 @@ struct LearnDeckView: View {
             if currentIndex < gameState.cardsList.count {
                 Spacer()
             } else {
-                Text("Get ready to remember the colors!")
+                Text("ready-to-guess")
                     .foregroundColor(.white)
                     .font(.title2)
                     .padding()
@@ -118,7 +118,7 @@ struct LearnDeckView: View {
                     .transition(.slide)
                     .animation(Animation.spring(response: 0.4, dampingFraction: 0.6, blendDuration: 0).delay(0.3))
                 
-                Button("Go!") {
+                Button("go-button.second") {
                     gameState.activeGameMode = .quiz
                 }
                 .buttonStyle(GoButton2())
