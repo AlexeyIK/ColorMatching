@@ -44,7 +44,7 @@ struct LearnAndQuizView: View {
                     Image(systemName: "chevron.left")
                         .foregroundColor(_globalNavBarButtonsColor)
                     
-                    Button("Menu") {
+                    Button("menu-button") {
                         gameState.endGameSession()
                         presentationMode.wrappedValue.dismiss()
                     }

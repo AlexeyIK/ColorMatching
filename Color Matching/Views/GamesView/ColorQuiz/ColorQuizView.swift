@@ -89,7 +89,7 @@ struct ColorQuizView: View {
                                         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
                                 }
                                 else if quizState.timerStatus == .runout && quizState.results == nil {
-                                    Text("Time is over!")
+                                    Text("time-over")
                                         .foregroundColor(.white)
                                         .font(.title)
                                         .padding()

@@ -34,7 +34,7 @@ struct QuizResultsView: View {
             Spacer()
             
             if resultsStore.quizResults.correctAnswers == resultsStore.quizResults.cardsCount {
-                Text("You have guessed all cards!")
+                Text("guessed-all-cards")
                     .foregroundColor(.white)
                     .font(.title2)
                     .padding()
@@ -123,11 +123,20 @@ struct QuizResultsView: View {
 
 struct QuizResultsView_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack {
-            BackgroundView()
-            QuizResultsView()
-                .environmentObject(LearnAndQuizState(quizType: .colorQuiz))
-                .environmentObject(QuizResultsStore())
+        Group {
+            ZStack {
+                BackgroundView()
+                QuizResultsView()
+                    .environmentObject(LearnAndQuizState(quizType: .colorQuiz))
+                    .environmentObject(QuizResultsStore())
+            }
+            ZStack {
+                BackgroundView()
+                QuizResultsView()
+                    .environmentObject(LearnAndQuizState(quizType: .colorQuiz))
+                    .environmentObject(QuizResultsStore())
+                    .environment(\.locale, Locale(identifier: "ru"))
+            }
         }
     }
 }

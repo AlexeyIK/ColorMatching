@@ -133,7 +133,7 @@ struct NameQuizView: View {
                     .transition(.identity)
                 }
                 else if quizState.timerStatus == .runout && quizState.results == nil {
-                    Text("Time is over!")
+                    Text("time-over")
                         .foregroundColor(.white)
                         .font(.title)
                         .padding()

@@ -8,13 +8,9 @@
 
 /* Game title */
 "main-menu-title" = "Игры о цветах";
-
 "more-games-soon" = "Больше игр, скоро";
-
 "color-quiz" = "Угадай цвета";
-
 "name-quiz" = "Угадай имя";
-
 "warm-vs-cold" = "Теплое/холодное";
 
 /* Hardness */
@@ -29,21 +25,25 @@
 /* Universal */
 "go-button.main" = "Старт!";
 "go-button.second" = "Вперед!";
-"remember-the-colors" = "Запоминай цвета";
 "how-to-play" = "Правила игры";
 "main-menu-button" = "Главное меню";
 "next-game-button" = "Играть снова";
+"time-over" = "Время вышло!";
 
 /* Color Quiz texts */
+"remember-the-colors" = "Запоминай цвета";
 "color-quiz-title" = "Угадай цвет";
-
 "color-quiz-tutor-first" = "Запоминай цвета и их названия";
-
 "color-quiz-tutor-second" = "Выбери правильный цвет";
-
 "ready-to-guess" = "Приготовься вспоминать и угадывать цвета!";
-
 "pick-the-right-color" = "Выбери верный цвет";
 
+/* Name Quiz texts */
+"remember-the-color-name" = "Запоминай названия цветов";
+"choose-right-name" = "Выбери правильный вариант";
+
+/* Results */
+"guessed-all-cards" = "You have guessed all cards!";
+"guessed-n-cards" = "";
 
 
