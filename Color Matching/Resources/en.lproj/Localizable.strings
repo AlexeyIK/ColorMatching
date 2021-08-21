@@ -44,4 +44,6 @@
 
 /* Results */
 "guessed-all-cards" = "You have guessed all cards!";
-"guessed-n-cards" = "";
+"%lld strike-bonus" = "x%lld strike!";
+
+

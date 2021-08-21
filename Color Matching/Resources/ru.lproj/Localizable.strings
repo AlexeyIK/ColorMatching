@@ -3,7 +3,6 @@
   Color Matching
 
   Created by Алексей Кузнецов on 21.08.2021.
-  
 */
 
 /* Game title */
@@ -26,8 +25,8 @@
 "go-button.main" = "Старт!";
 "go-button.second" = "Вперед!";
 "how-to-play" = "Правила игры";
-"main-menu-button" = "Главное меню";
-"next-game-button" = "Играть снова";
+"main-menu-button" = "В меню";
+"next-game-button" = "Еще раз";
 "time-over" = "Время вышло!";
 
 /* Color Quiz texts */
@@ -44,6 +43,22 @@
 
 /* Results */
 "guessed-all-cards" = "You have guessed all cards!";
-"guessed-n-cards" = "";
+"%lld strike-bonus" = "x%lld страйк!";
 
+/* Statistics */
+"Collected Соlor Coins:" = "Набранные Color Coins:";
+"Last game Color Coins:" = "Набрано CC в последней игре:";
+"Total games finished:" = "Всего игр завершено:";
+"Guessed unique colors:" = "Уникальных цветов разгадано:";
 
+// "Color QUIZ"
+"Finished games:" = "Игр завершено:";
+"Guessed colors:" = "Угадано цветов:";
+"Color Strikes:" = "Всего страйков:";
+"Best Strike:" = "Лучший страйк:";
+
+// "Name QUIZ"
+"Finished games:" = "Игр завершено:";
+"Guessed names:" = "Угадано названий:";
+"Color Strikes:" = "Всего страйков:";
+"Best Strike:" = "Лучший страйк:";

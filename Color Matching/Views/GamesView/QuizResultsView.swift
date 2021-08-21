@@ -42,7 +42,8 @@ struct QuizResultsView: View {
                     .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
                     .transition(.identity)
             } else {
-                Text("You guessed \(resultsStore.quizResults.correctAnswers) of \(resultsStore.quizResults.cardsCount) \(resultsStore.quizResults.cardsCount > 1 ? "cards" : "card" )")
+//                Text("You guessed \(resultsStore.quizResults.correctAnswers) of \(resultsStore.quizResults.cardsCount) \(resultsStore.quizResults.cardsCount > 1 ? "cards" : "card" )")
+                Text("You guessed \(resultsStore.quizResults.correctAnswers) of \(resultsStore.quizResults.cardsCount) card(s)")
                     .foregroundColor(.white)
                     .font(.title2)
                     .padding()
@@ -60,7 +61,7 @@ struct QuizResultsView: View {
                     .animation(Animation.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0).delay(0.6), value: scoreCaptionOffset)
                 
                 if (resultsStore.quizResults.strikeBonus > 0) {
-                    Text("x" + String(resultsStore.quizResults.strikeMultiplier) + " strike!")
+                    Text("\(resultsStore.quizResults.strikeMultiplier) strike-bonus")
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                         .font(.largeTitle)
