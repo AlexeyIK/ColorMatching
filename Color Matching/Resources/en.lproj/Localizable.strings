@@ -21,6 +21,7 @@
 
 /* Menus */
 "menu-button" = "Menu";
+"back-button" = "Back";
 
 /* Universal */
 "go-button.main" = "Go!";

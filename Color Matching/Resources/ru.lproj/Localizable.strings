@@ -20,6 +20,7 @@
 
 /* Menus */
 "menu-button" = "Меню";
+"back-button" = "Назад";
 
 /* Universal */
 "go-button.main" = "Старт!";
@@ -46,8 +47,9 @@
 "%lld strike-bonus" = "x%lld страйк!";
 
 /* Statistics */
+"Stats" = "Статистика";
 "Collected Соlor Coins:" = "Набранные Color Coins:";
-"Last game Color Coins:" = "Набрано CC в последней игре:";
+"Last game Color Coins:" = "CC за прошлую игру:";
 "Total games finished:" = "Всего игр завершено:";
 "Guessed unique colors:" = "Уникальных цветов разгадано:";
 

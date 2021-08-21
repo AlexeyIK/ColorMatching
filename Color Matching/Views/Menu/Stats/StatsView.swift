@@ -63,7 +63,7 @@ struct StatsView: View {
                     Image(systemName: "chevron.left")
                         .foregroundColor(_globalNavBarButtonsColor)
                     
-                    Button("Back") {
+                    Button("back-button") {
                         presentationMode.wrappedValue.dismiss()
                     }
                     .buttonStyle(BackButton())

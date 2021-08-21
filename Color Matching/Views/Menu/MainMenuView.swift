@@ -74,7 +74,7 @@ struct MainMenuView: View {
                         
                         Spacer()
                         
-                        VStack(spacing: 16) {
+                        VStack(spacing: 0) {
                             NavigationLink(
                                 destination: ColorQuizMainView()
                                     .navigationBarBackButtonHidden(true)
