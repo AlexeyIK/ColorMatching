@@ -33,6 +33,8 @@ struct MainMenuView: View {
     @State var linesOffset: CGFloat = 0.0
     @State var hueRotation: Double = 0.0
     
+    let screenSize = UIScreen.main.bounds
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in

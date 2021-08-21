@@ -6,10 +6,10 @@
 */
 
 /* Game title */
-"main-menu-title" = "Игры о цветах";
-"more-games-soon" = "Больше игр, скоро";
+"main-menu-title" = "Цветовые игры";
+"more-games-soon" = "Больше игр скоро";
 "color-quiz" = "Угадай цвета";
-"name-quiz" = "Угадай имя";
+"name-quiz" = "Угадай имена";
 "warm-vs-cold" = "Теплое/холодное";
 
 /* Hardness */
@@ -43,7 +43,7 @@
 "choose-right-name" = "Выбери правильный вариант";
 
 /* Results */
-"guessed-all-cards" = "You have guessed all cards!";
+"guessed-all-cards" = "Вы разгадали все карты!";
 "%lld strike-bonus" = "x%lld страйк!";
 
 /* Statistics */
