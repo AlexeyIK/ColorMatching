@@ -132,26 +132,32 @@ struct NameQuizStartView: View {
                     Spacer()
                     
                     ZStack {
-                        Button(action: {
-                            if gameState.hardness == Hardness.easy {
-                                gameState.hardness = Hardness.normal
-                            }
-                            else if gameState.hardness == Hardness.normal {
-                                gameState.hardness = Hardness.hard
-                            }
-                            else if gameState.hardness == Hardness.hard {
-                                gameState.hardness = Hardness.easy
-                            }
-                        }, label: {
-                            HStack {
-                                Text(String(describing: gameState.hardness).capitalized)
+                        HStack {
+                            Button(action: {
+                                gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
+                            }, label: {
+                                Image(systemName: "chevron.left")
+                            })
+                            
+                            Text(String(describing: gameState.hardness).capitalized)
+                                .font(.system(size: 20))
+                                .transition(.identity)
+                                .animation(.none)
+                            
+                            Button(action: {
+                                gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
+                            }, label: {
                                 Image(systemName: "chevron.right")
-                            }
-                        })
-                        .buttonStyle(GoButton2())
-                        .font(.system(size: 20))
-                        .transition(.identity)
-                        .animation(.none)
+                            })
+                        }
+                        .padding(EdgeInsets(top: 12, leading: 18, bottom: 12, trailing: 18))
+                        .foregroundColor(.white)
+                        .background(RoundedRectangle(cornerRadius: 36).stroke(Color.init(hue: 0, saturation: 0, brightness: 0.54, opacity: 1), lineWidth: 2))
+                        .clipShape(RoundedRectangle(cornerRadius: 36))
+                        .shadow(color: Color.black.opacity(0.2), radius: 8, x: -1, y: -1)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .frame(minWidth: 50, idealWidth: 150, maxWidth: 230, alignment: .center)
                     }
                     .animation(.none)
                     .frame(width: contentZone.size.width, alignment: .center)
