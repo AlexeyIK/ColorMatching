@@ -18,6 +18,7 @@ struct NameQuizView: View {
     @State var needToShowAnswer: Bool = false
     @State var lastAnswerIsCorrect: Bool? = nil
     @State var answerTimer: Timer? = nil
+    @State var userAnswer: Int = 0
     
     var highlightCorrectAnswer: Bool = false
     var showColorNames: Bool = false
@@ -91,22 +92,22 @@ struct NameQuizView: View {
                                 let colorName = gameState.russianNames ? answer.name : answer.englishName
 
                                 if needToShowAnswer && answer.id == quizItem.correct.id {
-                                    if lastAnswerIsCorrect == true {
-                                        Button(colorName) { }
-                                            .transition(.opacity)
-                                            .buttonStyle(QuizButtonCorrect())
-                                            .animation(.none)
-                                    } else {
-                                        Button(colorName) { }
-                                            .transition(.opacity)
-                                            .buttonStyle(QuizButtonIncorrect())
-                                            .animation(.none)
-                                    }
+                                    Button(colorName) { }
+                                        .transition(.opacity)
+                                        .buttonStyle(QuizButtonCorrect())
+                                        .animation(.none)
+                                }
+                                else if needToShowAnswer && lastAnswerIsCorrect == false && answer.id == userAnswer {
+                                    Button(colorName) { }
+                                        .transition(.opacity)
+                                        .buttonStyle(QuizButtonIncorrect())
+                                        .animation(.none)
                                 }
                                 else {
                                     Button(colorName) {
                                         lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: answer.id, hardness: gameState.hardness)
                                         self.needToShowAnswer = true
+                                        self.userAnswer = answer.id
                                         
                                         let hapticImpact = UINotificationFeedbackGenerator()
                                         hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
