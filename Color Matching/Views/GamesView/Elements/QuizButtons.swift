@@ -23,12 +23,10 @@ struct QuizButton: ButtonStyle {
 struct QuizButtonIncorrect: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(EdgeInsets(top: 10, leading: 12, bottom: 10, trailing: 12))
+            .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
             .foregroundColor(Color.init(hue: 0, saturation: 1, brightness: 0.63))
             .background(RoundedRectangle(cornerRadius: 36)
-                            .stroke(Color.init(hue: 0, saturation: 1, brightness: 0.63), lineWidth: 1)
-                            
-)
+                            .stroke(Color.init(hue: 0, saturation: 1, brightness: 0.63), lineWidth: 1))
             .clipShape(RoundedRectangle(cornerRadius: 36))
     }
 }
