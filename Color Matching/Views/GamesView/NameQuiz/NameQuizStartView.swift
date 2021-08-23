@@ -142,7 +142,7 @@ struct NameQuizStartView: View {
                         })
                         .disabled(gameState.hardness == .easy)
                         
-                        Text(String(describing: gameState.hardness).capitalized)
+                        Text(LocalizedStringKey(String(describing: gameState.hardness)))
                             .font(.system(size: 20))
                             .transition(.identity)
                             .animation(.none)
