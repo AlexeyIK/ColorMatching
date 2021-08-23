@@ -52,7 +52,7 @@ class LearnAndQuizState: ObservableObject  {
     }
     
     func startGameSession(shuffle: Bool = false) {
-        let cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness, shuffle: shuffle).filter({ russianNames ? $0.name != "" : $0.englishName != "" })
+        let cardsByHardness = ColorsPickerHelper.shared.getColors(byHardness: hardness, shuffle: shuffle, excludeBnW: true).filter({ russianNames ? $0.name != "" : $0.englishName != "" })
         
         self.cardsCount = getDefaultNumOfCards(for: hardness)
         
