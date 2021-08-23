@@ -11,7 +11,7 @@ public class ColorsPickerHelper {
     
     static let shared = ColorsPickerHelper()
     
-    func getColors(byHardness hardness: Hardness, shuffle: Bool = false) -> [ColorModel] {
+    func getColors(byHardness hardness: Hardness, shuffle: Bool = false, excludeBnW: Bool = false) -> [ColorModel] {
 
         var relevantCards: [ColorModel] = []
         
@@ -27,6 +27,11 @@ public class ColorsPickerHelper {
         }
         
         relevantCards = relevantCards.filter({ $0.name != "" })
+        
+        if excludeBnW {
+            relevantCards = relevantCards.filter({ $0.hexCode != "ffffff" && $0.hexCode != "000000" })
+        }
+        
         if (shuffle) {
             relevantCards = relevantCards.shuffled()
         }
