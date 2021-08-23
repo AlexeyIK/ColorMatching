@@ -8,8 +8,8 @@
 /* Game title */
 "main-menu-title" = "Цветовые игры";
 "more-games-soon" = "Больше игр скоро";
-"color-quiz" = "Угадай цвета";
-"name-quiz" = "Угадай имена";
+"color-quiz" = "Квиз на цвета";
+"name-quiz" = "Квиз на имена";
 "warm-vs-cold" = "Теплое/холодное";
 
 /* Hardness */

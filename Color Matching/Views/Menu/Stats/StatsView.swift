@@ -37,7 +37,7 @@ struct StatsView: View {
                     }
                     
                     Group {
-                        StatCaptionView(caption: "Color QUIZ")
+                        StatCaptionView(caption: "color-quiz")
                         StatItemView(caption: "Finished games:", value: String(colorQuizStats[0].finishedGames))
                         StatItemView(caption: "Guessed colors:", value: String(colorQuizStats[0].colorsGuessed))
                         StatItemView(caption: "Color Strikes:", value: String(colorQuizStats[0].strikesCount))
@@ -45,7 +45,7 @@ struct StatsView: View {
                     }
                     
                     Group {
-                        StatCaptionView(caption: "Name QUIZ")
+                        StatCaptionView(caption: "name-quiz")
                         StatItemView(caption: "Finished games:", value: String(nameQuizStats[0].finishedGames))
                         StatItemView(caption: "Guessed names:", value: String(nameQuizStats[0].namesGuessed))
                         StatItemView(caption: "Color Strikes:", value: String(nameQuizStats[0].strikesCount))
