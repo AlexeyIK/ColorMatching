@@ -18,6 +18,9 @@ struct NameQuizView: View {
     @State var needToShowAnswer: Bool = false
     @State var lastAnswerIsCorrect: Bool? = nil
     @State var answerTimer: Timer? = nil
+    @State var userAnswer: Int = 0
+    @State var blinkFreq: Double = 0.15
+    @State var highlightOpacity: Double = 1
     
     var highlightCorrectAnswer: Bool = false
     var showColorNames: Bool = false
@@ -37,7 +40,7 @@ struct NameQuizView: View {
                         .foregroundColor(.white)
                         .font(.title2)
                         .fontWeight(.light)
-                        .padding(.top, 10)
+                        .padding(.top, 20)
                 }
             }
             
@@ -91,31 +94,39 @@ struct NameQuizView: View {
                                 let colorName = gameState.russianNames ? answer.name : answer.englishName
 
                                 if needToShowAnswer && answer.id == quizItem.correct.id {
-                                    if lastAnswerIsCorrect == true {
-                                        Button(colorName) { }
-                                            .transition(.opacity)
-                                            .buttonStyle(QuizButtonCorrect())
-                                            .animation(.none)
-                                    } else {
-                                        Button(colorName) { }
-                                            .transition(.opacity)
-                                            .buttonStyle(QuizButtonIncorrect())
-                                            .animation(.none)
-                                    }
+                                    Button(colorName) { }
+                                        .transition(.opacity)
+                                        .buttonStyle(QuizButtonCorrect())
+                                        .opacity(highlightOpacity)
+                                        .animation(Animation.easeInOut(duration: blinkFreq).delay(0.05).repeatForever(), value: highlightOpacity)
+                                }
+                                else if needToShowAnswer && lastAnswerIsCorrect == false && answer.id == userAnswer {
+                                    Button(colorName) { }
+                                        .transition(.opacity)
+                                        .buttonStyle(QuizButtonIncorrect())
+                                        .animation(.none)
                                 }
                                 else {
                                     Button(colorName) {
                                         lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: answer.id, hardness: gameState.hardness)
                                         self.needToShowAnswer = true
+                                        self.userAnswer = answer.id
+                                        
+                                        if lastAnswerIsCorrect == false {
+                                            withAnimation() {
+                                                self.highlightOpacity = 0.25
+                                            }
+                                        }
                                         
                                         let hapticImpact = UINotificationFeedbackGenerator()
                                         hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
                                         
-                                        answerTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) {_ in
+                                        answerTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
                                             withAnimation() {
                                                 quizState.quizItemsList.removeFirst()
                                                 quizState.nextQuizItem()
                                                 self.needToShowAnswer = false
+                                                self.highlightOpacity = 1
                                             }
                                         }
                                     }

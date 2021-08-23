@@ -49,7 +49,7 @@ struct ColorQuizView: View {
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .fontWeight(.light)
-                                .padding(.top, 10)
+                                .padding(.top, 20)
                         }
                         
                         if quizState.quizActive || debugMode {

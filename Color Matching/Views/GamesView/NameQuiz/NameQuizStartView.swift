@@ -131,28 +131,36 @@ struct NameQuizStartView: View {
                     
                     Spacer()
                     
-                    ZStack {
+                    HStack {
                         Button(action: {
-                            if gameState.hardness == Hardness.easy {
-                                gameState.hardness = Hardness.normal
-                            }
-                            else if gameState.hardness == Hardness.normal {
-                                gameState.hardness = Hardness.hard
-                            }
-                            else if gameState.hardness == Hardness.hard {
-                                gameState.hardness = Hardness.easy
-                            }
+                            gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
                         }, label: {
-                            HStack {
-                                Text(String(describing: gameState.hardness).capitalized)
-                                Image(systemName: "chevron.right")
-                            }
+                            Image(systemName: "chevron.left")
+                                .opacity(gameState.hardness == .easy ? 0.15 : 1)
                         })
-                        .buttonStyle(GoButton2())
-                        .font(.system(size: 20))
-                        .transition(.identity)
-                        .animation(.none)
+                        .disabled(gameState.hardness == .easy)
+                        
+                        Text(String(describing: gameState.hardness).capitalized)
+                            .font(.system(size: 20))
+                            .transition(.identity)
+                            .animation(.none)
+                        
+                        Button(action: {
+                            gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
+                        }, label: {
+                            Image(systemName: "chevron.right")
+                                .opacity(gameState.hardness == .hard ? 0.15 : 1)
+                        })
+                        .disabled(gameState.hardness == .hard)
                     }
+                    .padding(EdgeInsets(top: 15, leading: 12, bottom: 15, trailing: 12))
+                    .foregroundColor(.white)
+                    .background(RoundedRectangle(cornerRadius: 36).stroke(Color.init(hue: 0, saturation: 0, brightness: 0.54, opacity: 1), lineWidth: 2))
+                    .clipShape(RoundedRectangle(cornerRadius: 36))
+                    .shadow(color: Color.black.opacity(0.2), radius: 8, x: -1, y: -1)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .frame(minWidth: 50, idealWidth: 150, maxWidth: 230, alignment: .center)
                     .animation(.none)
                     .frame(width: contentZone.size.width, alignment: .center)
                         
