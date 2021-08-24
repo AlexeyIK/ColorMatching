@@ -16,10 +16,10 @@ struct NameQuizStartView: View {
     @State var opacity1: Double = 0
     @State var opacity2: Double = 0
     
-    let rememberColorPreview: ColorModel = colorsData[1542] // 009DC4, заменить на randomElement(), когда база пополнится
-    let rememberColorPreviewRus: ColorModel = colorsData[1536] // 1CA9C9
-    let guessColorPreview: ColorModel = colorsData[330] // D1E231, заменить на randomElement(), когда база пополнится
-    let guessColorPreviewRus: ColorModel = colorsData[330] // D1E231
+    let rememberColorPreview: ColorModel = colorsData.first(where: { $0.hexCode == "009DC4" }) ?? colorsData[330] // 009DC4, заменить на randomElement(), когда база пополнится
+    let rememberColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "1CA9C9" }) ?? colorsData[1536] // 1CA9C9
+    let guessColorPreview: ColorModel = colorsData.first(where: { $0.hexCode == "D1E231" }) ?? colorsData[330] // D1E231, заменить на randomElement(), когда база пополнится
+    let guessColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "D1E231" }) ?? colorsData[330]  // D1E231
     let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
     
@@ -41,7 +41,7 @@ struct NameQuizStartView: View {
                             gameState.russianNames.toggle()
                         }
                         .buttonStyle(GoButton2())
-                        .font(.system(size: 14))
+                        .font(.system(size: 12))
                         .transition(.identity)
                         .animation(.none)
                         .padding()
@@ -51,12 +51,16 @@ struct NameQuizStartView: View {
             
             GeometryReader { contentZone in
                 VStack {
-                    Text("how-to-play")
-                        .foregroundColor(.white)
-                        .font(.title3)
-                        .multilineTextAlignment(.center)
-                        .padding()
-                        .transition(.opacity)
+                    if contentZone.size.height >= 570 {
+                        Text("how-to-play")
+                            .foregroundColor(.white)
+                            .font(.title3)
+                            .multilineTextAlignment(.center)
+                            .padding()
+                            .transition(.opacity)
+                    } else {
+                        Spacer()
+                    }
                     
                     VStack {
                         ZStack {
@@ -143,7 +147,7 @@ struct NameQuizStartView: View {
                         .disabled(gameState.hardness == .easy)
                         
                         Text(LocalizedStringKey(String(describing: gameState.hardness)))
-                            .font(.system(size: 20))
+                            .font(contentZone.size.height >= 570 ? .system(size: 18) : .system(size: 16))
                             .transition(.identity)
                             .animation(.none)
                         
@@ -170,7 +174,7 @@ struct NameQuizStartView: View {
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
-                    .font(.system(size: 40))
+                    .font(contentZone.size.height >= 570 ? .system(size: 38) : .system(size: 30))
                     .frame(width: contentZone.size.width, alignment: .center)
                     .transition(.identity)
                     .padding(.bottom, 50)
