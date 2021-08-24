@@ -28,14 +28,14 @@ struct MenuButtonView: View {
                     if (imageName == "") {
                         Rectangle()
                             .frame(width: 100, height: 100, alignment: .center)
-                            .padding(.leading, 4)
+                            .padding(.leading, 5)
                             .foregroundColor(.gray)
                     } else {
                         Image(imageName)
                             .resizable()
                             .aspectRatio(1, contentMode: .fill)
                             .frame(width: 100, height: 100, alignment: .center)
-                            .padding(.leading, 4)
+                            .padding(.leading, 5)
                             .foregroundColor(.gray)
                     }
                     

@@ -122,7 +122,7 @@ struct LearnDeckView: View {
                     gameState.activeGameMode = .quiz
                 }
                 .buttonStyle(GoButton2())
-                .font(.system(size: 40))
+                .font(contentZone.height > 570 ? .system(size: 38) : .system(size: 30))
                 .frame(width: contentZone.width, alignment: .center)
                 .transition(.move(edge: .trailing))
                 .animation(Animation.spring(response: 0.3, dampingFraction: 0.5, blendDuration: 0).delay(0.6))

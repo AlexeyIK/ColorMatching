@@ -24,10 +24,10 @@ struct ColorQuizStartView: View {
     @State var colorRef: ColorModel = colorsData[0]
     @State var timer: Timer? = nil
     
-    let rememberColorPreview: ColorModel = colorsData[251] // FF8E0D, заменить на randomElement(), когда база пополнится
-    let rememberColorPreviewRus: ColorModel = colorsData[215] // E8793E
-    let guessColorPreview: ColorModel = colorsData[251] // заменить на randomElement(), когда база пополнится
-    let guessColorPreviewRus: ColorModel = colorsData[215]
+    let rememberColorPreview: ColorModel = colorsData.first(where: { $0.hexCode == "E97451" }) ?? colorsData[300] // E97451, заменить на randomElement(), когда база пополнится
+    let rememberColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "E8793E" }) ?? colorsData[215] // E8793E
+    let guessColorPreview: ColorModel = colorsData.first(where: { $0.hexCode == "E97451" }) ?? colorsData[300] // E97451, заменить на randomElement(), когда база пополнится
+    let guessColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "E8793E" }) ?? colorsData[215]
     let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
     
@@ -46,7 +46,7 @@ struct ColorQuizStartView: View {
                             gameState.russianNames.toggle()
                         }
                         .buttonStyle(GoButton2())
-                        .font(.system(size: 14))
+                        .font(.system(size: 12))
                         .transition(.identity)
                         .animation(.none)
                         .padding()
@@ -161,7 +161,7 @@ struct ColorQuizStartView: View {
                         .disabled(gameState.hardness == .easy)
                         
                         Text(LocalizedStringKey(String(describing: gameState.hardness)))
-                            .font(.system(size: 20))
+                            .font(contentZone.size.height >= 570 ? .system(size: 18) : .system(size: 16))
                             .transition(.identity)
                             .animation(.none)
                         
@@ -188,7 +188,7 @@ struct ColorQuizStartView: View {
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
-                    .font(.system(size: 36))
+                    .font(contentZone.size.height >= 570 ? .system(size: 38) : .system(size: 30))
                     .frame(width: contentZone.size.width, alignment: .center)
                     .transition(.identity)
                     .padding(.bottom, 50)
