@@ -36,20 +36,22 @@ struct NameQuizStartView: View {
                 VStack {
                     Spacer()
                     
-                    Button(gameState.russianNames ? "Rus" : "Eng") {
-                        gameState.russianNames.toggle()
+                    if Locale.current.languageCode == "ru" {
+                        Button(gameState.russianNames ? "Рус" : "Eng") {
+                            gameState.russianNames.toggle()
+                        }
+                        .buttonStyle(GoButton2())
+                        .font(.system(size: 14))
+                        .transition(.identity)
+                        .animation(.none)
+                        .padding()
                     }
-                    .buttonStyle(GoButton2())
-                    .font(.system(size: 14))
-                    .transition(.identity)
-                    .animation(.none)
-                    .padding()
                 }
             }
             
             GeometryReader { contentZone in
                 VStack {
-                    Text("how to play?")
+                    Text("how-to-play")
                         .foregroundColor(.white)
                         .font(.title3)
                         .multilineTextAlignment(.center)
@@ -65,14 +67,14 @@ struct NameQuizStartView: View {
                                 .offset(x: card1Offset)
                                 .opacity(opacity1)
                             
-                            Text("Remember the color name")
+                            Text("remember-the-color-name")
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .fontWeight(.medium)
     //                            .padding()
                                 .multilineTextAlignment(.trailing)
                                 .shadow(color: .black, radius: 3)
-                                .frame(width: 110, alignment: .center)
+                                .frame(width: 120, alignment: .center)
                                 .offset(x: card1Offset - contentZone.size.width * 0.25)
 //                                .transition(.move(edge: .leading))
                                 .animation(Animation.easeOut(duration: 0.3).delay(0.6), value: card1Offset)
@@ -116,16 +118,16 @@ struct NameQuizStartView: View {
                                 .padding(.trailing, 24)
                         }
                         
-                        Text("Choose the right name")
+                        Text("choose-right-name")
                             .foregroundColor(.white)
                             .font(.title2)
                             .fontWeight(.medium)
 //                            .padding()
                             .multilineTextAlignment(.leading)
                             .shadow(color: .black, radius: 3)
-                            .frame(width: 110, alignment: .center)
+                            .frame(width: 128, alignment: .center)
                             .transition(.identity)
-                            .offset(x: card2Offset + contentZone.size.width * 0.3)
+                            .offset(x: card2Offset + contentZone.size.width * 0.25)
                             .animation(Animation.easeOut(duration: 0.3).delay(1.8), value: card2Offset)
                     }
                     
@@ -140,7 +142,7 @@ struct NameQuizStartView: View {
                         })
                         .disabled(gameState.hardness == .easy)
                         
-                        Text(String(describing: gameState.hardness).capitalized)
+                        Text(LocalizedStringKey(String(describing: gameState.hardness)))
                             .font(.system(size: 20))
                             .transition(.identity)
                             .animation(.none)
@@ -164,7 +166,7 @@ struct NameQuizStartView: View {
                     .animation(.none)
                     .frame(width: contentZone.size.width, alignment: .center)
                         
-                    Button("Go!") {
+                    Button("go-button.main") {
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
@@ -192,11 +194,16 @@ struct NameQuizStartView: View {
 
 struct QuizStartView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
+//        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
+        Group {
             NameQuizStartView()
-                .previewDevice(PreviewDevice(stringLiteral: device))
-                .previewDisplayName(device)
                 .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
+            NameQuizStartView()
+                .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
+                .environment(\.locale, Locale(identifier: "ru"))
         }
+//                .previewDevice(PreviewDevice(stringLiteral: device))
+//                .previewDisplayName(device)
+//        }
     }
 }

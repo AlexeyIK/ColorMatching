@@ -9,31 +9,33 @@ import SwiftUI
 
 struct MenuButtonView: View {
     
-    var text: String = ""
+    var text: LocalizedStringKey = ""
     var imageName: String = ""
     var noImage: Bool = false
     var foregroundColor: Color = .gray
+    
+    let screenSize = UIScreen.main.bounds
     
     var body: some View {
         ZStack(alignment: noImage ? .center : .leading) {
             
             RoundedRectangle(cornerRadius: 12)
                 .fill(Color.init(hue: 0, saturation: 0, brightness: 0.16, opacity: 1))
-                .frame(height: 58, alignment: .center)
+                .frame(height: 48, alignment: .center)
             
-            HStack(spacing: 0) {
+            HStack() {
                 if (!noImage) {
                     if (imageName == "") {
                         Rectangle()
                             .frame(width: 100, height: 100, alignment: .center)
-                            .padding(.leading, 16)
+                            .padding(.leading, 4)
                             .foregroundColor(.gray)
                     } else {
                         Image(imageName)
                             .resizable()
                             .aspectRatio(1, contentMode: .fill)
-                            .frame(width: 90, height: 110, alignment: .center)
-                            .padding(.leading, 16)
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .padding(.leading, 4)
                             .foregroundColor(.gray)
                     }
                     
@@ -42,7 +44,7 @@ struct MenuButtonView: View {
                 
                 Text(text)
                     .foregroundColor(foregroundColor)
-                    .font(.title2)
+                    .font(screenSize.width >= 340 || Locale.current.languageCode == "en" ? .title3 : .headline)
                     .fontWeight(noImage ? .regular : .heavy)
                     .layoutPriority(1)
                     .lineLimit(1)
@@ -54,13 +56,13 @@ struct MenuButtonView: View {
                     Image(systemName: "chevron.right").scaleEffect(0.9)
                         .foregroundColor(foregroundColor)
                         .font(.title2)
-                        .padding(.trailing, 5)
+                        .padding(.trailing, 6)
                 }
                     
             }
             .frame(height: 80, alignment: .center)
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal,  screenSize.width >= 380 ? 32 : 20)
     }
 }
 

@@ -49,6 +49,8 @@ class LearnAndQuizState: ObservableObject  {
         }
         
         self.hardness = lastHardness == 0 ? definedHardness : Hardness.init(rawValue: lastHardness) ?? .easy
+        
+        self.russianNames = Locale.current.languageCode == "ru"
     }
     
     func startGameSession(shuffle: Bool = false) {

@@ -13,6 +13,7 @@
 		BD279F9726BC800D005C8E3D /* ColorQuizMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD279F9626BC800D005C8E3D /* ColorQuizMainView.swift */; };
 		BD279F9B26BC805F005C8E3D /* ColorQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD279F9A26BC805F005C8E3D /* ColorQuizView.swift */; };
 		BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* colorsData.json */; };
+		BD2BC6F426CB9507005BC563 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2BC6F326CB9507005BC563 /* SettingsView.swift */; };
 		BD2E41E226B5415900D19D50 /* ScorePointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2E41E126B5415900D19D50 /* ScorePointView.swift */; };
 		BD3A3F1826B5C680006C8CDC /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */; };
 		BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */; };
@@ -26,6 +27,7 @@
 		BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */; };
 		BD3FB45626B1F84500BA5F3B /* NameQuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45526B1F84500BA5F3B /* NameQuizState.swift */; };
 		BD3FB45B26B1FF9600BA5F3B /* LearnAndQuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */; };
+		BD5415F526D05AC90095391C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BD5415F726D05AC90095391C /* Localizable.strings */; };
 		BD59630E26BEB12900E404FC /* ColorQuizState.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD59630D26BEB12900E404FC /* ColorQuizState.swift */; };
 		BD59631326BECB3500E404FC /* ColorQuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD59631226BECB3500E404FC /* ColorQuizDataManager.swift */; };
 		BD65930A26B6A3FB004E27C4 /* QuizResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD65930926B6A3FB004E27C4 /* QuizResultsView.swift */; };
@@ -41,6 +43,7 @@
 		BDC817D726BB3A3900DD0B45 /* QuizResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */; };
 		BDE58DF426BB27CF00387545 /* QuizButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE58DF326BB27CF00387545 /* QuizButtons.swift */; };
 		BDEC060026B9DC9C0087833D /* FakeButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDEC05FF26B9DC9C0087833D /* FakeButtonsView.swift */; };
+		BDF9516E26D162CC00563D81 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = BDF9517026D162CC00563D81 /* Localizable.stringsdict */; };
 		BDFAB12726AF653F00BF65CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFAB12626AF653F00BF65CD /* TimerView.swift */; };
 		F125010F26A5819700B521F1 /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F125010E26A5819700B521F1 /* ColorConverter.swift */; };
 		F145D10726A44D500044476F /* CardAnimations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F145D10626A44D500044476F /* CardAnimations.swift */; };
@@ -73,6 +76,7 @@
 		BD279F9626BC800D005C8E3D /* ColorQuizMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorQuizMainView.swift; sourceTree = "<group>"; };
 		BD279F9A26BC805F005C8E3D /* ColorQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorQuizView.swift; sourceTree = "<group>"; };
 		BD2978EA2697C4B100F19AEF /* colorsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colorsData.json; sourceTree = "<group>"; };
+		BD2BC6F326CB9507005BC563 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		BD2E41E126B5415900D19D50 /* ScorePointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointView.swift; sourceTree = "<group>"; };
 		BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		BD3CF1282692F07700FF0D68 /* HueQueue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueQueue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +96,8 @@
 		BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TimerHelper.swift; path = "Color Matching/Helpers/TimerHelper.swift"; sourceTree = SOURCE_ROOT; };
 		BD3FB45526B1F84500BA5F3B /* NameQuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuizState.swift; sourceTree = "<group>"; };
 		BD3FB45A26B1FF9600BA5F3B /* LearnAndQuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnAndQuizState.swift; sourceTree = "<group>"; };
+		BD5415F626D05AC90095391C /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		BD5415F926D05DB90095391C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BD59630D26BEB12900E404FC /* ColorQuizState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorQuizState.swift; sourceTree = "<group>"; };
 		BD59631226BECB3500E404FC /* ColorQuizDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorQuizDataManager.swift; sourceTree = "<group>"; };
 		BD65930926B6A3FB004E27C4 /* QuizResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsView.swift; sourceTree = "<group>"; };
@@ -107,6 +113,8 @@
 		BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsStore.swift; sourceTree = "<group>"; };
 		BDE58DF326BB27CF00387545 /* QuizButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizButtons.swift; sourceTree = "<group>"; };
 		BDEC05FF26B9DC9C0087833D /* FakeButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeButtonsView.swift; sourceTree = "<group>"; };
+		BDF9516F26D162CC00563D81 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		BDF9517226D162CE00563D81 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		BDFAB12626AF653F00BF65CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		F125010E26A5819700B521F1 /* ColorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ColorConverter.swift; path = "Color Matching/Helpers/ColorConverter.swift"; sourceTree = SOURCE_ROOT; };
 		F145D10626A44D500044476F /* CardAnimations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardAnimations.swift; sourceTree = "<group>"; };
@@ -236,6 +244,7 @@
 		BD3CF11F2692F07600FF0D68 = {
 			isa = PBXGroup;
 			children = (
+				BD2BC6F326CB9507005BC563 /* SettingsView.swift */,
 				BD3CF12A2692F07700FF0D68 /* Color Matching */,
 				BD3CF1412692F07A00FF0D68 /* Color MatchingTests */,
 				BD3CF14C2692F07A00FF0D68 /* Color MatchingUITests */,
@@ -254,6 +263,7 @@
 		BD3CF12A2692F07700FF0D68 /* Color Matching */ = {
 			isa = PBXGroup;
 			children = (
+				BD5415F026D058080095391C /* Resources */,
 				F1C519D8269DE1730096B9B4 /* Helpers */,
 				F145D0FC26A446A30044476F /* Logic */,
 				BD2978E82697C47000F19AEF /* Data */,
@@ -303,6 +313,15 @@
 				BD3DB4AA26BED66500763AAA /* OuterGlow.swift */,
 			);
 			path = Effects;
+			sourceTree = "<group>";
+		};
+		BD5415F026D058080095391C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BD5415F726D05AC90095391C /* Localizable.strings */,
+				BDF9517026D162CC00563D81 /* Localizable.stringsdict */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		BD6C17B226B5610E00C28F20 /* Stats */ = {
@@ -430,7 +449,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDF9516E26D162CC00563D81 /* Localizable.stringsdict in Resources */,
 				BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */,
+				BD5415F526D05AC90095391C /* Localizable.strings in Resources */,
 				BD3CF1332692F07900FF0D68 /* Preview Assets.xcassets in Resources */,
 				BD3CF1302692F07900FF0D68 /* Assets.xcassets in Resources */,
 			);
@@ -453,6 +474,7 @@
 				F1E28E0626AB0D1200B62054 /* SimilarColorPicker.swift in Sources */,
 				F1758E6E26A0DFA60035E6B5 /* ColorCardMinimalView.swift in Sources */,
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
+				BD2BC6F426CB9507005BC563 /* SettingsView.swift in Sources */,
 				BD6D1F5326BDE49C00CF34BF /* BackgroundView2.swift in Sources */,
 				BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */,
 				BD6D1F5026BDE33300CF34BF /* PetalView.swift in Sources */,
@@ -501,6 +523,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BD5415F726D05AC90095391C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD5415F626D05AC90095391C /* ru */,
+				BD5415F926D05DB90095391C /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		BDF9517026D162CC00563D81 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BDF9516F26D162CC00563D81 /* en */,
+				BDF9517226D162CE00563D81 /* ru */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BD3CF1502692F07A00FF0D68 /* Debug */ = {
@@ -625,7 +668,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
 				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
@@ -649,7 +692,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
 				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct StatItemView: View {
     
-    let caption: String
+    let caption: LocalizedStringKey
     let value: String
     
     var body: some View {
         HStack {
-            Text(caption + ":")
+            Text(caption)
                 .foregroundColor(.white)
                 .font(.body)
                 .fontWeight(.thin)
@@ -28,6 +28,10 @@ struct StatItemView: View {
         }
         .padding(.bottom, 4)
     }
+}
+
+func statCaption(str: LocalizedStringKey, separator: String) -> String {
+    return "\(str)\(separator)"
 }
 
 struct StatItemView_Previews: PreviewProvider {

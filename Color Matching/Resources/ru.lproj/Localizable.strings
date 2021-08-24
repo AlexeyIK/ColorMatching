@@ -1,0 +1,66 @@
+/* 
+  Localizable.strings
+  Color Matching
+
+  Created by Алексей Кузнецов on 21.08.2021.
+*/
+
+/* Game title */
+"main-menu-title" = "Коллекция игр";
+"more-games-soon" = "Больше игр. Скоро...";
+"color-quiz" = "Цвета";
+"name-quiz" = "Имена";
+"warm-vs-cold" = "Теплое/холодное";
+
+/* Hardness */
+"easy" = "Легко";
+"normal" = "Нормально";
+"hard" = "Сложно";
+"hell" = "Нереально";
+
+/* Menus */
+"menu-button" = "Меню";
+"back-button" = "Назад";
+
+/* Universal */
+"go-button.main" = "Старт!";
+"go-button.second" = "Вперед!";
+"how-to-play" = "Правила игры";
+"main-menu-button" = "В меню";
+"next-game-button" = "Еще раз";
+"time-over" = "Время вышло!";
+
+/* Color Quiz texts */
+"remember-the-colors" = "Запоминай цвета";
+"color-quiz-title" = "Угадай цвет";
+"color-quiz-tutor-first" = "Запомни цвета и их имена";
+"color-quiz-tutor-second" = "Выбери правильный цвет";
+"ready-to-guess" = "Приготовься!";
+"pick-the-right-color" = "Выбери верный цвет";
+
+/* Name Quiz texts */
+"remember-the-color-name" = "Запомни имена цветов";
+"choose-right-name" = "Выбери правильный вариант";
+
+/* Results */
+"guessed-all-cards" = "Бум! Все карты разгаданы!";
+"%lld strike-bonus" = "x%lld страйк!";
+
+/* Statistics */
+"Stats" = "Статистика";
+"Collected Соlor Coins:" = "Собрано Color Coins:";
+"Last game Color Coins:" = "CC за прошлую игру:";
+"Total games finished:" = "Всего завершенных игр:";
+"Guessed unique colors:" = "Разгадано уникальных цветов:";
+
+// "Color QUIZ"
+"Finished games:" = "Завершено игр:";
+"Guessed colors:" = "Угадано цветов:";
+"Color Strikes:" = "Всего страйков:";
+"Best Strike:" = "Лучший страйк:";
+
+// "Name QUIZ"
+"Finished games:" = "Завершено игр:";
+"Guessed names:" = "Угадано имён:";
+"Color Strikes:" = "Всего страйков:";
+"Best Strike:" = "Лучший страйк:";

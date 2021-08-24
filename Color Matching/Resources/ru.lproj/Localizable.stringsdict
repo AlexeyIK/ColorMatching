@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>You guessed %lld of %lld card(s)</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@card@</string>
+		<key>card</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>zero</key>
+			<string>Вы ничего не угадали :(</string>
+			<key>one</key>
+			<string>Вы угадали %d карту из %lld</string>
+			<key>few</key>
+			<string>Вы угадали %d карты из %lld</string>
+			<key>many</key>
+			<string>Вы угадали %d карт из %lld</string>
+			<key>other</key>
+			<string>Вы угадали %d карт из %lld</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

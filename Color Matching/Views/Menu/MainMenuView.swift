@@ -33,6 +33,8 @@ struct MainMenuView: View {
     @State var linesOffset: CGFloat = 0.0
     @State var hueRotation: Double = 0.0
     
+    let screenSize = UIScreen.main.bounds
+    
     var body: some View {
         NavigationView {
             GeometryReader { geometry in
@@ -67,21 +69,22 @@ struct MainMenuView: View {
                     VStack {
                         Spacer()
                         
-                        Text("Color games collection")
+                        Text("main-menu-title")
                             .font(.title)
                             .fontWeight(.light)
                             .foregroundColor(ColorConvert(colorType: .hsba, value: (179, 73, 40, 1)))
                         
                         Spacer()
                         
-                        VStack(spacing: 16) {
+                        VStack(spacing: 0) {
                             NavigationLink(
                                 destination: ColorQuizMainView()
                                     .navigationBarBackButtonHidden(true)
-                                    .navigationBarTitleDisplayMode(.inline),
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .transition(.identity),
                                     
                                 label: {
-                                    MenuButtonView(text: "Color QUIZ", imageName: "iconColorQUIZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    MenuButtonView(text: "color-quiz", imageName: "iconColorQUIZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
                                 })
                             
                             NavigationLink(
@@ -90,12 +93,12 @@ struct MainMenuView: View {
                                     .navigationBarTitleDisplayMode(.inline),
                                     
                                 label: {
-                                    MenuButtonView(text: "Name QUIZ", imageName: "iconNameQIUZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    MenuButtonView(text: "name-quiz", imageName: "iconNameQIUZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
                                 })
                             
-                            MenuButtonView(text: "Warm VS Cold", imageName: "iconColdVsWarm", foregroundColor: ColorConvert(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
+                            MenuButtonView(text: "warm-vs-cold", imageName: "iconColdVsWarm", foregroundColor: ColorConvert(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
                             
-                            MenuButtonView(text: "More games soon", noImage: true)
+                            MenuButtonView(text: "more-games-soon", noImage: true)
                         }
                         .offset(y: -geometry.size.height * 0.05)
                         
@@ -165,10 +168,15 @@ struct MainMenuView: View {
 
 struct SingleModeView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12"], id: \.self) { device in
+//        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12"], id: \.self) { device in
+        Group {
             MainMenuView()
-                .previewDevice(PreviewDevice(stringLiteral: device))
-                .previewDisplayName(device)
+                .environment(\.locale, Locale(identifier: "en"))
+            MainMenuView()
+                .environment(\.locale, Locale(identifier: "ru"))
         }
+//                .previewDevice(PreviewDevice(stringLiteral: device))
+//                .previewDisplayName(device)
+//        }
     }
 }

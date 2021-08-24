@@ -45,7 +45,7 @@ struct ColorQuizView: View {
                 VStack(alignment: .center) {
                     if quizState.results == nil {
                         if contentZone.size.height > 550 {
-                            Text("Pick right color")
+                            Text("pick-the-right-color")
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .fontWeight(.light)
@@ -89,7 +89,7 @@ struct ColorQuizView: View {
                                         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
                                 }
                                 else if quizState.timerStatus == .runout && quizState.results == nil {
-                                    Text("Time is over!")
+                                    Text("time-over")
                                         .foregroundColor(.white)
                                         .font(.title)
                                         .padding()
@@ -153,7 +153,7 @@ struct ColorQuizView: View {
                                                 let hapticImpact = UINotificationFeedbackGenerator()
                                                 hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
                                                 
-                                                answerTimer = Timer.scheduledTimer(withTimeInterval: 0.35, repeats: false) {_ in
+                                                answerTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
                                                     withAnimation() {
                                                         self.newRotation -= 120
                                                         self.rotatePercentage = 1
