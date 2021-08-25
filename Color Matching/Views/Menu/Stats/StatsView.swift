@@ -20,68 +20,68 @@ struct StatsView: View {
         ZStack {
             BackgroundView()
             
-            VStack() {
-                Text("Stats")
-                    .font(.largeTitle)
-                    .fontWeight(.thin)
-                    .foregroundColor(.white)
-                    .kerning(6)
-                    .padding(.bottom, 60)
-                
-                ScrollView(.vertical, showsIndicators: false) {
-                    Group {
-                        StatItemView(caption: "Collected Соlor Coins:", value: String(playerStats[0].totalScore))
-                        StatItemView(caption: "Last game Color Coins:", value: String(playerStats[0].lastGameScore))
-                        StatItemView(caption: "Total games finished:", value: String(playerStats[0].totalFinishedGames))
-                        StatItemView(caption: "Guessed unique colors:", value: String(viewedColors.count))
-                    }
+            GeometryReader { geometry in
+                VStack(alignment: .center) {
+                    Text("Stats")
+                        .font(.title)
+                        .fontWeight(.regular)
+                        .foregroundColor(_globalMenuTitleColor)
+    //                    .kerning(6)
+                        .padding(.bottom, 60)
+                        .padding(.top, 28)
                     
-                    Group {
-                        StatCaptionView(caption: "color-quiz")
-                        StatItemView(caption: "Finished games:", value: String(colorQuizStats[0].finishedGames))
-                        StatItemView(caption: "Guessed colors:", value: String(colorQuizStats[0].colorsGuessed))
-                        StatItemView(caption: "Color Strikes:", value: String(colorQuizStats[0].strikesCount))
-                        StatItemView(caption: "Best Strike:", value: String(colorQuizStats[0].bestStrike))
+                    ScrollView(.vertical, showsIndicators: false) {
+                        Group {
+                            StatItemView(caption: "Collected Соlor Coins:", value: String(playerStats[0].totalScore))
+                            StatItemView(caption: "Last game Color Coins:", value: String(playerStats[0].lastGameScore))
+                            StatItemView(caption: "Total games finished:", value: String(playerStats[0].totalFinishedGames))
+                            StatItemView(caption: "Guessed unique colors:", value: String(viewedColors.count))
+                        }
+                        
+                        Group {
+                            StatCaptionView(caption: "color-quiz")
+                            StatItemView(caption: "Finished games:", value: String(colorQuizStats[0].finishedGames))
+                            StatItemView(caption: "Guessed colors:", value: String(colorQuizStats[0].colorsGuessed))
+                            StatItemView(caption: "Color Strikes:", value: String(colorQuizStats[0].strikesCount))
+                            StatItemView(caption: "Best Strike:", value: String(colorQuizStats[0].bestStrike))
+                        }
+                        
+                        Group {
+                            StatCaptionView(caption: "name-quiz")
+                            StatItemView(caption: "Finished games:", value: String(nameQuizStats[0].finishedGames))
+                            StatItemView(caption: "Guessed names:", value: String(nameQuizStats[0].namesGuessed))
+                            StatItemView(caption: "Color Strikes:", value: String(nameQuizStats[0].strikesCount))
+                            StatItemView(caption: "Best Strike:", value: String(nameQuizStats[0].bestStrike))
+                        }
                     }
+                    .frame(width: geometry.size.width * 0.75, alignment: .center)
                     
-                    Group {
-                        StatCaptionView(caption: "name-quiz")
-                        StatItemView(caption: "Finished games:", value: String(nameQuizStats[0].finishedGames))
-                        StatItemView(caption: "Guessed names:", value: String(nameQuizStats[0].namesGuessed))
-                        StatItemView(caption: "Color Strikes:", value: String(nameQuizStats[0].strikesCount))
-                        StatItemView(caption: "Best Strike:", value: String(nameQuizStats[0].bestStrike))
-                    }
+                    Spacer()
                 }
-                
-                Spacer()
+                .frame(width: geometry.size.width, height: geometry.size.height - 70, alignment: .center)
             }
-            .frame(width: UIScreen.main.bounds.width * 0.75, height: UIScreen.main.bounds.height * 0.8, alignment: .center)
         }
-        .navigationBarItems(
-            leading:
-                HStack {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(_globalNavBarButtonsColor)
-                    
-                    Button("back-button") {
-                        presentationMode.wrappedValue.dismiss()
-                    }
-                    .buttonStyle(BackButton())
-                }
-        )
     }
 }
 
 struct StatsView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone 8", "iPhone SE (1st generation)", "iPhone 12"], id: \.self) { device in
-            ZStack {
-                BackgroundView()
-                StatsView()
-            }
-            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-            .previewDevice(PreviewDevice(stringLiteral: device))
-            .previewDisplayName(device)
+//        ForEach(["iPhone 8", "iPhone SE (1st generation)", "iPhone 12"], id: \.self) { device in
+//            ZStack {
+//                BackgroundView()
+//                StatsView()
+//            }
+//            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+//            .previewDevice(PreviewDevice(stringLiteral: device))
+//            .previewDisplayName(device)
+//        }
+        
+        Group {
+            StatsView()
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            StatsView()
+                .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+                .environment(\.locale, Locale(identifier: "ru"))
         }
     }
 }

@@ -16,3 +16,5 @@ let _globalAnswersColor: Color = ColorConvert(colorType: .hsba , value: (0, 0, 4
 let _globalAnswersColorHighlighted: Color = ColorConvert(colorType: .hsba , value: (0, 0, 60, 1))
 let _globalGrayedCardColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.28, opacity: 1)
 let _globalNavBarButtonsColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.34, opacity: 1)
+
+let _globalMenuTitleColor: Color = ColorConvert(colorType: .hsba, value: (36, 87, 100, 1))

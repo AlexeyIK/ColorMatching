@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+enum MenuTabItem {
+    case info
+    case mainmenu
+    case stats
+    case settings
+}
+
+class MenuState: ObservableObject {
+    
+    @Published var isMenuActive: Bool = true
+    @Published var selectedTab: MenuTabItem = .mainmenu
+}
+
 struct MainMenuView: View {
     
     init() {
@@ -30,125 +43,208 @@ struct MainMenuView: View {
     @FetchRequest(entity: NameQuizStats.entity(), sortDescriptors: []) var nameQuizStats: FetchedResults<NameQuizStats>
     @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
     
+    @StateObject var menuState: MenuState = MenuState()
+    @StateObject var settingsState: SettingsState = SettingsState()
+    
     @State var linesOffset: CGFloat = 0.0
     @State var hueRotation: Double = 0.0
     
     let screenSize = UIScreen.main.bounds
+    let tabButtonsSize: CGFloat = 25
+    let unselectedColor: Color = ColorConvert(colorType: .hsba, value: (151, 7, 34, 1))
+    let selectedColor: Color = ColorConvert(colorType: .hsba, value: (43, 87, 100, 1))
+    let selectedScaleFactor: CGFloat = 1.6
     
     var body: some View {
-        NavigationView {
-            GeometryReader { geometry in
-                ZStack {
-                    BackgroundView()
-                        .animation(.none)
-                    
-                    // кнопка статистики
-                    HStack {
-                        Spacer()
-                        
-                        VStack {
-                            NavigationLink(
-                                destination: StatsView()
-                                    .navigationBarBackButtonHidden(true)
-                                    .navigationBarTitleDisplayMode(.inline),
+        ZStack {
+            NavigationView {
+                switch menuState.selectedTab {
+                case .info:
+                    InfoView()
+                case .mainmenu:
+                        GeometryReader { geometry in
+                            VStack {
+                                Text("main-menu-title")
+                                    .font(.title)
+                                    .fontWeight(.regular)
+                                    .foregroundColor(_globalMenuTitleColor)
+    //                                .padding(.top, 28)
                                 
-                                label: {
-                                    ZStack {
-                                        Image("iconStats")
-                                            .resizable()
-                                    }
-                                    .frame(width: 50, height: 50, alignment: .topTrailing)
-                                    .padding(.all, 10)
-                            })
-                            
-                            Spacer()
-                        }
-                    }
-                    .animation(.none)
-                    
-                    VStack {
-                        Spacer()
-                        
-                        Text("main-menu-title")
-                            .font(.title)
-                            .fontWeight(.light)
-                            .foregroundColor(ColorConvert(colorType: .hsba, value: (179, 73, 40, 1)))
-                        
-                        Spacer()
-                        
-                        VStack(spacing: 0) {
-                            NavigationLink(
-                                destination: ColorQuizMainView()
-                                    .navigationBarBackButtonHidden(true)
-                                    .navigationBarTitleDisplayMode(.inline)
-                                    .transition(.identity),
+                                Spacer()
+                                
+                                VStack(spacing: 0) {
+                                    NavigationLink(
+                                        destination: ColorQuizMainView()
+                                            .navigationBarBackButtonHidden(true)
+                                            .navigationBarTitleDisplayMode(.inline)
+                                            .environmentObject(menuState),
+                                            
+                                        label: {
+                                            MenuButtonView(text: "color-quiz", imageName: "iconColorQUIZ", foregroundColor: ColorConvert(colorType: .hsba, value: (302, 67, 85, 1)))
+                                        })
                                     
-                                label: {
-                                    MenuButtonView(text: "color-quiz", imageName: "iconColorQUIZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
-                                })
-                            
-                            NavigationLink(
-                                destination: LearnAndQuizView()
-                                    .navigationBarBackButtonHidden(true)
-                                    .navigationBarTitleDisplayMode(.inline),
+                                    NavigationLink(
+                                        destination: LearnAndQuizView()
+                                            .navigationBarBackButtonHidden(true)
+                                            .navigationBarTitleDisplayMode(.inline)
+                                            .environmentObject(menuState),
+                                            
+                                        label: {
+                                            MenuButtonView(text: "name-quiz", imageName: "iconNameQIUZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
+                                        })
                                     
-                                label: {
-                                    MenuButtonView(text: "name-quiz", imageName: "iconNameQIUZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
-                                })
-                            
-                            MenuButtonView(text: "warm-vs-cold", imageName: "iconColdVsWarm", foregroundColor: ColorConvert(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
-                            
-                            MenuButtonView(text: "more-games-soon", noImage: true)
+                                    MenuButtonView(text: "warm-vs-cold", imageName: "iconColdVsWarm", foregroundColor: ColorConvert(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
+                                    
+                                    Text("more-games-soon")
+                                        .padding(.top, 20)
+                                        .foregroundColor(Color.init(hue: 0, saturation: 0, brightness: 0.74))
+                                        .font(.callout)
+//                                    MenuButtonView(text: "more-games-soon", noImage: true)
+                                }
+                                .offset(y: -geometry.size.height * 0.05)
+                                
+                                Spacer()
+                            }
+                            .padding(.top, 25)
+                            .animation(.none)
+                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                         }
-                        .offset(y: -geometry.size.height * 0.05)
-                        
-                        Spacer()
-                    }
-                    .padding(.top, 25)
-                    .animation(.none)
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                
-                    // цветные полоски по краям
-                    HStack(alignment: .center) {
-                        Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(
-                                                    colors: [
-                                                        ColorConvert(colorType: .rgba, value: (0, 255, 127, 1)),
-                                                        ColorConvert(colorType: .rgba, value: (70, 63, 250, 1)),
-                                                        ColorConvert(colorType: .rgba, value: (255, 0, 255, 1))
-                                                    ]),
-                                                 startPoint: .top,
-                                                 endPoint: .bottom))
-                            .hueRotation(Angle(degrees: hueRotation))
-                            .transition(.identity)
-                            .frame(width: 6, alignment: .center)
-                            .animation(repeatingLinesAnimation, value: hueRotation)
-                        
-                        Spacer()
-                        
-                        Rectangle()
-                            .fill(LinearGradient(gradient: Gradient(
-                                                    colors: [
-                                                        ColorConvert(colorType: .rgba, value: (255, 0, 107, 1)),
-                                                        ColorConvert(colorType: .rgba, value: (255, 164, 2, 1)),
-                                                        ColorConvert(colorType: .rgba, value: (69, 215, 0, 1))
-                                                    ]),
-                                                 startPoint: .top,
-                                                 endPoint: .bottom))
-                            .hueRotation(Angle(degrees: -hueRotation))
-                            .transition(.identity)
-                            .frame(width: 6, alignment: .center)
-                            .animation(repeatingLinesAnimation, value: hueRotation)
-                    }
-                    .ignoresSafeArea()
-//                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
-                    .onAppear() {
-                        self.hueRotation = 3600
-                    }
+                        .transition(.identity)
+                        .navigationBarHidden(true)
+                        .background(BackgroundView())
+                case .stats:
+                    StatsView()
+                case .settings:
+                    SettingsView()
+                        .environmentObject(settingsState)
                 }
             }
-            .transition(.identity)
-            .navigationBarHidden(true)
+            
+            if menuState.isMenuActive {
+                VStack {
+                    Spacer()
+                    
+                    HStack(alignment: .bottom, spacing: 30) {
+                        VStack(spacing: 8) {
+                            Image(systemName: "questionmark.circle.fill")
+                                .resizable()
+                                .aspectRatio(1, contentMode: .fit)
+                                .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
+                                .scaleEffect(menuState.selectedTab == .info ? selectedScaleFactor : 1)
+                                .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                            
+                            Text("О проекте")
+                                .font(.caption)
+                                .padding(.top, tabButtonsSize / 3)
+                                .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
+                        }
+                        .onTapGesture {
+                            menuState.selectedTab = .info
+                        }
+                            
+                        VStack(spacing: 8)  {
+                            Image(systemName: "play.circle.fill")
+                                .resizable()
+                                .aspectRatio(1, contentMode: .fit)
+                                .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
+                                .scaleEffect(menuState.selectedTab == .mainmenu ? selectedScaleFactor : 1)
+                                .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                            
+                            Text("Игры")
+                                .font(.caption)
+                                .padding(.top, tabButtonsSize / 3)
+                                .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
+                        }
+                        .onTapGesture {
+                            menuState.selectedTab = .mainmenu
+                        }
+                        
+                        VStack(spacing: 8) {
+                            Image(systemName: "arrow.up.forward.circle.fill")
+                                .resizable()
+                                .aspectRatio(1, contentMode: .fit)
+                                .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
+                                .scaleEffect(menuState.selectedTab == .stats ? selectedScaleFactor : 1)
+                                .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                            
+                            Text("Статистика")
+                                .font(.caption)
+                                .padding(.top, tabButtonsSize / 3)
+                                .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
+                        }
+                        .onTapGesture {
+                            menuState.selectedTab = .stats
+                        }
+                        
+                        VStack(spacing: 8) {
+                            Image(systemName: "gearshape.fill")
+                                .resizable()
+                                .aspectRatio(1, contentMode: .fit)
+                                .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
+                                .scaleEffect(menuState.selectedTab == .settings ? selectedScaleFactor : 1)
+                                .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                            
+                            Text("Игры")
+                                .font(.caption)
+                                .padding(.top, tabButtonsSize / 3)
+                                .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
+                        }
+                        .onTapGesture {
+                            menuState.selectedTab = .settings
+                        }
+                    }
+                    .padding(.bottom, 10)
+                    .transition(.move(edge: .leading))
+//                    .background(Color.black)
+                }
+                .frame(width: UIScreen.main.bounds.width, alignment: .center)
+                .transition(.move(edge: .leading))
+                .animation(.easeInOut)
+            }
+            
+            if menuState.isMenuActive {
+                // цветные полоски по краям
+                HStack(alignment: .center) {
+                    Rectangle()
+                        .fill(LinearGradient(gradient: Gradient(
+                                                colors: [
+                                                    ColorConvert(colorType: .rgba, value: (0, 255, 127, 1)),
+                                                    ColorConvert(colorType: .rgba, value: (70, 63, 250, 1)),
+                                                    ColorConvert(colorType: .rgba, value: (255, 0, 255, 1))
+                                                ]),
+                                             startPoint: .top,
+                                             endPoint: .bottom))
+                        .hueRotation(Angle(degrees: hueRotation))
+                        .transition(.identity)
+                        .frame(width: 6, alignment: .center)
+                        .animation(repeatingLinesAnimation, value: hueRotation)
+                    
+                    Spacer()
+                    
+                    Rectangle()
+                        .fill(LinearGradient(gradient: Gradient(
+                                                colors: [
+                                                    ColorConvert(colorType: .rgba, value: (255, 0, 107, 1)),
+                                                    ColorConvert(colorType: .rgba, value: (255, 164, 2, 1)),
+                                                    ColorConvert(colorType: .rgba, value: (69, 215, 0, 1))
+                                                ]),
+                                             startPoint: .top,
+                                             endPoint: .bottom))
+                        .hueRotation(Angle(degrees: -hueRotation))
+                        .transition(.identity)
+                        .frame(width: 6, alignment: .center)
+                        .animation(repeatingLinesAnimation, value: hueRotation)
+                }
+                .ignoresSafeArea()
+    //                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                .onAppear() {
+                    self.hueRotation = 3600
+                }
+            }
         }
         .onAppear() {
             if overallStats.count == 0 {
