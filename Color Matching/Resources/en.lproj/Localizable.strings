@@ -53,15 +53,15 @@
 
 /* Info page messages */
 "main-info-text" = "
-    We love colors very much. We literally adore them.\n
-    “The Colors” is a set of games for memorizing a lot of colors, their names, and something else that you can do with colors.\n
-    This is not a training program, but we hope that during the game you will be pleased and you will replenish your knowledge with new colors.
-    ";
+We love colors very much. We literally adore them.\n
+“The Colors” is a set of games for memorizing a lot of colors, their names, and something else that you can do with colors.\n
+This is not a training program, but we hope that during the game you will be pleased and you will replenish your knowledge with new colors.
+";
 
 "additional-info-text" = "it should be great if u whant to see more mini games in future, than u can support us here.";
 
 "credentials-text" = "
-    Yours, dev team.
-    Code() { Name: ‘@solinarius’ }
-    Design /* ‘@DavidShvartsman’ */
-    ";
+Yours, dev team.
+Code() { Name: ‘@solinarius’ }
+Design /* ‘@DavidShvartsman’ */
+";

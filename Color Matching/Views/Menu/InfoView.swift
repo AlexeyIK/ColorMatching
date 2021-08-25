@@ -20,29 +20,36 @@ struct InfoView: View {
                     .font(.title)
                     .fontWeight(.regular)
                     .foregroundColor(_globalMenuTitleColor)
+                    .padding(.bottom, 20)
 //                    .padding(.top, 28)
                 
                 Spacer()
                 
-                Text("main-info-text")
-                    .font(.caption)
-                    .foregroundColor(.white)
-                    .padding(.bottom, 30)
-                
-                Text("additional-info-text")
-                    .font(.caption)
-                    .foregroundColor(.white)
-                
-                Text("credentials-text")
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.leading)
-                    .padding(.top, 40)
-                    .foregroundColor(ColorConvert(colorType: .hsba, value: (220, 8, 52, 1)))
+                ScrollView(.vertical, showsIndicators: false) {
+                    Text("main-info-text")
+                        .font(.footnote)
+                        .foregroundColor(.white)
+                        .padding(.bottom, 10)
+                    
+                    Text("additional-info-text")
+                        .font(.footnote)
+                        .foregroundColor(.white)
+                    
+                    Rectangle()
+                        .fill(Color.init(hue: 0, saturation: 0, brightness: 0.25))
+                        .frame(width: 80, height: 1, alignment: .center)
+                        .padding(.top, 20)
+                    
+                    Text("credentials-text")
+                        .font(.footnote)
+                        .fontWeight(.medium)
+                        .multilineTextAlignment(.leading)
+                        .foregroundColor(ColorConvert(colorType: .hsba, value: (220, 8, 52, 1)))
+                }
                 
                 Spacer()
             }
-            .frame(width: screenSize.width * 0.7, height: screenSize.height - 80, alignment: .center)
+            .frame(width: screenSize.width * 0.7, height: screenSize.height - 150, alignment: .center)
         }
     }
 }
