@@ -31,7 +31,7 @@ struct InfoView: View {
                         
                         ScrollView(.vertical, showsIndicators: false) {
                             Text("main-info-text")
-                                .font(.body)
+                                .font(.callout)
                                 .foregroundColor(.white)
                             
 //                            Text("additional-info-text")
@@ -42,18 +42,18 @@ struct InfoView: View {
                             Rectangle()
                                 .fill(Color.init(hue: 0, saturation: 0, brightness: 0.25))
                                 .frame(width: 80, height: 1, alignment: .center)
-                                .padding(.top, 20)
+                                .padding(.bottom, 10)
                             
                             Text("credentials-text")
-                                .font(.body)
+                                .font(.callout)
                                 .fontWeight(.medium)
-                                .multilineTextAlignment(.leading)
                                 .foregroundColor(ColorConvert(colorType: .hsba, value: (220, 8, 52, 1)))
+                                .frame(width: geometry.size.width * 0.72, alignment: .leading)
                         }
                         
                         Spacer()
                     }
-                    .frame(width: geometry.size.width * 0.75, height: geometry.size.height - 70, alignment: .top)
+                    .frame(width: geometry.size.width * 0.72, height: geometry.size.height - 70, alignment: .top)
                     
                     Spacer()
                 }
