@@ -67,6 +67,7 @@ struct SettingsView: View {
                     Toggle("Sounds", isOn: $settingsState.sounds)
                         .listRowBackground(Color.black)
                 }
+                .padding()
                 .foregroundColor(.white)
             }
         }

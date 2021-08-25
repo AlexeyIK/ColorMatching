@@ -58,66 +58,64 @@ struct MainMenuView: View {
     var body: some View {
         ZStack {
             NavigationView {
-                switch menuState.selectedTab {
-                case .info:
-                    InfoView()
-                case .mainmenu:
-                        GeometryReader { geometry in
-                            VStack {
-                                Text("main-menu-title")
-                                    .font(.title)
-                                    .fontWeight(.regular)
-                                    .foregroundColor(_globalMenuTitleColor)
-    //                                .padding(.top, 28)
+                GeometryReader { geometry in
+                    switch menuState.selectedTab {
+                    case .info:
+                        InfoView()
+                    case .mainmenu:
+                        VStack {
+                            Text("main-menu-title")
+                                .font(.title)
+                                .fontWeight(.regular)
+                                .foregroundColor(_globalMenuTitleColor)
+                                .padding(.top, 28)
+                            
+                            Spacer()
+                            
+                            VStack(spacing: 0) {
+                                NavigationLink(
+                                    destination: ColorQuizMainView()
+                                        .navigationBarBackButtonHidden(true)
+                                        .navigationBarTitleDisplayMode(.inline)
+                                        .environmentObject(menuState),
+                                        
+                                    label: {
+                                        MenuButtonView(text: "color-quiz", imageName: "iconColorQUIZ", foregroundColor: ColorConvert(colorType: .hsba, value: (302, 67, 85, 1)))
+                                    })
                                 
-                                Spacer()
+                                NavigationLink(
+                                    destination: LearnAndQuizView()
+                                        .navigationBarBackButtonHidden(true)
+                                        .navigationBarTitleDisplayMode(.inline)
+                                        .environmentObject(menuState),
+                                        
+                                    label: {
+                                        MenuButtonView(text: "name-quiz", imageName: "iconNameQIUZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
+                                    })
                                 
-                                VStack(spacing: 0) {
-                                    NavigationLink(
-                                        destination: ColorQuizMainView()
-                                            .navigationBarBackButtonHidden(true)
-                                            .navigationBarTitleDisplayMode(.inline)
-                                            .environmentObject(menuState),
-                                            
-                                        label: {
-                                            MenuButtonView(text: "color-quiz", imageName: "iconColorQUIZ", foregroundColor: ColorConvert(colorType: .hsba, value: (302, 67, 85, 1)))
-                                        })
-                                    
-                                    NavigationLink(
-                                        destination: LearnAndQuizView()
-                                            .navigationBarBackButtonHidden(true)
-                                            .navigationBarTitleDisplayMode(.inline)
-                                            .environmentObject(menuState),
-                                            
-                                        label: {
-                                            MenuButtonView(text: "name-quiz", imageName: "iconNameQIUZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
-                                        })
-                                    
-                                    MenuButtonView(text: "warm-vs-cold", imageName: "iconColdVsWarm", foregroundColor: ColorConvert(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
-                                    
-                                    Text("more-games-soon")
-                                        .padding(.top, 20)
-                                        .foregroundColor(Color.init(hue: 0, saturation: 0, brightness: 0.74))
-                                        .font(.callout)
+                                MenuButtonView(text: "warm-vs-cold", imageName: "iconColdVsWarm", foregroundColor: ColorConvert(colorType: .hsba, value: (188, 64, 56, 1))).saturation(0).colorMultiply(Color.init(hue: 0, saturation: 0, brightness: 0.75))
+                                
+                                Text("more-games-soon")
+                                    .padding(.top, 20)
+                                    .foregroundColor(Color.init(hue: 0, saturation: 0, brightness: 0.74))
+                                    .font(.callout)
 //                                    MenuButtonView(text: "more-games-soon", noImage: true)
-                                }
-                                .offset(y: -geometry.size.height * 0.05)
-                                
-                                Spacer()
                             }
-                            .padding(.top, 25)
-                            .animation(.none)
-                            .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
+                            
+                            Spacer()
                         }
-                        .transition(.identity)
-                        .navigationBarHidden(true)
-                        .background(BackgroundView())
-                case .stats:
-                    StatsView()
-                case .settings:
-                    SettingsView()
-                        .environmentObject(settingsState)
+                        .animation(.none)
+                        .frame(width: geometry.size.width, height: geometry.size.height - 70, alignment: .top)
+                    case .stats:
+                        StatsView()
+                    case .settings:
+                        SettingsView()
+                            .environmentObject(settingsState)
+                    }
                 }
+                .transition(.identity)
+                .navigationBarHidden(true)
+                .background(BackgroundView())
             }
             
             if menuState.isMenuActive {
