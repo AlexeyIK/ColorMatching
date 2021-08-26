@@ -70,9 +70,10 @@
 "Best Strike:" = "Лучший страйк:";
 
 /* Settings */
-"Left Hand" = "Под левую руку";
+"Left hand" = "Под левую руку";
 "Tactile feedback" = "Тактильный отклик";
 "Sounds" = "Звуки";
+"Colors language" = "Язык для цветов";
 
 /* Info page messages */
 "main-info-text" = "

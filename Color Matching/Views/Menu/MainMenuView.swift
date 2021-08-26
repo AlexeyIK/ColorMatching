@@ -77,7 +77,8 @@ struct MainMenuView: View {
                                     destination: ColorQuizMainView()
                                         .navigationBarBackButtonHidden(true)
                                         .navigationBarTitleDisplayMode(.inline)
-                                        .environmentObject(menuState),
+                                        .environmentObject(menuState)
+                                        .environmentObject(settingsState), // глобальные настройки
                                         
                                     label: {
                                         MenuButtonView(text: "color-quiz", imageName: "iconColorQUIZ", foregroundColor: ColorConvert(colorType: .hsba, value: (302, 67, 85, 1)))
@@ -87,7 +88,8 @@ struct MainMenuView: View {
                                     destination: LearnAndQuizView()
                                         .navigationBarBackButtonHidden(true)
                                         .navigationBarTitleDisplayMode(.inline)
-                                        .environmentObject(menuState),
+                                        .environmentObject(menuState)
+                                        .environmentObject(settingsState), // глобальные настройки
                                         
                                     label: {
                                         MenuButtonView(text: "name-quiz", imageName: "iconNameQIUZ", foregroundColor: ColorConvert(colorType: .hsba, value: (74, 67, 52, 1)))
@@ -118,82 +120,88 @@ struct MainMenuView: View {
                 .background(BackgroundView())
             }
             
+            // Tabbar
             if menuState.isMenuActive {
                 VStack {
                     Spacer()
                     
-                    HStack(alignment: .bottom, spacing: 30) {
-                        VStack(spacing: 8) {
-                            Image(systemName: "questionmark.circle.fill")
-                                .resizable()
-                                .aspectRatio(1, contentMode: .fit)
-                                .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
-                                .scaleEffect(menuState.selectedTab == .info ? selectedScaleFactor : 1)
-                                .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-                            
-                            Text("О проекте")
-                                .font(.caption)
-                                .padding(.top, tabButtonsSize / 3)
-                                .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
-                        }
-                        .onTapGesture {
+                    HStack(alignment: .bottom, spacing: screenSize.width / 2 / 4) {
+                        Button(action: {
                             menuState.selectedTab = .info
-                        }
-                            
-                        VStack(spacing: 8)  {
-                            Image(systemName: "play.circle.fill")
-                                .resizable()
-                                .aspectRatio(1, contentMode: .fit)
-                                .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
-                                .scaleEffect(menuState.selectedTab == .mainmenu ? selectedScaleFactor : 1)
-                                .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-                            
-                            Text("Игры")
-                                .font(.caption)
-                                .padding(.top, tabButtonsSize / 3)
-                                .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
-                        }
-                        .onTapGesture {
+                        }, label: {
+                            VStack(spacing: 8) {
+                                Image(systemName: "questionmark.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(1, contentMode: .fit)
+                                    .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                    .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
+                                    .scaleEffect(menuState.selectedTab == .info ? selectedScaleFactor : 1)
+                                    .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                                
+                                Text("О проекте")
+                                    .font(.caption)
+                                    .padding(.top, tabButtonsSize / 3)
+                                    .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
+                            }
+                        })
+                        
+                        Button(action: {
                             menuState.selectedTab = .mainmenu
-                        }
+                        }, label: {
+                            VStack(spacing: 8)  {
+                                Image(systemName: "play.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(1, contentMode: .fit)
+                                    .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                    .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
+                                    .scaleEffect(menuState.selectedTab == .mainmenu ? selectedScaleFactor : 1)
+                                    .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                                
+                                Text("Игры")
+                                    .font(.caption)
+                                    .padding(.top, tabButtonsSize / 3)
+                                    .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
+                            }
+                        })
                         
-                        VStack(spacing: 8) {
-                            Image(systemName: "arrow.up.forward.circle.fill")
-                                .resizable()
-                                .aspectRatio(1, contentMode: .fit)
-                                .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
-                                .scaleEffect(menuState.selectedTab == .stats ? selectedScaleFactor : 1)
-                                .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-                            
-                            Text("Статистика")
-                                .font(.caption)
-                                .padding(.top, tabButtonsSize / 3)
-                                .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
-                        }
-                        .onTapGesture {
+                        
+                        Button(action: {
                             menuState.selectedTab = .stats
-                        }
+                        }, label: {
+                            VStack(spacing: 8) {
+                                Image(systemName: "arrow.up.forward.circle.fill")
+                                    .resizable()
+                                    .aspectRatio(1, contentMode: .fit)
+                                    .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                    .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
+                                    .scaleEffect(menuState.selectedTab == .stats ? selectedScaleFactor : 1)
+                                    .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                                
+                                Text("Статистика")
+                                    .font(.caption)
+                                    .padding(.top, tabButtonsSize / 3)
+                                    .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
+                            }
+                        })
                         
-                        VStack(spacing: 8) {
-                            Image(systemName: "gearshape.fill")
-                                .resizable()
-                                .aspectRatio(1, contentMode: .fit)
-                                .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
-                                .scaleEffect(menuState.selectedTab == .settings ? selectedScaleFactor : 1)
-                                .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-                            
-                            Text("Игры")
-                                .font(.caption)
-                                .padding(.top, tabButtonsSize / 3)
-                                .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
-                        }
-                        .onTapGesture {
+                        Button(action: {
                             menuState.selectedTab = .settings
-                        }
+                        }, label: {
+                            VStack(spacing: 8) {
+                                Image(systemName: "gearshape.fill")
+                                    .resizable()
+                                    .aspectRatio(1, contentMode: .fit)
+                                    .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                    .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
+                                    .scaleEffect(menuState.selectedTab == .settings ? selectedScaleFactor : 1)
+                                    .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                                
+                                Text("Игры")
+                                    .font(.caption)
+                                    .padding(.top, tabButtonsSize / 3)
+                                    .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
+                            }
+                        })
                     }
                     .padding(.bottom, 10)
                     .transition(.move(edge: .leading))

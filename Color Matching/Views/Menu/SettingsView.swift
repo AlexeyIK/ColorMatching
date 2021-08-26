@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+enum ColorLang: String, CaseIterable {
+    case russian
+    case english
+}
+
 class SettingsState: ObservableObject {
     
     @Published var settingsChanged: Bool = UserDefaults.standard.bool(forKey: "SettingsActivated") {
@@ -34,12 +39,20 @@ class SettingsState: ObservableObject {
         }
     }
     
+    @Published var colorsLang: ColorLang = ColorLang(rawValue: UserDefaults.standard.string(forKey: "colorsLang") ?? "") ?? .english  {
+        didSet {
+            settingsChanged = true
+            UserDefaults.standard.set(colorsLang, forKey: "colorsLang")
+        }
+    }
+    
     init() {
         if !settingsChanged {
             // defaults
             leftHandMode = false
             tactileFeedback = true
             sounds = true
+            colorsLang = Locale.current.languageCode == "ru" ? .russian : .english
         }
     }
 }
@@ -47,6 +60,8 @@ class SettingsState: ObservableObject {
 struct SettingsView: View {
     
     @EnvironmentObject var settingsState: SettingsState
+    
+    let colorLangs = ["Русский", "English"]
     
     var body: some View {
         ZStack {
@@ -60,12 +75,19 @@ struct SettingsView: View {
                     .padding(.top, 28)
                 
                 Form {
-                    Toggle("Left Hand", isOn: $settingsState.leftHandMode)
+                    Toggle("Left hand", isOn: $settingsState.leftHandMode)
                         .listRowBackground(Color.black)
                     Toggle("Tactile feedback", isOn: $settingsState.tactileFeedback)
                         .listRowBackground(Color.black)
                     Toggle("Sounds", isOn: $settingsState.sounds)
                         .listRowBackground(Color.black)
+//                    Picker("Colors language", selection: $settingsState.colorsLang) {
+//                        ForEach(ColorLang.allCases, id: \.self) { value in
+//                            Text(value.rawValue.capitalized)
+//                        }
+//                    }
+//                    .foregroundColor(.white)
+//                    .listRowBackground(Color.black)
                 }
                 .padding()
                 .foregroundColor(.white)
