@@ -125,7 +125,7 @@ struct MainMenuView: View {
                 VStack {
                     Spacer()
                     
-                    HStack(alignment: .bottom) {
+                    HStack(alignment: .bottom, spacing: Locale.current.languageCode == "ru" ? screenSize.width / 20 : screenSize.width / 10) {
                         Button(action: {
                             menuState.selectedTab = .info
                         }, label: {
@@ -144,8 +144,6 @@ struct MainMenuView: View {
                                     .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
                             }
                         })
-                        
-                        Spacer()
                         
                         Button(action: {
                             menuState.selectedTab = .mainmenu
@@ -166,8 +164,6 @@ struct MainMenuView: View {
                             }
                         })
                         
-                        Spacer()
-                        
                         Button(action: {
                             menuState.selectedTab = .stats
                         }, label: {
@@ -186,8 +182,6 @@ struct MainMenuView: View {
                                     .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
                             }
                         })
-                        
-                        Spacer()
                         
                         Button(action: {
                             menuState.selectedTab = .settings
