@@ -24,7 +24,7 @@ struct InfoView: View {
                             .font(.title)
                             .fontWeight(.regular)
                             .foregroundColor(_globalMenuTitleColor)
-                            .padding(.bottom, 20)
+                            .padding(.bottom, geometry.size.height / 10)
                             .padding(.top, 28)
                         
                         Spacer()
@@ -50,8 +50,6 @@ struct InfoView: View {
                                 .foregroundColor(ColorConvert(colorType: .hsba, value: (220, 8, 52, 1)))
                                 .frame(width: geometry.size.width * 0.72, alignment: .leading)
                         }
-                        
-                        Spacer()
                     }
                     .frame(width: geometry.size.width * 0.72, height: geometry.size.height - 70, alignment: .top)
                     

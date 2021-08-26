@@ -125,7 +125,7 @@ struct MainMenuView: View {
                 VStack {
                     Spacer()
                     
-                    HStack(alignment: .bottom, spacing: screenSize.width / 2 / 4) {
+                    HStack(alignment: .bottom, spacing: (screenSize.width / 2 - 30) / 4) {
                         Button(action: {
                             menuState.selectedTab = .info
                         }, label: {
