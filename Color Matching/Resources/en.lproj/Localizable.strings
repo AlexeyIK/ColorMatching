@@ -17,6 +17,12 @@
 "info-page-title" = "“HueQueue”";
 "settings-title" = "Settings";
 
+"store-button" = "Store";
+"about-button" = "About";
+"games-button" = "Games";
+"stats-button" = "Stats";
+"settings-button" = "Settings";
+
 /* Hardness */
 "easy" = "Easy";
 "normal" = "Normal";

@@ -125,7 +125,7 @@ struct MainMenuView: View {
                 VStack {
                     Spacer()
                     
-                    HStack(alignment: .bottom, spacing: (screenSize.width / 2 - 30) / 4) {
+                    HStack(alignment: .bottom) {
                         Button(action: {
                             menuState.selectedTab = .info
                         }, label: {
@@ -138,12 +138,14 @@ struct MainMenuView: View {
                                     .scaleEffect(menuState.selectedTab == .info ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
-                                Text("О проекте")
+                                Text("about-button")
                                     .font(.caption)
                                     .padding(.top, tabButtonsSize / 3)
                                     .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
                             }
                         })
+                        
+                        Spacer()
                         
                         Button(action: {
                             menuState.selectedTab = .mainmenu
@@ -157,13 +159,14 @@ struct MainMenuView: View {
                                     .scaleEffect(menuState.selectedTab == .mainmenu ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
-                                Text("Игры")
+                                Text("games-button")
                                     .font(.caption)
                                     .padding(.top, tabButtonsSize / 3)
                                     .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
                             }
                         })
                         
+                        Spacer()
                         
                         Button(action: {
                             menuState.selectedTab = .stats
@@ -177,12 +180,14 @@ struct MainMenuView: View {
                                     .scaleEffect(menuState.selectedTab == .stats ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
-                                Text("Статистика")
+                                Text("stats-button")
                                     .font(.caption)
                                     .padding(.top, tabButtonsSize / 3)
                                     .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
                             }
                         })
+                        
+                        Spacer()
                         
                         Button(action: {
                             menuState.selectedTab = .settings
@@ -196,7 +201,7 @@ struct MainMenuView: View {
                                     .scaleEffect(menuState.selectedTab == .settings ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
-                                Text("Игры")
+                                Text("settings-button")
                                     .font(.caption)
                                     .padding(.top, tabButtonsSize / 3)
                                     .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
@@ -207,7 +212,7 @@ struct MainMenuView: View {
                     .transition(.move(edge: .leading))
 //                    .background(Color.black)
                 }
-                .frame(width: UIScreen.main.bounds.width, alignment: .center)
+                .frame(width: UIScreen.main.bounds.width - 40, alignment: .center)
                 .transition(.move(edge: .leading))
                 .animation(.easeInOut)
             }

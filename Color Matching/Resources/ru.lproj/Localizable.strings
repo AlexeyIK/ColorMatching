@@ -16,6 +16,12 @@
 "info-page-title" = "“HueQueue”";
 "settings-title" = "Настройки";
 
+"store-button" = "Магазин";
+"about-button" = "О проекте";
+"games-button" = "Игры";
+"stats-button" = "Статистика";
+"settings-button" = "Настройки";
+
 /* Hardness */
 "easy" = "Легко";
 "normal" = "Нормально";

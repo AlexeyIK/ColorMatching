@@ -36,7 +36,7 @@ struct InfoView: View {
                             
 //                            Text("additional-info-text")
 //                                .padding(.top, 16)
-//                                .font(.footnote)
+//                                .font(.callout)
 //                                .foregroundColor(.white)
                             
                             Rectangle()
