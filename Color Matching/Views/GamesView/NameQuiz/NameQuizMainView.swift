@@ -14,6 +14,8 @@ struct LearnAndQuizView: View {
     @StateObject var gameState: LearnAndQuizState = LearnAndQuizState(quizType: .nameQuiz)
     @StateObject var resultState: QuizResultsStore = QuizResultsStore()
     
+    @EnvironmentObject var menuState: MenuState
+    
     var body: some View {
         ZStack {
             BackgroundView()
@@ -38,6 +40,9 @@ struct LearnAndQuizView: View {
                         .transition(.opacity)
             }
         }
+        .onAppear() {
+            menuState.isMenuActive = false
+        }
         .navigationBarItems(
             leading:
                 HStack {
@@ -46,6 +51,7 @@ struct LearnAndQuizView: View {
                     
                     Button("menu-button") {
                         gameState.endGameSession()
+                        menuState.isMenuActive = true
                         presentationMode.wrappedValue.dismiss()
                     }
                     .buttonStyle(BackButton())

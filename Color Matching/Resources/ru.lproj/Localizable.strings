@@ -5,12 +5,22 @@
   Created by Алексей Кузнецов on 21.08.2021.
 */
 
+// RUSSIAN
+
 /* Game title */
 "main-menu-title" = "Коллекция игр";
 "more-games-soon" = "Больше игр. Скоро...";
 "color-quiz" = "Цвета";
 "name-quiz" = "Имена";
 "warm-vs-cold" = "Теплое/холодное";
+"info-page-title" = "“HueQueue”";
+"settings-title" = "Настройки";
+
+"store-button" = "Магазин";
+"about-button" = "О проекте";
+"games-button" = "Игры";
+"stats-button" = "Статистика";
+"settings-button" = "Настройки";
 
 /* Hardness */
 "easy" = "Легко";
@@ -64,3 +74,25 @@
 "Guessed names:" = "Угадано имён:";
 "Color Strikes:" = "Всего страйков:";
 "Best Strike:" = "Лучший страйк:";
+
+/* Settings */
+"Left hand" = "Под левую руку";
+"Tactile feedback" = "Тактильный отклик";
+"Sounds" = "Звуки";
+"Colors language" = "Язык для цветов";
+
+/* Info page messages */
+"main-info-text" = "
+Цвета. Нам очень нравятся цвета. Мы буквально обожаем их.\n
+“HueQueue” это коллекция игр, посвященная цветам. Они познакомят вас с огромным количеством цветов и, возможно, помогут вам запомнить их как можно больше. Ну или можете просто получать удовольствие от знакомства с цветами и играми.\n
+Это не обучащя программа, но мы надеемся, что в процессе игры вы неизбежно пополните свои знание большим запасом цветов и их названий.\n
+";
+
+"additional-info-text" = "it should be great if u whant to see more mini games in future, than u can support us here.";
+
+"credentials-text" = "
+Ваша команда разработки:
+Code() { Name: ‘@solinarius’ }
+Design /* ‘@DavidShvartsman’ */
+";
+

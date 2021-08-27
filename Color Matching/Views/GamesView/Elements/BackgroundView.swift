@@ -11,8 +11,8 @@ struct BackgroundView: View {
     var body: some View {
         RadialGradient(gradient:
                         Gradient(colors: [
-                            Color.init(hue: 0, saturation: 0, brightness: 0.12),
-                            Color.init(hue: 0, saturation: 0, brightness: 0.06)
+                            Color.init(hue: 0, saturation: 0, brightness: 0.10),
+                            Color.init(hue: 0, saturation: 0, brightness: 0.05)
                         ]),
                        center: UnitPoint(x: 0.5, y: 0.6),
                        startRadius: 1, endRadius: 400

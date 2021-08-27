@@ -13,6 +13,7 @@ struct NameQuizView: View {
     
     @EnvironmentObject var gameState: LearnAndQuizState
     @EnvironmentObject var resultStore: QuizResultsStore
+    @EnvironmentObject var settingsState: SettingsState
     @StateObject var quizState: NameQuizState = NameQuizState()
     
     @State var needToShowAnswer: Bool = false
@@ -118,8 +119,10 @@ struct NameQuizView: View {
                                             }
                                         }
                                         
-                                        let hapticImpact = UINotificationFeedbackGenerator()
-                                        hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
+                                        if settingsState.tactileFeedback {
+                                            let hapticImpact = UINotificationFeedbackGenerator()
+                                            hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
+                                        }
                                         
                                         answerTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
                                             withAnimation() {
