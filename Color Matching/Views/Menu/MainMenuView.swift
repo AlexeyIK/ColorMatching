@@ -50,7 +50,7 @@ struct MainMenuView: View {
     @State var hueRotation: Double = 0.0
     
     let screenSize = UIScreen.main.bounds
-    let tabButtonsSize: CGFloat = 25
+    let tabButtonsSize: CGFloat = 30
     let unselectedColor: Color = ColorConvert(colorType: .hsba, value: (151, 7, 34, 1))
     let selectedColor: Color = ColorConvert(colorType: .hsba, value: (43, 87, 100, 1))
     let selectedScaleFactor: CGFloat = 1.6
@@ -101,7 +101,6 @@ struct MainMenuView: View {
                                     .padding(.top, 20)
                                     .foregroundColor(Color.init(hue: 0, saturation: 0, brightness: 0.74))
                                     .font(.callout)
-//                                    MenuButtonView(text: "more-games-soon", noImage: true)
                             }
                             
                             Spacer()
@@ -125,7 +124,7 @@ struct MainMenuView: View {
                 VStack {
                     Spacer()
                     
-                    HStack(alignment: .bottom, spacing: Locale.current.languageCode == "ru" ? screenSize.width / 20 : screenSize.width / 10) {
+                    HStack(alignment: .bottom, spacing: Locale.current.languageCode == "ru" ? screenSize.width / 7 : screenSize.width / 7) {
                         Button(action: {
                             menuState.selectedTab = .info
                         }, label: {
@@ -138,10 +137,10 @@ struct MainMenuView: View {
                                     .scaleEffect(menuState.selectedTab == .info ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
-                                Text("about-button")
-                                    .font(.caption)
-                                    .padding(.top, tabButtonsSize / 3)
-                                    .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
+//                                Text("about-button")
+//                                    .font(.caption)
+//                                    .padding(.top, tabButtonsSize / 3)
+//                                    .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
                             }
                         })
                         
@@ -157,10 +156,10 @@ struct MainMenuView: View {
                                     .scaleEffect(menuState.selectedTab == .mainmenu ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
-                                Text("games-button")
-                                    .font(.caption)
-                                    .padding(.top, tabButtonsSize / 3)
-                                    .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
+//                                Text("games-button")
+//                                    .font(.caption)
+//                                    .padding(.top, tabButtonsSize / 3)
+//                                    .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
                             }
                         })
                         
@@ -168,7 +167,7 @@ struct MainMenuView: View {
                             menuState.selectedTab = .stats
                         }, label: {
                             VStack(spacing: 8) {
-                                Image(systemName: "arrow.up.forward.circle.fill")
+                                Image(systemName: "flag.circle.fill")
                                     .resizable()
                                     .aspectRatio(1, contentMode: .fit)
                                     .frame(width: tabButtonsSize, height: tabButtonsSize)
@@ -176,10 +175,10 @@ struct MainMenuView: View {
                                     .scaleEffect(menuState.selectedTab == .stats ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
-                                Text("stats-button")
-                                    .font(.caption)
-                                    .padding(.top, tabButtonsSize / 3)
-                                    .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
+//                                Text("stats-button")
+//                                    .font(.caption)
+//                                    .padding(.top, tabButtonsSize / 3)
+//                                    .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
                             }
                         })
                         
@@ -194,17 +193,16 @@ struct MainMenuView: View {
                                     .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
                                     .scaleEffect(menuState.selectedTab == .settings ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-                                
-                                Text("settings-button")
-                                    .font(.caption)
-                                    .padding(.top, tabButtonsSize / 3)
-                                    .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
+//
+//                                Text("settings-button")
+//                                    .font(.caption)
+//                                    .padding(.top, tabButtonsSize / 3)
+//                                    .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
                             }
                         })
                     }
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 20)
                     .transition(.move(edge: .leading))
-//                    .background(Color.black)
                 }
                 .frame(width: UIScreen.main.bounds.width - 40, alignment: .center)
                 .transition(.move(edge: .leading))

@@ -51,7 +51,7 @@ struct InfoView: View {
                                 .frame(width: geometry.size.width * 0.72, alignment: .leading)
                         }
                     }
-                    .frame(width: geometry.size.width * 0.72, height: geometry.size.height - 80, alignment: .top)
+                    .frame(width: geometry.size.width * 0.72, height: geometry.size.height - 60, alignment: .top)
                     
                     Spacer()
                 }

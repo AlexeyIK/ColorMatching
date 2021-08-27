@@ -58,7 +58,7 @@ struct StatsView: View {
                     
                     Spacer()
                 }
-                .frame(width: geometry.size.width, height: geometry.size.height - 70, alignment: .top)
+                .frame(width: geometry.size.width, height: geometry.size.height - 60, alignment: .top)
             }
         }
     }
