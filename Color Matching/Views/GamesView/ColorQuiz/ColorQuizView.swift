@@ -111,7 +111,7 @@ struct ColorQuizView: View {
                                 let startAngle = 90 - angleStep / 2
                                 
                                 ForEach(quizItem.answers.indices) { index in
-                                    
+                                    // Если включен леворукий режим, то крутим все по часовой стрелке
                                     if settingsState.leftHandMode {
                                         PetalView(colorModel: quizItem.answers[index],
                                                   name: gameState.russianNames ? quizItem.answers[index].name : quizItem.answers[index].englishName,
@@ -166,7 +166,7 @@ struct ColorQuizView: View {
                                                 }
                                             }
                                             .animation(Animation.easeInOut(duration: 0.15 + Double(quizItem.answers.count) * 0.1 - 0.1 * Double(index)).delay(0.1 * Double(index)), value: rotatePercentage)
-                                    }
+                                    } // Если же нет, то крутим против часовой стрелки
                                     else {
                                         PetalView(colorModel: quizItem.answers[index],
                                                   name: gameState.russianNames ? quizItem.answers[index].name : quizItem.answers[index].englishName,
