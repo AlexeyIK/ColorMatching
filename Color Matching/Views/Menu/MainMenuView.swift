@@ -49,8 +49,8 @@ struct MainMenuView: View {
     @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
     
     let screenSize = UIScreen.main.bounds
-    let tabButtonsSize: CGFloat = 30
-    let selectedScaleFactor: CGFloat = 1.6
+    let tabButtonsSize: CGFloat = 36
+    let selectedScaleFactor: CGFloat = 1.5
     let hapticImpact = UISelectionFeedbackGenerator()
     
     let tabButtons: [TabItem] = [TabItem(tab: .info, previewImg: "questionmark.circle.fill"), TabItem(tab: .mainmenu, previewImg: "play.circle.fill"), TabItem(tab: .stats, previewImg: "flag.circle.fill"), TabItem(tab: .settings, previewImg: "gearshape.fill")]

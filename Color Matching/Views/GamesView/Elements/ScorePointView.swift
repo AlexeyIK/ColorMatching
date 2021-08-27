@@ -13,13 +13,20 @@ struct ScorePointView: View {
     let isCorrect: Bool
     
     var body: some View {
-        Text(score >= 0 ? "+\(score)" : "\(score)")
-            .font(.title)
-            .foregroundColor(isCorrect ? .white : .red)
-            .fontWeight(.bold)
-            .transition(.identity)
-            .shadow(color: .gray, radius: 10, x: 0, y: 0)
-            .transition(.identity)
+        HStack {
+            Text(score >= 0 ? "+\(score)" : "\(score)")
+                .font(.title)
+                .foregroundColor(isCorrect ? .white : .red)
+                .fontWeight(.bold)
+                .transition(.identity)
+                .shadow(color: .gray, radius: 10, x: 0, y: 0)
+                .transition(.identity)
+            
+            Image("iconColorCoin")
+                .resizable()
+                .frame(width: 26, height: 26, alignment: .center)
+                .offset(x: -4, y: 0)
+        }
     }
 }
 

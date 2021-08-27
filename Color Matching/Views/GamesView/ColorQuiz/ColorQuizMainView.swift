@@ -11,11 +11,10 @@ struct ColorQuizMainView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
         
     @EnvironmentObject var settingsState: SettingsState
+    @EnvironmentObject var menuState: MenuState
     
     @StateObject var gameState: LearnAndQuizState = LearnAndQuizState(quizType: .colorQuiz)
     @StateObject var resultState: QuizResultsStore = QuizResultsStore()
-    
-    @EnvironmentObject var menuState: MenuState
     
     var body: some View {
         ZStack {
@@ -38,6 +37,7 @@ struct ColorQuizMainView: View {
                         .transition(.opacity)
                 case .results:
                     QuizResultsView()
+                        .environmentObject(menuState)
                         .environmentObject(gameState)
                         .environmentObject(resultState)
                         .transition(.opacity)
