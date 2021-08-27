@@ -10,6 +10,7 @@ import SwiftUI
 struct ColorQuizStartView: View {
     
     @EnvironmentObject var gameState: LearnAndQuizState
+    @EnvironmentObject var settingsState: SettingsState
     
     @State var card1Offset: CGFloat = -UIScreen.main.bounds.width * 0.6
     @State var card2Offset: CGFloat = UIScreen.main.bounds.width * 0.6
@@ -109,21 +110,21 @@ struct ColorQuizStartView: View {
                             .frame(width: 50, height: 50, alignment: .center)
                             .offset(y: contentZone.size.height * 0.1)
                             .opacity(opacity2)
-//                            .animation
                         
                         ForEach(answers.indices, id: \.self) { i in
+                            let toAngle = (settingsState.leftHandMode ? 37.5 : -37.5) + (angle + Double(i * 25)) * (settingsState.leftHandMode ? -1 : 1)
+                            
                             PetalView(colorModel: answers[i],
                                       showColor: !blink || blink && answers[i].id == colorRef.id,
                                       blink: blink && answers[i].id == colorRef.id,
                                       blinkFreq: 0.25)
                                 .frame(width: contentZone.size.height * 0.07, height: contentZone.size.height * 0.22, alignment: .center)
                                 .opacity(perc)
-                                .modifier(RollingModifier(toAngle: -37.5 + angle + Double(i * 25), percentage: perc, anchor: .bottom, onFinish: {
+                                .modifier(RollingModifier(toAngle: toAngle, percentage: perc, anchor: .bottom, onFinish: {
                                     if timer == nil && !blink {
                                         self.blink = true
                                         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
                                             self.blink = false
-//                                            print("animation finished")
                                         }
                                     }
                                 }))
@@ -229,8 +230,10 @@ struct ColorQuizStartView_Previews: PreviewProvider {
         Group {
             ColorQuizStartView()
                 .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
+                .environmentObject(SettingsState())
             ColorQuizStartView()
                 .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
+                .environmentObject(SettingsState())
                 .environment(\.locale, Locale(identifier: "ru"))
         }
 //                .previewDevice(PreviewDevice(stringLiteral: device))

@@ -22,6 +22,11 @@ class MenuState: ObservableObject {
 
 struct MainMenuView: View {
     
+    struct TabItem: Hashable {
+        let tab: MenuTabItem
+        let previewImg: String
+    }
+    
     init() {
         UINavigationBar.appearance().barTintColor = .clear
         UINavigationBar.appearance().barStyle = .default
@@ -43,15 +48,18 @@ struct MainMenuView: View {
     @FetchRequest(entity: NameQuizStats.entity(), sortDescriptors: []) var nameQuizStats: FetchedResults<NameQuizStats>
     @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
     
+    let screenSize = UIScreen.main.bounds
+    let tabButtonsSize: CGFloat = 30
+    let selectedScaleFactor: CGFloat = 1.6
+    let hapticImpact = UISelectionFeedbackGenerator()
+    
+    let tabButtons: [TabItem] = [TabItem(tab: .info, previewImg: "questionmark.circle.fill"), TabItem(tab: .mainmenu, previewImg: "play.circle.fill"), TabItem(tab: .stats, previewImg: "flag.circle.fill"), TabItem(tab: .settings, previewImg: "gearshape.fill")]
+    
     @StateObject var menuState: MenuState = MenuState()
     @StateObject var settingsState: SettingsState = SettingsState()
     
     @State var linesOffset: CGFloat = 0.0
     @State var hueRotation: Double = 0.0
-    
-    let screenSize = UIScreen.main.bounds
-    let tabButtonsSize: CGFloat = 30
-    let selectedScaleFactor: CGFloat = 1.6
     
     var body: some View {
         ZStack {
@@ -122,82 +130,26 @@ struct MainMenuView: View {
                 VStack {
                     Spacer()
                     
+                   
                     HStack(alignment: .bottom, spacing: Locale.current.languageCode == "ru" ? screenSize.width / 7 : screenSize.width / 7) {
-                        Button(action: {
-                            menuState.selectedTab = .info
-                        }, label: {
-                            VStack(spacing: 8) {
-                                Image(systemName: "questionmark.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                    .foregroundColor(menuState.selectedTab == .info ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
-                                    .scaleEffect(menuState.selectedTab == .info ? selectedScaleFactor : 1)
-                                    .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-                                
-//                                Text("about-button")
-//                                    .font(.caption)
-//                                    .padding(.top, tabButtonsSize / 3)
-//                                    .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
-                            }
-                        })
-                        
-                        Button(action: {
-                            menuState.selectedTab = .mainmenu
-                        }, label: {
-                            VStack(spacing: 8)  {
-                                Image(systemName: "play.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                    .foregroundColor(menuState.selectedTab == .mainmenu ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
-                                    .scaleEffect(menuState.selectedTab == .mainmenu ? selectedScaleFactor : 1)
-                                    .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-                                
-//                                Text("games-button")
-//                                    .font(.caption)
-//                                    .padding(.top, tabButtonsSize / 3)
-//                                    .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
-                            }
-                        })
-                        
-                        Button(action: {
-                            menuState.selectedTab = .stats
-                        }, label: {
-                            VStack(spacing: 8) {
-                                Image(systemName: "flag.circle.fill")
-                                    .resizable()
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                    .foregroundColor(menuState.selectedTab == .stats ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
-                                    .scaleEffect(menuState.selectedTab == .stats ? selectedScaleFactor : 1)
-                                    .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-                                
-//                                Text("stats-button")
-//                                    .font(.caption)
-//                                    .padding(.top, tabButtonsSize / 3)
-//                                    .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
-                            }
-                        })
-                        
-                        Button(action: {
-                            menuState.selectedTab = .settings
-                        }, label: {
-                            VStack(spacing: 8) {
-                                Image(systemName: "gearshape.fill")
-                                    .resizable()
-                                    .aspectRatio(1, contentMode: .fit)
-                                    .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                    .foregroundColor(menuState.selectedTab == .settings ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
-                                    .scaleEffect(menuState.selectedTab == .settings ? selectedScaleFactor : 1)
-                                    .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
-//
-//                                Text("settings-button")
-//                                    .font(.caption)
-//                                    .padding(.top, tabButtonsSize / 3)
-//                                    .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
-                            }
-                        })
+                        ForEach(tabButtons, id: \.self) { button in
+                            Button(action: {
+                                menuState.selectedTab = button.tab
+                                if settingsState.tactileFeedback {
+                                    hapticImpact.selectionChanged()
+                                }
+                            }, label: {
+                                VStack(spacing: 8) {
+                                    Image(systemName: button.previewImg)
+                                        .resizable()
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .frame(width: tabButtonsSize, height: tabButtonsSize)
+                                        .foregroundColor(menuState.selectedTab == button.tab ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
+                                        .scaleEffect(menuState.selectedTab == button.tab ? selectedScaleFactor : 1)
+                                        .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
+                                }
+                            })
+                        }
                     }
                     .padding(.bottom, 20)
                     .transition(.move(edge: .leading))
@@ -221,7 +173,7 @@ struct MainMenuView: View {
                                              endPoint: .bottom))
                         .hueRotation(Angle(degrees: hueRotation))
                         .transition(.identity)
-                        .frame(width: 6, alignment: .center)
+                        .frame(width: 3, alignment: .center)
                         .animation(repeatingLinesAnimation, value: hueRotation)
                     
                     Spacer()
@@ -237,7 +189,7 @@ struct MainMenuView: View {
                                              endPoint: .bottom))
                         .hueRotation(Angle(degrees: -hueRotation))
                         .transition(.identity)
-                        .frame(width: 6, alignment: .center)
+                        .frame(width: 3, alignment: .center)
                         .animation(repeatingLinesAnimation, value: hueRotation)
                 }
                 .ignoresSafeArea()
