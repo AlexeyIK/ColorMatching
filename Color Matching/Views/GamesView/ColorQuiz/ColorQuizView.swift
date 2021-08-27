@@ -13,6 +13,7 @@ struct ColorQuizView: View {
     
     @EnvironmentObject var gameState: LearnAndQuizState
     @EnvironmentObject var resultStore: QuizResultsStore
+    @EnvironmentObject var settingsState: SettingsState
     @StateObject var quizState: ColorQuizState = ColorQuizState()
 
     var highlightCorrectAnswer: Bool = false
@@ -137,7 +138,6 @@ struct ColorQuizView: View {
                                                     quizState.quizItemsList.removeFirst()
                                                     quizState.nextQuizItem()
                                                     
-//                                                    withAnimation(Animation.easeOut(duration: 0.5).delay(0.1 * Double(index))) {
                                                     withAnimation() {
                                                         self.newRotation -= 120
                                                         self.rotatePercentage = 1
@@ -150,8 +150,10 @@ struct ColorQuizView: View {
                                                 lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                 self.swapCards = true
                                                 
-                                                let hapticImpact = UINotificationFeedbackGenerator()
-                                                hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
+                                                if settingsState.tactileFeedback {
+                                                    let hapticImpact = UINotificationFeedbackGenerator()
+                                                    hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
+                                                }
                                                 
                                                 answerTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
                                                     withAnimation() {
