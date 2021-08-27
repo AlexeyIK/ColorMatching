@@ -51,8 +51,6 @@ struct MainMenuView: View {
     
     let screenSize = UIScreen.main.bounds
     let tabButtonsSize: CGFloat = 30
-    let unselectedColor: Color = ColorConvert(colorType: .hsba, value: (151, 7, 34, 1))
-    let selectedColor: Color = ColorConvert(colorType: .hsba, value: (43, 87, 100, 1))
     let selectedScaleFactor: CGFloat = 1.6
     
     var body: some View {
@@ -133,7 +131,7 @@ struct MainMenuView: View {
                                     .resizable()
                                     .aspectRatio(1, contentMode: .fit)
                                     .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                    .foregroundColor(menuState.selectedTab == .info ? selectedColor : unselectedColor)
+                                    .foregroundColor(menuState.selectedTab == .info ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
                                     .scaleEffect(menuState.selectedTab == .info ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
@@ -152,7 +150,7 @@ struct MainMenuView: View {
                                     .resizable()
                                     .aspectRatio(1, contentMode: .fit)
                                     .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                    .foregroundColor(menuState.selectedTab == .mainmenu ? selectedColor : unselectedColor)
+                                    .foregroundColor(menuState.selectedTab == .mainmenu ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
                                     .scaleEffect(menuState.selectedTab == .mainmenu ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
@@ -171,7 +169,7 @@ struct MainMenuView: View {
                                     .resizable()
                                     .aspectRatio(1, contentMode: .fit)
                                     .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                    .foregroundColor(menuState.selectedTab == .stats ? selectedColor : unselectedColor)
+                                    .foregroundColor(menuState.selectedTab == .stats ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
                                     .scaleEffect(menuState.selectedTab == .stats ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 
@@ -190,7 +188,7 @@ struct MainMenuView: View {
                                     .resizable()
                                     .aspectRatio(1, contentMode: .fit)
                                     .frame(width: tabButtonsSize, height: tabButtonsSize)
-                                    .foregroundColor(menuState.selectedTab == .settings ? selectedColor : unselectedColor)
+                                    .foregroundColor(menuState.selectedTab == .settings ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
                                     .scaleEffect(menuState.selectedTab == .settings ? selectedScaleFactor : 1)
                                     .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
 //

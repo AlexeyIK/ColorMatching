@@ -18,3 +18,5 @@ let _globalGrayedCardColor: Color = Color.init(hue: 0, saturation: 0, brightness
 let _globalNavBarButtonsColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.34, opacity: 1)
 
 let _globalMenuTitleColor: Color = ColorConvert(colorType: .hsba, value: (36, 87, 100, 1))
+let _globalMenuUnselectedColor: Color = ColorConvert(colorType: .hsba, value: (151, 7, 34, 1))
+let _globalMenuSelectedColor: Color = ColorConvert(colorType: .hsba, value: (43, 87, 100, 1))
