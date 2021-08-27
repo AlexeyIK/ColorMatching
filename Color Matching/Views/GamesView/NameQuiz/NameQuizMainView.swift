@@ -11,6 +11,8 @@ struct LearnAndQuizView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @EnvironmentObject var settingsState: SettingsState
+    
     @StateObject var gameState: LearnAndQuizState = LearnAndQuizState(quizType: .nameQuiz)
     @StateObject var resultState: QuizResultsStore = QuizResultsStore()
     
@@ -25,6 +27,7 @@ struct LearnAndQuizView: View {
                 case .prepare:
                     NameQuizStartView()
                         .environmentObject(gameState)
+                        .environmentObject(settingsState)
                 case .learn:
                     LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                         .environmentObject(gameState)
@@ -32,6 +35,7 @@ struct LearnAndQuizView: View {
                     NameQuizView(showColorNames: false, debugMode: false)
                         .environmentObject(gameState)
                         .environmentObject(resultState)
+                        .environmentObject(settingsState)
                         .transition(.opacity)
                 case .results:
                     QuizResultsView()

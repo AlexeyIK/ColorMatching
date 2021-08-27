@@ -87,7 +87,7 @@ struct ColorQuizView: View {
                                         .padding()
                                         .frame(width: contentZone.size.width)
                                         .animation(.spring(response: 0.2, dampingFraction: 0.6, blendDuration: 0))
-                                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+                                        .transition(.asymmetric(insertion: settingsState.leftHandMode ? .move(edge: .leading) : .move(edge: .trailing), removal: .opacity))
                                 }
                                 else if quizState.timerStatus == .runout && quizState.results == nil {
                                     Text("time-over")
@@ -111,64 +111,122 @@ struct ColorQuizView: View {
                                 let startAngle = 90 - angleStep / 2
                                 
                                 ForEach(quizItem.answers.indices) { index in
-                                    PetalView(colorModel: quizItem.answers[index],
-                                              name: gameState.russianNames ? quizItem.answers[index].name : quizItem.answers[index].englishName,
-                                              showNames: false,
-                                              showColor: appActive || quizState.isAppActive && quizItem.answers[index] == quizItem.correct,
-                                              hightlight: lastAnswerIsCorrect ?? false && quizItem.answers[index] == quizItem.correct,
-                                              blink: lastAnswerIsCorrect == false && quizItem.answers[index] == quizItem.correct)
-                                        .frame(width: (flowerZoneDemention + 50) / CGFloat(quizItem.answers.count), height: flowerZoneDemention, alignment: .center)
-                                        .transition(.identity)
-                                        .modifier(
-                                            RollingModifier(toAngle: -startAngle + angleStep * Double(index) + newRotation, percentage: rotatePercentage, anchor: .bottom) {
-                                                
-                                                self.rotatePercentage = 0
-                                                
-                                                if quizState.isAppActive && quizState.quizActive && quizState.timerStatus == .stopped {
-                                                    quizState.runTimer()
-                                                }
-                                                
-                                                if swapCards && quizState.timerStatus != .runout {
-                                                    self.newRotation -= 120
-                                                    self.swapCards = false
-                                                    self.lastAnswerIsCorrect = nil
-                                                    if (self.answerTimer != nil) {
-                                                        self.answerTimer!.invalidate()
-                                                    }
-                                                    quizState.quizItemsList.removeFirst()
-                                                    quizState.nextQuizItem()
+                                    
+                                    if settingsState.leftHandMode {
+                                        PetalView(colorModel: quizItem.answers[index],
+                                                  name: gameState.russianNames ? quizItem.answers[index].name : quizItem.answers[index].englishName,
+                                                  showNames: false,
+                                                  showColor: appActive || quizState.isAppActive && quizItem.answers[index] == quizItem.correct,
+                                                  hightlight: lastAnswerIsCorrect ?? false && quizItem.answers[index] == quizItem.correct,
+                                                  blink: lastAnswerIsCorrect == false && quizItem.answers[index] == quizItem.correct)
+                                            .frame(width: (flowerZoneDemention + 50) / CGFloat(quizItem.answers.count), height: flowerZoneDemention, alignment: .center)
+                                            .transition(.identity)
+                                            .modifier(
+                                                RollingModifier(toAngle: startAngle - angleStep * Double(index) + newRotation, percentage: rotatePercentage, anchor: .bottom) {
                                                     
-                                                    withAnimation() {
-                                                        self.newRotation -= 120
-                                                        self.rotatePercentage = 1
+                                                    self.rotatePercentage = 0
+                                                    
+                                                    if quizState.isAppActive && quizState.quizActive && quizState.timerStatus == .stopped {
+                                                        quizState.runTimer()
+                                                    }
+                                                    
+                                                    if swapCards && quizState.timerStatus != .runout {
+                                                        self.newRotation += 120
+                                                        self.swapCards = false
+                                                        self.lastAnswerIsCorrect = nil
+                                                        if (self.answerTimer != nil) {
+                                                            self.answerTimer!.invalidate()
+                                                        }
+                                                        quizState.quizItemsList.removeFirst()
+                                                        quizState.nextQuizItem()
+                                                        
+                                                        withAnimation() {
+                                                            self.newRotation += 120
+                                                            self.rotatePercentage = 1
+                                                        }
+                                                    }
+                                                }
+                                            )
+                                            .onTapGesture {
+                                                if quizState.timerStatus != .runout && !swapCards {
+                                                    lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
+                                                    self.swapCards = true
+                                                    
+                                                    if settingsState.tactileFeedback {
+                                                        let hapticImpact = UINotificationFeedbackGenerator()
+                                                        hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
+                                                    }
+                                                    
+                                                    answerTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
+                                                        withAnimation() {
+                                                            self.newRotation += 120
+                                                            self.rotatePercentage = 1
+                                                        }
                                                     }
                                                 }
                                             }
-                                        )
-                                        .onTapGesture {
-                                            if quizState.timerStatus != .runout && !swapCards {
-                                                lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
-                                                self.swapCards = true
-                                                
-                                                if settingsState.tactileFeedback {
-                                                    let hapticImpact = UINotificationFeedbackGenerator()
-                                                    hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
-                                                }
-                                                
-                                                answerTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
-                                                    withAnimation() {
+                                            .animation(Animation.easeInOut(duration: 0.15 + Double(quizItem.answers.count) * 0.1 - 0.1 * Double(index)).delay(0.1 * Double(index)), value: rotatePercentage)
+                                    }
+                                    else {
+                                        PetalView(colorModel: quizItem.answers[index],
+                                                  name: gameState.russianNames ? quizItem.answers[index].name : quizItem.answers[index].englishName,
+                                                  showNames: false,
+                                                  showColor: appActive || quizState.isAppActive && quizItem.answers[index] == quizItem.correct,
+                                                  hightlight: lastAnswerIsCorrect ?? false && quizItem.answers[index] == quizItem.correct,
+                                                  blink: lastAnswerIsCorrect == false && quizItem.answers[index] == quizItem.correct)
+                                            .frame(width: (flowerZoneDemention + 50) / CGFloat(quizItem.answers.count), height: flowerZoneDemention, alignment: .center)
+                                            .transition(.identity)
+                                            .modifier(
+                                                RollingModifier(toAngle: -startAngle + angleStep * Double(index) + newRotation, percentage: rotatePercentage, anchor: .bottom) {
+                                                    
+                                                    self.rotatePercentage = 0
+                                                    
+                                                    if quizState.isAppActive && quizState.quizActive && quizState.timerStatus == .stopped {
+                                                        quizState.runTimer()
+                                                    }
+                                                    
+                                                    if swapCards && quizState.timerStatus != .runout {
                                                         self.newRotation -= 120
-                                                        self.rotatePercentage = 1
+                                                        self.swapCards = false
+                                                        self.lastAnswerIsCorrect = nil
+                                                        if (self.answerTimer != nil) {
+                                                            self.answerTimer!.invalidate()
+                                                        }
+                                                        quizState.quizItemsList.removeFirst()
+                                                        quizState.nextQuizItem()
+                                                        
+                                                        withAnimation() {
+                                                            self.newRotation -= 120
+                                                            self.rotatePercentage = 1
+                                                        }
+                                                    }
+                                                }
+                                            )
+                                            .onTapGesture {
+                                                if quizState.timerStatus != .runout && !swapCards {
+                                                    lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
+                                                    self.swapCards = true
+                                                    
+                                                    if settingsState.tactileFeedback {
+                                                        let hapticImpact = UINotificationFeedbackGenerator()
+                                                        hapticImpact.notificationOccurred(lastAnswerIsCorrect! ? .success : .error)
+                                                    }
+                                                    
+                                                    answerTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
+                                                        withAnimation() {
+                                                            self.newRotation -= 120
+                                                            self.rotatePercentage = 1
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
-                                        .animation(Animation.easeInOut(duration: 0.15 + Double(quizItem.answers.count) * 0.1 - 0.1 * Double(index)).delay(0.1 * Double(index)), value: rotatePercentage)
+                                            .animation(Animation.easeInOut(duration: 0.15 + Double(quizItem.answers.count) * 0.1 - 0.1 * Double(index)).delay(0.1 * Double(index)), value: rotatePercentage)
+                                    }
                                 }
                             }
                             .transition(.opacity)
                             .frame(width: contentZone.size.width * 0.68, height: contentZone.size.height * 0.5, alignment: .bottom)
-                            .offset(x: contentZone.size.width * 0.5 - 10, y: -10)
+                            .offset(x: settingsState.leftHandMode ? -contentZone.size.width * 0.5 + 10 : contentZone.size.width * 0.5 - 10, y: -10)
                         }
                     }
                 }
@@ -177,6 +235,10 @@ struct ColorQuizView: View {
         }
         .onAppear() {
             quizState.startQuiz(cards: gameState.cardsList, hardness: gameState.hardness, russianNames: gameState.russianNames, runTimer: false)
+            
+            if settingsState.leftHandMode {
+                self.newRotation = -180
+            }
             
             withAnimation(.easeOut(duration: 0.4)) {
                 self.newRotation = 0
@@ -188,7 +250,7 @@ struct ColorQuizView: View {
                 self.rotatePercentage = 0
                 
                 withAnimation() {
-                    self.newRotation -= 120
+                    self.newRotation += settingsState.leftHandMode ? 120 : -120
                     self.rotatePercentage = 1
                 }
             }
@@ -228,6 +290,7 @@ struct GuessColorView_Previews: PreviewProvider {
                 ColorQuizView(debugMode: true)
                     .environmentObject(LearnAndQuizState(quizType: .colorQuiz))
                     .environmentObject(QuizResultsStore())
+                    .environmentObject(SettingsState())
             }
             .previewDevice(PreviewDevice(stringLiteral: device))
             .previewDisplayName(device)
