@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ColorQuizMainView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+        
+    @EnvironmentObject var settingsState: SettingsState
     
     @StateObject var gameState: LearnAndQuizState = LearnAndQuizState(quizType: .colorQuiz)
     @StateObject var resultState: QuizResultsStore = QuizResultsStore()
@@ -24,6 +26,7 @@ struct ColorQuizMainView: View {
                 case .prepare:
                     ColorQuizStartView()
                         .environmentObject(gameState)
+                        .environmentObject(settingsState)
                 case .learn:
                     LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                         .environmentObject(gameState)
@@ -31,6 +34,7 @@ struct ColorQuizMainView: View {
                     ColorQuizView(showColorNames: false, debugMode: false)
                         .environmentObject(gameState)
                         .environmentObject(resultState)
+                        .environmentObject(settingsState)
                         .transition(.opacity)
                 case .results:
                     QuizResultsView()
