@@ -34,10 +34,13 @@ struct InfoView: View {
                                 .font(.callout)
                                 .foregroundColor(.white)
                             
-//                            Text("additional-info-text")
-//                                .padding(.top, 16)
-//                                .font(.callout)
-//                                .foregroundColor(.white)
+                            // ToDo: Разблокировать по достижении > 1000 скачиваний :)
+                            /*
+                            Text("additional-info-text")
+                                .padding(.top, 16)
+                                .font(.callout)
+                                .foregroundColor(.white)
+                            */
                             
                             Rectangle()
                                 .fill(Color.init(hue: 0, saturation: 0, brightness: 0.25))
