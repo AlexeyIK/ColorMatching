@@ -32,8 +32,8 @@ struct StatsView: View {
                     
                     ScrollView(.vertical, showsIndicators: false) {
                         Group {
-                            StatItemView(caption: "Collected Соlor Coins:", value: String(playerStats[0].totalScore))
-                            StatItemView(caption: "Last game Color Coins:", value: String(playerStats[0].lastGameScore))
+                            StatItemView(caption: "Collected Соlor Coins:", value: String(playerStats[0].totalScore), flowerSign: true)
+                            StatItemView(caption: "Last game Color Coins:", value: String(playerStats[0].lastGameScore), flowerSign: true)
                             StatItemView(caption: "Total games finished:", value: String(playerStats[0].totalFinishedGames))
                             StatItemView(caption: "Guessed unique colors:", value: String(viewedColors.count))
                         }
@@ -54,7 +54,7 @@ struct StatsView: View {
                             StatItemView(caption: "Best Strike:", value: String(nameQuizStats[0].bestStrike))
                         }
                     }
-                    .frame(width: geometry.size.width * 0.75, alignment: .center)
+                    .frame(width: geometry.size.width * 0.85, alignment: .center)
                     
                     Spacer()
                 }

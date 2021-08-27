@@ -11,6 +11,7 @@ struct StatItemView: View {
     
     let caption: LocalizedStringKey
     let value: String
+    var flowerSign: Bool = false
     
     var body: some View {
         HStack {
@@ -21,12 +22,22 @@ struct StatItemView: View {
             
             Spacer()
             
-            Text(value)
-                .foregroundColor(.white)
-                .font(.body)
-                .fontWeight(.bold)
+            ZStack(alignment: Alignment(horizontal: .trailing, vertical: .center)) {
+                Text(value)
+                    .foregroundColor(.white)
+                    .font(.body)
+                    .fontWeight(.bold)
+            
+                if flowerSign {
+                    Image("iconColorCoin")
+                        .resizable()
+                        .frame(width: 18, height: 18, alignment: .center)
+                        .offset(x: 22)
+                }
+            }
         }
         .padding(.bottom, 4)
+        .padding(.horizontal, 22)
     }
 }
 
@@ -40,11 +51,11 @@ struct StatItemView_Previews: PreviewProvider {
             BackgroundView()
             
             VStack(spacing: 4) {
-                StatItemView(caption: "Collected Соlor Coins", value: "1807")
-                StatItemView(caption: "Guessed unique colors", value: "54")
-                StatItemView(caption: "Played games", value: "87")
+                StatItemView(caption: "Collected Соlor Coins:", value: "1807", flowerSign: true)
+                StatItemView(caption: "Guessed unique colors:", value: "57", flowerSign: true)
+                StatItemView(caption: "Played games:", value: "87")
             }
-            .frame(width: UIScreen.main.bounds.width * 0.65, alignment: .center)
+            .frame(width: UIScreen.main.bounds.width * 0.75, alignment: .center)
         }
     }
 }

@@ -59,7 +59,7 @@
 /* Statistics */
 "Stats" = "Статистика";
 "Collected Соlor Coins:" = "Собрано Color Coins:";
-"Last game Color Coins:" = "CC за прошлую игру:";
+"Last game Color Coins:" = "За прошлую игру:";
 "Total games finished:" = "Всего завершенных игр:";
 "Guessed unique colors:" = "Разгадано уникальных цветов:";
 

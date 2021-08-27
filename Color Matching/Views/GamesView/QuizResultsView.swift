@@ -13,6 +13,7 @@ struct QuizResultsView: View {
     
     @EnvironmentObject var gameState: LearnAndQuizState
     @EnvironmentObject var resultsStore: QuizResultsStore
+    @EnvironmentObject var menuState: MenuState
     
     @State var resultsCaptionOffset: CGFloat = -UIScreen.main.bounds.height * 0.5
     @State var scoreCaptionOffset: CGFloat = -UIScreen.main.bounds.width * 0.8
@@ -42,7 +43,6 @@ struct QuizResultsView: View {
                     .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
                     .transition(.identity)
             } else {
-//                Text("You guessed \(resultsStore.quizResults.correctAnswers) of \(resultsStore.quizResults.cardsCount) \(resultsStore.quizResults.cardsCount > 1 ? "cards" : "card" )")
                 Text("You guessed \(resultsStore.quizResults.correctAnswers) of \(resultsStore.quizResults.cardsCount) card(s)")
                     .foregroundColor(.white)
                     .font(.title2)
@@ -52,13 +52,20 @@ struct QuizResultsView: View {
             }
         
             VStack(spacing: 12) {
-                Text("\(resultsStore.quizResults.scoreEarned > 0 ? "+" : "")\(resultsStore.quizResults.scoreEarned - resultsStore.quizResults.strikeBonus) CC")
-                    .foregroundColor(.white)
-                    .fontWeight(.bold)
-                    .font(.largeTitle)
-                    .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-                    .offset(x: scoreCaptionOffset)
-                    .animation(Animation.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0).delay(0.6), value: scoreCaptionOffset)
+                HStack {
+                    Text("\(resultsStore.quizResults.scoreEarned > 0 ? "+" : "")\(resultsStore.quizResults.scoreEarned - resultsStore.quizResults.strikeBonus)")
+                        .foregroundColor(.white)
+                        .fontWeight(.bold)
+                        .font(.largeTitle)
+                        .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
+                        .offset(x: scoreCaptionOffset)
+                    
+                    Image("iconColorCoin")
+                        .resizable()
+                        .frame(width: 28, height: 28, alignment: .center)
+                        .offset(x: -scoreCaptionOffset, y: 0)
+                }
+                .animation(Animation.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0).delay(0.6), value: scoreCaptionOffset)
                 
                 if (resultsStore.quizResults.strikeBonus > 0) {
                     Text("\(resultsStore.quizResults.strikeMultiplier) strike-bonus")
@@ -69,15 +76,21 @@ struct QuizResultsView: View {
                         .scaleEffect(bonusScale)
                         .animation(Animation.spring(response: 0.2, dampingFraction: 0.3, blendDuration: 0).delay(1.25), value: bonusScale)
                     
-                    Text("= \(resultsStore.quizResults.scoreEarned) CC")
-                        .foregroundColor(.white)
-                        .fontWeight(.bold)
-                        .font(.largeTitle)
-                        .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
-                        .offset(x: totalCaptionOffset)
-                        .animation(Animation.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0).delay(2), value: totalCaptionOffset)
+                    HStack {
+                        Text("= \(resultsStore.quizResults.scoreEarned)")
+                            .foregroundColor(.white)
+                            .fontWeight(.bold)
+                            .font(.largeTitle)
+                            .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
+                            .offset(x: totalCaptionOffset)
+                        
+                        Image("iconColorCoin")
+                            .resizable()
+                            .frame(width: 28, height: 28, alignment: .center)
+                            .offset(x: -totalCaptionOffset)
+                    }
+                    .animation(Animation.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0).delay(2), value: totalCaptionOffset)
                 }
-                
             }
             .padding()
             .frame(width: contentZone.width, alignment: .center)
@@ -91,6 +104,7 @@ struct QuizResultsView: View {
             Spacer()
             
             Button("main-menu-button") {
+                menuState.isMenuActive = true
                 presentationMode.wrappedValue.dismiss()
             }
             .buttonStyle(GoButton2())
