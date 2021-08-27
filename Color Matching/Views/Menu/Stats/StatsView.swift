@@ -54,7 +54,7 @@ struct StatsView: View {
                             StatItemView(caption: "Best Strike:", value: String(nameQuizStats[0].bestStrike))
                         }
                     }
-                    .frame(width: geometry.size.width * 0.82, alignment: .center)
+                    .frame(width: geometry.size.width * 0.85, alignment: .center)
                     
                     Spacer()
                 }
