@@ -60,10 +60,10 @@ struct QuizResultsView: View {
                         .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
                         .offset(x: scoreCaptionOffset)
                     
-                    Image("iconColorCoin")
+                    Image("iconColorCoin28")
                         .resizable()
                         .frame(width: 28, height: 28, alignment: .center)
-                        .offset(x: -scoreCaptionOffset, y: 0)
+                        .offset(x: -4 - scoreCaptionOffset, y: 0)
                 }
                 .animation(Animation.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0).delay(0.6), value: scoreCaptionOffset)
                 
@@ -84,10 +84,10 @@ struct QuizResultsView: View {
                             .shadow(color: Color.black.opacity(0.3), radius: 8, x: -1, y: -1)
                             .offset(x: totalCaptionOffset)
                         
-                        Image("iconColorCoin")
+                        Image("iconColorCoin28")
                             .resizable()
                             .frame(width: 28, height: 28, alignment: .center)
-                            .offset(x: -totalCaptionOffset)
+                            .offset(x: -4 - totalCaptionOffset)
                     }
                     .animation(Animation.spring(response: 0.2, dampingFraction: 0.4, blendDuration: 0).delay(2), value: totalCaptionOffset)
                 }
