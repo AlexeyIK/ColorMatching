@@ -22,7 +22,7 @@ struct ScorePointView: View {
                 .shadow(color: .gray, radius: 10, x: 0, y: 0)
                 .transition(.identity)
             
-            Image("iconColorCoin")
+            Image("iconColorCoin28")
                 .resizable()
                 .frame(width: 26, height: 26, alignment: .center)
                 .offset(x: -4, y: 0)

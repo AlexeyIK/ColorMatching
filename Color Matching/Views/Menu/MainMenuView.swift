@@ -49,8 +49,8 @@ struct MainMenuView: View {
     @FetchRequest(entity: ColorQuizStats.entity(), sortDescriptors: []) var colorQuizStats: FetchedResults<ColorQuizStats>
     
     let screenSize = UIScreen.main.bounds
-    let tabButtonsSize: CGFloat = 36
-    let selectedScaleFactor: CGFloat = 1.5
+    let tabButtonsSize: CGFloat = 54
+    let selectedDescaleFactor: CGFloat = 0.6
     let hapticImpact = UISelectionFeedbackGenerator()
     
     let tabButtons: [TabItem] = [TabItem(tab: .info, previewImg: "questionmark.circle.fill"), TabItem(tab: .mainmenu, previewImg: "play.circle.fill"), TabItem(tab: .stats, previewImg: "flag.circle.fill"), TabItem(tab: .settings, previewImg: "gearshape.fill")]
@@ -129,9 +129,8 @@ struct MainMenuView: View {
             if menuState.isMenuActive {
                 VStack {
                     Spacer()
-                    
                    
-                    HStack(alignment: .bottom, spacing: Locale.current.languageCode == "ru" ? screenSize.width / 7 : screenSize.width / 7) {
+                    HStack(alignment: .bottom, spacing: screenSize.width / 12) {
                         ForEach(tabButtons, id: \.self) { button in
                             Button(action: {
                                 menuState.selectedTab = button.tab
@@ -145,13 +144,13 @@ struct MainMenuView: View {
                                         .aspectRatio(1, contentMode: .fit)
                                         .frame(width: tabButtonsSize, height: tabButtonsSize)
                                         .foregroundColor(menuState.selectedTab == button.tab ? _globalMenuSelectedColor : _globalMenuUnselectedColor)
-                                        .scaleEffect(menuState.selectedTab == button.tab ? selectedScaleFactor : 1)
+                                        .scaleEffect(menuState.selectedTab == button.tab ? 1 : selectedDescaleFactor)
                                         .animation(.spring(response: 0.2, dampingFraction: 0.5, blendDuration: 0))
                                 }
                             })
                         }
                     }
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 10)
                     .transition(.move(edge: .leading))
                 }
                 .frame(width: UIScreen.main.bounds.width - 40, alignment: .center)
