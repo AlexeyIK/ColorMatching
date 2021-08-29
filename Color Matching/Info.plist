@@ -33,11 +33,9 @@
 	<dict>
 		<key>UIColorName</key>
 		<string>launchScreenBackground</string>
-		<key>UIImageName</key>
-		<string>loaderFlowerSVG</string>
-		<key>UIImageRespectsSafeAreaInsets</key>
-		<true/>
 	</dict>
+	<key>UILaunchStoryboardName</key>
+	<string>Launch Screen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
