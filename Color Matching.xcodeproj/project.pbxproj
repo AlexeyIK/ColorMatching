@@ -15,6 +15,7 @@
 		BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* colorsData.json */; };
 		BD29F2F826DB8B1A00578454 /* TactileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD29F2F726DB8B1A00578454 /* TactileGenerator.swift */; };
 		BD2E41E226B5415900D19D50 /* ScorePointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2E41E126B5415900D19D50 /* ScorePointView.swift */; };
+		BD32729826DBC8C600115E02 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD32729726DBC8C600115E02 /* Launch Screen.storyboard */; };
 		BD3A3F1826B5C680006C8CDC /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */; };
 		BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */; };
 		BD3CF1302692F07900FF0D68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD3CF12F2692F07900FF0D68 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		BD2978EA2697C4B100F19AEF /* colorsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colorsData.json; sourceTree = "<group>"; };
 		BD29F2F726DB8B1A00578454 /* TactileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TactileGenerator.swift; sourceTree = "<group>"; };
 		BD2E41E126B5415900D19D50 /* ScorePointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointView.swift; sourceTree = "<group>"; };
+		BD32729726DBC8C600115E02 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		BD3CF1282692F07700FF0D68 /* HueQueue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueQueue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color_MatchingApp.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				BD3CF1392692F07900FF0D68 /* Info.plist */,
 				BD3CF1362692F07900FF0D68 /* Color_Matching.xcdatamodeld */,
 				BD3CF1312692F07900FF0D68 /* Preview Content */,
+				BD32729726DBC8C600115E02 /* Launch Screen.storyboard */,
 			);
 			path = "Color Matching";
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD32729826DBC8C600115E02 /* Launch Screen.storyboard in Resources */,
 				BDF9516E26D162CC00563D81 /* Localizable.stringsdict in Resources */,
 				BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */,
 				BD5415F526D05AC90095391C /* Localizable.strings in Resources */,
