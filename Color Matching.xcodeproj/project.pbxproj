@@ -13,6 +13,7 @@
 		BD279F9726BC800D005C8E3D /* ColorQuizMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD279F9626BC800D005C8E3D /* ColorQuizMainView.swift */; };
 		BD279F9B26BC805F005C8E3D /* ColorQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD279F9A26BC805F005C8E3D /* ColorQuizView.swift */; };
 		BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */ = {isa = PBXBuildFile; fileRef = BD2978EA2697C4B100F19AEF /* colorsData.json */; };
+		BD29F2F826DB8B1A00578454 /* TactileGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD29F2F726DB8B1A00578454 /* TactileGenerator.swift */; };
 		BD2E41E226B5415900D19D50 /* ScorePointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD2E41E126B5415900D19D50 /* ScorePointView.swift */; };
 		BD3A3F1826B5C680006C8CDC /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */; };
 		BD3CF12C2692F07700FF0D68 /* Color_MatchingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD3CF12B2692F07700FF0D68 /* Color_MatchingApp.swift */; };
@@ -77,6 +78,7 @@
 		BD279F9626BC800D005C8E3D /* ColorQuizMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorQuizMainView.swift; sourceTree = "<group>"; };
 		BD279F9A26BC805F005C8E3D /* ColorQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorQuizView.swift; sourceTree = "<group>"; };
 		BD2978EA2697C4B100F19AEF /* colorsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = colorsData.json; sourceTree = "<group>"; };
+		BD29F2F726DB8B1A00578454 /* TactileGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TactileGenerator.swift; sourceTree = "<group>"; };
 		BD2E41E126B5415900D19D50 /* ScorePointView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScorePointView.swift; sourceTree = "<group>"; };
 		BD3A3F1726B5C680006C8CDC /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		BD3CF1282692F07700FF0D68 /* HueQueue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueQueue.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -216,8 +218,8 @@
 		BD279F9526BC7FE5005C8E3D /* ColorQuiz */ = {
 			isa = PBXGroup;
 			children = (
-				BD279F9626BC800D005C8E3D /* ColorQuizMainView.swift */,
 				BD3DB4BD26BF25F600763AAA /* ColorQuizStartView.swift */,
+				BD279F9626BC800D005C8E3D /* ColorQuizMainView.swift */,
 				BD279F9A26BC805F005C8E3D /* ColorQuizView.swift */,
 			);
 			path = ColorQuiz;
@@ -390,6 +392,7 @@
 				F1F3757726A75D4700FBA06A /* GameHelpers.swift */,
 				F169585126A9F89200E1E86A /* Math.swift */,
 				F125010E26A5819700B521F1 /* ColorConverter.swift */,
+				BD29F2F726DB8B1A00578454 /* TactileGenerator.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
 				BD6D1F5326BDE49C00CF34BF /* BackgroundView2.swift in Sources */,
 				BD3FB45126B1F25700BA5F3B /* TimerHelper.swift in Sources */,
+				BD29F2F826DB8B1A00578454 /* TactileGenerator.swift in Sources */,
 				BD6D1F5026BDE33300CF34BF /* PetalView.swift in Sources */,
 				BDE58DF426BB27CF00387545 /* QuizButtons.swift in Sources */,
 				F1D22CAD269BA14A009D4BD2 /* ColorCardView.swift in Sources */,

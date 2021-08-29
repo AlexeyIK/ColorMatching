@@ -20,11 +20,12 @@ struct NameQuizStartView: View {
     @State var hardnessChanged: Bool = false {
         didSet {
             if settingsState.tactileFeedback && oldValue == false {
-                let hapticImpact = UIImpactFeedbackGenerator(style: .light)
-                hapticImpact.impactOccurred()
+                hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
             }
         }
     }
+    
+    let hapticImpact = TactileGeneratorManager()
     
     let rememberColorPreview: ColorModel = colorsData.first(where: { $0.hexCode == "009DC4" }) ?? colorsData[330] // 009DC4, заменить на randomElement(), когда база пополнится
     let rememberColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "1CA9C9" }) ?? colorsData[1536] // 1CA9C9
@@ -85,12 +86,10 @@ struct NameQuizStartView: View {
                                 .foregroundColor(.white)
                                 .font(.title2)
                                 .fontWeight(.medium)
-    //                            .padding()
                                 .multilineTextAlignment(.trailing)
                                 .shadow(color: .black, radius: 3)
                                 .frame(width: 120, alignment: .center)
                                 .offset(x: card1Offset - contentZone.size.width * 0.25)
-//                                .transition(.move(edge: .leading))
                                 .animation(Animation.easeOut(duration: 0.3).delay(0.6), value: card1Offset)
                         }
                         
@@ -103,7 +102,6 @@ struct NameQuizStartView: View {
                             .offset(x: -card1Offset)
                             .transition(.scale)
                             .opacity(opacity1)
-//                            .animation(Animation.easeOut(duration: 0.3).delay(0.6), value: card1Offset)
                     }
                     
                     Spacer()
@@ -149,9 +147,8 @@ struct NameQuizStartView: View {
                     
                     HStack {
                         Button(action: {
-                            hardnessChanged = true
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
-                            hardnessChanged = false
+                            hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         }, label: {
                             Image(systemName: "chevron.left")
                                 .opacity(gameState.hardness == .easy ? 0.15 : 1)
@@ -164,9 +161,8 @@ struct NameQuizStartView: View {
                             .animation(.none)
                         
                         Button(action: {
-                            hardnessChanged = true
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
-                            hardnessChanged = false
+                            hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         }, label: {
                             Image(systemName: "chevron.right")
                                 .opacity(gameState.hardness == .hard ? 0.15 : 1)
@@ -201,6 +197,7 @@ struct NameQuizStartView: View {
                                 }))
                         
                     Button("go-button.main") {
+                        hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
@@ -208,8 +205,6 @@ struct NameQuizStartView: View {
                     .frame(width: contentZone.size.width, alignment: .center)
                     .transition(.identity)
                     .padding(.bottom, 50)
-                    
-//                    Spacer()
                 }
                 .onAppear() {
                     withAnimation(Animation.easeOut(duration: 0.3).delay(0.3)) {

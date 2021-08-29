@@ -28,10 +28,12 @@ struct ColorQuizStartView: View {
     @State var hardnessChanged: Bool = false {
         didSet {
             if settingsState.tactileFeedback && oldValue == false {
-                hapticImpact.impactOccurred()
+                hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
             }
         }
     }
+    
+    let hapticImpact = TactileGeneratorManager()
     
     let rememberColorPreview: ColorModel = colorsData.first(where: { $0.hexCode == "E97451" }) ?? colorsData[300] // E97451, заменить на randomElement(), когда база пополнится
     let rememberColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "E8793E" }) ?? colorsData[215] // E8793E
@@ -39,8 +41,6 @@ struct ColorQuizStartView: View {
     let guessColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "E8793E" }) ?? colorsData[215]
     let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
-    
-    let hapticImpact = UIImpactFeedbackGenerator(style: .light)
     
     var body: some View {
         ZStack {
@@ -164,9 +164,8 @@ struct ColorQuizStartView: View {
                     
                     HStack {
                         Button(action: {
-                            hardnessChanged = true
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
-                            hardnessChanged = false
+                            hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         }, label: {
                             Image(systemName: "chevron.left")
                                 .opacity(gameState.hardness == .easy ? 0.15 : 1)
@@ -179,9 +178,8 @@ struct ColorQuizStartView: View {
                             .animation(.none)
                         
                         Button(action: {
-                            hardnessChanged = true
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
-                            hardnessChanged = false
+                            hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         }, label: {
                             Image(systemName: "chevron.right")
                                 .opacity(gameState.hardness == .hard ? 0.15 : 1)
@@ -216,7 +214,7 @@ struct ColorQuizStartView: View {
                                 }))
                         
                     Button("go-button.main") {
-                        hapticImpact.impactOccurred()
+                        hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
@@ -224,8 +222,6 @@ struct ColorQuizStartView: View {
                     .frame(width: contentZone.size.width, alignment: .center)
                     .transition(.identity)
                     .padding(.bottom, 50)
-                    
-//                    Spacer()
                 }
                 .onAppear() {
                     colorRef = gameState.russianNames ? guessColorPreviewRus : guessColorPreview
