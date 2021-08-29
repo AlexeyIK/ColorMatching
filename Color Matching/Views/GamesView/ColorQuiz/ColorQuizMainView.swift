@@ -29,6 +29,7 @@ struct ColorQuizMainView: View {
                 case .learn:
                     LearnDeckView(cardsState: Array(repeating: CardState(), count: gameState.cardsCount))
                         .environmentObject(gameState)
+                        .environmentObject(settingsState)
                 case .quiz:
                     ColorQuizView(showColorNames: false, debugMode: false)
                         .environmentObject(gameState)
@@ -40,6 +41,7 @@ struct ColorQuizMainView: View {
                         .environmentObject(menuState)
                         .environmentObject(gameState)
                         .environmentObject(resultState)
+                        .environmentObject(settingsState)
                         .transition(.opacity)
             }
         }
