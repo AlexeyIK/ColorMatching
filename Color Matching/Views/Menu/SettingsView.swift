@@ -42,7 +42,7 @@ class SettingsState: ObservableObject {
     @Published var colorsLang: ColorLang = ColorLang(rawValue: UserDefaults.standard.string(forKey: "colorsLang") ?? "") ?? .english  {
         didSet {
             settingsChanged = true
-            UserDefaults.standard.set(colorsLang, forKey: "colorsLang")
+            UserDefaults.standard.set(colorsLang.rawValue, forKey: "colorsLang")
         }
     }
     
