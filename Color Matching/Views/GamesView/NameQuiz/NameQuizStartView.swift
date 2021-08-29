@@ -15,6 +15,15 @@ struct NameQuizStartView: View {
     @State var card2Offset: CGFloat = UIScreen.main.bounds.width * 0.6
     @State var opacity1: Double = 0
     @State var opacity2: Double = 0
+    @State var dragTranslationX: CGFloat = 0
+    @State var hardnessChanged: Bool = false {
+        didSet {
+            if oldValue == false {
+                let hapticImpact = UINotificationFeedbackGenerator()
+                hapticImpact.notificationOccurred(.success)
+            }
+        }
+    }
     
     let rememberColorPreview: ColorModel = colorsData.first(where: { $0.hexCode == "009DC4" }) ?? colorsData[330] // 009DC4, заменить на randomElement(), когда база пополнится
     let rememberColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "1CA9C9" }) ?? colorsData[1536] // 1CA9C9
@@ -150,6 +159,22 @@ struct NameQuizStartView: View {
                             .font(contentZone.size.height >= 570 ? .system(size: 18) : .system(size: 16))
                             .transition(.identity)
                             .animation(.none)
+                            .gesture(DragGesture()
+                                        .onChanged({ value in
+                                            dragTranslationX = value.translation.width
+                                            
+                                            if dragTranslationX > 40 && !hardnessChanged {
+                                                gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
+                                                hardnessChanged = true
+                                            }
+                                            else if dragTranslationX < -40 && !hardnessChanged  {
+                                                gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
+                                                hardnessChanged = true
+                                            }
+                                        })
+                                        .onEnded({ _ in
+                                            hardnessChanged = false
+                                        }))
                         
                         Button(action: {
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
