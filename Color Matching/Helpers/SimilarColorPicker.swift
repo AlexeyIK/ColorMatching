@@ -80,7 +80,7 @@ public class SimilarColorPicker {
                                                        satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
                                                        valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange)
                 
-                print("new sim color: \(newColorHSV)")
+//                print("new sim color: \(newColorHSV)")
                 
                 colorResult = ColorModel(id: -variations, name: "-", englishName: "-", hexCode: "", colorRGB: HSVConvertToRGB(newColorHSV), colorHSV: newColorHSV, difficulty: .unknown, isGuessed: false)
             }
@@ -98,8 +98,6 @@ public class SimilarColorPicker {
                 similarColors.append(simColor)
             }
         }
-        
-//        print("new hues: \(similarColor1?.colorHSV[0]), \(similarColor2?.colorHSV[0]); new saturations: \(similarColor1?.colorHSV[1]), \(similarColor2?.colorHSV[1]), new values: \(similarColor1?.colorHSV[2]), \(similarColor2?.colorHSV[2])")
         
         if packRef {
             similarColors.append(colorRef)
@@ -124,7 +122,6 @@ public class SimilarColorPicker {
         let newValue = Int.random(in: valueRef - valOffset...valueRef + valOffset).clamped(to: valueClamp)
         
         return [newHue, newSaturation, newValue]
-//        return ConvertColor(colorType: .hsba, value: (newHue, newSaturation, newValue, 1))
     }
     
     private func findSimilarColorByOffset(hue refHue: Int, saturation satRef: Int, value valueRef: Int,
@@ -184,7 +181,7 @@ public class SimilarColorPicker {
                 newHue = Int((Angle.degrees(Double(newHue) - 1)).degrees)
             }
         } while similarColor == nil && iterations < 30
-        
+
 //        print("iterations: \(iterations)")
         
         return similarColor
