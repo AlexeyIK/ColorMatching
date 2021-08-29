@@ -14,6 +14,7 @@ struct QuizResultsView: View {
     @EnvironmentObject var gameState: LearnAndQuizState
     @EnvironmentObject var resultsStore: QuizResultsStore
     @EnvironmentObject var menuState: MenuState
+    @EnvironmentObject var settingsState: SettingsState
     
     @State var resultsCaptionOffset: CGFloat = -UIScreen.main.bounds.height * 0.5
     @State var scoreCaptionOffset: CGFloat = -UIScreen.main.bounds.width * 0.8
@@ -21,6 +22,8 @@ struct QuizResultsView: View {
     @State var totalCaptionOffset: CGFloat = UIScreen.main.bounds.width * 0.8
     @State var isVisible: Bool = false
     @State var hueAngle: Double = 0.0
+    
+    let tactileFeedback = TactileGeneratorManager()
     
     var repeatingLinesAnimation: Animation {
         Animation
@@ -105,6 +108,7 @@ struct QuizResultsView: View {
             
             Button("main-menu-button") {
                 menuState.isMenuActive = true
+                tactileFeedback.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                 presentationMode.wrappedValue.dismiss()
             }
             .buttonStyle(GoButton2())
@@ -114,6 +118,7 @@ struct QuizResultsView: View {
             .animation(Animation.easeOut(duration: 0.3).delay(0.3))
             
             Button("next-game-button") {
+                tactileFeedback.generateFeedback(style: .medium, if: settingsState.tactileFeedback)
                 gameState.restartGameSession()
             }
             .buttonStyle(GoButton2())

@@ -15,11 +15,14 @@ struct CardState {
 struct LearnDeckView: View {
     
     @EnvironmentObject var gameState: LearnAndQuizState
+    @EnvironmentObject var settingsState: SettingsState
     
     @State var needToDropCard: Bool = false
     @State var showColorNames: Bool = true
     @State var cardsState: [CardState] = Array(repeating: CardState(), count: 10)
     @State var currentIndex: Int = 0
+    
+    let tactileFeedback = TactileGeneratorManager()
     
     let swipeTreshold: CGFloat = UIScreen.main.bounds.width / 4
     
@@ -119,6 +122,7 @@ struct LearnDeckView: View {
                     .animation(Animation.spring(response: 0.4, dampingFraction: 0.6, blendDuration: 0).delay(0.3))
                 
                 Button("go-button.second") {
+                    tactileFeedback.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                     gameState.activeGameMode = .quiz
                 }
                 .buttonStyle(GoButton2())
