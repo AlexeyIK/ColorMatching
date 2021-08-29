@@ -27,9 +27,8 @@ struct ColorQuizStartView: View {
     @State var dragTranslationX: CGFloat = 0
     @State var hardnessChanged: Bool = false {
         didSet {
-            if oldValue == false {
-                let hapticImpact = UINotificationFeedbackGenerator()
-                hapticImpact.notificationOccurred(.success)
+            if settingsState.tactileFeedback && oldValue == false {
+                hapticImpact.impactOccurred()
             }
         }
     }
@@ -40,6 +39,8 @@ struct ColorQuizStartView: View {
     let guessColorPreviewRus: ColorModel = colorsData.first(where: { $0.hexCode == "E8793E" }) ?? colorsData[215]
     let aspectRatio: CGFloat = 0.75
     let answersColor: Color = Color.init(hue: 0, saturation: 0, brightness: 0.43)
+    
+    let hapticImpact = UIImpactFeedbackGenerator(style: .light)
     
     var body: some View {
         ZStack {
@@ -163,7 +164,9 @@ struct ColorQuizStartView: View {
                     
                     HStack {
                         Button(action: {
+                            hardnessChanged = true
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
+                            hardnessChanged = false
                         }, label: {
                             Image(systemName: "chevron.left")
                                 .opacity(gameState.hardness == .easy ? 0.15 : 1)
@@ -174,25 +177,11 @@ struct ColorQuizStartView: View {
                             .font(contentZone.size.height >= 570 ? .system(size: 18) : .system(size: 16))
                             .transition(.identity)
                             .animation(.none)
-                            .gesture(DragGesture()
-                                        .onChanged({ value in
-                                            dragTranslationX = value.translation.width
-                                            
-                                            if dragTranslationX > 40 && !hardnessChanged {
-                                                gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
-                                                hardnessChanged = true
-                                            }
-                                            else if dragTranslationX < -40 && !hardnessChanged  {
-                                                gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
-                                                hardnessChanged = true
-                                            }
-                                        })
-                                        .onEnded({ _ in
-                                            hardnessChanged = false
-                                        }))
                         
                         Button(action: {
+                            hardnessChanged = true
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
+                            hardnessChanged = false
                         }, label: {
                             Image(systemName: "chevron.right")
                                 .opacity(gameState.hardness == .hard ? 0.15 : 1)
@@ -209,8 +198,25 @@ struct ColorQuizStartView: View {
                     .frame(minWidth: 50, idealWidth: 150, maxWidth: 230, alignment: .center)
                     .animation(.none)
                     .frame(width: contentZone.size.width, alignment: .center)
+                    .gesture(DragGesture()
+                                .onChanged({ value in
+                                    dragTranslationX = value.translation.width
+                                    
+                                    if dragTranslationX > 40 && !hardnessChanged && gameState.hardness != .easy {
+                                        gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
+                                        hardnessChanged = true
+                                    }
+                                    else if dragTranslationX < -40 && !hardnessChanged && gameState.hardness != .hard {
+                                        gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
+                                        hardnessChanged = true
+                                    }
+                                })
+                                .onEnded({ _ in
+                                    hardnessChanged = false
+                                }))
                         
                     Button("go-button.main") {
+                        hapticImpact.impactOccurred()
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
