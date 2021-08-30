@@ -91,7 +91,7 @@ struct LearnDeckView: View {
                                             })
                                 )
                                 .onTapGesture {
-                                    SoundPlayer.shared.playSound(type: .tap)
+                                    SoundPlayer.shared.playSound(type: .tapHard)
                                 }
                         }
                     }
