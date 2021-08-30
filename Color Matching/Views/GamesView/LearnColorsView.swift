@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct CardState {
     var posX: CGFloat = 0
@@ -70,11 +71,15 @@ struct LearnDeckView: View {
                                             })
                                             .onEnded({ value in
                                                 if value.translation.width > swipeTreshold {
+                                                    SoundPlayer.shared.playSound(type: .dragToRight)
+                                                    
                                                     withAnimation() {
                                                         currentIndex += 1
                                                     }
                                                 }
                                                 else if value.translation.width < -swipeTreshold {
+                                                    SoundPlayer.shared.playSound(type: .dragToLeft)
+                                                    
                                                     withAnimation() {
                                                         currentIndex += 1
                                                     }
@@ -85,6 +90,9 @@ struct LearnDeckView: View {
                                                 }
                                             })
                                 )
+                                .onTapGesture {
+                                    SoundPlayer.shared.playSound(type: .tap)
+                                }
                         }
                     }
                 }
@@ -123,6 +131,7 @@ struct LearnDeckView: View {
                 
                 Button("go-button.second") {
                     tactileFeedback.generateFeedback(style: .light, if: settingsState.tactileFeedback)
+                    SoundPlayer.shared.playSound(type: .click)
                     gameState.activeGameMode = .quiz
                 }
                 .buttonStyle(GoButton2())

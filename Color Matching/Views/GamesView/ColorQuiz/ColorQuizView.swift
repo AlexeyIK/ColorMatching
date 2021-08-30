@@ -151,6 +151,7 @@ struct ColorQuizView: View {
                                                 if quizState.timerStatus != .runout && !swapCards {
                                                     lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                     self.swapCards = true
+                                                    SoundPlayer.shared.playSound(type: .click2)
                                                     
                                                     if settingsState.tactileFeedback {
                                                         let hapticImpact = UINotificationFeedbackGenerator()
@@ -206,6 +207,7 @@ struct ColorQuizView: View {
                                                 if quizState.timerStatus != .runout && !swapCards {
                                                     lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                     self.swapCards = true
+                                                    SoundPlayer.shared.playSound(type: .click2)
                                                     
                                                     if settingsState.tactileFeedback {
                                                         let hapticImpact = UINotificationFeedbackGenerator()

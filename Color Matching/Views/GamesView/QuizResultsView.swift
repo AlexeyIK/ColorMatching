@@ -109,6 +109,7 @@ struct QuizResultsView: View {
             Button("main-menu-button") {
                 menuState.isMenuActive = true
                 tactileFeedback.generateFeedback(style: .light, if: settingsState.tactileFeedback)
+                SoundPlayer.shared.playSound(type: .click)
                 presentationMode.wrappedValue.dismiss()
             }
             .buttonStyle(GoButton2())
@@ -119,6 +120,7 @@ struct QuizResultsView: View {
             
             Button("next-game-button") {
                 tactileFeedback.generateFeedback(style: .medium, if: settingsState.tactileFeedback)
+                SoundPlayer.shared.playSound(type: .click)
                 gameState.restartGameSession()
             }
             .buttonStyle(GoButton2())
