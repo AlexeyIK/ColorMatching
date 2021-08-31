@@ -113,6 +113,8 @@ struct NameQuizView: View {
                                         self.needToShowAnswer = true
                                         self.userAnswer = answer.id
                                         
+                                        SoundPlayer.shared.playSound(type: .click2)
+                                        
                                         if lastAnswerIsCorrect == false {
                                             withAnimation() {
                                                 self.highlightOpacity = 0.25

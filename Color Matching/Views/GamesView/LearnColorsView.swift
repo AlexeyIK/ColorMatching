@@ -64,6 +64,10 @@ struct LearnDeckView: View {
                                 // обработка драгов
                                 .gesture(DragGesture()
                                             .onChanged({ value in
+                                                if (self.cardsState[i].posX == 0) {
+                                                    SoundPlayer.shared.playSound(type: .tapHard)
+                                                }
+                                                
                                                 if (currentIndex == i) {
                                                     self.cardsState[i].posX = value.translation.width
                                                     self.cardsState[i].angle = Double(value.translation.width / 50)
@@ -90,9 +94,6 @@ struct LearnDeckView: View {
                                                 }
                                             })
                                 )
-                                .onTapGesture {
-                                    SoundPlayer.shared.playSound(type: .tapHard)
-                                }
                         }
                     }
                 }
