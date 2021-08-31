@@ -198,6 +198,7 @@ struct NameQuizStartView: View {
                         
                     Button("go-button.main") {
                         hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
+                        SoundPlayer.shared.playSound(type: .click)
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
