@@ -11,9 +11,11 @@ func GetSequentalNumOfCards(cardsArray: [ColorModel], numberOfCards: Int = 10) -
     
     var newCardList: [ColorModel] = []
     
-    for _ in 0..<numberOfCards {
+    while newCardList.count < numberOfCards {
         let rndCard = cardsArray[Int.random(in: 0..<cardsArray.count)]
-        newCardList.append(rndCard)
+        if !newCardList.contains(rndCard) {
+            newCardList.append(rndCard)
+        }
     }
     
     return newCardList
