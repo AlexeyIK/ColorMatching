@@ -359,7 +359,6 @@
 				BD5B880C26DD755400231F10 /* tap.mp3 */,
 				BD5B880926DD74C700231F10 /* click.mp3 */,
 				BD5B881C26DD7FF800231F10 /* click2.mp3 */,
-				BD5B880626DD6FAB00231F10 /* SoundPlayer.swift */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -420,6 +419,7 @@
 		F1C519D8269DE1730096B9B4 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BD5B880626DD6FAB00231F10 /* SoundPlayer.swift */,
 				BD3FB45026B1F25700BA5F3B /* TimerHelper.swift */,
 				F1E28E0526AB0D1200B62054 /* SimilarColorPicker.swift */,
 				F1E28E0A26AB0D6000B62054 /* ColorsPickerHelper.swift */,
@@ -720,7 +720,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
 				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
@@ -730,7 +730,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.8;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alex-n-dave.color-matching";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -744,7 +744,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
 				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
@@ -754,7 +754,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.8;
+				MARKETING_VERSION = 0.9;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alex-n-dave.color-matching";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
