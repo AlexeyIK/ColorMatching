@@ -20,6 +20,8 @@ public class SimilarColorPicker {
         
         var similarColors: [ColorModel] = []
         
+//        print("Saturation clamp: \(hardnessCardPickerParameters[hardness]!.saturationRange) | Value clamp: \(hardnessCardPickerParameters[hardness]!.valueRange)")
+        
         for i in 0..<variations {
             var hueStep: Int = 0
             var hueOffset: Int = 0
@@ -77,8 +79,8 @@ public class SimilarColorPicker {
                                                        saturation: colorRef.colorHSV[1]!,
                                                        value: colorRef.colorHSV[2]!,
                                                        hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                       satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
-                                                       valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange)
+                                                       satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[hardness]!.saturationRange,
+                                                       valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[hardness]!.valueRange)
                 
 //                print("new sim color: \(newColorHSV)")
                 
@@ -89,12 +91,14 @@ public class SimilarColorPicker {
                                                      saturation: colorRef.colorHSV[1]!,
                                                      value: colorRef.colorHSV[2]!,
                                                      hueOffset: hueOffset, satOffset: saturationOffset, valOffset: valueOffset,
-                                                     satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.saturationRange,
-                                                     valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[.easy]!.valueRange,
+                                                     satClamp: noClamp ? 0...100 : hardnessCardPickerParameters[hardness]!.saturationRange,
+                                                     valueClamp: noClamp ? 0...100 : hardnessCardPickerParameters[hardness]!.valueRange,
                                                      isRussianOnly: isRussianOnly)
             }
+            
             // если цвет получен, то добавляем его в выдачу
             if let simColor = colorResult {
+//                print("Sim color: \(simColor.colorHSV)")
                 similarColors.append(simColor)
             }
         }

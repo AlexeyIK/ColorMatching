@@ -20,8 +20,8 @@ struct HardnessParams {
 }
 
 let hardnessCardPickerParameters: [Hardness: HardnessParams] = [
-    .easy: HardnessParams(saturationRange: 80...100, valueRange: 80...100),
-    .normal: HardnessParams(saturationRange: 60...100, valueRange: 60...100),
-    .hard: HardnessParams(saturationRange: 60...100, valueRange: 40...100),
+    .easy: HardnessParams(saturationRange: 80...100, valueRange: 20...85),
+    .normal: HardnessParams(saturationRange: 60...100, valueRange: 15...90),
+    .hard: HardnessParams(saturationRange: 60...100, valueRange: 10...95),
     .hell: HardnessParams(saturationRange: 5...10, valueRange: 10...95) // поправить позже
 ]

@@ -226,7 +226,7 @@ struct ColorQuizStartView: View {
                 }
                 .onAppear() {
                     colorRef = gameState.russianNames ? guessColorPreviewRus : guessColorPreview
-                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
+                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
                     
                     withAnimation(Animation.easeOut(duration: 0.3).delay(0.3)) {
                         card1Offset = 0

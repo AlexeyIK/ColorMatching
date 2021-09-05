@@ -90,7 +90,7 @@ class ColorQuizState: ObservableObject {
         
         availableCards.forEach { (card) in
             let correctColor = card
-            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: variationsNum, withRef: true, noClamp: true, isRussianOnly: russianNames, useTrueColors: true))
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: variationsNum, withRef: true, noClamp: false, isRussianOnly: russianNames, useTrueColors: true))
             quizItemsList.append(QuizItem(answers: colorVariants, correct: correctColor))
         }
     }
