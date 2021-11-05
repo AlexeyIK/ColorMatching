@@ -48,6 +48,9 @@
 		BD6D1F5026BDE33300CF34BF /* PetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6D1F4F26BDE33300CF34BF /* PetalView.swift */; };
 		BD6D1F5326BDE49C00CF34BF /* BackgroundView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6D1F5226BDE49C00CF34BF /* BackgroundView2.swift */; };
 		BD6EC87226B9CAAF001B563E /* NameQuizStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6EC87126B9CAAF001B563E /* NameQuizStartView.swift */; };
+		BD70263726E55FCD005E70DE /* swoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD70263626E55FCD005E70DE /* swoosh.mp3 */; };
+		BD70263A26E564E1005E70DE /* spring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD70263926E564E0005E70DE /* spring.mp3 */; };
+		BD70263D26E565DB005E70DE /* swoosh-spring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD70263C26E565DB005E70DE /* swoosh-spring.mp3 */; };
 		BD79806126BECC4A00261004 /* NameQuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD79806026BECC4A00261004 /* NameQuizDataManager.swift */; };
 		BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */; };
 		BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */; };
@@ -129,6 +132,9 @@
 		BD6D1F4F26BDE33300CF34BF /* PetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetalView.swift; sourceTree = "<group>"; };
 		BD6D1F5226BDE49C00CF34BF /* BackgroundView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView2.swift; sourceTree = "<group>"; };
 		BD6EC87126B9CAAF001B563E /* NameQuizStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuizStartView.swift; sourceTree = "<group>"; };
+		BD70263626E55FCD005E70DE /* swoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = swoosh.mp3; sourceTree = "<group>"; };
+		BD70263926E564E0005E70DE /* spring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = spring.mp3; sourceTree = "<group>"; };
+		BD70263C26E565DB005E70DE /* swoosh-spring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "swoosh-spring.mp3"; sourceTree = "<group>"; };
 		BD79806026BECC4A00261004 /* NameQuizDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuizDataManager.swift; sourceTree = "<group>"; };
 		BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizColorPickView.swift; sourceTree = "<group>"; };
@@ -352,6 +358,7 @@
 		BD5B880226DD6EE400231F10 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				BD70263626E55FCD005E70DE /* swoosh.mp3 */,
 				BD5B881926DD7B7600231F10 /* clock_tiking.mp3 */,
 				BD5B881526DD78AE00231F10 /* tap_hard.mp3 */,
 				BD5B882926DD856500231F10 /* drag_to_left.mp3 */,
@@ -359,6 +366,8 @@
 				BD5B880C26DD755400231F10 /* tap.mp3 */,
 				BD5B880926DD74C700231F10 /* click.mp3 */,
 				BD5B881C26DD7FF800231F10 /* click2.mp3 */,
+				BD70263926E564E0005E70DE /* spring.mp3 */,
+				BD70263C26E565DB005E70DE /* swoosh-spring.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -492,12 +501,15 @@
 			files = (
 				BD5B881626DD78AE00231F10 /* tap_hard.mp3 in Resources */,
 				BD32729826DBC8C600115E02 /* Launch Screen.storyboard in Resources */,
+				BD70263D26E565DB005E70DE /* swoosh-spring.mp3 in Resources */,
 				BD5B882626DD855200231F10 /* drag_to_right.mp3 in Resources */,
 				BDF9516E26D162CC00563D81 /* Localizable.stringsdict in Resources */,
 				BD5B880D26DD755400231F10 /* tap.mp3 in Resources */,
+				BD70263726E55FCD005E70DE /* swoosh.mp3 in Resources */,
 				BD2978EB2697C4B100F19AEF /* colorsData.json in Resources */,
 				BD5B881D26DD7FF800231F10 /* click2.mp3 in Resources */,
 				BD5B881A26DD7B7600231F10 /* clock_tiking.mp3 in Resources */,
+				BD70263A26E564E1005E70DE /* spring.mp3 in Resources */,
 				BD5415F526D05AC90095391C /* Localizable.strings in Resources */,
 				BD5B880A26DD74C700231F10 /* click.mp3 in Resources */,
 				BD3CF1332692F07900FF0D68 /* Preview Assets.xcassets in Resources */,
