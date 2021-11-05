@@ -17,6 +17,9 @@ class SoundPlayer {
         case tapHard = "tap_hard"
         case click = "click"
         case click2 = "click2"
+        case swoosh = "swoosh"
+        case spring = "spring"
+        case swooshSpring = "swoosh-spring"
     }
     
     static let shared = SoundPlayer()
@@ -25,10 +28,18 @@ class SoundPlayer {
     var clockPlayer: AVAudioPlayer?
     
     init() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("coundn't initialize AVAudioSession settings")
+        }
+        
         let path = Bundle.main.path(forResource: "clock_tiking", ofType: "mp3")!
         
         do {
             clockPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            clockPlayer?.prepareToPlay()
         }
         catch {
             print("coundn't get clock sound")
@@ -44,6 +55,20 @@ class SoundPlayer {
             soundPlayer?.play()
         } catch {
             print("coundn't get sound file")
+        }
+    }
+    
+    public func playSoundAfterSeconds(type: SoundType, timer: Float) {
+        Timer.scheduledTimer(withTimeInterval: TimeInterval(timer), repeats: false) { _ in
+            let path = Bundle.main.path(forResource: type.rawValue, ofType: "mp3")!
+            let url = URL(fileURLWithPath: path)
+            
+            do {
+                self.soundPlayer = try AVAudioPlayer(contentsOf: url)
+                self.soundPlayer?.play()
+            } catch {
+                print("coundn't get sound file")
+            }
         }
     }
     
