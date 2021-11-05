@@ -210,6 +210,8 @@ struct MainMenuView: View {
             }
 
             CoreDataManager.shared.showAllReadings()
+            
+            SoundPlayer.shared
         }
     }
 }

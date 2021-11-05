@@ -138,6 +138,13 @@ struct QuizResultsView: View {
                 self.scoreCaptionOffset = 0
                 self.bonusScale = 1
                 self.totalCaptionOffset = 0
+                
+                SoundPlayer.shared.playSoundAfterSeconds(type: .swooshSpring, timer: 0.5)
+                
+                if resultsStore.quizResults.strikeBonus > 0 {
+                    SoundPlayer.shared.playSoundAfterSeconds(type: .spring, timer: 1.4)
+                    SoundPlayer.shared.playSoundAfterSeconds(type: .swooshSpring, timer: 1.9)
+                }
             }
         }
     }
