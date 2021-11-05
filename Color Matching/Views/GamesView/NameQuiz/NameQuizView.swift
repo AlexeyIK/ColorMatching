@@ -113,9 +113,13 @@ struct NameQuizView: View {
                                         self.needToShowAnswer = true
                                         self.userAnswer = answer.id
                                         
-                                        SoundPlayer.shared.playSound(type: .click2)
+//                                        SoundPlayer.shared.playSound(type: .click2)
                                         
-                                        if lastAnswerIsCorrect == false {
+                                        if lastAnswerIsCorrect == true {
+                                            SoundPlayer.shared.playSound(type: .answerCorrect)
+                                        } else {
+                                            SoundPlayer.shared.playSound(type: .answerWrong)
+                                            
                                             withAnimation() {
                                                 self.highlightOpacity = 0.25
                                             }

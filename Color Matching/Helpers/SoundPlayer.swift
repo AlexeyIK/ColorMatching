@@ -20,12 +20,16 @@ class SoundPlayer {
         case swoosh = "swoosh"
         case spring = "spring"
         case swooshSpring = "swoosh-spring"
+        case answerCorrect = "answer-correct"
+        case answerWrong = "answer-wrong"
+        case pop = "pop"
     }
     
     static let shared = SoundPlayer()
     
     var soundPlayer: AVAudioPlayer?
     var clockPlayer: AVAudioPlayer?
+    var strikeHitPlayer: AVAudioPlayer?
     
     init() {
         do {
@@ -35,15 +39,23 @@ class SoundPlayer {
             print("coundn't initialize AVAudioSession settings")
         }
         
-        let path = Bundle.main.path(forResource: "clock_tiking", ofType: "mp3")!
+        let clockSoundPath = Bundle.main.path(forResource: "clock_tiking", ofType: "mp3")!
+        let strikeSoundPath = Bundle.main.path(forResource: "strike", ofType: "mp3")!
         
         do {
-            clockPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
+            clockPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: clockSoundPath))
             clockPlayer?.prepareToPlay()
+            
+            strikeHitPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: strikeSoundPath))
+            strikeHitPlayer?.prepareToPlay()
         }
         catch {
-            print("coundn't get clock sound")
+            print("coundn't get clock or strike sound")
         }
+    }
+    
+    public func initialize() {
+        soundPlayer?.prepareToPlay()
     }
     
     public func playSound(type: SoundType) {
@@ -69,6 +81,12 @@ class SoundPlayer {
             } catch {
                 print("coundn't get sound file")
             }
+        }
+    }
+    
+    public func playStrikeHit(afterSeconds timer: Float) {
+        Timer.scheduledTimer(withTimeInterval: TimeInterval(timer), repeats: false) { _ in
+            self.strikeHitPlayer?.play()
         }
     }
     

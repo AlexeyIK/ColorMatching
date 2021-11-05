@@ -48,6 +48,7 @@ struct LearnAndQuizView: View {
         }
         .onAppear() {
             menuState.isMenuActive = false
+            SoundPlayer.shared.playSound(type: .click2)
         }
         .navigationBarItems(
             leading:

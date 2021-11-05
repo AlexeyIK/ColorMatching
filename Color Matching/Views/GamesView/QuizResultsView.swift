@@ -144,6 +144,7 @@ struct QuizResultsView: View {
                 if resultsStore.quizResults.strikeBonus > 0 {
                     SoundPlayer.shared.playSoundAfterSeconds(type: .spring, timer: 1.4)
                     SoundPlayer.shared.playSoundAfterSeconds(type: .swooshSpring, timer: 1.9)
+                    SoundPlayer.shared.playStrikeHit(afterSeconds: 1.2)
                 }
             }
         }
