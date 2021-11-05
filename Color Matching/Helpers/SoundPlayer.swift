@@ -27,6 +27,8 @@ class SoundPlayer {
     
     static let shared = SoundPlayer()
     
+    var soundsOff: Bool = false
+    
     var soundPlayer: AVAudioPlayer?
     var clockPlayer: AVAudioPlayer?
     var strikeHitPlayer: AVAudioPlayer?
@@ -59,6 +61,10 @@ class SoundPlayer {
     }
     
     public func playSound(type: SoundType) {
+        if soundsOff {
+            return
+        }
+        
         let path = Bundle.main.path(forResource: type.rawValue, ofType: "mp3")!
         let url = URL(fileURLWithPath: path)
         
@@ -71,6 +77,10 @@ class SoundPlayer {
     }
     
     public func playSoundAfterSeconds(type: SoundType, timer: Float) {
+        if soundsOff {
+            return
+        }
+        
         Timer.scheduledTimer(withTimeInterval: TimeInterval(timer), repeats: false) { _ in
             let path = Bundle.main.path(forResource: type.rawValue, ofType: "mp3")!
             let url = URL(fileURLWithPath: path)
@@ -85,12 +95,20 @@ class SoundPlayer {
     }
     
     public func playStrikeHit(afterSeconds timer: Float) {
+        if soundsOff {
+            return
+        }
+        
         Timer.scheduledTimer(withTimeInterval: TimeInterval(timer), repeats: false) { _ in
             self.strikeHitPlayer?.play()
         }
     }
     
     public func playClockTiking() {
+        if soundsOff {
+            return
+        }
+        
         if let clockPlaying = clockPlayer?.isPlaying {
             if !clockPlaying {
                 clockPlayer?.play()

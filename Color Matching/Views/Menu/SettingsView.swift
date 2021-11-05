@@ -35,6 +35,7 @@ class SettingsState: ObservableObject {
     @Published var sounds: Bool = UserDefaults.standard.bool(forKey: "sounds") {
         didSet {
             settingsChanged = true
+            SoundPlayer.shared.soundsOff = !sounds
             UserDefaults.standard.set(sounds, forKey: "sounds")
         }
     }
