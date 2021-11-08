@@ -215,7 +215,7 @@ struct MainMenuView: View {
             SoundPlayer.shared.soundsOff = !settingsState.sounds
         }
         .onChange(of: menuState.selectedTab, perform: { value in
-            SoundPlayer.shared.playSoundAfterSeconds(type: .pop, timer: 0.1)
+            SoundPlayer.shared.playSoundAfterSeconds(type: .pop, timer: 0.05)
         })
     }
 }
