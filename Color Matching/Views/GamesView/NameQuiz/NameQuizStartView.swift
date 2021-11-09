@@ -148,6 +148,7 @@ struct NameQuizStartView: View {
                     HStack {
                         Button(action: {
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
+                            SoundPlayer.shared.playSound(type: .click2)
                             hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         }, label: {
                             Image(systemName: "chevron.left")
@@ -162,6 +163,7 @@ struct NameQuizStartView: View {
                         
                         Button(action: {
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
+                            SoundPlayer.shared.playSound(type: .click2)
                             hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         }, label: {
                             Image(systemName: "chevron.right")
@@ -198,6 +200,7 @@ struct NameQuizStartView: View {
                         
                     Button("go-button.main") {
                         hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
+                        SoundPlayer.shared.playSound(type: .click)
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())

@@ -90,7 +90,7 @@ class ColorQuizState: ObservableObject {
         
         availableCards.forEach { (card) in
             let correctColor = card
-            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: variationsNum, withRef: true, noClamp: true, isRussianOnly: russianNames, useTrueColors: true))
+            let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: variationsNum, withRef: true, noClamp: false, isRussianOnly: russianNames, useTrueColors: true))
             quizItemsList.append(QuizItem(answers: colorVariants, correct: correctColor))
         }
     }
@@ -104,8 +104,12 @@ class ColorQuizState: ObservableObject {
             self.timerString = TimerHelper.shared.getRemainingTimeFomatted()
             
             if TimerHelper.shared.timeBetweenDates() <= 0 {
+                SoundPlayer.shared.stopClockTiking()
                 self.timerStatus = .runout
                 self.startGameEndPause()
+            }
+            else if TimerHelper.shared.timeBetweenDates() <= 5 {
+                SoundPlayer.shared.playClockTiking()
             }
         })
         
@@ -133,6 +137,7 @@ class ColorQuizState: ObservableObject {
     }
     
     func startGameEndPause() {
+        SoundPlayer.shared.stopClockTiking()
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
             self.stopQuiz()
         }

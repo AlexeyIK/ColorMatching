@@ -165,6 +165,7 @@ struct ColorQuizStartView: View {
                     HStack {
                         Button(action: {
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue - 1) ?? Hardness.hard
+                            SoundPlayer.shared.playSound(type: .click2)
                             hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         }, label: {
                             Image(systemName: "chevron.left")
@@ -179,6 +180,7 @@ struct ColorQuizStartView: View {
                         
                         Button(action: {
                             gameState.hardness = Hardness(rawValue: gameState.hardness.rawValue + 1) ?? Hardness.easy
+                            SoundPlayer.shared.playSound(type: .click2)
                             hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
                         }, label: {
                             Image(systemName: "chevron.right")
@@ -215,6 +217,7 @@ struct ColorQuizStartView: View {
                         
                     Button("go-button.main") {
                         hapticImpact.generateFeedback(style: .light, if: settingsState.tactileFeedback)
+                        SoundPlayer.shared.playSound(type: .click)
                         gameState.startGameSession()
                     }
                     .buttonStyle(GoButton2())
@@ -225,7 +228,7 @@ struct ColorQuizStartView: View {
                 }
                 .onAppear() {
                     colorRef = gameState.russianNames ? guessColorPreviewRus : guessColorPreview
-                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, noClamp: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
+                    answers = SimilarColorPicker.shared.getSimilarColors(colorRef: colorRef, for: gameState.hardness, variations: 3, withRef: true, isRussianOnly: gameState.russianNames, useTrueColors: true).shuffled()
                     
                     withAnimation(Animation.easeOut(duration: 0.3).delay(0.3)) {
                         card1Offset = 0

@@ -73,6 +73,7 @@ class LearnAndQuizState: ObservableObject  {
     
     func endGameSession() {
         self.gameActive = false
+        SoundPlayer.shared.stopClockTiking();
         TimerHelper.shared.cancelTimer()
     }
     

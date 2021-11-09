@@ -210,7 +210,13 @@ struct MainMenuView: View {
             }
 
             CoreDataManager.shared.showAllReadings()
+            
+            SoundPlayer.shared.initialize() // initialize sound engine
+            SoundPlayer.shared.soundsOff = !settingsState.sounds
         }
+        .onChange(of: menuState.selectedTab, perform: { value in
+            SoundPlayer.shared.playSoundAfterSeconds(type: .pop, timer: 0.05)
+        })
     }
 }
 
