@@ -89,7 +89,10 @@ class ColorQuizState: ObservableObject {
         }
         
         availableCards.forEach { (card) in
-            let correctColor = card
+            var correctColor = card
+            correctColor.name = GetRandomName(card.name)
+            correctColor.englishName = GetRandomName(card.englishName)
+            
             let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: variationsNum, withRef: true, noClamp: false, isRussianOnly: russianNames, useTrueColors: true))
             quizItemsList.append(QuizItem(answers: colorVariants, correct: correctColor))
         }

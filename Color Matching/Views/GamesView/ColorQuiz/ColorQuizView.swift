@@ -215,8 +215,6 @@ struct ColorQuizView: View {
                                                     lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                     self.swapCards = true
                                                     
-//                                                    SoundPlayer.shared.playSound(type: .click2)
-                                                    
                                                     if lastAnswerIsCorrect == true {
                                                         SoundPlayer.shared.playSound(type: .answerCorrect)
                                                     } else {

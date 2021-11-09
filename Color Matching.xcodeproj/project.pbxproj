@@ -52,6 +52,7 @@
 		BD70263A26E564E1005E70DE /* spring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD70263926E564E0005E70DE /* spring.mp3 */; };
 		BD70263D26E565DB005E70DE /* swoosh-spring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD70263C26E565DB005E70DE /* swoosh-spring.mp3 */; };
 		BD79806126BECC4A00261004 /* NameQuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD79806026BECC4A00261004 /* NameQuizDataManager.swift */; };
+		BD8F5A49273B021200C48DF5 /* ColorNameSplitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F5A48273B021200C48DF5 /* ColorNameSplitter.swift */; };
 		BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */; };
 		BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */; };
 		BDC817D726BB3A3900DD0B45 /* QuizResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */; };
@@ -140,6 +141,7 @@
 		BD70263926E564E0005E70DE /* spring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = spring.mp3; sourceTree = "<group>"; };
 		BD70263C26E565DB005E70DE /* swoosh-spring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "swoosh-spring.mp3"; sourceTree = "<group>"; };
 		BD79806026BECC4A00261004 /* NameQuizDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuizDataManager.swift; sourceTree = "<group>"; };
+		BD8F5A48273B021200C48DF5 /* ColorNameSplitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNameSplitter.swift; sourceTree = "<group>"; };
 		BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizColorPickView.swift; sourceTree = "<group>"; };
 		BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsStore.swift; sourceTree = "<group>"; };
@@ -449,6 +451,7 @@
 				F169585126A9F89200E1E86A /* Math.swift */,
 				F125010E26A5819700B521F1 /* ColorConverter.swift */,
 				BD29F2F726DB8B1A00578454 /* TactileGenerator.swift */,
+				BD8F5A48273B021200C48DF5 /* ColorNameSplitter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -550,6 +553,7 @@
 				BD142D7826B36E9300CB5F2C /* MenuButtonView.swift in Sources */,
 				BD3DB4AB26BED66500763AAA /* OuterGlow.swift in Sources */,
 				F1E28E0626AB0D1200B62054 /* SimilarColorPicker.swift in Sources */,
+				BD8F5A49273B021200C48DF5 /* ColorNameSplitter.swift in Sources */,
 				F1758E6E26A0DFA60035E6B5 /* ColorCardMinimalView.swift in Sources */,
 				BD3CF1382692F07900FF0D68 /* Color_Matching.xcdatamodeld in Sources */,
 				BD6D1F5326BDE49C00CF34BF /* BackgroundView2.swift in Sources */,
@@ -748,7 +752,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
 				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
@@ -772,7 +776,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
 				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
