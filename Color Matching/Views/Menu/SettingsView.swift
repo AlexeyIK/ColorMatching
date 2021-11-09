@@ -47,6 +47,12 @@ class SettingsState: ObservableObject {
         }
     }
     
+    @Published var showAlert: Bool = UserDefaults.standard.bool(forKey: "ShowAlert") {
+        didSet {
+            UserDefaults.standard.set(showAlert, forKey: "ShowAlert")
+        }
+    }
+    
     init() {
         if !settingsChanged {
             // defaults
@@ -54,6 +60,7 @@ class SettingsState: ObservableObject {
             tactileFeedback = true
             sounds = true
             colorsLang = Locale.current.languageCode == "ru" ? .russian : .english
+            showAlert = true
         }
     }
 }

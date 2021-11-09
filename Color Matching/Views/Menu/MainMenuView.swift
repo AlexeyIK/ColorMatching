@@ -191,6 +191,17 @@ struct MainMenuView: View {
                         .frame(width: 3, alignment: .center)
                         .animation(repeatingLinesAnimation, value: hueRotation)
                 }
+                .alert(isPresented: $settingsState.showAlert, content: {
+                    Alert(title: Text("startup-alert-caption"),
+                          message: Text("startup-alert-text"))
+                })
+//                .actionSheet(isPresented: $settingsState.showAlert) {
+//                    ActionSheet(title: Text("startup-alert-caption"),
+//                                message: Text("startup-alert-text"),
+//                                buttons: [
+//                                    .default(Text("OK"))
+//                                ])
+//                }
                 .ignoresSafeArea()
     //                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                 .onAppear() {

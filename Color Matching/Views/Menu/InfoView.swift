@@ -34,6 +34,14 @@ struct InfoView: View {
                                 .font(.callout)
                                 .foregroundColor(.white)
                             
+                            Text("startup-alert-caption")
+                                .font(.headline)
+                                .foregroundColor(_globalMenuTitleColor)
+                                .padding(.bottom, 6)
+                            Text("startup-alert-text")
+                                .font(.callout)
+                                .foregroundColor(.orange)
+                            
                             // ToDo: Разблокировать по достижении > 1000 скачиваний :)
                             /*
                             Text("additional-info-text")

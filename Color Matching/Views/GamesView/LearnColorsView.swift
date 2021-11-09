@@ -52,6 +52,7 @@ struct LearnDeckView: View {
                                                  drawShadow: i == currentIndex,
                                                  showName: false,
                                                  showColor: i == currentIndex || i == currentIndex + 1, // окрашиваем в цвет не всё
+                                                 transparencyOn: self.cardsState[i].angle != 0,
                                                  glowOffset: (CGSize(width: 0.9 + self.cardsState[i].angle / 5, height: 0.9 + self.cardsState[i].angle / 5), CGSize(width: 1.25 + self.cardsState[i].angle / 10, height: 1.25 + self.cardsState[i].angle / 10)))
                                 .offset(
                                     x: self.cardsState[i].posX,
