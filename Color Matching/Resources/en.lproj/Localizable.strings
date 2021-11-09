@@ -23,6 +23,9 @@
 "stats-button" = "Stats";
 "settings-button" = "Settings";
 
+"startup-alert-caption" = "Attention!";
+"startup-alert-text" = "The NightShift mode and other color filters settings are change representation of real colors.\nFor best experience, we advise to switch off them while playing.";
+
 /* Hardness */
 "easy" = "Easy";
 "normal" = "Normal";

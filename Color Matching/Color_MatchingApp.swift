@@ -16,6 +16,7 @@ struct Color_MatchingApp: App {
             MainMenuView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
                 .accessibilityIgnoresInvertColors()
+                .preferredColorScheme(.dark)
         }
     }
 }

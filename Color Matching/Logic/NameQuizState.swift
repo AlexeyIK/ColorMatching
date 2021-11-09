@@ -52,8 +52,12 @@ class NameQuizState: ObservableObject {
         
         // создаем список вопросов заранее
         cardsList.forEach { (card) in
-            let correctColor = card
+            var correctColor = card
+            correctColor.name = GetRandomName(card.name)
+            correctColor.englishName = GetRandomName(card.englishName)
+            
             let colorVariants = ShuffleCards(cardsArray: SimilarColorPicker.shared.getSimilarColors(colorRef: correctColor, for: hardness, variations: 2, withRef: true, noClamp: true, isRussianOnly: russianNames))
+            
             quizItemsList.append(QuizItem(answers: colorVariants, correct: correctColor))
         }
         

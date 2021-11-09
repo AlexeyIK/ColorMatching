@@ -92,7 +92,7 @@ struct NameQuizView: View {
                     VStack(spacing: 8) {
                         if let quizItem = quizState.getQuizItem() {
                             ForEach(quizItem.answers) { answer in
-                                let colorName = gameState.russianNames ? answer.name : answer.englishName
+                                let colorName = gameState.russianNames ? GetFirstName(answer.name) : GetFirstName(answer.englishName)
 
                                 if needToShowAnswer && answer.id == quizItem.correct.id {
                                     Button(colorName) { }
