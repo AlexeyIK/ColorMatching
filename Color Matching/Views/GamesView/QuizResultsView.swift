@@ -11,6 +11,8 @@ struct QuizResultsView: View {
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
+    @FetchRequest(entity: OverallStats.entity(), sortDescriptors: []) var playerStats: FetchedResults<OverallStats>
+    
     @EnvironmentObject var gameState: LearnAndQuizState
     @EnvironmentObject var resultsStore: QuizResultsStore
     @EnvironmentObject var menuState: MenuState
@@ -145,6 +147,12 @@ struct QuizResultsView: View {
                     SoundPlayer.shared.playSoundAfterSeconds(type: .spring, timer: 1.4)
                     SoundPlayer.shared.playSoundAfterSeconds(type: .swooshSpring, timer: 1.9)
                     SoundPlayer.shared.playStrikeHit(afterSeconds: 1.2)
+                }
+            }
+            
+            if playerStats[0].totalFinishedGames == 10 {
+                if let windowScene = UIApplication.shared.windows.first?.windowScene {
+                    AppStoreReviewManager.requestReviewIfAppropriate(window: windowScene)
                 }
             }
         }
