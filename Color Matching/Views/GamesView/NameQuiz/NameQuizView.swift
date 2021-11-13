@@ -180,6 +180,8 @@ struct NameQuizView: View {
                 resultStore.quizResults = results
                 resultStore.colorsViewed = quizState.colorsViewed
                 
+                quizState.pauseTimer()
+                
                 withAnimation {
                     gameState.activeGameMode = .results
                 }

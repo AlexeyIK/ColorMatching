@@ -116,6 +116,7 @@ class NameQuizState: ObservableObject {
     }
     
     func startGameEndPause() {
+        pauseTimer()
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
             self.stopQuiz()
         }
