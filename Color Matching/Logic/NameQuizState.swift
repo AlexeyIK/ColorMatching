@@ -93,8 +93,12 @@ class NameQuizState: ObservableObject {
             }
             
             if TimerHelper.shared.timeBetweenDates() <= 0 {
+                SoundPlayer.shared.stopClockTiking()
                 self.timerStatus = .runout
                 self.startGameEndPause()
+            }
+            else if TimerHelper.shared.timeBetweenDates() <= 5 {
+                SoundPlayer.shared.playClockTiking()
             }
         })
         
