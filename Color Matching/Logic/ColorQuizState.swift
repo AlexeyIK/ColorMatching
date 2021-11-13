@@ -107,7 +107,6 @@ class ColorQuizState: ObservableObject {
             self.timerString = TimerHelper.shared.getRemainingTimeFomatted()
             
             if TimerHelper.shared.timeBetweenDates() <= 0 {
-                SoundPlayer.shared.stopClockTiking()
                 self.timerStatus = .runout
                 self.startGameEndPause()
             }
@@ -141,6 +140,12 @@ class ColorQuizState: ObservableObject {
     
     func startGameEndPause() {
         SoundPlayer.shared.stopClockTiking()
+        
+        // если время вышло, то аннулируем очки за игру
+//        if timerStatus == .runout {
+//            gameScore = 0
+//        }
+        
         pauseTimer()
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
             self.stopQuiz()
