@@ -141,6 +141,7 @@ class ColorQuizState: ObservableObject {
     
     func startGameEndPause() {
         SoundPlayer.shared.stopClockTiking()
+        pauseTimer()
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
             self.stopQuiz()
         }
