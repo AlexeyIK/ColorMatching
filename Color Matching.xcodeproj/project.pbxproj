@@ -54,6 +54,7 @@
 		BD79806126BECC4A00261004 /* NameQuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD79806026BECC4A00261004 /* NameQuizDataManager.swift */; };
 		BD8F5A49273B021200C48DF5 /* ColorNameSplitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F5A48273B021200C48DF5 /* ColorNameSplitter.swift */; };
 		BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */; };
+		BDBF0B2C273FB52900C8540B /* RequestAppStoreRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBF0B2B273FB52900C8540B /* RequestAppStoreRate.swift */; };
 		BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */; };
 		BDC817D726BB3A3900DD0B45 /* QuizResultsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */; };
 		BDD554CE2735D89F00318FB7 /* answer-correct.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BDD554CC2735D89F00318FB7 /* answer-correct.mp3 */; };
@@ -143,6 +144,7 @@
 		BD79806026BECC4A00261004 /* NameQuizDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuizDataManager.swift; sourceTree = "<group>"; };
 		BD8F5A48273B021200C48DF5 /* ColorNameSplitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNameSplitter.swift; sourceTree = "<group>"; };
 		BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
+		BDBF0B2B273FB52900C8540B /* RequestAppStoreRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppStoreRate.swift; sourceTree = "<group>"; };
 		BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizColorPickView.swift; sourceTree = "<group>"; };
 		BDC817D626BB3A3900DD0B45 /* QuizResultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultsStore.swift; sourceTree = "<group>"; };
 		BDD554CC2735D89F00318FB7 /* answer-correct.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "answer-correct.mp3"; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 				F125010E26A5819700B521F1 /* ColorConverter.swift */,
 				BD29F2F726DB8B1A00578454 /* TactileGenerator.swift */,
 				BD8F5A48273B021200C48DF5 /* ColorNameSplitter.swift */,
+				BDBF0B2B273FB52900C8540B /* RequestAppStoreRate.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				BD3DB4B026BEE0E200763AAA /* RollingAnimation.swift in Sources */,
 				BD3DB4BE26BF25F600763AAA /* ColorQuizStartView.swift in Sources */,
 				BD09136126BD1CA00082386C /* PetalTestView.swift in Sources */,
+				BDBF0B2C273FB52900C8540B /* RequestAppStoreRate.swift in Sources */,
 				F1D656EF26AB758A007BCDAE /* NameQuizView.swift in Sources */,
 				F1F3757826A75D4700FBA06A /* GameHelpers.swift in Sources */,
 				BD6EC87226B9CAAF001B563E /* NameQuizStartView.swift in Sources */,
@@ -752,7 +756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
 				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
@@ -762,7 +766,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.9;
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alex-n-dave.color-matching";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -776,7 +780,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Color Matching/Preview Content\"";
 				DEVELOPMENT_TEAM = 9942MC6727;
 				ENABLE_PREVIEWS = YES;
@@ -786,7 +790,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.9;
+				MARKETING_VERSION = 1.01;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alex-n-dave.color-matching";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
