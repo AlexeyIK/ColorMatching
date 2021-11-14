@@ -109,6 +109,8 @@ struct NameQuizView: View {
                                 }
                                 else {
                                     Button(colorName) {
+                                        guard quizState.timerStatus != .paused else { return }
+                                        
                                         lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: answer.id, hardness: gameState.hardness)
                                         self.needToShowAnswer = true
                                         self.userAnswer = answer.id
