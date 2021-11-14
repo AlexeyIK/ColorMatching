@@ -121,8 +121,7 @@ class NameQuizState: ObservableObject {
 //        if timerStatus == .runout {
 //            gameScore = 0
 //        }
-        
-        pauseTimer()
+
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
             self.stopQuiz()
         }
@@ -184,6 +183,7 @@ class NameQuizState: ObservableObject {
         
         if quizPosition == quizQuestions - 1 {
             TimerHelper.shared.pauseTimer()
+            pauseTimer()
             startGameEndPause()
         }
         

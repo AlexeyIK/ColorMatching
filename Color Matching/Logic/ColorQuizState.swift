@@ -146,7 +146,6 @@ class ColorQuizState: ObservableObject {
 //            gameScore = 0
 //        }
         
-        pauseTimer()
         Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { (Timer) in
             self.stopQuiz()
         }

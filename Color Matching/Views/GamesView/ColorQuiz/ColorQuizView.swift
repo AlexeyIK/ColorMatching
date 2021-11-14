@@ -148,7 +148,7 @@ struct ColorQuizView: View {
                                                 }
                                             )
                                             .onTapGesture {
-                                                if quizState.timerStatus != .runout && !swapCards {
+                                                if quizState.timerStatus != .runout && quizState.timerStatus != .paused && !swapCards {
                                                     lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                     self.swapCards = true
                                                     
@@ -211,7 +211,7 @@ struct ColorQuizView: View {
                                                 }
                                             )
                                             .onTapGesture {
-                                                if quizState.timerStatus != .runout && !swapCards {
+                                                if quizState.timerStatus != .runout && quizState.timerStatus != .paused && !swapCards {
                                                     lastAnswerIsCorrect = quizState.checkAnswer(for: quizItem, answer: quizItem.answers[index].id, hardness: gameState.hardness)
                                                     self.swapCards = true
                                                     
