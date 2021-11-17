@@ -21,6 +21,7 @@ class NameQuizState: ObservableObject {
     private var gameScore: Int = 0
     private var quizPosition: Int = 0
     private var correctAnswers: Int = 0
+    private var gameHardness: Hardness = .easy;
     private var cancellable: AnyCancellable? = nil
     
     // public
@@ -43,6 +44,7 @@ class NameQuizState: ObservableObject {
         quizPosition = 0
         correctAnswers = 0
         quizQuestions = cards.count
+        gameHardness = hardness
         
         var cardsList = cards
         // перемешиваем карточки, если надо
@@ -148,7 +150,7 @@ class NameQuizState: ObservableObject {
         // записываем увиденные и разгаданные карты
         CoreDataManager.shared.addViewedColors(colorsViewed)
         // записываем результаты квиза
-        NameQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
+        NameQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore, hardness: gameHardness)
         // записываем эти очки в CoreData
         CoreDataManager.shared.writeLastGameScore(gameScore)
         CoreDataManager.shared.updatePlayerScore(by: lastScoreChange)

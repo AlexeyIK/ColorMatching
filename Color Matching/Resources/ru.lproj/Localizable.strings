@@ -71,6 +71,9 @@
 "Guessed colors:" = "Угадано цветов:";
 "Color Strikes:" = "Всего страйков:";
 "Best Strike:" = "Лучший страйк:";
+"Easy finished:" = "Завершено на легком:";
+"Normal finished:" = "Завершено на нормальном:";
+"Hard finished:" = "Завершено на сложном:";
 
 // "Name QUIZ"
 "Finished games:" = "Завершено игр:";
