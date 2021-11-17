@@ -53,6 +53,7 @@
 		BD70263D26E565DB005E70DE /* swoosh-spring.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BD70263C26E565DB005E70DE /* swoosh-spring.mp3 */; };
 		BD79806126BECC4A00261004 /* NameQuizDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD79806026BECC4A00261004 /* NameQuizDataManager.swift */; };
 		BD8F5A49273B021200C48DF5 /* ColorNameSplitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F5A48273B021200C48DF5 /* ColorNameSplitter.swift */; };
+		BD8F637D2742FA2D005B64F5 /* ColdVsWarmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD8F637C2742FA2D005B64F5 /* ColdVsWarmView.swift */; };
 		BD9E1F2126B4A8F900ADD891 /* ScoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */; };
 		BDBF0B2C273FB52900C8540B /* RequestAppStoreRate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBF0B2B273FB52900C8540B /* RequestAppStoreRate.swift */; };
 		BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */; };
@@ -143,6 +144,7 @@
 		BD70263C26E565DB005E70DE /* swoosh-spring.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "swoosh-spring.mp3"; sourceTree = "<group>"; };
 		BD79806026BECC4A00261004 /* NameQuizDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameQuizDataManager.swift; sourceTree = "<group>"; };
 		BD8F5A48273B021200C48DF5 /* ColorNameSplitter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorNameSplitter.swift; sourceTree = "<group>"; };
+		BD8F637C2742FA2D005B64F5 /* ColdVsWarmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColdVsWarmView.swift; sourceTree = "<group>"; };
 		BD9E1F2026B4A8F900ADD891 /* ScoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreManager.swift; sourceTree = "<group>"; };
 		BDBF0B2B273FB52900C8540B /* RequestAppStoreRate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAppStoreRate.swift; sourceTree = "<group>"; };
 		BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizColorPickView.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 		BD215CD726B5548300B1D493 /* GamesView */ = {
 			isa = PBXGroup;
 			children = (
+				BD8F637E2742FA38005B64F5 /* ColdVsWarm */,
 				BD65930926B6A3FB004E27C4 /* QuizResultsView.swift */,
 				BDC817D326BB392900DD0B45 /* QuizColorPickView.swift */,
 				F1758E6826A0DEB20035E6B5 /* LearnColorsView.swift */,
@@ -408,6 +411,14 @@
 			path = NameQuiz;
 			sourceTree = "<group>";
 		};
+		BD8F637E2742FA38005B64F5 /* ColdVsWarm */ = {
+			isa = PBXGroup;
+			children = (
+				BD8F637C2742FA2D005B64F5 /* ColdVsWarmView.swift */,
+			);
+			path = ColdVsWarm;
+			sourceTree = "<group>";
+		};
 		F145D0FC26A446A30044476F /* Logic */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,6 +608,7 @@
 				BD279F9726BC800D005C8E3D /* ColorQuizMainView.swift in Sources */,
 				BDC817D426BB392900DD0B45 /* QuizColorPickView.swift in Sources */,
 				F1E28E1326AB128400B62054 /* Hardness.swift in Sources */,
+				BD8F637D2742FA2D005B64F5 /* ColdVsWarmView.swift in Sources */,
 				BD65930A26B6A3FB004E27C4 /* QuizResultsView.swift in Sources */,
 				F125010F26A5819700B521F1 /* ColorConverter.swift in Sources */,
 				BD57D03D26D6ED23003E1EC4 /* InfoView.swift in Sources */,
