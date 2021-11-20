@@ -21,13 +21,13 @@ class ColorQuizState: ObservableObject {
     private var gameScore: Int = 0
     private var quizPosition: Int = 0
     private var correctAnswers: Int = 0
+    private var gameHardness: Hardness = .easy;
     private var cancellable: AnyCancellable? = nil
     
     // public
     public var quizQuestions = 0
     public var results: QuizResults? = nil
     public var colorsViewed: [ColorModel] = []
-    
     // Published
     @Published var quizItemsList: [QuizItem] = []
     @Published var quizAnswersAndScore: [QuizAnswer] = []
@@ -42,6 +42,7 @@ class ColorQuizState: ObservableObject {
         quizPosition = 0
         correctAnswers = 0
         quizQuestions = cards.count
+        gameHardness = hardness
         
         var cardsList = cards
         // перемешиваем карточки, если надо
@@ -57,13 +58,13 @@ class ColorQuizState: ObservableObject {
         switch hardness
         {
             case .easy:
-                countdown = 30
+                countdown = 25
             case .normal:
-                countdown  = 25
+                countdown  = 20
             case .hard:
-                countdown  = 25
+                countdown  = 20
             case .hell:
-                countdown  = 60
+                countdown  = 30
         }
         
         CoreDataManager.shared.resetLastGameScore()
@@ -172,7 +173,7 @@ class ColorQuizState: ObservableObject {
         // записываем увиденные и разгаданные цвета
         CoreDataManager.shared.addViewedColors(colorsViewed)
         // записываем результаты квиза
-        ColorQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore)
+        ColorQuizDataManager.shared.updateQuizStats(correctAnswers: correctAnswers, totalCards: quizQuestions, overallGameScore: gameScore, hardness: gameHardness)
         // записываем эти очки в CoreData
         CoreDataManager.shared.writeLastGameScore(gameScore)
         CoreDataManager.shared.updatePlayerScore(by: gameScore)
