@@ -58,13 +58,13 @@ class ColorQuizState: ObservableObject {
         switch hardness
         {
             case .easy:
-                countdown = 30
+                countdown = 25
             case .normal:
-                countdown  = 25
+                countdown  = 20
             case .hard:
-                countdown  = 25
+                countdown  = 20
             case .hell:
-                countdown  = 60
+                countdown  = 30
         }
         
         CoreDataManager.shared.resetLastGameScore()

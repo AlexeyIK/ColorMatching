@@ -87,7 +87,7 @@ struct StatsView_Previews: PreviewProvider {
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             StatsView()
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-                .environment(\.locale, Locale(identifier: "ru"))
+                .environment(\.locale, Locale(identifier: "en"))
         }
     }
 }
