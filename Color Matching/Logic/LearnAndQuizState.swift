@@ -88,7 +88,7 @@ class LearnAndQuizState: ObservableObject  {
             case .easy:
                 return 5
             case .normal:
-                return 7
+                return 6
             case .hard:
                 return 7
             case .hell:

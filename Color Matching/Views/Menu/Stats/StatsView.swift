@@ -44,6 +44,9 @@ struct StatsView: View {
                             StatItemView(caption: "Guessed colors:", value: String(colorQuizStats[0].colorsGuessed))
                             StatItemView(caption: "Color Strikes:", value: String(colorQuizStats[0].strikesCount))
                             StatItemView(caption: "Best Strike:", value: String(colorQuizStats[0].bestStrike))
+                            StatItemView(caption: "Easy finished:", value: String(colorQuizStats[0].easyCount))
+                            StatItemView(caption: "Normal finished:", value: String(colorQuizStats[0].normalCount))
+                            StatItemView(caption: "Hard finished:", value: String(colorQuizStats[0].hardCount))
                         }
                         
                         Group {
@@ -52,6 +55,9 @@ struct StatsView: View {
                             StatItemView(caption: "Guessed names:", value: String(nameQuizStats[0].namesGuessed))
                             StatItemView(caption: "Color Strikes:", value: String(nameQuizStats[0].strikesCount))
                             StatItemView(caption: "Best Strike:", value: String(nameQuizStats[0].bestStrike))
+                            StatItemView(caption: "Easy finished:", value: String(nameQuizStats[0].easyCount))
+                            StatItemView(caption: "Normal finished:", value: String(nameQuizStats[0].normalCount))
+                            StatItemView(caption: "Hard finished:", value: String(nameQuizStats[0].hardCount))
                         }
                     }
                     .frame(width: geometry.size.width * 0.85, alignment: .center)
@@ -81,7 +87,7 @@ struct StatsView_Previews: PreviewProvider {
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
             StatsView()
                 .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-                .environment(\.locale, Locale(identifier: "ru"))
+                .environment(\.locale, Locale(identifier: "en"))
         }
     }
 }

@@ -16,7 +16,7 @@ class ColorQuizDataManager {
 
     let context = PersistenceController.shared.container.viewContext
     
-    func updateQuizStats(correctAnswers: Int, totalCards: Int, overallGameScore: Int)
+    func updateQuizStats(correctAnswers: Int, totalCards: Int, overallGameScore: Int, hardness: Hardness)
     {
         let fetchRequest: NSFetchRequest<ColorQuizStats> = ColorQuizStats.fetchRequest()
 
@@ -34,6 +34,20 @@ class ColorQuizDataManager {
 
             colorQuizStats.finishedGames += 1
             colorQuizStats.colorsGuessed += Int16(correctAnswers)
+            
+            switch hardness {
+                case .easy:
+                    colorQuizStats.easyCount += 1
+                    break
+                case .normal:
+                    colorQuizStats.normalCount += 1
+                    break
+                case .hard:
+                    colorQuizStats.hardCount += 1
+                    break
+                case .hell:
+                    break
+            }
 
             if correctAnswers == totalCards {
                 colorQuizStats.strikesCount += 1
