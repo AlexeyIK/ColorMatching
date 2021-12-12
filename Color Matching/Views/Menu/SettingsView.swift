@@ -97,6 +97,7 @@ struct SettingsView: View {
 //                    .foregroundColor(.white)
 //                    .listRowBackground(Color.black)
                 }
+                .frame(minWidth: 300, idealWidth: 340, maxWidth: 480, alignment: .center)
                 .padding()
                 .foregroundColor(.white)
             }

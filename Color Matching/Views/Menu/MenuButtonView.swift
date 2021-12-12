@@ -62,6 +62,7 @@ struct MenuButtonView: View {
             }
             .frame(height: 80, alignment: .center)
         }
+        .frame(minWidth: 300, idealWidth: 340, maxWidth: 480, alignment: .center)
         .padding(.horizontal,  screenSize.width >= 380 ? 32 : 20)
     }
 }

@@ -60,7 +60,7 @@ struct StatsView: View {
                             StatItemView(caption: "Hard finished:", value: String(nameQuizStats[0].hardCount))
                         }
                     }
-                    .frame(width: geometry.size.width * 0.85, alignment: .center)
+                    .frame(width: geometry.size.width < 420 ? geometry.size.width * 0.85 : geometry.size.width * 0.6, alignment: .center)
                     
                     Spacer()
                 }
