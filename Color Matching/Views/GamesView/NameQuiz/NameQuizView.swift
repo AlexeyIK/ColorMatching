@@ -151,7 +151,8 @@ struct NameQuizView: View {
                     }
                     .animation(Animation.easeOut(duration: 0.15))
                     .frame(height: 120)
-                    .padding(.vertical, 10)
+                    .padding(.top, 30)
+                    .padding(.bottom, 10)
                     .transition(.identity)
                 }
                 else if quizState.timerStatus == .runout && quizState.results == nil {
@@ -206,15 +207,15 @@ struct NameQuizView: View {
 struct QuizGameView_Previews: PreviewProvider {
     static var previews: some View {
 //        ForEach(["iPhone Xs"], id: \.self) { device in
-//        ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
+        ForEach(["iPad Air", "iPhone 8", "iPhone 13 mini"], id: \.self) { device in
             ZStack {
                 BackgroundView()
                 NameQuizView(debugMode: true)
                     .environmentObject(LearnAndQuizState(quizType: .nameQuiz))
                     .environmentObject(QuizResultsStore())
             }
-//            .previewDevice(PreviewDevice(stringLiteral: device))
-//            .previewDisplayName(device)
-//        }
+            .previewDevice(PreviewDevice(stringLiteral: device))
+            .previewDisplayName(device)
+        }
     }
 }

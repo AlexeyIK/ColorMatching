@@ -27,6 +27,8 @@ struct ColorQuizView: View {
     @State var swapCards: Bool = false
     @State var answerTimer: Timer? = nil
     
+    private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
+    
     private let debugAnswers = QuizItem(answers: [colorsData[170], colorsData[180], colorsData[190], colorsData[200]], correct: colorsData[190])
     private let debugScores = [QuizAnswer(isCorrect: true, scoreEarned: 12)]
     
@@ -107,7 +109,7 @@ struct ColorQuizView: View {
                             ZStack(alignment: .center) {
                                 let angleStep = Double(90 / quizItem.answers.count)
                                 let appActive = lastAnswerIsCorrect == nil && quizState.isAppActive
-                                let flowerZoneDemention = max(260, contentZone.size.width * 0.8)
+                                let flowerZoneDemention = idiom == .pad ? max(300, contentZone.size.width * 0.72) : max(260, contentZone.size.width * 0.8)
                                 let startAngle = 90 - angleStep / 2
                                 
                                 ForEach(quizItem.answers.indices) { index in
@@ -122,7 +124,7 @@ struct ColorQuizView: View {
                                             .frame(width: (flowerZoneDemention + 50) / CGFloat(quizItem.answers.count), height: flowerZoneDemention, alignment: .center)
                                             .transition(.identity)
                                             .modifier(
-                                                RollingModifier(toAngle: startAngle - angleStep * Double(index) + newRotation, percentage: rotatePercentage, anchor: .bottom) {
+                                                RollingModifier(toAngle:  startAngle - angleStep * Double(index) + newRotation, percentage: rotatePercentage, anchor: .bottom) {
                                                     
                                                     self.rotatePercentage = 0
                                                     
@@ -298,6 +300,7 @@ struct ColorQuizView: View {
 
 struct GuessColorView_Previews: PreviewProvider {
     static var previews: some View {
+//        ForEach(["iPad Air", "iPhone 8", "iPhone 12 mini"], id: \.self) { device in
         ForEach(["iPhone SE (1st generation)", "iPhone 8", "iPhone 12"], id: \.self) { device in
             ZStack {
                 BackgroundView()
