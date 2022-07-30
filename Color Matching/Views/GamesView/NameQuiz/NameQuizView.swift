@@ -83,7 +83,7 @@ struct NameQuizView: View {
                     }
                 }
                 .transition(.opacity)
-                .frame(width: contentZone.width * 0.68, height: contentZone.height * 0.44, alignment: .center)
+                .frame(width: contentZone.width * 0.68, height: contentZone.height * 0.45, alignment: .center)
             }
             
             VStack {
