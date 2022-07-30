@@ -57,7 +57,7 @@ struct TransparentCardView: View {
 
 struct TransparentCardView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPad Air", "iPhone 8", "iPhone Xs"], id: \.self) { device in
+        ForEach(["iPad Air", "iPhone 8", "iPhone 12"], id: \.self) { device in
             ZStack {
                 BackgroundView()
                 TransparentCardView(colorModel: colorsData[310], drawBorder: true, drawShadow: true, showName: true, transparencyOn: false)

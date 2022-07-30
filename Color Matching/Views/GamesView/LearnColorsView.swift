@@ -95,7 +95,7 @@ struct LearnDeckView: View {
                     }
                 }
                 .transition(.opacity)
-                .frame(width: contentZone.width * 0.68, height: contentZone.height * 0.5, alignment: .center)
+                .frame(width: contentZone.width * 0.68, height: contentZone.height * 0.44, alignment: .center)
             }
             
             // Вывод имени текущего цвета
