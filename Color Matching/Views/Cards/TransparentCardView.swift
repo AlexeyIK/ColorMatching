@@ -51,13 +51,13 @@ struct TransparentCardView: View {
                     .colorInvert()
             }
         }
-        .frame(minWidth: 110, idealWidth: 250, maxWidth: 270, minHeight: 110, idealHeight: 340, maxHeight: 350, alignment: .top)
+        .frame(minWidth: 110, idealWidth: 250, maxWidth: 378, minHeight: 110, idealHeight: 340, maxHeight: 540, alignment: .top)
     }
 }
 
 struct TransparentCardView_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone 8", "iPhone Xs"], id: \.self) { device in
+        ForEach(["iPad Air", "iPhone 8", "iPhone 12"], id: \.self) { device in
             ZStack {
                 BackgroundView()
                 TransparentCardView(colorModel: colorsData[310], drawBorder: true, drawShadow: true, showName: true, transparencyOn: false)

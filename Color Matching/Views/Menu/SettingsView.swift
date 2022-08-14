@@ -57,7 +57,7 @@ class SettingsState: ObservableObject {
         if !settingsChanged {
             // defaults
             leftHandMode = false
-            tactileFeedback = true
+            tactileFeedback = UIDevice.current.userInterfaceIdiom == .phone ? true : false
             sounds = true
             colorsLang = Locale.current.languageCode == "ru" ? .russian : .english
             showAlert = true
@@ -68,6 +68,8 @@ class SettingsState: ObservableObject {
 struct SettingsView: View {
     
     @EnvironmentObject var settingsState: SettingsState
+    
+    private var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
     
     let colorLangs = ["Русский", "English"]
     
@@ -85,9 +87,10 @@ struct SettingsView: View {
                 Form {
                     Toggle("Left hand", isOn: $settingsState.leftHandMode)
                         .listRowBackground(Color.black)
-                    Toggle("Tactile feedback", isOn: $settingsState.tactileFeedback)
-                        .listRowBackground(Color.black)
                     Toggle("Sounds", isOn: $settingsState.sounds)
+                        .listRowBackground(Color.black)
+                    Toggle("Tactile feedback", isOn: $settingsState.tactileFeedback)
+                        .disabled(idiom != .phone)
                         .listRowBackground(Color.black)
 //                    Picker("Colors language", selection: $settingsState.colorsLang) {
 //                        ForEach(ColorLang.allCases, id: \.self) { value in
@@ -97,6 +100,7 @@ struct SettingsView: View {
 //                    .foregroundColor(.white)
 //                    .listRowBackground(Color.black)
                 }
+                .frame(minWidth: 300, idealWidth: 340, maxWidth: 480, alignment: .center)
                 .padding()
                 .foregroundColor(.white)
             }

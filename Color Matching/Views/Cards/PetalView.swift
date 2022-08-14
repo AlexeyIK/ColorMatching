@@ -64,7 +64,8 @@ struct PetalView_Previews: PreviewProvider {
             BackgroundView()
             
             PetalView(colorModel: colorsData[300], name: colorsData[300].name, showNames: true, hightlight: false, blink: false)
-                .frame(width: 120, height: 350, alignment: .center)
+                            .frame(minWidth: 80, idealWidth: 140, maxWidth: 200, minHeight: 300, idealHeight: 560, maxHeight: 750, alignment: .center)
+//                .frame(width: 120, height: 350, alignment: .center)
         }
     }
 }

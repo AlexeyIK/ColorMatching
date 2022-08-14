@@ -124,6 +124,7 @@ struct MainMenuView: View {
                 .navigationBarHidden(true)
                 .background(BackgroundView())
             }
+            .navigationViewStyle(StackNavigationViewStyle())
             
             // Tabbar
             if menuState.isMenuActive {
