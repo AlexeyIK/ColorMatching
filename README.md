@@ -1,2 +1,2 @@
 # ColorMatching
-Small app for creation set of matched colors
+Small game for guessing and learning colors and to see the differences between them.
